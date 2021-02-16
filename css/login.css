@@ -10,7 +10,7 @@ html, body {
     font-family: 'Montserrat', sans-serif;
 }
 
-.registration {
+.login {
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -18,7 +18,7 @@ html, body {
     align-items: center;
 }
 
-.registration_content {
+.login_content {
     position: relative;
     margin: 80px auto auto;
     height: auto;
@@ -27,17 +27,17 @@ html, body {
     align-items: center;
 }
 
-.registration_title {
+.login_title {
     font-size: 38px;
     margin-bottom: 16px;
 }
 
-.registration_title-hint {
+.login_title-hint {
     font-size: 15px;
     margin-bottom: 20px;
 }
 
-.registration_form {
+.login_form {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,7 +45,7 @@ html, body {
     text-align: center;
 }
 
-.registration_form-content {
+.login_form-content {
     border: 1px solid #a2a2a2;
     border-radius: 4px;
     max-width: 433px;
@@ -53,15 +53,15 @@ html, body {
     margin-bottom: 30px;
 }
 
-.registration_form-inputs {
+.login_form-inputs {
     margin-bottom: 20px;
 }
 
-.registration_form-input-field:first-child {
+.login_form-input-field:first-child {
     margin-bottom: 10px;
 }
 
-.registration_form-input {
+.login_form-input {
     box-sizing: border-box;
     width: 100%;
     background-color: #101417;
@@ -72,14 +72,14 @@ html, body {
     font-size: 18px;
 }
 
-.registration_form-hint {
+.login_form-hint {
     font-size: 13px;
     cursor: pointer;
     margin-bottom: 20px;
     text-align: left;
 }
 
-.registration_form-button {
+.login_form-button {
     background-color: #1e252b;
     color: #9b9b9b;
     display: flex;
@@ -99,28 +99,28 @@ html, body {
     font-size: 15px;
 }
 
-.registration-networks-content{
+.login_networks-content{
     display: flex;
     justify-content: space-around;
     margin-bottom: 20px;
 }
 
-.registration-network-button {
+.login_networks-button {
     border: none;
     background-color: #101417;
     padding: 0;
     cursor: pointer;
 }
 
-.registration-networks-img {
+.login_networks-img {
     width: 40px;
     height: 40px;
 }
 
-.registration_no-acc {
+.login_no-acc {
     font-size: 15px;
 }
 
-.registration_no-acc-link {
+.login_no-acc-link {
     color: #ec0c0c;
 }
