@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link href="css/profile.css" rel="stylesheet">
+</head>
+<body>
+<div class="profile">
+    <div class="profile_content">
+        <div class="profile_content-title-wrapper">
+            <div class="profile_content-title">
+                Настройки профиля:
+            </div>
+            <div class="profile_content-title-name">
+                Никита
+            </div>
+        </div>
+        <div class="profile_content-inputs">
+            <form class="profile_content-inputs-form">
+                <div class="profile_content-input-wrapper">
+                    <label for="input_login" class="profile_content-input-label">Имя</label>
+                    <input type="text" id="input_name" class="profile_content-input"
+                           placeholder="Никита Волков" value="Никита Волков">
+                </div>
+                <div class="profile_content-input-wrapper">
+                    <label for="input_login" class="profile_content-input-label">Логин</label>
+                    <input type="text" id="input_login" class="profile_content-input"
+                           placeholder="nikitavolkov1707" value="nikitavolkov1707">
+                </div>
+                <div class="profile_content-input-wrapper">
+                    <label for="input_email" class="profile_content-input-label">Почта</label>
+                    <input type="email" id="input_email" class="profile_content-input"
+                           placeholder="nikitavolkov1707@gmail.com" value="nikitavolkov1707@gmail.com">
+                </div>
+                <div class="profile_content-input-wrapper">
+                    <label for="input_password" class="profile_content-input-label">Пароль</label>
+                    <input type="password" id="input_password" class="profile_content-input"
+                           placeholder="nikita23">
+                </div>
+                <div class="profile_content-input-wrapper">
+                    <div class="profile_content-input-file">
+                        <div class="profile_content-input-label">Аватар</div>
+                        <div class="profile_content-input-file-img">
+                            <img src="img/user.png" class="profile_content-img" width="120px" height="120px">
+                            <input type="file" id="input_file">
+                            <label for="input_file" class="profile_content-input">Choose a file...</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile_content-input-wrapper">
+                    <div class="profile_content-input-label"></div>
+                    <button class="profile_content-input-btn profile_content-input">
+                        Сохранить
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

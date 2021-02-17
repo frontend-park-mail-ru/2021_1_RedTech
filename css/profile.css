@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+html, body {
+    height: 100%;
+    background-color: #101417;
+    color: #eaeaea;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.profile {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    position: relative;
+    margin: 80px auto auto;
+    width: auto;
+}
+
+.profile_content-title-wrapper {
+    font-size: 40px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 40px;
+}
+
+.profile_content-title-name {
+    margin-left: 20px;
+}
+
+.profile_content-inputs {
+    font-size: 25px;
+    width: 100%;
+}
+
+.profile_content-input-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.profile_content-input-label {
+    padding-top: 10px;
+    min-width: 99px;
+}
+
+ .profile_content-input {
+     margin-left: 20px;
+     padding: 10px 20px 10px;
+     background-color: #101417;
+     border: 1px solid #eaeaea;
+     border-radius: 4px;
+     font-size: 25px;
+     color: #eaeaea;
+     width: 100%
+ }
+
+ .profile_content-input-file {
+     display: flex;
+     flex-direction: row;
+ }
+
+ #input_file {
+     width: 0.1px;
+     height: 0.1px;
+     opacity: 0;
+     overflow: hidden;
+     position: absolute;
+     z-index: -1;
+ }
+
+ #input_file + label {
+     padding: 10px 20px 10px;
+     border: 1px solid #eaeaea;
+     border-radius: 4px;
+     cursor: pointer;
+     width: auto;
+     margin-left: 0;
+ }
+
+ .profile_content-input-file-img {
+     margin-left: 20px;
+     display: flex;
+     flex-direction: column;
+ }
+
+ .profile_content-img {
+     align-self: center;
+     margin-bottom: 10px;
+ }
+
+ .profile_content-input-btn {
+     width: auto;
+ }
