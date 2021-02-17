@@ -1,0 +1,135 @@
+.title {
+    color: red;
+    font-size: 47px;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #101417;
+}
+
+header {
+    margin: 18px auto;
+    max-width: 90%;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header .logo {
+    max-width: 175px;
+    max-height: 45px;
+}
+
+img {
+    max-width: 100%;
+}
+
+header .mnu_top {
+    list-style-type: none;
+}
+
+header .mnu_top li {
+    display: inline-block;
+    margin-right: 75px;
+}
+
+header .mnu_top a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+
+    transition: 0.5s ease;
+}
+
+header .mnu_top a:hover {
+    color: #b7b7b7;
+}
+
+header .btns {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    align-items: center;
+
+
+}
+
+header .btns .btn-header {
+    margin-right: 25px;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    align-items: center;
+    max-width: 34px;
+    max-height: 34px;
+
+    transition: 0.5s ease;
+}
+
+header .btns .btn-header {
+    color: #b7b7b7;
+}
+
+.film-card {
+    position: absolute;
+    height: 350px;
+    width: 95%;
+    max-width: 450px;
+    margin: auto;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.film-card .inner-part {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0px;
+    height: 95%;
+    width: 95%;
+}
+
+.inner-part .img {
+    height: 90%;
+    width: 200px;
+    overflow: hidden;
+    border-radius: 15px;
+    /*flex-shrink: 1;*/
+    background-color: pink;
+}
+
+.inner-part .img img {
+    border-radius: 15px;
+    height: 100%;
+    width: 100%;
+    max-width: 200px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.inner-part .content {
+    background-color: green;
+    padding: 0 10px 0 10px;
+    margin-left: 10px;
+    width: 150px;
+}
+
+.content button {
+    display: inline-flex;
+    border: none;
+    padding: 15px 20px;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    border: 1px solid none;
+    background: linear-gradient(147deg, red, blue) ;
+    transition: 0.5s ease-in-out;
+}
