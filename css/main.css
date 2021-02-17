@@ -75,61 +75,151 @@ header .btns .btn-header {
     color: #b7b7b7;
 }
 
+/*.film-card {*/
+/*    position: absolute;*/
+/*    height: 350px;*/
+/*    width: 95%;*/
+/*    max-width: 450px;*/
+/*    margin: auto;*/
+/*    background-color: white;*/
+/*    border-radius: 15px;*/
+/*}*/
+
+/*.film-card .inner-part {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    padding: 8px 0px;*/
+/*    height: 95%;*/
+/*    width: 95%;*/
+/*}*/
+
+/*.inner-part .img {*/
+/*    height: 90%;*/
+/*    width: 200px;*/
+/*    overflow: hidden;*/
+/*    border-radius: 15px;*/
+/*    !*flex-shrink: 1;*!*/
+/*    background-color: pink;*/
+/*}*/
+
+/*.inner-part .img img {*/
+/*    border-radius: 15px;*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    max-width: 200px;*/
+/*    object-fit: cover;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.inner-part .content {*/
+/*    background-color: green;*/
+/*    padding: 0 10px 0 10px;*/
+/*    margin-left: 10px;*/
+/*    width: 150px;*/
+/*}*/
+
+/*.content button {*/
+/*    display: inline-flex;*/
+/*    border: none;*/
+/*    padding: 15px 20px;*/
+/*    font-size: 16px;*/
+/*    text-transform: uppercase;*/
+/*    color: white;*/
+/*    font-weight: 600;*/
+/*    letter-spacing: 1px;*/
+/*    border-radius: 8px;*/
+/*    border: 1px solid none;*/
+/*    background: linear-gradient(147deg, red, blue) ;*/
+/*    transition: 0.5s ease-in-out;*/
+/*}*/
+
+.film-img { grid-area: right-img; }
+.film-content { grid-area: film-content; }
+.item3 { grid-area: main; }
+.item4 { grid-area: right; }
+.item5 { grid-area: footer; }
+
 .film-card {
-    position: absolute;
+    display: grid;
+    grid-template-areas:
+    'right-img right-img film-content film-content film-content film-content';
+    grid-gap: 15px;
+    background-color: #2196F3;
+    padding: 5px;
     height: 350px;
-    width: 95%;
-    max-width: 450px;
-    margin: auto;
-    background-color: white;
-    border-radius: 15px;
+    width: 505px;
+    border-radius: 25px;
 }
 
-.film-card .inner-part {
+.film-card >div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 15px 0px;
+    font-size: 30px;
+}
+
+.film-card .film-img {
+    width: 220px;
+}
+
+.film-card .film-img img {
+        border-radius: 15px;
+        height: 100%;
+        /*width: 100%;*/
+        max-width: 220px;
+        object-fit: cover;
+        cursor: pointer;
+}
+
+.film-card .film-stars {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 0px;
-    height: 95%;
-    width: 95%;
 }
 
-.inner-part .img {
-    height: 90%;
-    width: 200px;
-    overflow: hidden;
-    border-radius: 15px;
-    /*flex-shrink: 1;*/
-    background-color: pink;
+.film-card .film-content {
+    /*display: -webkit-flex;*/
+    /*display: -ms-flex;*/
+    /*align-items: center;*/
+    /*justify-content: space-between;*/
+    /*display: flex;*/
+
+    text-align: left;
+    max-width: 270px;
 }
 
-.inner-part .img img {
-    border-radius: 15px;
-    height: 100%;
-    width: 100%;
-    max-width: 200px;
-    object-fit: cover;
-    cursor: pointer;
+.film-card .film-title {
+    font-size: 25px;
+    font-weight: 500;
 }
 
-.inner-part .content {
-    background-color: green;
-    padding: 0 10px 0 10px;
-    margin-left: 10px;
-    width: 150px;
+.film-card .film-description {
+    font-size: 18px;
 }
 
-.content button {
-    display: inline-flex;
-    border: none;
-    padding: 15px 20px;
-    font-size: 16px;
-    text-transform: uppercase;
-    color: white;
-    font-weight: 600;
-    letter-spacing: 1px;
-    border-radius: 8px;
-    border: 1px solid none;
-    background: linear-gradient(147deg, red, blue) ;
-    transition: 0.5s ease-in-out;
+.film-card .film-buttons {
+    display: flex;
+    justify-content: right;
+}
+
+.film-card .film-buttons {
+    padding-top: 10px;
+    padding-left: 5px;
+}
+
+.film-card .film-buttons >a:last-child {
+    padding-left: 10px;
+
+}
+
+.scroll-films {
+    width: auto;
+    height:auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.scroll-films >div {
+
+    display: inline-block;
 }
