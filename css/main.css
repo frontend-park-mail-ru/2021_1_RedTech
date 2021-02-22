@@ -1,11 +1,7 @@
-.title {
-    color: red;
-    font-size: 47px;
-}
-
 body {
     font-family: "Montserrat", sans-serif;
     background-color: #101417;
+    color: white;
 }
 
 header {
@@ -23,7 +19,7 @@ header .logo {
     max-height: 45px;
 }
 
-img {
+header img {
     max-width: 100%;
 }
 
@@ -75,151 +71,158 @@ header .btns .btn-header {
     color: #b7b7b7;
 }
 
-/*.film-card {*/
-/*    position: absolute;*/
-/*    height: 350px;*/
-/*    width: 95%;*/
-/*    max-width: 450px;*/
-/*    margin: auto;*/
-/*    background-color: white;*/
-/*    border-radius: 15px;*/
-/*}*/
+button {
+    height: 32px;
+    font-size: 15px;
+    padding: 0px 15px;
 
-/*.film-card .inner-part {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*    padding: 8px 0px;*/
-/*    height: 95%;*/
-/*    width: 95%;*/
-/*}*/
+    border-radius: 12px;
+    background: none;
+    color: white;
+    cursor: pointer;
+}
 
-/*.inner-part .img {*/
-/*    height: 90%;*/
-/*    width: 200px;*/
-/*    overflow: hidden;*/
-/*    border-radius: 15px;*/
-/*    !*flex-shrink: 1;*!*/
-/*    background-color: pink;*/
-/*}*/
+button:hover {
+    background-color: #101417;
+    color: #d9d9d9;
+}
 
-/*.inner-part .img img {*/
-/*    border-radius: 15px;*/
-/*    height: 100%;*/
-/*    width: 100%;*/
-/*    max-width: 200px;*/
-/*    object-fit: cover;*/
-/*    cursor: pointer;*/
-/*}*/
+button:active {
+    background-color: #101417;
+}
 
-/*.inner-part .content {*/
-/*    background-color: green;*/
-/*    padding: 0 10px 0 10px;*/
-/*    margin-left: 10px;*/
-/*    width: 150px;*/
-/*}*/
+button:focus {
+    outline: none;
+}
 
-/*.content button {*/
-/*    display: inline-flex;*/
-/*    border: none;*/
-/*    padding: 15px 20px;*/
-/*    font-size: 16px;*/
-/*    text-transform: uppercase;*/
-/*    color: white;*/
-/*    font-weight: 600;*/
-/*    letter-spacing: 1px;*/
-/*    border-radius: 8px;*/
-/*    border: 1px solid none;*/
-/*    background: linear-gradient(147deg, red, blue) ;*/
-/*    transition: 0.5s ease-in-out;*/
-/*}*/
+button[disabled] {
+    opacity: 0.48;
+    pointer-events: none;
+    user-select: none;
+}
 
-.film-img { grid-area: right-img; }
-.film-content { grid-area: film-content; }
-.item3 { grid-area: main; }
-.item4 { grid-area: right; }
-.item5 { grid-area: footer; }
+a {
+    text-decoration: none;
+}
 
-.film-card {
+a:hover {
+    opacity: 0.75;
+}
+.error {
+    color: red;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.line-underheader {
+    border: 0;
+    border-top: 2px solid #cdcdcd;
+}
+
+body .card {
+    margin: 10px;
+    background-color: #0A0C0E;
+    /*border: 2px solid orange;*/
+    padding: 20px 30px 20px 10px;
+    border-radius: 12px;
+
+    width: 500px;
+
     display: grid;
-    grid-template-areas:
-    'right-img right-img film-content film-content film-content film-content';
-    grid-gap: 15px;
-    background-color: #2196F3;
-    padding: 5px;
-    height: 350px;
-    width: 505px;
-    border-radius: 25px;
+    grid-template-columns: minmax(10px, 1fr) minmax(10px, 1fr);
+    gap: 1em;
 }
 
-.film-card >div {
-    background-color: rgba(255, 255, 255, 0.8);
-    text-align: center;
-    padding: 15px 0px;
-    font-size: 30px;
-}
-
-.film-card .film-img {
-    width: 220px;
-}
-
-.film-card .film-img img {
-        border-radius: 15px;
-        height: 100%;
-        /*width: 100%;*/
-        max-width: 220px;
-        object-fit: cover;
-        cursor: pointer;
-}
-
-.film-card .film-stars {
-    display: flex;
-}
-
-.film-card .film-content {
-    /*display: -webkit-flex;*/
-    /*display: -ms-flex;*/
-    /*align-items: center;*/
-    /*justify-content: space-between;*/
-    /*display: flex;*/
-
-    text-align: left;
-    max-width: 270px;
-}
-
-.film-card .film-title {
-    font-size: 25px;
-    font-weight: 500;
-}
-
-.film-card .film-description {
-    font-size: 18px;
-}
-
-.film-card .film-buttons {
-    display: flex;
-    justify-content: right;
-}
-
-.film-card .film-buttons {
-    padding-top: 10px;
-    padding-left: 5px;
-}
-
-.film-card .film-buttons >a:last-child {
-    padding-left: 10px;
-
-}
-
-.scroll-films {
+.card .card-image {
     width: auto;
-    height:auto;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
+    height: auto;
+    justify-content: center;
+    display: flex;
 }
 
-.scroll-films >div {
+.card .card-image img {
+    object-fit: contain;
+    border-radius: 12px;
+    /*max-width: 100%;*/
+    width: 200px;
+}
 
-    display: inline-block;
+.card .card-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.card .card-details .card-title {
+    position: relative;
+    /*text-align: justify;*/
+    font-size: 18px;
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+
+.card .card-details .card-content {
+    position: relative;
+    word-spacing: 6px;
+    font-weight: 400;
+    /*text-align: justify;*/
+}
+
+.card .card-details .card-stars {
+    position: relative;
+    /*text-align: justify;*/
+    font-size: 28px;
+    font-weight: 900;
+}
+
+.card .card-details .card-buttons {
+    margin-block-start: auto;
+    /*position: absolute;*/
+    /*bottom: 0;*/
+}
+
+.suggestion {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 180px);
+    gap: 1em;
+
+    padding: 20px 30px 20px 30px;
+}
+
+.suggestion .suggestion-internal {
+    background-color: white;
+    width: 100px;
+    background: none;
+    display: grid;
+    /*justify-items: center;*/
+}
+
+.suggestion .suggestion-internal > img {
+    object-fit: contain;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.suggestion .suggestion-title {
+    padding-top: 5px;
+    padding-left: 10px;
+    font-weight: 500;
+    font-size: 18px;
+    justify-items: left;
+}
+
+.suggestion .suggestion-title > a {
+    color: white;
+}
+
+.suggestion .suggestion-status {
+    padding: 5px 0px 15px 10px;
+    font-size: 14px;
+    font-weight: 300;
+    justify-items: left;
+}
+
+.suggestion .suggestion-status > a {
+    color: darkseagreen;
 }
