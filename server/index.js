@@ -1,25 +1,31 @@
-const http = require('http')
-const fs = require('fs')
+const express = require('express');
+const path = require("path");
+const app = express();
+const port = 3000;
 
-const server = http.createServer((req, res) => {
-    console.log('request', req.url);
-    let file = 'index.html';
+// app.use(express.static('src'));
 
-    if (req.url ==! '/') {
-        file = req.url.replace('/', '');
-    }
+console.log('FEFEFE', path.join(__dirname, ''))
 
-    fs.readFile(`public/src/${file}`, (err, data) => {
-        if (err) {
-            console.log('error', err);
-            res.end();
-            return;
-        }
-        res.write(data)
-        res.end()
-    });
+app.get('/*', (req, res) => {
+    console.log(req.ip, 'page request', req.url);
+    res.sendFile(path.resolve(`${__dirname}/../src/login.html`));
+});
 
-    // res.end();
-})
 
-server.listen(3000)
+// app.get('/main.css', function(req, res) {
+//     res.sendFile(path.resolve(`${__dirname}/../src/css/main.html`));
+// });
+
+// app.get('/', (req, res) => {
+//     res.send('Hello World!')
+// });
+//
+// app.all('/secret', function(req, res, next) {
+//     console.log('Accessing the secret section ...');
+//     next(); // pass control to the next handler
+// });
+
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}!`)
+});
