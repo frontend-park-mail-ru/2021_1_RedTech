@@ -3,28 +3,19 @@ const path = require("path");
 const app = express();
 const port = 3000;
 
-// app.use(express.static('src'));
+app.use(express.static('src'));
 
-console.log('FEFEFE', path.join(__dirname, ''))
+app.use('/favicon.ico', express.static('img/favicon.ico'));
 
-app.get('/*', (req, res) => {
+app.get('/login', (req, res) => {
     console.log(req.ip, 'page request', req.url);
     res.sendFile(path.resolve(`${__dirname}/../src/login.html`));
 });
 
-
-// app.get('/main.css', function(req, res) {
-//     res.sendFile(path.resolve(`${__dirname}/../src/css/main.html`));
-// });
-
-// app.get('/', (req, res) => {
-//     res.send('Hello World!')
-// });
-//
-// app.all('/secret', function(req, res, next) {
-//     console.log('Accessing the secret section ...');
-//     next(); // pass control to the next handler
-// });
+app.get('/signup', (req, res) => {
+    console.log(req.ip, 'page request', req.url);
+    res.sendFile(path.resolve(`${__dirname}/../src/signup.html`));
+});
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}!`)
