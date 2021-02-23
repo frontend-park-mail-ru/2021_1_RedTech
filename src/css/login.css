@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+html, body {
+    height: 100%;
+    background-color: #101417;
+    color: #eaeaea;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.login {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login_content {
+    position: relative;
+    margin: 80px auto auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login_title {
+    font-size: 38px;
+    margin-bottom: 16px;
+}
+
+.login_title-hint {
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.login_form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.login_form-content {
+    border: 1px solid #a2a2a2;
+    border-radius: 4px;
+    max-width: 433px;
+    padding: 24px;
+    margin-bottom: 30px;
+}
+
+.login_form-inputs {
+    margin-bottom: 20px;
+}
+
+.login_form-input-field:first-child {
+    margin-bottom: 10px;
+}
+
+.login_form-input {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: #101417;
+    border: 1px solid #a2a2a2;
+    border-radius: 4px;
+    padding: 10px 15px;
+    color: #eaeaea;
+    font-size: 18px;
+}
+
+.login_form-hint {
+    font-size: 13px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.login_form-button {
+    background-color: #1e252b;
+    color: #9b9b9b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+    padding: 10px 20px 10px;
+    margin-bottom: 20px;
+}
+
+.login_networks-title {
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.login_networks-content{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.login_networks-button {
+    border: none;
+    background-color: #101417;
+    padding: 0;
+    cursor: pointer;
+}
+
+.login_networks-img {
+    width: 40px;
+    height: 40px;
+}
+
+.login_no-acc {
+    font-size: 15px;
+}
+
+.login_no-acc-link {
+    color: #ec0c0c;
+}
