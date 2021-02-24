@@ -14,7 +14,7 @@ header {
     justify-content: space-between;
 }
 
-header .logo {
+header .header-logo {
     max-width: 175px;
     max-height: 45px;
 }
@@ -23,16 +23,16 @@ header img {
     max-width: 100%;
 }
 
-header .mnu_top {
+header .header-form {
     list-style-type: none;
 }
 
-header .mnu_top li {
+header .header-form li {
     display: inline-block;
     margin-right: 75px;
 }
 
-header .mnu_top a {
+header .header-form a {
     display: block;
     text-decoration: none;
     color: white;
@@ -42,11 +42,11 @@ header .mnu_top a {
     transition: 0.5s ease;
 }
 
-header .mnu_top a:hover {
+header .header-form a:hover {
     color: #b7b7b7;
 }
 
-header .btns {
+header .header-form__profile {
     display: -webkit-flex;
     display: -ms-flex;
     display: flex;
@@ -55,7 +55,7 @@ header .btns {
 
 }
 
-header .btns .btn-header {
+header .header-form__profile .header-form__profile__link {
     margin-right: 25px;
     display: -webkit-flex;
     display: -ms-flex;
@@ -67,7 +67,7 @@ header .btns .btn-header {
     transition: 0.5s ease;
 }
 
-header .btns .btn-header {
+header .header-form__profile .header-form__profile__link {
     color: #b7b7b7;
 }
 
@@ -121,7 +121,7 @@ a:hover {
     border-top: 2px solid #cdcdcd;
 }
 
-body .card {
+body .card-form {
     margin: 10px;
     background-color: #0A0C0E;
     /*border: 2px solid orange;*/
@@ -135,26 +135,26 @@ body .card {
     gap: 1em;
 }
 
-.card .card-image {
+.card-form .card-form_image {
     width: auto;
     height: auto;
     justify-content: center;
     display: flex;
 }
 
-.card .card-image img {
+.card-form .card-form_image img {
     object-fit: contain;
     border-radius: 12px;
     /*max-width: 100%;*/
     width: 200px;
 }
 
-.card .card-details {
+.card-form .card-form_details {
     display: flex;
     flex-direction: column;
 }
 
-.card .card-details .card-title {
+.card-form .card-form_details .card-form_title {
     position: relative;
     /*text-align: justify;*/
     font-size: 18px;
@@ -162,27 +162,27 @@ body .card {
     padding-bottom: 10px;
 }
 
-.card .card-details .card-content {
+.card-form .card-form_details .card-form_description {
     position: relative;
     word-spacing: 6px;
     font-weight: 400;
     /*text-align: justify;*/
 }
 
-.card .card-details .card-stars {
+.card-form .card-form_details .card-form_stars {
     position: relative;
     /*text-align: justify;*/
     font-size: 28px;
     font-weight: 900;
 }
 
-.card .card-details .card-buttons {
+.card-form .card-form_details .card-form_buttons {
     margin-block-start: auto;
     /*position: absolute;*/
     /*bottom: 0;*/
 }
 
-.suggestion {
+.suggestion-form {
     display: grid;
     grid-template-columns: repeat(auto-fill, 180px);
     gap: 1em;
@@ -190,7 +190,7 @@ body .card {
     padding: 20px 30px 20px 30px;
 }
 
-.suggestion .suggestion-internal {
+.suggestion-form .suggestion-form__internal {
     background-color: white;
     width: 100px;
     background: none;
@@ -198,13 +198,13 @@ body .card {
     /*justify-items: center;*/
 }
 
-.suggestion .suggestion-internal > img {
+.suggestion-form .suggestion-form_internal > img {
     object-fit: contain;
     border-radius: 12px;
     cursor: pointer;
 }
 
-.suggestion .suggestion-title {
+.suggestion-form .suggestion-form_title {
     padding-top: 5px;
     padding-left: 10px;
     font-weight: 500;
@@ -212,17 +212,17 @@ body .card {
     justify-items: left;
 }
 
-.suggestion .suggestion-title > a {
+.suggestion-form .suggestion-form_title > a {
     color: white;
 }
 
-.suggestion .suggestion-status {
+.suggestion-form .suggestion-form_status {
     padding: 5px 0px 15px 10px;
     font-size: 14px;
     font-weight: 300;
     justify-items: left;
 }
 
-.suggestion .suggestion-status > a {
+.suggestion-form .suggestion-form_status > a {
     color: darkseagreen;
 }
