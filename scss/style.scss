@@ -1,0 +1,66 @@
+@import 'header-form';
+@import 'card-form';
+@import 'suggestion-form';
+
+$background-color: #101417;
+$text-color: white;
+$button-background-color: #101417;
+$button-active-background-color: #101417;
+$text-hover-color: #d9d9d9;
+
+head, body {
+  font-family: "Montserrat", sans-serif;
+  background-color: $background-color;
+  color: $text-color;
+}
+
+button {
+  height: 32px;
+  font-size: 15px;
+  padding: 0 15px;
+
+  border-radius: 12px;
+  background: none;
+  color: $text-color;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: $button-background-color;
+  color: $text-hover-color;
+}
+
+button:active {
+  background-color: $button-active-background-color;
+}
+
+button:focus {
+  outline: none;
+}
+
+button[disabled] {
+  opacity: 0.48;
+  pointer-events: none;
+  user-select: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 0.75;
+}
+
+.error {
+  color: red;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.line-underheader {
+  border: 0;
+  border-top: 2px solid #cdcdcd;
+}

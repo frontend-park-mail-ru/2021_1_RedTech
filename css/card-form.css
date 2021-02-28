@@ -1,0 +1,44 @@
+.card-form {
+  margin: 30px;
+  background-color: #0A0C0E;
+  padding: 20px 30px 20px 10px;
+  border-radius: 12px;
+  width: 500px;
+  display: grid;
+  grid-template-columns: minmax(10px, 1fr) minmax(10px, 1fr);
+  gap: 1em;
+}
+.card-form .card-form_image {
+  width: auto;
+  height: auto;
+  justify-content: center;
+  display: flex;
+}
+.card-form .card-form_image img {
+  object-fit: contain;
+  border-radius: 12px;
+  width: 200px;
+}
+.card-form .card-form_details {
+  display: flex;
+  flex-direction: column;
+}
+.card-form .card-form_details .card-form_title {
+  position: relative;
+  font-size: 18px;
+  font-weight: 600;
+  padding-bottom: 10px;
+}
+.card-form .card-form_details .card-form_description {
+  position: relative;
+  word-spacing: 6px;
+  font-weight: 400;
+}
+.card-form .card-form_details .card-form_stars {
+  position: relative;
+  font-size: 28px;
+  font-weight: 900;
+}
+.card-form .card-form_details .card-form_buttons {
+  margin-block-start: auto;
+}

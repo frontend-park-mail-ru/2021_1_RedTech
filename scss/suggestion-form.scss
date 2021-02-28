@@ -1,0 +1,46 @@
+$title-color: white;
+$status-color: darkseagreen;
+
+.suggestion-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 180px);
+  gap: 1em;
+
+  padding: 20px 30px 20px 30px;
+
+  .suggestion-form_internal {
+    background-color: white;
+    width: 100px;
+    background: none;
+    display: grid;
+
+    >img {
+      object-fit: contain;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+  }
+
+  .suggestion-form_title {
+    padding-top: 5px;
+    padding-left: 10px;
+    font-weight: 500;
+    font-size: 18px;
+    justify-items: left;
+
+    > a {
+      color: $title-color;
+    }
+  }
+
+  .suggestion-form_status {
+    padding: 5px 0px 15px 10px;
+    font-size: 14px;
+    font-weight: 300;
+    justify-items: left;
+
+    > a {
+      color: $status-color;
+    }
+  }
+}
