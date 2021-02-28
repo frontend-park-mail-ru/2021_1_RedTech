@@ -26,7 +26,7 @@ header .header-form a {
   color: white;
   font-size: 20px;
   font-weight: 500;
-  transition: 0.15s ease;
+  transition: 0.25s ease;
 }
 header .header-form a:hover {
   color: #b7b7b7;
@@ -43,7 +43,7 @@ header .header-form__profile .header-form__profile__link {
   align-items: center;
   max-width: 34px;
   max-height: 34px;
-  transition: 0.15s ease;
+  transition: 0.25s ease;
   color: #b7b7b7;
 }
 
