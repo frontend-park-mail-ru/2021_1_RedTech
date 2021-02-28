@@ -1,6 +1,6 @@
-@import 'header-form';
-@import 'card-form';
-@import 'suggestion-form';
+@import 'components/Header/header-form';
+@import 'components/CardForm/card-form';
+@import 'components/SuggestionForm/suggestion-form';
 
 $background-color: #101417;
 $text-color: white;

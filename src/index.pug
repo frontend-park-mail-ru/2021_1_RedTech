@@ -1,47 +1,12 @@
-extends basic.pug
+html
+    head
+        meta(charset="utf-8")
+        title My Site - #{title}
+        block style
+    body
+        block variables
 
-block variables
-    -
-        var headerLinks = [
-            {title: 'Главная'},
-            {title: 'Сериалы'},
-            {title: 'Фильмы'},
-            {title: 'Последнее'}
-            ]
+        block header
 
-    -
-        var headerIcons = [
-            {href:'#', src: 'assets/search.png', alt:''},
-            {href:'#', 'src': 'assets/star.png', alt:''},
-            {href:'#', src: 'assets/profile.png', alt:''}
-            ]
-
-    -
-        var cardFilms = [
-            {src: 'assets/st.jpeg', alt: '', title: 'Очень странные дела', stars: '* * * * *', description: 'Очень странные дела — американский научно-фантастический сериал, созданный братьями Даффер для сети потокового мультимедиа Redioteka', },
-            ]
-
-    -
-        var suggestionsFilms = [
-            {src: 'assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Подписка'},
-            {src: 'assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Платно'},
-            {src: 'assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Бесплатно'},
-            {src: 'assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Бесплатно'}
-            ]
-
-block style
-    style
-        include ./css/style.css
-
-block header
-    include header
-
-block content
-    each i in cardFilms
-        include card-form
-
-    include suggestion-form
-
-
-
+        block content
 
