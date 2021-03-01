@@ -1,3 +1,5 @@
+import {FormComponent} from "./components/Form/Form.js";
+
 const application = document.getElementById('app');
 
 const config = {
@@ -15,6 +17,11 @@ const config = {
         href: '/login',
         text: 'Войти',
         open: loginPage,
+    },
+    pug: {
+        href: '/pug',
+        text: 'pug',
+        open: pugPage,
     }
 
 }
@@ -201,6 +208,15 @@ function loginPage() {
     const divForHint = appendTag('div', 'form-content__have-acc', 'Еще нет аккаунта?', 'form__form-content');
     divForHint.appendChild(createATag('have-acc__link', 'login.html', 'Зарегистрируйтесь!'));
 
+}
+
+function pugPage() {
+    application.innerHTML = '';
+
+    const formComponent = new FormComponent({
+        parent: application
+    })
+    formComponent.render()
 }
 
 function menuPage() {
