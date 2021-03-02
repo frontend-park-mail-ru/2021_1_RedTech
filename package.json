@@ -5,13 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "DEBUG=* node server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tmpl": "puglatizer -d src/components -o templates.js",
+    "prestart": "npm run tmpl"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "puglatizer": "^1.1.9"
   }
 }

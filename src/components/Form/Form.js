@@ -1,5 +1,3 @@
-const pug = require('pug')
-
 export class FormComponent {
     constructor({
                     parent = document.body,
@@ -11,8 +9,8 @@ export class FormComponent {
     }
 
     render() {
-        const template = pug.compileFile('./Form.pug')
-        console.log(template())
-        this._parent.innerHTML = template();
+        const template = puglatizer.Form.Form()
+        //console.log(template())
+        this._parent.innerHTML = template;
     }
 }
