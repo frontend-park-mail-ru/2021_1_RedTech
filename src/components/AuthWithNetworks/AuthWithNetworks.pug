@@ -1,0 +1,8 @@
+mixin authWithNetworks(networks)
+    div.form-content__networks
+        div.networks__title Или войдите с помощью социальных сетей
+        div.networks__content
+            for networksSrc in networks
+                div.networks__img
+                    button.networks__button
+                        img.networks__img(src=networksSrc.src alt="")

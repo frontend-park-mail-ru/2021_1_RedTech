@@ -1,7 +1,7 @@
-export class FormComponent {
+export class LogInView {
     constructor({
                     parent = document.body,
-                    data = [],
+                    data = {},
                 } = {}) {
 
         this._parent = parent;
@@ -9,8 +9,7 @@ export class FormComponent {
     }
 
     render() {
-        const template = puglatizer.Form.Form()
-        //console.log(template())
+        const template = puglatizer.LogIn.LogIn(this._data)
         this._parent.innerHTML = template;
     }
 }
