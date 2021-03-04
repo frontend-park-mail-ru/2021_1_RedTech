@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "DEBUG=* node server",
+    "start": "node server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tmpl": "puglatizer -d src/components -o templates.js",
+    "tmpl": "puglatizer -d src/views -o templates.js",
     "prestart": "npm run tmpl"
   },
   "keywords": [],
