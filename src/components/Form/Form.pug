@@ -1,0 +1,11 @@
+include ../Input/Input.pug
+
+mixin customForm(inputs, buttonName)
+    form(novalidate)
+        div.form_content__inputs
+            div.inputs__input-field
+                for input in inputs
+                    div.inputs__input-field
+                        +customInput(input.type, 'input-field__input', input.placeholder, input.id)
+                        span.error
+        button.form-content__button #{buttonName}
