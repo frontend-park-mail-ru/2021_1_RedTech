@@ -106,6 +106,12 @@ html, body {
     font-family: 'Montserrat', sans-serif;
     padding: 12px 20px 12px;
     margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.form-content__button:hover {
+    color: #9B9B9B;
+    background-color: #0a0d0e;
 }
 
 .form-content__have-acc {
@@ -113,7 +119,9 @@ html, body {
 }
 
 .have-acc__link {
+    margin-left: 4px;
     color: var(--alert-color);
+    display: inline;
 }
 
 .networks__title {
