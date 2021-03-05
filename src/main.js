@@ -1,5 +1,6 @@
 import {SignUpView} from "./views/SignUp/SignUp.js";
 import {LogInView} from "./views/LogIn/LogIn.js";
+import {validateForm} from "./utils/validator.js";
 
 const APPLICATION = document.getElementById('app');
 
@@ -68,7 +69,7 @@ const configForLogin = {
 }
 
 /**
- * Render signup page
+ * Render signup page and check validation of form.
  */
 CONFIG.signup.open = () => {
     APPLICATION.innerHTML = '';
@@ -78,10 +79,13 @@ CONFIG.signup.open = () => {
         data: configForSignUp
     });
     signUpView.render();
+
+    const form = document.getElementsByTagName('form')[0];
+    validateForm(form);
 }
 
 /**
- * Render login page
+ * Render login page and check validation of form.
  */
 CONFIG.login.open = () => {
     APPLICATION.innerHTML = '';
@@ -91,6 +95,9 @@ CONFIG.login.open = () => {
         data: configForLogin
     });
     logInView.render();
+
+    const form = document.getElementsByTagName('form')[0];
+    validateForm(form);
 }
 
 const menuPage = () => {
