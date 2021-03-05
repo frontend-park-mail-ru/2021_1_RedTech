@@ -3,3 +3,9 @@
 a {
     display: block;
 }
+
+.error {
+    color: var(--alert-color);
+    overflow: hidden;
+    font-size: 12px;
+}
