@@ -67,6 +67,9 @@ const configForLogin = {
     buttonName: 'Войти'
 }
 
+/**
+ * Render signup page
+ */
 CONFIG.signup.open = () => {
     APPLICATION.innerHTML = '';
 
@@ -77,6 +80,9 @@ CONFIG.signup.open = () => {
     signUpView.render();
 }
 
+/**
+ * Render login page
+ */
 CONFIG.login.open = () => {
     APPLICATION.innerHTML = '';
 
