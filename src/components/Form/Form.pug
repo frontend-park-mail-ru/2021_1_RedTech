@@ -7,5 +7,5 @@ mixin customForm(inputs, buttonName)
                 for input in inputs
                     div.inputs__input-field
                         +customInput(input.type, 'input-field__input', input.placeholder, input.id)
-                        span.error
+                        div.error(id = input.id+'Error')
         button.form-content__button #{buttonName}
