@@ -46,10 +46,12 @@ const configForSignUp = {
 const configForLogin = {
     inputs: [
         {
+            id: 'email',
             placeholder: 'Email',
             type: 'email',
         },
         {
+            id: 'password',
             placeholder: 'Пароль',
             type: 'password',
         }
