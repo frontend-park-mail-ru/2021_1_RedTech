@@ -1,6 +1,8 @@
-@import 'components/Header/header-form';
-@import 'components/CardForm/card-form';
-@import 'components/SuggestionForm/suggestion-form';
+@import 'components/Header/Header';
+@import 'components/CardForm/CardForm';
+@import 'components/SuggestionForm/SuggestionForm';
+@import 'components/DetailForm/DetailForm';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
 $background-color: #101417;
 $text-color: white;
@@ -14,6 +16,12 @@ head, body {
   color: $text-color;
 }
 
+.container {
+  display: flex;
+  overflow-x: auto;
+  height: auto;
+}
+
 button {
   height: 32px;
   font-size: 15px;
@@ -22,6 +30,7 @@ button {
   border-radius: 12px;
   background: none;
   color: $text-color;
+
   cursor: pointer;
 }
 

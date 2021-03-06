@@ -9,19 +9,19 @@ $card-form-background-color: #0A0C0E;
   width: 500px;
 
   display: grid;
-  grid-template-columns: minmax(10px, 1fr) minmax(10px, 1fr);
-  gap: 1em;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 
   .card-form_image {
-    width: auto;
-    height: auto;
+    width: 220px;
+    height: 300px;
     justify-content: center;
     display: flex;
 
     img {
       object-fit: contain;
       border-radius: 12px;
-      width: 276px;
+      width: 220px;
       height: 300px;
       cursor: pointer;
     }
@@ -30,12 +30,14 @@ $card-form-background-color: #0A0C0E;
   .card-form_details {
     display: flex;
     flex-direction: column;
+    width: 220px;
 
     .card-form_title {
 
       > a {
         color: white;
       }
+
       position: relative;
       font-size: 18px;
       font-weight: 600;
@@ -59,4 +61,5 @@ $card-form-background-color: #0A0C0E;
     }
   }
 }
+
 
