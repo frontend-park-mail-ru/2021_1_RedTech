@@ -1,3 +1,31 @@
+import { APPLICATION } from '../../main.js';
+import { SignUpView } from '../SignUp/SignUp.js';
+
+const configForLogin = {
+    inputs: [
+        {
+            placeholder: 'Email',
+            type: 'email',
+        },
+        {
+            placeholder: 'Пароль',
+            type: 'password',
+        }
+    ],
+    networksAuth: [
+        {
+            src: 'img/google.svg',
+        },
+        {
+            src: 'img/facebook.svg',
+        },
+        {
+            src: 'img/vk.svg',
+        }
+    ],
+    buttonName: 'Войти'
+}
+
 /** Class representing a login page view. */
 export class LogInView {
     /**
@@ -6,11 +34,9 @@ export class LogInView {
      * @param {Object} data - Parameters for render signup view.
      */
     constructor({
-                    parent = document.body,
                     data = {},
-                } = {}) {
-
-        this._parent = parent;
+                } = {})
+    {
         this._data = data;
     }
 
@@ -18,7 +44,18 @@ export class LogInView {
      * Render html login page from pug template to parent.
      */
     render() {
-        const template = puglatizer.LogIn.LogIn(this._data)
-        this._parent.innerHTML = template;
+        const template = puglatizer.LogIn.LogIn(configForLogin);
+        APPLICATION.innerHTML = template;
+
+        const aTag = document.getElementsByClassName('have-acc__link');
+
+        aTag.item(0).addEventListener(('click'), event => {
+            event.preventDefault();
+
+            APPLICATION.innerHTML = '';
+
+            const signUpView = new SignUpView();
+            signUpView.render();
+        })
     }
 }

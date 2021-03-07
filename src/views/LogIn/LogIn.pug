@@ -1,5 +1,4 @@
 include ../../components/Form/Form.pug
-include ../../components/AuthWithNetworks/AuthWithNetworks.pug
 
 div.login-signup
     div.login-signup__content
@@ -7,7 +6,13 @@ div.login-signup
         div.content__title-hint Войдите для просмотра фильмов и сериалов
         div.content__form
             div.form__form-content
-                +customForm(inputs, buttonName)
-                +authWithNetworks(networksAuth)
+                +form(inputs, buttonName)
+                div.form-content__networks
+                    div.networks__title Или войдите с помощью социальных сетей
+                    div.networks__content
+                        for networksSrc in networksAuth
+                            div.networks__img
+                                button.networks__button
+                                    img.networks__img(src=networksSrc.src alt="")
                 div.form-content__have-acc Еще нет аккаунта?
                     a(class="have-acc__link" href="login.html") Зарегистрируйтесь!

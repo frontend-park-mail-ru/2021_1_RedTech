@@ -20,13 +20,3 @@ app.get('/*', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}!`)
 });
-
-// app.get('/login', (req, res) => {
-//     console.log(req.ip, 'page request', req.url);
-//     res.sendFile(path.resolve(`${__dirname}/../src/login.html`));
-// });
-//
-// app.get('/signup', (req, res) => {
-//     console.log(req.ip, 'page request', req.url);
-//     res.sendFile(path.resolve(`${__dirname}/../src/signup.html`));
-// });

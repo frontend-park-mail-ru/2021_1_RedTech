@@ -1,85 +1,16 @@
-import {SignUpView} from "./views/SignUp/SignUp.js";
-import {LogInView} from "./views/LogIn/LogIn.js";
-import {validateForm} from "./utils/validator.js";
+import { SignUpView } from './views/SignUp/SignUp.js';
+import { LogInView } from './views/LogIn/LogIn.js';
+import { validateForm } from "./utils/validator.js";
 
-const APPLICATION = document.getElementById('app');
-
-const CONFIG = {
-    signup: {
-        href: '/signup',
-        text: 'Зарегистрироваться',
-        open
-    },
-    login: {
-        href: '/login',
-        text: 'Войти',
-        open
-    }
-}
-
-const configForSignUp = {
-    inputs: [
-        {
-            id: 'login',
-            placeholder: 'Логин',
-            type: 'text',
-        },
-        {
-            id: 'email',
-            placeholder: 'Email',
-            type: 'email',
-        },
-        {
-            id: 'password',
-            placeholder: 'Пароль',
-            type: 'password',
-        },
-        {
-            id: 'confirmPassword',
-            placeholder: 'Подтвердите пароль',
-            type: 'password',
-        }
-    ],
-    buttonName: 'Зарегистрироваться'
-}
-
-const configForLogin = {
-    inputs: [
-        {
-            id: 'email',
-            placeholder: 'Email',
-            type: 'email',
-        },
-        {
-            id: 'password',
-            placeholder: 'Пароль',
-            type: 'password',
-        }
-    ],
-    networksAuth: [
-        {
-            src: 'img/google.svg',
-        },
-        {
-            src: 'img/facebook.svg',
-        },
-        {
-            src: 'img/vk.svg',
-        }
-    ],
-    buttonName: 'Войти'
-}
+export const APPLICATION = document.getElementById('app');
 
 /**
  * Render signup page and check validation of form.
  */
-CONFIG.signup.open = () => {
+const signUpPage = () => {
     APPLICATION.innerHTML = '';
 
-    const signUpView = new SignUpView({
-        parent: APPLICATION,
-        data: configForSignUp
-    });
+    const signUpView = new SignUpView();
     signUpView.render();
 
     const form = document.getElementsByTagName('form')[0];
@@ -89,43 +20,52 @@ CONFIG.signup.open = () => {
 /**
  * Render login page and check validation of form.
  */
-CONFIG.login.open = () => {
+const loginPage = () => {
     APPLICATION.innerHTML = '';
 
-    const logInView = new LogInView({
-        parent: APPLICATION,
-        data: configForLogin
-    });
+    const logInView = new LogInView();
     logInView.render();
 
     const form = document.getElementsByTagName('form')[0];
     validateForm(form);
 }
 
+const MENU = {
+    signup: {
+        href: '/signup',
+        text: 'Зарегистрироваться',
+        open: signUpPage,
+    },
+    login: {
+        href: '/login',
+        text: 'Войти',
+        open: loginPage,
+    }
+}
+
 const menuPage = () => {
     APPLICATION.innerHTML = '';
 
     Object
-        .entries(CONFIG)
-        .map(([configKey, {text, href}]) => {
+        .entries(MENU)
+        .forEach(([menuKey, {text, href}]) => {
             const menuItem = document.createElement('a');
+            menuItem.className = 'main-page__href';
             menuItem.href = href;
             menuItem.textContent = text;
-            menuItem.dataset.section = configKey;
-
-            return menuItem;
+            menuItem.dataset.section = menuKey;
+            APPLICATION.appendChild(menuItem);
         })
-        .forEach(element => APPLICATION.appendChild(element))
     ;
 }
-
-menuPage();
 
 APPLICATION.addEventListener(('click'), event => {
     const {target} = event;
 
     if (target instanceof HTMLAnchorElement) {
         event.preventDefault();
-        CONFIG[target.dataset.section].open();
+        MENU[target.dataset.section].open();
     }
 });
+
+menuPage();
