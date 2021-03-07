@@ -1,4 +1,11 @@
-@import url("signup_login.css");
+@import "signup_login.css";
+
+@font-face {
+    font-family: "MontserratMedium";
+    src: url("../fonts/Montserrat-Medium.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
 
 a {
     display: block;
