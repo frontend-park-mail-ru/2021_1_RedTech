@@ -1,5 +1,5 @@
-import {SignUpView} from "./views/SignUp/SignUp.js";
-import {LogInView} from "./views/LogIn/LogIn.js";
+import { SignUpView } from "./views/SignUp/SignUp.js";
+import { LogInView } from "./views/LogIn/LogIn.js";
 
 const APPLICATION = document.getElementById('app');
 
