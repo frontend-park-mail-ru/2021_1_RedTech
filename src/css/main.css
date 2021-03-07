@@ -7,6 +7,16 @@
     font-weight: normal;
 }
 
+:root {
+    --background-color: #101417;
+    --font-color: #eaeaea;
+    --border-color: #a2a2a2;
+    --alert-color: #ec0c0c;
+    --btn-background-color: #1e252b;
+    --btn-font-color: #9b9b9b;
+    --btn-hover-color: #0a0d0e;
+}
+
 a.main-page__href {
     display: block;
 }
