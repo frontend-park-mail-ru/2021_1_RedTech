@@ -6,6 +6,6 @@ mixin form(inputs, buttonName)
             div.inputs__input-field
                 for input in inputs
                     div.inputs__input-field
-                        +customInput(input.type, 'input-field__input', input.placeholder, input.id)
+                        +customInput(input.type, input.class, input.placeholder, input.id)
                         div.error(id = input.id+'Error')
         button.form-content__button #{buttonName}
