@@ -1,4 +1,4 @@
-import { APPLICATION } from '../../main';
+import { APPLICATION } from '../../main.js';
 
 const configForLogin = {
     inputs: [
