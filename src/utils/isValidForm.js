@@ -1,86 +1,110 @@
 /**
  * Check validation of form.
  * Calls others functions to check validations of every type of input.
- * @param {Element} form - form for validation
+ * @param {Element} form - form for validation.
+ * @returns {boolean} - is valid form or not.
  */
-export const validateForm = (form) => {
+export const isValidForm = (form) => {
+
     if (form === undefined) {
-        return;
+        return false;
     }
 
     const inputs = form.querySelectorAll('.input-field__input');
 
     inputs.forEach((input) => {
         document.getElementById(input.id + 'Error').textContent = '';
+        input.classList.remove('input-field__input_error');
     })
+
+    let isValid = true;
 
     inputs.forEach((input) => {
         const errorDiv = document.getElementById(input.id + 'Error');
 
         if (!input.value) {
             errorDiv.textContent = 'Это поле обязательно к заполнению';
-            event.preventDefault();
+            input.classList.add('input-field__input_error');
+            isValid &= false;
         } else {
             switch (input.id) {
                 case 'email':
-                    validateEmail(input.value, errorDiv);
+                    isValid &= isValidEmail(input, errorDiv);
                     break;
                 case 'login':
-                    validateLogin(input.value, errorDiv);
+                    isValid &= isValidLogin(input, errorDiv);
                     break;
                 case 'password':
-                    validatePassword(input.value, errorDiv);
+                    isValid &= isValidPassword(input, errorDiv);
                     break;
                 case 'confirmPassword':
-                    validateConfirmPassword(input.value, errorDiv);
+                    isValid &= isValidConfirmPassword(input, errorDiv);
                     break;
             }
         }
     });
+
+    return isValid;
 }
 
 /**
  * Check validation of inputted login.
- * @param {string} login - value of login input to be validated.
+ * @param {Element} loginInput - element login input to be validated.
  * @param {HTMLElement} errorDiv - div element, where will be printed message of error.
+ * @returns {boolean} - is valid login form or not.
  */
-const validateLogin = (login, errorDiv) => {
-    if (!/^[a-zA-Z](.[a-zA-Z0-9]*)$/.test(login)) {
+const isValidLogin = (loginInput, errorDiv) => {
+    if (!/^[a-zA-Z](.[a-zA-Z0-9]*)$/.test(loginInput.value)) {
         errorDiv.textContent = 'Логин должен содержать только латинские буквы и цифры';
+        loginInput.classList.add('input-field__input_error');
+        return false;
     }
+    return true;
 }
 
 /**
  * Check validation of inputted email.
- * @param {string} email - value of email input to be validated.
+ * @param {Element} emailInput - element email input to be validated.
  * @param {HTMLElement} errorDiv - div element, where will be printed message of error.
+ * @returns {boolean} - is valid email form or not.
  */
-const validateEmail = (email, errorDiv) => {
-    if (!/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(email)) {
+const isValidEmail = (emailInput, errorDiv) => {
+    if (!/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(emailInput.value)) {
         errorDiv.textContent = 'Введен некорректный email';
+        emailInput.classList.add('input-field__input_error');
+        return false;
     }
+    return true;
 }
 
 /**
  * Check validation of inputted password.
- * @param {string} password - value of login input to be validated.
+ * @param {Element} passwordInput - element login input to be validated.
  * @param {HTMLElement} errorDiv - div element, where will be printed message of error.
+ * @returns {boolean} - is valid password form or not.
  */
-const validatePassword = (password, errorDiv) => {
-    if (password.length < 8 || password.length > 50) {
+const isValidPassword = (passwordInput, errorDiv) => {
+    if (passwordInput.value.length < 8 || passwordInput.value.length > 50) {
         errorDiv.textContent = 'Пароль должен быть длиной от 8 до 50 символов';
+        passwordInput.classList.add('input-field__input_error');
+        return false;
     }
+    return true;
 }
 
 /**
  * Check validation of inputted password for confirmation.
- * @param {string} confirmPassword - value of password for confirmation input to be validated.
+ * @param {Element} confirmPasswordInput - element password for confirmation input to be validated.
  * @param {HTMLElement} errorDiv - div element, where will be printed message of error.
+ * @returns {boolean} - is valid confirm password form or not.
  */
-const validateConfirmPassword = (confirmPassword, errorDiv) => {
+const isValidConfirmPassword = (confirmPasswordInput, errorDiv) => {
     const password = document.getElementById('password').value;
 
-    if (confirmPassword !== password) {
+    if (confirmPasswordInput.value !== password) {
         errorDiv.textContent = 'Пароли не совпадают!';
+        confirmPasswordInput.classList.add('input-field__input_error');
+        return false;
     }
+    return true;
 }
