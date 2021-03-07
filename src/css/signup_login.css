@@ -76,6 +76,10 @@ html, body {
     font-family: 'MontserratMedium', sans-serif;
 }
 
+.input-field__input_error {
+    border: 1px solid var(--alert-color);
+}
+
 .form-content__hint {
     font-size: 12px;
     cursor: pointer;
