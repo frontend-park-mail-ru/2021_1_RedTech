@@ -51,8 +51,7 @@ export const validateForm = (form) => {
  */
 const validateLogin = (login, errorDiv) => {
     if(!/^[a-zA-Z](.[a-zA-Z0-9]*)$/.test(login)) {
-        errorDiv.textContent = 'Логин должен содержать только латинские буквы и цифры.' +
-                               ' Первый символ логина может быть только буквенным';
+        errorDiv.textContent = 'Логин должен содержать только латинские буквы и цифры';
         event.preventDefault();
     }
 }
@@ -64,7 +63,7 @@ const validateLogin = (login, errorDiv) => {
  */
 const validateEmail = (email, errorDiv) => {
     if(!/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(email)) {
-        errorDiv.textContent = 'Введен некорректный почтовый адрес';
+        errorDiv.textContent = 'Введен некорректный email';
         event.preventDefault();
     }
 }
