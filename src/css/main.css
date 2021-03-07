@@ -1,1 +1,38 @@
-@import url("signup_login.css");
+@import "signup_login.css";
+
+@font-face {
+    font-family: "MontserratMedium";
+    src: url("../fonts/Montserrat-Medium.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+:root {
+    --background-color: #101417;
+    --font-color: #eaeaea;
+    --border-color: #a2a2a2;
+    --alert-color: #ec0c0c;
+    --btn-background-color: #1e252b;
+    --btn-font-color: #9b9b9b;
+    --btn-hover-color: #0a0d0e;
+}
+
+a.main-page__href {
+    display: block;
+}
+
+.error {
+    margin-top: 4px;
+    color: var(--alert-color);
+    overflow: hidden;
+    font-size: 12px;
+}
+
+button:focus {
+    outline: none;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 0 10px #b0b0b0;
+}

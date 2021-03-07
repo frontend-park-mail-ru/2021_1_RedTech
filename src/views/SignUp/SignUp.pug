@@ -1,0 +1,11 @@
+include ../../components/Form/Form.pug
+
+div.login-signup
+    div.login-signup__content
+        div.content__title Регистрация
+        div.content__title-hint Зарегистрируйтесь для просмотра фильмов и сериалов
+        div.content__form
+            div.form__form-content
+                +form(inputs, buttonName)
+                div.form-content__have-acc Уже зарегистрированы?
+                    a(class="have-acc__link" href="login.html") Войдите в аккаунт!

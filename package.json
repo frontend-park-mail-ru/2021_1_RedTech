@@ -5,18 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "tmpl": "puglatizer -d src -o templates.js",
+    "tmpl": "puglatizer -d src/views -o templates.js",
     "prestart": "npm run tmpl"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cors": "^2.8.5",
     "express": "^4.17.1",
     "pug": "^3.0.2",
-    "puglatizer": "^1.1.9",
-    "tmpl": "^1.0.4"
+    "puglatizer": "^1.1.9"
   }
 }
