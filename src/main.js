@@ -41,20 +41,16 @@ const menuPage = () => {
 
     Object
         .entries(MENU)
-        .map(([configKey, {text, href}]) => {
+        .forEach(([menuKey, {text, href}]) => {
             const menuItem = document.createElement('a');
             menuItem.className = 'main-page__href';
             menuItem.href = href;
             menuItem.textContent = text;
-            menuItem.dataset.section = configKey;
-
-            return menuItem;
+            menuItem.dataset.section = menuKey;
+            APPLICATION.appendChild(menuItem);
         })
-        .forEach(element => APPLICATION.appendChild(element))
     ;
 }
-
-menuPage();
 
 APPLICATION.addEventListener(('click'), event => {
     const {target} = event;
@@ -64,3 +60,5 @@ APPLICATION.addEventListener(('click'), event => {
         MENU[target.dataset.section].open();
     }
 });
+
+menuPage();
