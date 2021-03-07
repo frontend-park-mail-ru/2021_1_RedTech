@@ -3,23 +3,10 @@ import { LogInView } from './views/LogIn/LogIn.js';
 
 export const APPLICATION = document.getElementById('app');
 
-const MENU = {
-    signup: {
-        href: '/signup',
-        text: 'Зарегистрироваться',
-        open
-    },
-    login: {
-        href: '/login',
-        text: 'Войти',
-        open
-    }
-}
-
 /**
  * Render signup page
  */
-MENU.signup.open = () => {
+const signUpPage = () => {
     APPLICATION.innerHTML = '';
 
     const signUpView = new SignUpView();
@@ -29,11 +16,24 @@ MENU.signup.open = () => {
 /**
  * Render login page
  */
-MENU.login.open = () => {
+const loginPage = () => {
     APPLICATION.innerHTML = '';
 
     const logInView = new LogInView();
     logInView.render();
+}
+
+const MENU = {
+    signup: {
+        href: '/signup',
+        text: 'Зарегистрироваться',
+        open: signUpPage,
+    },
+    login: {
+        href: '/login',
+        text: 'Войти',
+        open: loginPage,
+    }
 }
 
 const menuPage = () => {
