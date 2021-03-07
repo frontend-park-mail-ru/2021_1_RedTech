@@ -22,7 +22,12 @@ a.main-page__href {
 }
 
 .error {
+    margin-top: 4px;
     color: var(--alert-color);
     overflow: hidden;
     font-size: 12px;
+}
+
+button:focus {
+    outline: none;
 }
