@@ -100,6 +100,7 @@ const menuPage = () => {
         .entries(CONFIG)
         .map(([configKey, {text, href}]) => {
             const menuItem = document.createElement('a');
+            menuItem.className = 'main-page__href';
             menuItem.href = href;
             menuItem.textContent = text;
             menuItem.dataset.section = configKey;

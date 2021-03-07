@@ -7,6 +7,6 @@
     font-weight: normal;
 }
 
-a {
+a.main-page__href {
     display: block;
 }
