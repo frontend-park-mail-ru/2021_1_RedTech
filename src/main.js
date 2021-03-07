@@ -1,9 +1,9 @@
 import { SignUpView } from './views/SignUp/SignUp.js';
 import { LogInView } from './views/LogIn/LogIn.js';
 
-const APPLICATION = document.getElementById('app');
+export const APPLICATION = document.getElementById('app');
 
-const CONFIG = {
+const MENU = {
     signup: {
         href: '/signup',
         text: 'Зарегистрироваться',
@@ -16,80 +16,23 @@ const CONFIG = {
     }
 }
 
-const configForSignUp = {
-    inputs: [
-        {
-            id: 'login',
-            placeholder: 'Логин',
-            type: 'text',
-        },
-        {
-            id: 'email',
-            placeholder: 'Email',
-            type: 'email',
-        },
-        {
-            id: 'password',
-            placeholder: 'Пароль',
-            type: 'password',
-        },
-        {
-            id: 'confirmPassword',
-            placeholder: 'Подтвердите пароль',
-            type: 'password',
-        }
-    ],
-    buttonName: 'Зарегистрироваться'
-}
-
-const configForLogin = {
-    inputs: [
-        {
-            placeholder: 'Email',
-            type: 'email',
-        },
-        {
-            placeholder: 'Пароль',
-            type: 'password',
-        }
-    ],
-    networksAuth: [
-        {
-            src: 'img/google.svg',
-        },
-        {
-            src: 'img/facebook.svg',
-        },
-        {
-            src: 'img/vk.svg',
-        }
-    ],
-    buttonName: 'Войти'
-}
-
 /**
  * Render signup page
  */
-CONFIG.signup.open = () => {
+MENU.signup.open = () => {
     APPLICATION.innerHTML = '';
 
-    const signUpView = new SignUpView({
-        parent: APPLICATION,
-        data: configForSignUp
-    });
+    const signUpView = new SignUpView();
     signUpView.render();
 }
 
 /**
  * Render login page
  */
-CONFIG.login.open = () => {
+MENU.login.open = () => {
     APPLICATION.innerHTML = '';
 
-    const logInView = new LogInView({
-        parent: APPLICATION,
-        data: configForLogin
-    });
+    const logInView = new LogInView();
     logInView.render();
 }
 
@@ -97,7 +40,7 @@ const menuPage = () => {
     APPLICATION.innerHTML = '';
 
     Object
-        .entries(CONFIG)
+        .entries(MENU)
         .map(([configKey, {text, href}]) => {
             const menuItem = document.createElement('a');
             menuItem.className = 'main-page__href';
@@ -118,6 +61,6 @@ APPLICATION.addEventListener(('click'), event => {
 
     if (target instanceof HTMLAnchorElement) {
         event.preventDefault();
-        CONFIG[target.dataset.section].open();
+        MENU[target.dataset.section].open();
     }
 });

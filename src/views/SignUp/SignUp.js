@@ -1,3 +1,31 @@
+import { APPLICATION } from '../../main';
+
+const configForSignUp = {
+    inputs: [
+        {
+            id: 'login',
+            placeholder: 'Логин',
+            type: 'text',
+        },
+        {
+            id: 'email',
+            placeholder: 'Email',
+            type: 'email',
+        },
+        {
+            id: 'password',
+            placeholder: 'Пароль',
+            type: 'password',
+        },
+        {
+            id: 'confirmPassword',
+            placeholder: 'Подтвердите пароль',
+            type: 'password',
+        }
+    ],
+    buttonName: 'Зарегистрироваться'
+}
+
 /** Class representing a signup page view. */
 export class SignUpView {
     /**
@@ -6,7 +34,6 @@ export class SignUpView {
      * @param {Object} data - Parameters for render signup view.
      */
     constructor({
-                    parent = document.body,
                     data = {},
                 } = {}) {
 
@@ -18,7 +45,7 @@ export class SignUpView {
      * Render html signup page from pug template to parent.
      */
     render() {
-        const template = puglatizer.SignUp.SignUp(this._data)
-        this._parent.innerHTML = template;
+        const template = puglatizer.SignUp.SignUp(configForSignUp)
+        APPLICATION.innerHTML = template;
     }
 }
