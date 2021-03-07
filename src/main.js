@@ -1,11 +1,10 @@
 import { SignUpView } from './views/SignUp/SignUp.js';
 import { LogInView } from './views/LogIn/LogIn.js';
-import { FormComponent } from "./components/Form/Form.js";
-import { CardFormComponent } from './components/CardForm/CardForm.js';
 import { HomeComponent } from './views/HomeView/HomeView.js';
 import { DetailComponent } from './views/DetailView/DetailView.js';
 import { asyncGetUsing } from './modules/http.js';
 import { URLS } from './modules/urls.js';
+import { ProfileView } from './views/Profile/Profile';
 
 export const APPLICATION = document.getElementById('app');
 
@@ -29,6 +28,16 @@ const loginPage = () => {
     logInView.render();
 }
 
+/**
+ * Render login page and check validation of form.
+ */
+const profilePage = () => {
+    APPLICATION.innerHTML = '';
+
+    const profileView = new ProfileView();
+    profileView.render();
+}
+
 const MENU = {
     signup: {
         href: '/signup',
@@ -40,14 +49,19 @@ const MENU = {
         text: 'Войти',
         open: loginPage,
     },
+    profile: {
+        href: '/login',
+        text: 'Профиль',
+        open: profilePage,
+    },
     home: {
         href: '/home',
-        text: 'Home',
+        text: 'Домашняя страница',
         open: homePage,
     },
     detail: {
         href: '/detail',
-        text: 'Detail',
+        text: 'Детальная страница о кино',
         open: detailPage,
     }
 }
