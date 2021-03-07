@@ -1,6 +1,6 @@
 import { APPLICATION } from '../../main.js';
 import { SignUpView } from '../SignUp/SignUp.js';
-import { validateForm } from "../../utils/validateForm.js";
+import { isValidForm } from '../../utils/isValidForm.js';
 
 const configForLogin = {
     inputs: [
@@ -52,7 +52,13 @@ export class LogInView {
         const template = puglatizer.LogIn.LogIn(configForLogin);
         APPLICATION.innerHTML = template;
 
+        const [form] = document.getElementsByTagName('form');
         const aTag = document.getElementsByClassName('have-acc__link');
+
+        form.addEventListener(('submit'), event => {
+            event.preventDefault();
+            isValidForm(form);
+        })
 
         aTag.item(0).addEventListener(('click'), event => {
             event.preventDefault();
@@ -61,9 +67,6 @@ export class LogInView {
 
             const signUpView = new SignUpView();
             signUpView.render();
-
-            const [form] = document.getElementsByTagName('form');
-            validateForm(form);
         })
     }
 }
