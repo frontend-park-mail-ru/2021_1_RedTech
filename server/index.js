@@ -1,9 +1,17 @@
 const express = require('express');
-const path = require("path");
+const path = require('path');
+const cors = require('cors')
 const app = express();
 const port = 3000;
 
-app.use(express.static('src'));
+app.use(express.static(
+    'src'));
+
+app.use(cors())
+
+app.get('/products', function (req, res, next) {
+    res.json({msg: 'This is CORS-enabled for  all origins!'})
+})
 
 app.use('/favicon.ico', express.static('img/favicon.ico'));
 
@@ -20,3 +28,13 @@ app.get('/*', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}!`)
 });
+
+// app.get('/login', (req, res) => {
+//     console.log(req.ip, 'page request', req.url);
+//     res.sendFile(path.resolve(`${__dirname}/../src/login.html`));
+// });
+//
+// app.get('/signup', (req, res) => {
+//     console.log(req.ip, 'page request', req.url);
+//     res.sendFile(path.resolve(`${__dirname}/../src/signup.html`));
+// });
