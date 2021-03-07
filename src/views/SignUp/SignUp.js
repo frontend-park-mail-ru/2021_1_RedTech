@@ -1,4 +1,5 @@
 import { APPLICATION } from '../../main.js';
+import { LogInView } from '../LogIn/LogIn.js';
 
 const configForSignUp = {
     inputs: [
@@ -46,5 +47,16 @@ export class SignUpView {
     render() {
         const template = puglatizer.SignUp.SignUp(configForSignUp);
         APPLICATION.innerHTML = template;
+
+        const aTag = document.getElementsByClassName('have-acc__link');
+
+        aTag.item(0).addEventListener(('click'), event => {
+            event.preventDefault();
+
+            APPLICATION.innerHTML = '';
+
+            const loginView = new LogInView();
+            loginView.render();
+        })
     }
 }
