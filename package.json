@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "tmpl": "puglatizer -d src/views -o templates.js",
     "prestart": "npm run tmpl"
   },
