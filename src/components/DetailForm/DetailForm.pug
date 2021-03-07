@@ -1,0 +1,55 @@
+-
+    var filmData=
+            {
+                mainImageSrc: '../../assets/gravity.jpg',
+                mediaTitle: 'Гравити фолз',
+                mediaTag: 'Сериал',
+                mediaRank: 'Положительных оценок 10%',
+                mediaYear: '2016',
+                mediaGenres: 'Хоррор, Триллер',
+                mediaDirector: 'Алекс Хирш',
+                mediaCountry: 'Россия, Кахахстан',
+                mediaActors: 'Мейбл, Диппер, Стен Пайнс',
+                mediaDescription: 'История рассказывает о приключениях близнецов, брата и сестры Диппера и Мэйбл Пайнс, чьи летние планы отправляются в чулан, когда родители оправляют их к дальнему родственнику в тихий городок Гравити Фолз. Но так ли прост этот город, родственник и жители, и какие тайны ждут своих первооткрывателей?',
+            }
+
+div.detail_preview
+    div.detail_preview-left
+        div.detail-preview__image
+            img(src= filmData.mainImageSrc
+                alt= '')
+        div.detail_description__buttons
+            button.button__item Play
+            button.button__item Favourite
+            button.button__item Like
+            button.button__item Dislike
+    div.detail_preview-right
+        div.detail_preview__title=filmData.mediaTitle
+        div.detail_preview__tags
+            span.item__type=filmData.mediaTag
+            span.item__marks=filmData.mediaRank
+
+
+        div(class= 'detail_description__year description__items')
+            span.country__title Год:
+            span.country__text=filmData.mediaYear
+        div(class= 'detail_description__genre description__items')
+            span.country__title Жанр:
+            span.country__text=filmData.mediaGenres
+        div(class= 'detail_description__director description__items')
+            span.country__title Режжисер:
+            span.country__text=filmData.mediaDirector
+        div(class= 'detail_description__country description__items')
+            span.country__title Страны:
+            span.country__text=filmData.mediaCountry
+
+        div(class= 'detail_description__actors description__items')
+            span.country__title Актеры:
+            span.country__text=filmData.mediaActors
+
+
+div.detail_description
+    div.detail_description-left
+        div.detail_description__text
+            span=filmData.mediaDescription
+    div.detail_description-right
