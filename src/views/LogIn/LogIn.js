@@ -1,15 +1,20 @@
 import { APPLICATION } from '../../main.js';
 import { SignUpView } from '../SignUp/SignUp.js';
+import { validateForm } from "../../utils/validateForm.js";
 
 const configForLogin = {
     inputs: [
         {
+            id: 'email',
             placeholder: 'Email',
             type: 'email',
+            class: 'input-field__input',
         },
         {
+            id: 'password',
             placeholder: 'Пароль',
             type: 'password',
+            class: 'input-field__input',
         }
     ],
     networksAuth: [
@@ -56,6 +61,9 @@ export class LogInView {
 
             const signUpView = new SignUpView();
             signUpView.render();
+
+            const [form] = document.getElementsByTagName('form');
+            validateForm(form);
         })
     }
 }

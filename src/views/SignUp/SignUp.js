@@ -1,5 +1,6 @@
 import { APPLICATION } from '../../main.js';
 import { LogInView } from '../LogIn/LogIn.js';
+import { validateForm } from "../../utils/validateForm.js";
 
 const configForSignUp = {
     inputs: [
@@ -7,21 +8,25 @@ const configForSignUp = {
             id: 'login',
             placeholder: 'Логин',
             type: 'text',
+            class: 'input-field__input',
         },
         {
             id: 'email',
             placeholder: 'Email',
             type: 'email',
+            class: 'input-field__input',
         },
         {
             id: 'password',
             placeholder: 'Пароль',
             type: 'password',
+            class: 'input-field__input',
         },
         {
             id: 'confirmPassword',
             placeholder: 'Подтвердите пароль',
             type: 'password',
+            class: 'input-field__input',
         }
     ],
     buttonName: 'Зарегистрироваться'
@@ -57,6 +62,9 @@ export class SignUpView {
 
             const loginView = new LogInView();
             loginView.render();
+
+            const [form] = document.getElementsByTagName('form');
+            validateForm(form);
         })
     }
 }

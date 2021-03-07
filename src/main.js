@@ -1,6 +1,6 @@
 import { SignUpView } from './views/SignUp/SignUp.js';
 import { LogInView } from './views/LogIn/LogIn.js';
-import { validateForm } from "./utils/validator.js";
+import { validateForm } from "./utils/validateForm.js";
 
 export const APPLICATION = document.getElementById('app');
 
@@ -13,7 +13,7 @@ const signUpPage = () => {
     const signUpView = new SignUpView();
     signUpView.render();
 
-    const form = document.getElementsByTagName('form')[0];
+    const [form] = document.getElementsByTagName('form');
     validateForm(form);
 }
 
@@ -26,7 +26,7 @@ const loginPage = () => {
     const logInView = new LogInView();
     logInView.render();
 
-    const form = document.getElementsByTagName('form')[0];
+    const [form] = document.getElementsByTagName('form');
     validateForm(form);
 }
 
