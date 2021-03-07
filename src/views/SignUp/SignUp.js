@@ -35,9 +35,8 @@ export class SignUpView {
      */
     constructor({
                     data = {},
-                } = {}) {
-
-        this._parent = parent;
+                } = {})
+    {
         this._data = data;
     }
 
@@ -45,7 +44,7 @@ export class SignUpView {
      * Render html signup page from pug template to parent.
      */
     render() {
-        const template = puglatizer.SignUp.SignUp(configForSignUp)
+        const template = puglatizer.SignUp.SignUp(configForSignUp);
         APPLICATION.innerHTML = template;
     }
 }

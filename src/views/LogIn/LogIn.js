@@ -34,9 +34,8 @@ export class LogInView {
      */
     constructor({
                     data = {},
-                } = {}) {
-
-        this._parent = parent;
+                } = {})
+    {
         this._data = data;
     }
 
@@ -44,7 +43,7 @@ export class LogInView {
      * Render html login page from pug template to parent.
      */
     render() {
-        const template = puglatizer.LogIn.LogIn(configForLogin)
+        const template = puglatizer.LogIn.LogIn(configForLogin);
         APPLICATION.innerHTML = template;
     }
 }
