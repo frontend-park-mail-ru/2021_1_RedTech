@@ -55,7 +55,7 @@ const menuPage = () => {
 APPLICATION.addEventListener(('click'), event => {
     const { target } = event;
 
-    const mainPageHref = APPLICATION.getElementsByClassName('main-page__href')?.item(0);
+    const [mainPageHref] = APPLICATION.getElementsByClassName('main-page__href');
 
     if (target instanceof HTMLAnchorElement && APPLICATION.contains(mainPageHref)) {
         event.preventDefault();
