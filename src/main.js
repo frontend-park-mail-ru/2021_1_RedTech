@@ -88,7 +88,7 @@ function homePage() {
         method: 'GET',
     };
 
-    console.log(params.url)
+    console.log(params.url);
     asyncGetUsing(params).then(({status, parsedJson}) => {
         console.log(status);
         console.log(parsedJson);

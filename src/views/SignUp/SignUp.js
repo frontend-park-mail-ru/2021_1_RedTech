@@ -25,7 +25,7 @@ export class SignUpView {
         form?.addEventListener(('submit'), event => {
             event.preventDefault();
             isValidForm(form);
-        })
+        });
 
         aTag?.addEventListener(('click'), event => {
             event.preventDefault();
@@ -34,6 +34,6 @@ export class SignUpView {
 
             const loginView = new LogInView();
             loginView.render();
-        })
+        });
     }
 }

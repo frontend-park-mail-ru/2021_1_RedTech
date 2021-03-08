@@ -35,7 +35,7 @@ export class ProfileView {
                         input.readOnly = false;
                     }
 
-                })
+                });
             } else if (button.textContent === 'Сохранить') {
                 const isValid = isValidForm(form);
                 if (isValid) {
@@ -47,9 +47,9 @@ export class ProfileView {
                             input.readOnly = true;
                         }
 
-                    })
+                    });
                 }
             }
-        })
+        });
     }
 }

@@ -1,7 +1,7 @@
 export async function asyncGetUsing(params = {}) {
     const headers = {
         'Content-Type' : 'application/json'
-    }
+    };
     const response = await fetch(params.url, {
         method: params.method,
         body: JSON.stringify(params.body),

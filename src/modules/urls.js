@@ -8,4 +8,4 @@ export const URLS = {
         media: '/media',
         testUrl: 'https://jsonplaceholder.typicode.com/users',
     }
-}
+};
