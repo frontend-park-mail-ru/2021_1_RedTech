@@ -53,7 +53,7 @@ const menuPage = () => {
 }
 
 APPLICATION.addEventListener(('click'), event => {
-    const {target} = event;
+    const { target } = event;
 
     if (target instanceof HTMLAnchorElement) {
         event.preventDefault();
