@@ -32,19 +32,15 @@ export const isValidForm = (form) => {
                 case 'email':
                     isValid = isValidEmail(input, errorDiv);
                     return;
-                    break;
                 case 'login':
                     isValid = isValidLogin(input, errorDiv);
                     return;
-                    break;
                 case 'password':
                     isValid = isValidPassword(input, errorDiv);
                     return;
-                    break;
                 case 'confirmPassword':
                     isValid = isValidConfirmPassword(input, errorDiv);
                     return;
-                    break;
             }
         }
     });
