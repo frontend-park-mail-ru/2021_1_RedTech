@@ -8,7 +8,6 @@ app.use(express.static('src'));
 app.use('/favicon.ico', express.static('img/favicon.ico'));
 
 app.get('/templates.js', (req, res) => {
-    console.log(req.ip, 'page request', req.url);
     res.sendFile(path.resolve(`${__dirname}/../templates.js`));
 });
 
