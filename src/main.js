@@ -4,7 +4,7 @@ import { LogInView } from './views/LogIn/LogIn.js';
 export const APPLICATION = document.getElementById('app');
 
 /**
- * Render signup page
+ * Render signup page and check validation of form.
  */
 const signUpPage = () => {
     APPLICATION.innerHTML = '';
@@ -14,7 +14,7 @@ const signUpPage = () => {
 }
 
 /**
- * Render login page
+ * Render login page and check validation of form.
  */
 const loginPage = () => {
     APPLICATION.innerHTML = '';
@@ -55,7 +55,9 @@ const menuPage = () => {
 APPLICATION.addEventListener(('click'), event => {
     const { target } = event;
 
-    if (target instanceof HTMLAnchorElement) {
+    const [mainPageHref] = APPLICATION.getElementsByClassName('main-page__href');
+
+    if (target instanceof HTMLAnchorElement && APPLICATION.contains(mainPageHref)) {
         event.preventDefault();
         MENU[target.dataset.section].open();
     }

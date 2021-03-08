@@ -1,5 +1,6 @@
 import { APPLICATION } from '../../main.js';
 import { LogInView } from '../LogIn/LogIn.js';
+import { isValidForm } from '../../utils/isValidForm.js';
 
 /** Class representing a signup page view. */
 export class SignUpView {
@@ -17,6 +18,13 @@ export class SignUpView {
     render() {
         const template = puglatizer.SignUp.SignUp();
         APPLICATION.innerHTML = template;
+
+        const [form] = document.getElementsByTagName('form');
+
+        form?.addEventListener(('submit'), event => {
+            event.preventDefault();
+            isValidForm(form);
+        })
 
         const [aTag] = document.getElementsByClassName('have-acc__link');
 

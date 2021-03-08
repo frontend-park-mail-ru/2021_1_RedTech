@@ -15,8 +15,17 @@
     --btn-background-color: #1e252b;
     --btn-font-color: #9b9b9b;
     --btn-hover-color: #0a0d0e;
+    --input-shadow: #b0b0b0;
 }
 
 a.main-page__href {
     display: block;
 }
+
+.error {
+    margin-top: 4px;
+    color: var(--alert-color);
+    overflow: hidden;
+    font-size: 12px;
+}
+
