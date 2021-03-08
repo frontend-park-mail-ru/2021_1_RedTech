@@ -1,16 +1,16 @@
+import { APPLICATION } from '../../main.js';
+import { isValidForm } from '../../utils/isValidForm.js';
+
 /** Class representing a login page view. */
 export class ProfileView {
     /**
      * Create a profile page view.
-     * @param {HTMLElement} parent - Parent of profile view in DOM.
      * @param {Object} data - Parameters for render profile view.
      */
     constructor({
-                    parent = document.body,
                     data = {},
-                } = {}) {
-
-        this._parent = parent;
+                } = {})
+    {
         this._data = data;
     }
 
@@ -18,7 +18,31 @@ export class ProfileView {
      * Render html login page from pug template to parent.
      */
     render() {
-        const template = puglatizer.Profile.Profile(this._data)
-        this._parent.innerHTML = template;
+        const template = puglatizer.Profile.Profile(this._data);
+        APPLICATION.innerHTML = template;
+
+        const [form] = document.getElementsByTagName('form');
+        const [button] = document.getElementsByClassName('input-wrapper__button');
+
+        form.addEventListener(('submit'), event => {
+            event.preventDefault();
+
+            const inputs = form.querySelectorAll('.input-wrapper__input');
+
+            if (button.textContent === 'Редактировать') {
+                button.textContent = 'Сохранить';
+                inputs.forEach((input) => {
+                    input.readOnly = false;
+                })
+            } else if (button.textContent === 'Сохранить') {
+                const isValid = isValidForm(form);
+                if (isValid) {
+                    button.textContent = 'Редактировать';
+                    inputs.forEach((input) => {
+                        input.readOnly = true;
+                    })
+                }
+            }
+        })
     }
 }

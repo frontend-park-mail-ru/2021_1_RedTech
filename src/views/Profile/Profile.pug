@@ -1,29 +1,17 @@
+include ../../components/Form/Form.pug
+
+-
+    const inputWrapper = [
+        {for: "firstName", text: "Имя", type: "text", id: "firstName", placeholder: "Иван", value: "Никита"},
+        {for: "secondName", text: "Фамилия", type: "text", id: "secondName", placeholder: "Иванов", value: "Волков"},
+        {for: "login", text: "Логин", type: "text", id: "login", placeholder: "ivanchik", value: "nikitavolkov1707"},
+        {for: "email", text: "Почта", type: "email", id: "email", placeholder: "ivanchik@mail.ru", value: "nikitavolkov1707@gmail.com"}
+    ]
+
 div.profile
     div.profile__profile-content
         div.profile-content__title-wrapper
             div.title-wrapper__title Настройки профиля:
             div.title-wrapper__nickname nikitavolkov1707
         div.profile-content__inputs
-            form.inputs__form
-                div.form__input-wrapper
-                    label(for="first_name" class="input-wrapper__label") Имя
-                    input(type="text" id="first_name" class="input-wrapper__input" placeholder="Никита" value="Никита")
-                div.form__input-wrapper
-                    label(for="input_login" class="input-wrapper__label") Фамилия
-                    input(type="text" id="second_name" class="input-wrapper__input" placeholder="Волков" value="Волков")
-                div.form__input-wrapper
-                    label(for="input_login" class="input-wrapper__label") Логин
-                    input(type="text" id="input_login" class="input-wrapper__input" placeholder="nikitavolkov1707" value="nikitavolkov1707")
-                div.form__input-wrapper
-                    label(for="email" class="input-wrapper__label") Почта
-                    input(type="email" id="email" class="input-wrapper__input" placeholder="nikitavolkov1707@gmail.com" value="nikitavolkov1707@gmail.com")
-                div.form__input-wrapper
-                    div.input-wrapper__input-avatar
-                        div.input-wrapper__label Аватар
-                        div.input-avatar__input-wrapper
-                            img(src="img/user.png" class="input-wrapper__img" width="120px" height="120px")
-                            input(type="file" id="file")
-                            label(for="file" class="input-wrapper__input") Выберите...
-                div.form__input-wrapper
-                    div.input-wrapper__label
-                    button.profile_content-input-btn.input-wrapper__input Сохранить
+            +form(inputs, buttonName, inputWrapper)
