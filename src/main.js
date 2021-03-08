@@ -4,7 +4,7 @@ import { HomeComponent } from './views/HomeView/HomeView.js';
 import { DetailComponent } from './views/DetailView/DetailView.js';
 import { asyncGetUsing } from './modules/http.js';
 import { URLS } from './modules/urls.js';
-import { ProfileView } from './views/Profile/Profile';
+import { ProfileView } from './views/Profile/Profile.js';
 
 export const APPLICATION = document.getElementById('app');
 
