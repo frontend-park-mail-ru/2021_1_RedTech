@@ -28,11 +28,3 @@ a.main-page__href {
     font-size: 12px;
 }
 
-button:focus {
-    outline: none;
-}
-
-input:focus {
-    outline: none;
-    box-shadow: 0 0 10px #b0b0b0;
-}
