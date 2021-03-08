@@ -1,5 +1,34 @@
 include ../../components/Form/Form.pug
 
+-
+    const inputs = [
+            {
+                placeholder: 'Email',
+                type: 'email',
+                class: 'input-wrapper__input',
+            },
+            {
+                placeholder: 'Пароль',
+                type: 'password',
+                class: 'input-wrapper__input',
+            }
+            ]
+
+    const networksAuth = [
+        {
+            src: 'img/google.svg',
+        },
+        {
+            src: 'img/facebook.svg',
+        },
+        {
+            src: 'img/vk.svg',
+        }
+        ]
+
+    const buttonName = 'Войти'
+
+
 div.login-signup
     div.login-signup__content
         div.content__title Вход

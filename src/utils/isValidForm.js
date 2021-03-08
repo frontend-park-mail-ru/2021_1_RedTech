@@ -6,7 +6,7 @@
  */
 export const isValidForm = (form) => {
 
-    if (form === undefined) {
+    if (!form) {
         return false;
     }
 
@@ -17,6 +17,7 @@ export const isValidForm = (form) => {
         if (error) {
             error.textContent = '';
         }
+        document.getElementById(input.id + 'Error').textContent = '';
         input.classList.remove('input-wrapper__input_error');
     })
 
@@ -24,33 +25,32 @@ export const isValidForm = (form) => {
 
     inputs.forEach((input) => {
         const errorDiv = document.getElementById(input.id + 'Error');
-
         if (errorDiv) {
-
             if (!input.value) {
                 errorDiv.textContent = 'Это поле обязательно к заполнению';
                 input.classList.add('input-wrapper__input_error');
                 isValid &= false;
+                return;
             } else {
                 switch (input.id) {
                     case 'email':
-                        isValid &= isValidEmail(input, errorDiv);
-                        break;
+                        isValid = isValidEmail(input, errorDiv);
+                        return;
                     case 'login':
-                        isValid &= isValidLogin(input, errorDiv);
-                        break;
+                        isValid = isValidLogin(input, errorDiv);
+                        return;
                     case 'password':
-                        isValid &= isValidPassword(input, errorDiv);
-                        break;
+                        isValid = isValidPassword(input, errorDiv);
+                        return;
                     case 'confirmPassword':
-                        isValid &= isValidConfirmPassword(input, errorDiv);
-                        break;
+                        isValid = isValidConfirmPassword(input, errorDiv);
+                        return;
                     case 'firstName':
-                        isValid &= isValidName(input, errorDiv)
-                        break;
+                        isValid = isValidName(input, errorDiv)
+                        return;
                     case 'secondName':
-                        isValid &= isValidName(input, errorDiv)
-                        break;
+                        isValid = isValidName(input, errorDiv)
+                        return;
                 }
             }
         }
@@ -81,7 +81,7 @@ const isValidLogin = (loginInput, errorDiv) => {
  * @returns {boolean} - is valid name form or not.
  */
 const isValidName = (nameInput, errorDiv) => {
-    if (!/^[a-zA-Zа-яА-Я'][a-zA-Zа-яА-Я-' ]+[a-zA-Zа-яА-Я']?$/. test(nameInput.value)) {
+    if (!/^[a-zA-Zа-яА-Я'][a-zA-Zа-яА-Я-' ]+[a-zA-Zа-яА-Я']?$/.test(nameInput.value)) {
         errorDiv.textContent = 'Некорректно введены данные';
         nameInput.classList.add('input-wrapper__input_error');
         return false;
@@ -135,4 +135,3 @@ const isValidConfirmPassword = (confirmPasswordInput, errorDiv) => {
     }
     return true;
 }
-

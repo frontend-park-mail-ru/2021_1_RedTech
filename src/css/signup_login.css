@@ -138,3 +138,12 @@ html, body {
     width: 40px;
     height: 40px;
 }
+
+.form-content__button:focus {
+    outline: none;
+}
+
+.input-wrapper__input:focus {
+    outline: none;
+    box-shadow: 0 0 12px var(--input-shadow);
+}
