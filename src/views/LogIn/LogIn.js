@@ -8,13 +8,13 @@ const configForLogin = {
             id: 'email',
             placeholder: 'Email',
             type: 'email',
-            class: 'input-field__input',
+            class: 'input-wrapper__input',
         },
         {
             id: 'password',
             placeholder: 'Пароль',
             type: 'password',
-            class: 'input-field__input',
+            class: 'input-wrapper__input',
         }
     ],
     networksAuth: [
@@ -35,8 +35,7 @@ const configForLogin = {
 export class LogInView {
     /**
      * Create a login page view.
-     * @param {HTMLElement} parent - Parent of signup view in DOM.
-     * @param {Object} data - Parameters for render signup view.
+     * @param {Object} data - Parameters for render login view.
      */
     constructor({
                     data = {},
@@ -53,14 +52,14 @@ export class LogInView {
         APPLICATION.innerHTML = template;
 
         const [form] = document.getElementsByTagName('form');
-        const aTag = document.getElementsByClassName('have-acc__link');
+        const [aTag] = document.getElementsByClassName('have-acc__link');
 
         form.addEventListener(('submit'), event => {
             event.preventDefault();
             isValidForm(form);
         })
 
-        aTag.item(0).addEventListener(('click'), event => {
+        aTag.addEventListener(('click'), event => {
             event.preventDefault();
 
             APPLICATION.innerHTML = '';
