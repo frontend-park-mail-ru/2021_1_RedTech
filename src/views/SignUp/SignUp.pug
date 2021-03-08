@@ -1,5 +1,32 @@
 include ../../components/Form/Form.pug
 
+-
+    const inputs = [
+            {
+                id: 'login',
+                placeholder: 'Логин',
+                type: 'text',
+            },
+            {
+                id: 'email',
+                placeholder: 'Email',
+                type: 'email',
+            },
+            {
+                id: 'password',
+                placeholder: 'Пароль',
+                type: 'password',
+            },
+            {
+                id: 'confirmPassword',
+                placeholder: 'Подтвердите пароль',
+                type: 'password',
+            }
+            ]
+
+    const buttonName = 'Зарегистрироваться'
+
+
 div.login-signup
     div.login-signup__content
         div.content__title Регистрация
