@@ -56,15 +56,15 @@ html, body {
     margin-bottom: 20px;
 }
 
-.inputs__input-field {
+.inputs__input-wrapper {
     margin-bottom: 12px;
 }
 
-.inputs__input-field:last-child {
+.inputs__input-wrapper:last-child {
     margin-bottom: 0;
 }
 
-.input-field__input {
+.input-wrapper__input {
     box-sizing: border-box;
     width: 100%;
     background-color: var(--background-color);
@@ -76,7 +76,7 @@ html, body {
     font-family: 'MontserratMedium', sans-serif;
 }
 
-.input-field__input_error {
+.input-wrapper__input_error {
     border: 1px solid var(--alert-color);
 }
 
