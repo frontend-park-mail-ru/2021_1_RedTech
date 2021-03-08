@@ -105,7 +105,7 @@ function homePage() {
         //     ]
         // }
     });
-    formComponent.render()
+    formComponent.render();
 }
 
 function detailPage() {
