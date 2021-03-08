@@ -64,7 +64,7 @@ html, body {
     margin-bottom: 0;
 }
 
-.iinput-wrapper__input {
+.input-wrapper__input {
     box-sizing: border-box;
     width: 100%;
     background-color: var(--background-color);
