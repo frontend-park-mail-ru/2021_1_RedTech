@@ -6,15 +6,15 @@
  */
 export const isValidForm = (form) => {
 
-    if (form === undefined) {
+    if (!form) {
         return false;
     }
 
-    const inputs = form.querySelectorAll('.input-field__input');
+    const inputs = form.querySelectorAll('.input-wrapper__input');
 
     inputs.forEach((input) => {
         document.getElementById(input.id + 'Error').textContent = '';
-        input.classList.remove('input-field__input_error');
+        input.classList.remove('input-wrapper__input_error');
     })
 
     let isValid = true;
@@ -24,7 +24,7 @@ export const isValidForm = (form) => {
 
         if (!input.value) {
             errorDiv.textContent = 'Это поле обязательно к заполнению';
-            input.classList.add('input-field__input_error');
+            input.classList.add('input-wrapper__input_error');
             isValid &= false;
         } else {
             switch (input.id) {
@@ -56,7 +56,7 @@ export const isValidForm = (form) => {
 const isValidLogin = (loginInput, errorDiv) => {
     if (!/^[a-zA-Z](.[a-zA-Z0-9]*)$/.test(loginInput.value)) {
         errorDiv.textContent = 'Логин должен содержать только латинские буквы и цифры';
-        loginInput.classList.add('input-field__input_error');
+        loginInput.classList.add('input-wrapper__input_error');
         return false;
     }
     return true;
@@ -71,7 +71,7 @@ const isValidLogin = (loginInput, errorDiv) => {
 const isValidEmail = (emailInput, errorDiv) => {
     if (!/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(emailInput.value)) {
         errorDiv.textContent = 'Введен некорректный email';
-        emailInput.classList.add('input-field__input_error');
+        emailInput.classList.add('input-wrapper__input_error');
         return false;
     }
     return true;
@@ -86,7 +86,7 @@ const isValidEmail = (emailInput, errorDiv) => {
 const isValidPassword = (passwordInput, errorDiv) => {
     if (passwordInput.value.length < 8 || passwordInput.value.length > 50) {
         errorDiv.textContent = 'Пароль должен быть длиной от 8 до 50 символов';
-        passwordInput.classList.add('input-field__input_error');
+        passwordInput.classList.add('input-wrapper__input_error');
         return false;
     }
     return true;
@@ -103,7 +103,7 @@ const isValidConfirmPassword = (confirmPasswordInput, errorDiv) => {
 
     if (confirmPasswordInput.value !== password) {
         errorDiv.textContent = 'Пароли не совпадают!';
-        confirmPasswordInput.classList.add('input-field__input_error');
+        confirmPasswordInput.classList.add('input-wrapper__input_error');
         return false;
     }
     return true;

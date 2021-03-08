@@ -3,9 +3,9 @@ include ../Input/Input.pug
 mixin form(inputs, buttonName)
     form(novalidate)
         div.form_content__inputs
-            div.inputs__input-field
+            div.inputs__input-wrapper
                 for input in inputs
-                    div.inputs__input-field
+                    div.inputs__input-wrapper
                         +customInput(input.type, input.class, input.placeholder, input.id)
                         div.error(id = input.id+'Error')
         button.form-content__button #{buttonName}
