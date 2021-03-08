@@ -1,10 +1,8 @@
-div.suggestion-form
+div.item__suggestion
     each i in suggestionsFilms
-        div.suggestion-form_internal
-            img(src= i.src
-                alt= i.alt)
-            div.suggestion-form_title
+        div.item__internal
+            img.item__suggestion__image(src= i.src alt= i.alt)
+            div.item__suggestion__title
                 a(href= "#")= i.title
-            div.suggestion-form_status
-                a(href= "#")= i.status
-
+            div.item__suggestion__status
+                div= i.status

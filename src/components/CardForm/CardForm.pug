@@ -1,16 +1,15 @@
-div.card-form
-    div.card-form_image
-        img(src= i.src
-            alt= i.alt)
-    div.card-form_details
-        div.card-form_title
+div.item__film-card
+    div.item__image
+        img(src= i.src alt= i.alt)
+    div.item__details
+        div.item__film-card__title
             a(href= "#")= i.title
 
-        div.card-form_stars= i.stars
+        div.item__film-card__stars= i.stars
 
 
-        div.card-form_description= i.description
+        div.item__film-card__description= i.description
 
-        div.card-form_buttons
-            button Смотреть
-            button Инфо
+        div.item__film-card__buttons
+            button.item__button Смотреть
+            button.item__button Инфо

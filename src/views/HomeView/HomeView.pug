@@ -62,17 +62,16 @@ block variables
             ]
 
 
-block style
-    style
-        include ../../index.css
-
 block header
     include ../../components/Header/header
 
 block content
+    div.item__page-title
+        h1  Фильмы недели
     div.container
         each i in cardFilms
             include ../../components/CardForm/CardForm
 
+    div.item__page-title
+        h1  Рекомендуемые фильмы
     include ../../components/SuggestionForm/SuggestionForm
-

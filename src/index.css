@@ -47,100 +47,227 @@ header .header-form__profile .header-form__profile__link {
   color: #b7b7b7;
 }
 
-.card-form {
-  margin: 30px;
+.item__film-card {
+  margin: 10px 30px;
   background-color: #0A0C0E;
   padding: 20px 30px 20px 10px;
   border-radius: 12px;
   width: 500px;
   display: grid;
-  grid-template-columns: minmax(10px, 1fr) minmax(10px, 1fr);
-  gap: 1em;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
-.card-form .card-form_image {
-  width: auto;
-  height: auto;
+.item__film-card .item__image {
+  width: 220px;
+  height: 300px;
   justify-content: center;
   display: flex;
 }
-.card-form .card-form_image img {
+.item__film-card .item__image img {
   object-fit: contain;
   border-radius: 12px;
-  width: 276px;
+  width: 220px;
   height: 300px;
   cursor: pointer;
 }
-.card-form .card-form_details {
+.item__film-card .item__details {
   display: flex;
   flex-direction: column;
+  width: 220px;
 }
-.card-form .card-form_details .card-form_title {
+.item__film-card .item__details .item__film-card__title {
   position: relative;
   font-size: 18px;
   font-weight: 600;
   padding-bottom: 10px;
 }
-.card-form .card-form_details .card-form_title > a {
+.item__film-card .item__details .item__film-card__title > a {
+  text-decoration: none;
   color: white;
 }
-.card-form .card-form_details .card-form_description {
-  position: relative;
-  word-spacing: 6px;
-  font-weight: 400;
-}
-.card-form .card-form_details .card-form_stars {
+.item__film-card .item__details .item__film-card__stars {
   position: relative;
   font-size: 28px;
   font-weight: 900;
 }
-.card-form .card-form_details .card-form_buttons {
+.item__film-card .item__details .item__film-card__description {
+  position: relative;
+  word-spacing: 6px;
+  font-weight: 400;
+}
+.item__film-card .item__details .item__film-card__buttons {
   margin-block-start: auto;
 }
 
-.suggestion-form {
+.item__suggestion {
   display: grid;
   grid-template-columns: repeat(auto-fill, 180px);
   gap: 1em;
   padding: 20px 30px 20px 30px;
 }
-.suggestion-form .suggestion-form_internal {
+.item__suggestion .item__internal {
   background-color: white;
   width: 100px;
   background: none;
   display: grid;
 }
-.suggestion-form .suggestion-form_internal > img {
+.item__suggestion .item__internal .item__suggestion__image {
   object-fit: contain;
   border-radius: 12px;
   cursor: pointer;
+  transition: all 0.15s ease-in-out;
 }
-.suggestion-form .suggestion-form_title {
+.item__suggestion .item__internal .item__suggestion__image:hover {
+  transform: scale(1.02);
+}
+.item__suggestion .item__suggestion__title {
   padding-top: 5px;
   padding-left: 10px;
   font-weight: 500;
   font-size: 18px;
   justify-items: left;
 }
-.suggestion-form .suggestion-form_title > a {
+.item__suggestion .item__suggestion__title > a {
+  text-decoration: none;
   color: white;
 }
-.suggestion-form .suggestion-form_status {
+.item__suggestion .item__suggestion__status {
   padding: 5px 0 15px 10px;
   font-size: 14px;
   font-weight: 300;
   justify-items: left;
-}
-.suggestion-form .suggestion-form_status > a {
   color: darkseagreen;
 }
 
+.row {
+  clear: both;
+  margin: 20px;
+}
+
+.detail_preview {
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 50px;
+  padding-left: 20px;
+  padding-right: 10px;
+  display: flex;
+}
+.detail_preview .detail_preview-left {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+}
+.detail_preview .detail_preview-left .detail-preview__image {
+  margin-bottom: 20px;
+}
+.detail_preview .detail_preview-left .detail-preview__image img {
+  width: 95%;
+  border-radius: 24px;
+}
+.detail_preview .detail_preview-left .detail_description__buttons {
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.detail_preview .detail_preview-left .detail_description__buttons .button__item {
+  width: 24%;
+}
+.detail_preview .detail_preview-right {
+  padding-left: 10px;
+  width: 44%;
+}
+.detail_preview .detail_preview-right .detail_preview__title {
+  font-size: 28px;
+  font-weight: 700;
+  padding-bottom: 15px;
+}
+.detail_preview .detail_preview-right .detail_preview__tags {
+  display: flex;
+  font-size: 18px;
+  padding-bottom: 15px;
+}
+.detail_preview .detail_preview-right .detail_preview__tags .item__type {
+  flex-direction: column;
+  background: #962f2f;
+  border-radius: 6px;
+  outline: none;
+  color: var(--white);
+  text-align: center;
+  padding: 5px;
+}
+.detail_preview .detail_preview-right .detail_preview__tags .item__marks {
+  background: #962f2f;
+  border-radius: 6px;
+  margin-left: 10px;
+  outline: none;
+  color: var(--white);
+  text-align: center;
+  padding: 5px;
+}
+.detail_preview .detail_preview-right .description__items {
+  display: flex;
+  margin-bottom: 15px;
+}
+.detail_preview .detail_preview-right .country__title {
+  font-size: 18px;
+  font-weight: 550;
+  margin-right: 8px;
+}
+.detail_preview .detail_preview-right .country__text {
+  font-size: 18px;
+}
+.detail_preview .detail_preview-right span {
+  display: flex;
+}
+
+.detail_description {
+  max-width: 1300px;
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 15px;
+  padding-left: 20px;
+  padding-right: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.detail_description .detail_description-left {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.detail_description .detail_description-left .detail_description__text {
+  font-size: 18px;
+  font-weight: 500;
+  padding-bottom: 15px;
+  word-spacing: 2px;
+}
+.detail_description .detail_description-right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@font-face {
+  font-family: "MontserratMedium";
+  src: url("fonts/Montserrat-Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
 head, body {
-  font-family: "Montserrat", sans-serif;
+  font-family: "MontserratMedium", sans-serif;
   background-color: #101417;
   color: white;
 }
 
-button {
+.container {
+  display: flex;
+  overflow-x: auto;
+  height: auto;
+}
+
+.item__button {
   height: 32px;
   font-size: 15px;
   padding: 0 15px;
@@ -148,6 +275,12 @@ button {
   background: none;
   color: white;
   cursor: pointer;
+  transition: 0.15s ease-in;
+}
+
+.item__button:hover {
+  background-color: #101417;
+  color: #d9d9d9;
 }
 
 button:hover {
@@ -170,10 +303,6 @@ button[disabled] {
           user-select: none;
 }
 
-a {
-  text-decoration: none;
-}
-
 a:hover {
   opacity: 0.75;
 }
@@ -189,4 +318,8 @@ a:hover {
 .line-underheader {
   border: 0;
   border-top: 2px solid #cdcdcd;
+}
+
+.item__page-title > h1 {
+  margin: 15px 35px;
 }

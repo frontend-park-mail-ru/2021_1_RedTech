@@ -1,7 +1,7 @@
-$card-form-background-color: #0A0C0E;
+@import '../../css/consts';
 
-.card-form {
-  margin: 30px;
+.item__film-card {
+  margin: 10px 30px;
   background-color: $card-form-background-color;
   padding: 20px 30px 20px 10px;
   border-radius: 12px;
@@ -12,7 +12,7 @@ $card-form-background-color: #0A0C0E;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
 
-  .card-form_image {
+  .item__image {
     width: 220px;
     height: 300px;
     justify-content: center;
@@ -27,14 +27,15 @@ $card-form-background-color: #0A0C0E;
     }
   }
 
-  .card-form_details {
+  .item__details {
     display: flex;
     flex-direction: column;
     width: 220px;
 
-    .card-form_title {
+    .item__film-card__title {
 
       > a {
+        text-decoration: none;
         color: white;
       }
 
@@ -44,19 +45,19 @@ $card-form-background-color: #0A0C0E;
       padding-bottom: 10px;
     }
 
-    .card-form_description {
-      position: relative;
-      word-spacing: 6px;
-      font-weight: 400;
-    }
-
-    .card-form_stars {
+    .item__film-card__stars {
       position: relative;
       font-size: 28px;
       font-weight: 900;
     }
 
-    .card-form_buttons {
+    .item__film-card__description {
+      position: relative;
+      word-spacing: 6px;
+      font-weight: 400;
+    }
+
+    .item__film-card__buttons {
       margin-block-start: auto;
     }
   }

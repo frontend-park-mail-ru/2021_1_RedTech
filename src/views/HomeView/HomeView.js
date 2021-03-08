@@ -9,10 +9,8 @@ export class HomeComponent {
     }
 
     render() {
-        const template = puglatizer.views.HomeView.HomeView()
+        const template = puglatizer.HomeView.HomeView()
         //console.log(template())
         this._parent.innerHTML = template;
     }
 }
-
-

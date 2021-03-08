@@ -14,4 +14,3 @@ export class HeaderComponent {
         this._parent.innerHTML = template;
     }
 }
-

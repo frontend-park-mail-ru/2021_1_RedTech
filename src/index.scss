@@ -2,16 +2,18 @@
 @import 'components/CardForm/CardForm';
 @import 'components/SuggestionForm/SuggestionForm';
 @import 'components/DetailForm/DetailForm';
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import 'css/consts';
 
-$background-color: #101417;
-$text-color: white;
-$button-background-color: #101417;
-$button-active-background-color: #101417;
-$text-hover-color: #d9d9d9;
+@font-face {
+  font-family: "MontserratMedium";
+  src: url("fonts/Montserrat-Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
 
 head, body {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'MontserratMedium', sans-serif;
   background-color: $background-color;
   color: $text-color;
 }
@@ -22,7 +24,7 @@ head, body {
   height: auto;
 }
 
-button {
+.item__button {
   height: 32px;
   font-size: 15px;
   padding: 0 15px;
@@ -32,7 +34,15 @@ button {
   color: $text-color;
 
   cursor: pointer;
+  transition: 0.15s ease-in;
 }
+
+.item__button:hover {
+  background-color: $button-background-color;
+  color: $text-hover-color;
+}
+
+
 
 button:hover {
   background-color: $button-background-color;
@@ -53,10 +63,6 @@ button[disabled] {
   user-select: none;
 }
 
-a {
-  text-decoration: none;
-}
-
 a:hover {
   opacity: 0.75;
 }
@@ -74,3 +80,6 @@ a:hover {
   border-top: 2px solid #cdcdcd;
 }
 
+.item__page-title > h1 {
+  margin: 15px 35px;
+}
