@@ -26,19 +26,24 @@ export const isValidForm = (form) => {
             errorDiv.textContent = 'Это поле обязательно к заполнению';
             input.classList.add('input-wrapper__input_error');
             isValid &= false;
+            return;
         } else {
             switch (input.id) {
                 case 'email':
-                    isValid &= isValidEmail(input, errorDiv);
+                    isValid = isValidEmail(input, errorDiv);
+                    return;
                     break;
                 case 'login':
-                    isValid &= isValidLogin(input, errorDiv);
+                    isValid = isValidLogin(input, errorDiv);
+                    return;
                     break;
                 case 'password':
-                    isValid &= isValidPassword(input, errorDiv);
+                    isValid = isValidPassword(input, errorDiv);
+                    return;
                     break;
                 case 'confirmPassword':
-                    isValid &= isValidConfirmPassword(input, errorDiv);
+                    isValid = isValidConfirmPassword(input, errorDiv);
+                    return;
                     break;
             }
         }
