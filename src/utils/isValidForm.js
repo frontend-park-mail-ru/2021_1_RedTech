@@ -17,7 +17,6 @@ export const isValidForm = (form) => {
         if (error) {
             error.textContent = '';
         }
-        document.getElementById(input.id + 'Error').textContent = '';
         input.classList.remove('input-wrapper__input_error');
     })
 
@@ -29,7 +28,7 @@ export const isValidForm = (form) => {
             if (!input.value) {
                 errorDiv.textContent = 'Это поле обязательно к заполнению';
                 input.classList.add('input-wrapper__input_error');
-                isValid &= false;
+                isValid = false;
                 return;
             } else {
                 switch (input.id) {
