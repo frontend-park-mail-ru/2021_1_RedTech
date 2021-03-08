@@ -91,7 +91,7 @@ function homePage() {
     console.log(params.url);
     asyncGetUsing(params).then(({status, parsedJson}) => {
         console.log(status);
-        console.log(parsedJson);
+        console.log(parsedJson)
     });
 
     const formComponent = new HomeComponent({
@@ -105,7 +105,7 @@ function homePage() {
         //     ]
         // }
     });
-    formComponent.render()
+    formComponent.render();
 }
 
 function detailPage() {
