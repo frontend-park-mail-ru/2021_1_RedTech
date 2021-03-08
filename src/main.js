@@ -55,8 +55,9 @@ const menuPage = () => {
 APPLICATION.addEventListener(('click'), event => {
     const { target } = event;
 
-    if (target instanceof HTMLAnchorElement
-        && APPLICATION.contains(APPLICATION.getElementsByClassName('main-page__href')?.item(0))) {
+    const mainPageHref = APPLICATION.getElementsByClassName('main-page__href')?.item(0);
+
+    if (target instanceof HTMLAnchorElement && APPLICATION.contains(mainPageHref)) {
         event.preventDefault();
         MENU[target.dataset.section].open();
     }
