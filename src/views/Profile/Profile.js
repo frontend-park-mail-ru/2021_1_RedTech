@@ -21,7 +21,7 @@ export class ProfileView {
         const [form] = document.getElementsByTagName('form');
         const [button] = document.getElementsByClassName('input-wrapper__button');
 
-        form.addEventListener(('submit'), event => {
+        form?.addEventListener(('submit'), event => {
             event.preventDefault();
 
             const inputs = form.querySelectorAll('.input-wrapper__input');
