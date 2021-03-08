@@ -16,7 +16,7 @@ const signUpPage = () => {
 
     const signUpView = new SignUpView();
     signUpView.render();
-}
+};
 
 /**
  * Render login page and check validation of form.
@@ -26,7 +26,7 @@ const loginPage = () => {
 
     const logInView = new LogInView();
     logInView.render();
-}
+};
 
 /**
  * Render login page and check validation of form.
@@ -36,7 +36,7 @@ const profilePage = () => {
 
     const profileView = new ProfileView();
     profileView.render();
-}
+};
 
 const MENU = {
     signup: {
@@ -64,7 +64,7 @@ const MENU = {
         text: 'Детальная страница о кино',
         open: detailPage,
     }
-}
+};
 
 function homePage() {
     APPLICATION.innerHTML = '';
@@ -86,13 +86,13 @@ function homePage() {
     let params = {
         url: URLS.api.testUrl,
         method: 'GET',
-    }
+    };
 
-    console.log(params.url)
+    console.log(params.url);
     asyncGetUsing(params).then(({status, parsedJson}) => {
-        console.log(status)
-        console.log(parsedJson)
-    })
+        console.log(status);
+        console.log(parsedJson);
+    });
 
     const formComponent = new HomeComponent({
         parent: APPLICATION,
@@ -104,7 +104,7 @@ function homePage() {
         //         {title: 'Последнее'},
         //     ]
         // }
-    })
+    });
     formComponent.render()
 }
 
@@ -113,8 +113,8 @@ function detailPage() {
 
     const formComponent = new DetailComponent({
         parent: APPLICATION
-    })
-    formComponent.render()
+    });
+    formComponent.render();
 }
 
 const menuPage = () => {
@@ -130,7 +130,7 @@ const menuPage = () => {
             APPLICATION.appendChild(menuItem);
         })
     ;
-}
+};
 
 APPLICATION.addEventListener(('click'), event => {
     const { target } = event;
