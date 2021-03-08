@@ -20,7 +20,7 @@ export class SignUpView {
 
         const [aTag] = document.getElementsByClassName('have-acc__link');
 
-        aTag.addEventListener(('click'), event => {
+        aTag?.addEventListener(('click'), event => {
             event.preventDefault();
 
             APPLICATION.innerHTML = '';
