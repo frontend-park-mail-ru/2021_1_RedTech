@@ -6,47 +6,46 @@
  */
 export const isValidForm = (form) => {
 
-    if (!form) {
-        return false;
-    }
+	if (!form) {
+		return false;
+	}
 
-    const inputs = form.querySelectorAll('.input-wrapper__input');
+	const inputs = form.querySelectorAll('.input-wrapper__input');
 
-    inputs.forEach((input) => {
-        document.getElementById(input.id + 'Error').textContent = '';
-        input.classList.remove('input-wrapper__input_error');
-    })
+	inputs.forEach((input) => {
+		document.getElementById(input.id + 'Error').textContent = '';
+		input.classList.remove('input-wrapper__input_error');
+	});
 
-    let isValid = true;
+	let isValid = true;
 
-    inputs.forEach((input) => {
-        const errorDiv = document.getElementById(input.id + 'Error');
+	inputs.forEach((input) => {
+		const errorDiv = document.getElementById(input.id + 'Error');
 
-        if (!input.value) {
-            errorDiv.textContent = 'Это поле обязательно к заполнению';
-            input.classList.add('input-wrapper__input_error');
-            isValid &= false;
-            return;
-        } else {
-            switch (input.id) {
-                case 'email':
-                    isValid = isValidEmail(input, errorDiv);
-                    return;
-                case 'login':
-                    isValid = isValidLogin(input, errorDiv);
-                    return;
-                case 'password':
-                    isValid = isValidPassword(input, errorDiv);
-                    return;
-                case 'confirmPassword':
-                    isValid = isValidConfirmPassword(input, errorDiv);
-                    return;
-            }
-        }
-    });
+		if (!input.value) {
+			errorDiv.textContent = 'Это поле обязательно к заполнению';
+			input.classList.add('input-wrapper__input_error');
+			isValid &= false;
+			return;
+		}
+		switch (input.id) {
+		case 'email':
+			isValid = isValidEmail(input, errorDiv);
+			return;
+		case 'login':
+			isValid = isValidLogin(input, errorDiv);
+			return;
+		case 'password':
+			isValid = isValidPassword(input, errorDiv);
+			return;
+		case 'confirmPassword':
+			isValid = isValidConfirmPassword(input, errorDiv);
+			return;
+		}
+	});
 
-    return isValid;
-}
+	return isValid;
+};
 
 /**
  * Check validation of inputted login.
@@ -55,13 +54,13 @@ export const isValidForm = (form) => {
  * @returns {boolean} - is valid login form or not.
  */
 const isValidLogin = (loginInput, errorDiv) => {
-    if (!/^[a-zA-Z](.[a-zA-Z0-9]*)$/.test(loginInput.value)) {
-        errorDiv.textContent = 'Логин должен содержать только латинские буквы и цифры';
-        loginInput.classList.add('input-wrapper__input_error');
-        return false;
-    }
-    return true;
-}
+	if (!/^[a-zA-Z](.[a-zA-Z0-9]*)$/.test(loginInput.value)) {
+		errorDiv.textContent = 'Логин должен содержать только латинские буквы и цифры';
+		loginInput.classList.add('input-wrapper__input_error');
+		return false;
+	}
+	return true;
+};
 
 /**
  * Check validation of inputted email.
@@ -70,13 +69,13 @@ const isValidLogin = (loginInput, errorDiv) => {
  * @returns {boolean} - is valid email form or not.
  */
 const isValidEmail = (emailInput, errorDiv) => {
-    if (!/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(emailInput.value)) {
-        errorDiv.textContent = 'Введен некорректный email';
-        emailInput.classList.add('input-wrapper__input_error');
-        return false;
-    }
-    return true;
-}
+	if (!/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(emailInput.value)) {
+		errorDiv.textContent = 'Введен некорректный email';
+		emailInput.classList.add('input-wrapper__input_error');
+		return false;
+	}
+	return true;
+};
 
 /**
  * Check validation of inputted password.
@@ -85,13 +84,13 @@ const isValidEmail = (emailInput, errorDiv) => {
  * @returns {boolean} - is valid password form or not.
  */
 const isValidPassword = (passwordInput, errorDiv) => {
-    if (passwordInput.value.length < 8 || passwordInput.value.length > 50) {
-        errorDiv.textContent = 'Пароль должен быть длиной от 8 до 50 символов';
-        passwordInput.classList.add('input-wrapper__input_error');
-        return false;
-    }
-    return true;
-}
+	if (passwordInput.value.length < 8 || passwordInput.value.length > 50) {
+		errorDiv.textContent = 'Пароль должен быть длиной от 8 до 50 символов';
+		passwordInput.classList.add('input-wrapper__input_error');
+		return false;
+	}
+	return true;
+};
 
 /**
  * Check validation of inputted password for confirmation.
@@ -100,12 +99,12 @@ const isValidPassword = (passwordInput, errorDiv) => {
  * @returns {boolean} - is valid confirm password form or not.
  */
 const isValidConfirmPassword = (confirmPasswordInput, errorDiv) => {
-    const password = document.getElementById('password').value;
+	const password = document.getElementById('password').value;
 
-    if (confirmPasswordInput.value !== password) {
-        errorDiv.textContent = 'Пароли не совпадают!';
-        confirmPasswordInput.classList.add('input-wrapper__input_error');
-        return false;
-    }
-    return true;
-}
+	if (confirmPasswordInput.value !== password) {
+		errorDiv.textContent = 'Пароли не совпадают!';
+		confirmPasswordInput.classList.add('input-wrapper__input_error');
+		return false;
+	}
+	return true;
+};

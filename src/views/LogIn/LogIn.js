@@ -21,14 +21,14 @@ export class LogInView {
 
         const [form] = document.getElementsByTagName('form');
 
-        form.addEventListener(('submit'), event => {
+        form?.addEventListener(('submit'), event => {
             event.preventDefault();
             isValidForm(form);
         })
 
         const [aTag] = document.getElementsByClassName('have-acc__link');
 
-        aTag.addEventListener(('click'), event => {
+        aTag?.addEventListener(('click'), event => {
             event.preventDefault();
 
             APPLICATION.innerHTML = '';
