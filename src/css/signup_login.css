@@ -1,13 +1,3 @@
-html, body {
-    height: 100%;
-    background-color: var(--background-color);
-    color: var(--font-color);
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-family: 'MontserratMedium', sans-serif;
-}
-
 .login-signup {
     width: 100%;
     min-height: 100vh;
@@ -78,6 +68,10 @@ html, body {
 
 .input-wrapper__input_error {
     border: 1px solid var(--alert-color);
+}
+
+.input-wrapper__input_disabled {
+    color: var(--font-color-disabled);
 }
 
 .form-content__hint {
