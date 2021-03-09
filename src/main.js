@@ -111,6 +111,17 @@ function homePage() {
 function detailPage() {
     APPLICATION.innerHTML = '';
 
+    let params = {
+        url: 'http://89.208.198.192:8081/api/media/movie/1',
+        method: 'GET',
+    };
+
+    console.log(params.url);
+    asyncGetUsing(params).then(({status, parsedJson}) => {
+        console.log(status);
+        console.log(parsedJson);
+    });
+
     const formComponent = new DetailComponent({
         parent: APPLICATION
     });

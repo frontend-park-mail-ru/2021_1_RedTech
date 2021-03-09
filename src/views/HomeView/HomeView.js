@@ -1,3 +1,6 @@
+import {APPLICATION} from "../../main.js";
+import { SignUpView } from "../SignUp/SignUp.js";
+
 export class HomeComponent {
     constructor({
         parent = document.body,
@@ -12,6 +15,17 @@ export class HomeComponent {
         const template = puglatizer.HomeView.HomeView();
         //console.log(template())
         this._parent.innerHTML = template;
+
+        const [aTag] = document.getElementsByClassName('button__logout')
+
+        aTag?.addEventListener(('click'), event => {
+            event.preventDefault();
+
+            APPLICATION.innerHTML = '';
+
+            const signUpView = new SignUpView();
+            signUpView.render();
+        });
     }
 }
 

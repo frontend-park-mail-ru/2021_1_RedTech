@@ -8,6 +8,8 @@ app.use(express.static('src'));
 
 app.use(cors())
 
+app.options('*', cors());
+
 app.get('/products', (req, res, next) => {
     res.json({msg: 'This is CORS-enabled for  all origins!'})
 })

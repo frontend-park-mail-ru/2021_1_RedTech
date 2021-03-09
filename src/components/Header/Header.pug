@@ -10,9 +10,8 @@ header
 
     div.header-form__profile
         each i in headerIcons
-            a(href= i.href ).header-form__profile__link
-                img(src= i.src
-                    alt= i.alt)
+            a.button__logout(href= i.href).header-form__profile__link
+                img(src= i.src alt= i.alt)
 
 include ../Underline/Underline
 
