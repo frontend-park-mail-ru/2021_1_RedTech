@@ -35,7 +35,7 @@ const profilePage = () => {
     APPLICATION.innerHTML = '';
 
     const profileView = new ProfileView();
-    profileView.render();
+    profileView.render()
 };
 
 const MENU = {
