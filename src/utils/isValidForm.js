@@ -73,7 +73,7 @@ const isValidLogin = (loginInput, errorDiv) => {
 };
 
 /**
- * Check validation of inputted na,e.
+ * Check validation of inputted name.
  * @param {Element} nameInput - element name input to be validated.
  * @param {HTMLElement} errorDiv - div element, where will be printed message of error.
  * @returns {boolean} - is valid name form or not.
