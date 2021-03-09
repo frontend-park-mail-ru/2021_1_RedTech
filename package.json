@@ -1,7 +1,7 @@
 {
   "name": "netflix",
   "version": "1.0.0",
-  "description": "",
+  "description": "<p align=\"center\">   <img class = \"wordz\" src = \"img/TitlePicture.png\" > </p>",
   "main": "index.js",
   "scripts": {
     "start": "node server",

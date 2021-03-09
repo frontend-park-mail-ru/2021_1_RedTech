@@ -4,10 +4,13 @@ const cors = require('cors')
 const app = express();
 const port = 3000;
 
+
+
 app.use(express.static(
     'src'));
 
 app.use(cors())
+app.options('*', cors());
 
 app.get('/products', function (req, res, next) {
     res.json({msg: 'This is CORS-enabled for  all origins!'})
