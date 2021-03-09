@@ -33,22 +33,22 @@ export const isValidForm = (form) => {
             }
             switch (input.id) {
             case 'email':
-                isValid = isValidEmail(input, errorDiv);
+                isValid &&= isValidEmail(input, errorDiv);
                 return;
             case 'login':
-                isValid = isValidLogin(input, errorDiv);
+                isValid &&= isValidLogin(input, errorDiv);
                 return;
             case 'password':
-                isValid = isValidPassword(input, errorDiv);
+                isValid &&= isValidPassword(input, errorDiv);
                 return;
             case 'confirmPassword':
-                isValid = isValidConfirmPassword(input, errorDiv);
+                isValid &&= isValidConfirmPassword(input, errorDiv);
                 return;
             case 'firstName':
-                isValid = isValidName(input, errorDiv);
+                isValid &&= isValidName(input, errorDiv);
                 return;
             case 'secondName':
-                isValid = isValidName(input, errorDiv);
+                isValid &&= isValidName(input, errorDiv);
                 return;
             }
         }
