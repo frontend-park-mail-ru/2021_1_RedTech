@@ -48,7 +48,24 @@ export class DetailComponent {
             homePage();
         });
 
-        // const [aLogout] = document
+        const logoutPage = document.getElementById('logoutPage');
+        logoutPage?.addEventListener(('click'), event => {
+            event.preventDefault();
+
+            APPLICATION.innerHTML = '';
+
+            localStorage.removeItem('ID');
+            const logInView = new LogInView();
+            logInView.render();
+        });
+
+        const [aLogout] = document.getElementsByClassName('logoutPage');
+        aLogout?.addEventListener(('click'), event => {
+            event.preventDefault();
+
+            APPLICATION.innerHTML = '';
+            homePage();
+        });
     }
 }
 

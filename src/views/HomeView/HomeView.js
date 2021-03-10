@@ -1,6 +1,8 @@
 import {APPLICATION, detailPage} from '../../main.js';
 import { LogInView } from '../LogIn/LogIn.js';
 import {ProfileView} from '../Profile/Profile.js';
+import {URLS} from '../../modules/urls.js';
+import {asyncGetUsing} from '../../modules/http.js';
 
 export class HomeComponent {
     constructor({
@@ -32,6 +34,17 @@ export class HomeComponent {
 
             APPLICATION.innerHTML = '';
 
+            const logInView = new LogInView();
+            logInView.render();
+        });
+
+        const logoutPage = document.getElementById('logoutPage');
+        logoutPage?.addEventListener(('click'), event => {
+            event.preventDefault();
+
+            APPLICATION.innerHTML = '';
+
+            localStorage.removeItem('ID');
             const logInView = new LogInView();
             logInView.render();
         });

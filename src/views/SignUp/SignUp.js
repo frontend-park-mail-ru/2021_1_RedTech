@@ -42,19 +42,26 @@ export class SignUpView {
                     }
                 };
 
-                console.log(params.url);
                 asyncGetUsing(params).then(({status, parsedJson}) => {
                     if (status === 200) {
                         APPLICATION.innerHTML = '';
+                        localStorage.setItem('ID', parsedJson.id);
+                        let headerIcons = [
+                            {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
+                            {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
+                            {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
+                            {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
+                        ];
 
                         const formComponent = new HomeComponent({
                             parent: APPLICATION,
+                            data: {
+                                headerIcons,
+                            }
                         });
-                        localStorage.setItem('ID', parsedJson.id);
+
                         formComponent.render();
                     }
-                    console.log(status);
-                    console.log(parsedJson);
                 });
             }
         });
