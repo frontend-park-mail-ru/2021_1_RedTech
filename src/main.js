@@ -69,20 +69,6 @@ const MENU = {
 function homePage() {
     APPLICATION.innerHTML = '';
 
-    // let params = {
-    //     url: 'https://jsonplaceholder.typicode.com/users',
-    //     method: 'POST',
-    //     body: {
-    //         name: 'Vladilen',
-    //         age: 26,
-    //     }
-    // }
-    //
-    // asyncGetUsing(params).then(({status, parsedJson}) => {
-    //     console.log(status)
-    //     console.log(parsedJson)
-    // })
-
     let params = {
         url: URLS.api.media,
         method: 'GET',
@@ -94,14 +80,6 @@ function homePage() {
     });
     const formComponent = new HomeComponent({
         parent: APPLICATION,
-        // data: {
-        //     headerLinks: [
-        //         {title: 'Главная'},
-        //         {title: 'Фильмы'},
-        //         {title: 'Сериалы'},
-        //         {title: 'Последнее'},
-        //     ]
-        // }
     });
     formComponent.render();
 }
@@ -114,29 +92,29 @@ function detailPage() {
         method: 'GET',
     };
 
-    let film = {}
+    let film = {};
 
-     asyncGetUsing(params).then(({status, parsedJson}) => {
+    asyncGetUsing(params).then(({status, parsedJson}) => {
         console.log(status);
         console.log('json', parsedJson);
-        film.mainImageSrc = parsedJson.movie_avatar,
-        film.mediaTitle = parsedJson.title
-        film.mediaTag = 'Сериал'
-        film.mediaRank = 'Положительных оценок ' + `${parsedJson.rating}` ?? ''
-        film.mediaYear = 2016
-        film.mediaGenres = parsedJson.genres ?? ''
-        film.mediaDirector = 'Алекс Хирш'
-        film.mediaCountry = parsedJson.countries ?? ''
-        film.mediaActors = parsedJson.actors ?? ''
-        film.mediaDescription = parsedJson.description ?? ''
-         console.log(film)
-         const formComponent = new DetailComponent({
-             parent: APPLICATION,
-             data: {
-                 filmData: film,
-             }
-         });
-         formComponent.render();
+        film.mainImageSrc = './assets/gravity.jpg';
+        film.mediaTitle = parsedJson.title;
+        film.mediaTag = 'Сериал';
+        film.mediaRank = 'Положительных оценок ' + `${parsedJson.rating}` ?? '';
+        film.mediaYear = 2016;
+        film.mediaGenres = parsedJson.genres ?? '';
+        film.mediaDirector = 'Алекс Хирш';
+        film.mediaCountry = parsedJson.countries ?? '';
+        film.mediaActors = parsedJson.actors ?? '';
+        film.mediaDescription = parsedJson.description ?? '';
+        console.log(film);
+        const formComponent = new DetailComponent({
+            parent: APPLICATION,
+            data: {
+                filmData: film,
+            }
+        });
+        formComponent.render();
     });
 }
 
