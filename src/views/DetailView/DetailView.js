@@ -1,6 +1,7 @@
 import {APPLICATION, homePage} from '../../main.js';
 import {SignUpView} from '../SignUp/SignUp.js';
 import {ProfileView} from '../Profile/Profile.js';
+import {LogInView} from '../LogIn/LogIn.js';
 // import {HomeComponent} from '../HomeView/HomeView.js';
 
 
@@ -35,8 +36,8 @@ export class DetailComponent {
 
             APPLICATION.innerHTML = '';
 
-            const signUpView = new SignUpView();
-            signUpView.render();
+            const logInView = new LogInView();
+            logInView.render();
         });
 
         const [aMain] = document.getElementsByClassName('homePage');

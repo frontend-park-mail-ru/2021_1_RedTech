@@ -1,7 +1,6 @@
 import {APPLICATION, detailPage} from '../../main.js';
-import { SignUpView } from '../SignUp/SignUp.js';
+import { LogInView } from '../LogIn/LogIn.js';
 import {ProfileView} from '../Profile/Profile.js';
-// import {DetailComponent} from '../DetailView/DetailView.js';
 
 export class HomeComponent {
     constructor({
@@ -33,8 +32,8 @@ export class HomeComponent {
 
             APPLICATION.innerHTML = '';
 
-            const signUpView = new SignUpView();
-            signUpView.render();
+            const logInView = new LogInView();
+            logInView.render();
         });
 
         const [linkFilm] = document.getElementsByClassName('film_link_1');
