@@ -62,23 +62,10 @@ export class LogInView {
 
         aTag?.addEventListener(('click'), event => {
             event.preventDefault();
+            APPLICATION.innerHTML = '';
 
-            const params = {
-                url: 'http://89.208.198.192:8081/api/me',
-                method: 'GET',
-                credentials: 'include'
-            };
-
-            console.log(params.url);
-            asyncGetUsing(params).then(({status, parsedJson}) => {
-                console.log(status);
-                console.log(parsedJson);
-            });
-
-            // APPLICATION.innerHTML = '';
-            //
-            // const signUpView = new SignUpView();
-            // signUpView.render();
+            const signUpView = new SignUpView();
+            signUpView.render();
         });
     }
 }
