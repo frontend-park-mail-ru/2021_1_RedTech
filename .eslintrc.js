@@ -12,6 +12,8 @@ module.exports = {
         'sourceType': 'module'
     },
     'rules': {
+        'no-console': 'error',
+        'no-inline-comments': 'error',
         'indent': [
             'error',
             4
