@@ -1,6 +1,7 @@
 import { APPLICATION } from '../../main.js';
 import { LogInView } from '../LogIn/LogIn.js';
 import { isValidForm } from '../../utils/isValidForm.js';
+import { asyncGetUsing } from '../../modules/http.js';
 
 /** Class representing a signup page view. */
 export class SignUpView {
@@ -22,9 +23,29 @@ export class SignUpView {
         const [form] = document.getElementsByTagName('form');
         const [aTag] = document.getElementsByClassName('have-acc__link');
 
+        const inputs = form.querySelectorAll('.input-wrapper__input');
+
         form?.addEventListener(('submit'), event => {
             event.preventDefault();
-            isValidForm(form);
+            const isValid = isValidForm(form)
+            if (isValid) {
+                let params = {
+                    url: 'http://89.208.198.192:8081/api/users/signup',
+                    method: 'POST',
+                    body: {
+                        username: document.getElementById('login').value,
+                        email: document.getElementById('email').value,
+                        password: document.getElementById('password').value,
+                        confirm_password: document.getElementById('confirmPassword').value
+                    }
+                };
+
+                console.log(params.url);
+                asyncGetUsing(params).then(({status, parsedJson}) => {
+                    console.log(status);
+                    console.log(parsedJson);
+                });
+            }
         });
 
         aTag?.addEventListener(('click'), event => {

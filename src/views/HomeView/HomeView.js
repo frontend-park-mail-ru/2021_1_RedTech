@@ -1,5 +1,5 @@
-import {APPLICATION} from "../../main.js";
-import { SignUpView } from "../SignUp/SignUp.js";
+import {APPLICATION} from '../../main.js';
+import { SignUpView } from '../SignUp/SignUp.js';
 
 export class HomeComponent {
     constructor({
@@ -16,7 +16,7 @@ export class HomeComponent {
         //console.log(template())
         this._parent.innerHTML = template;
 
-        const [aTag] = document.getElementsByClassName('button__logout')
+        const [aTag] = document.getElementsByClassName('button__logout');
 
         aTag?.addEventListener(('click'), event => {
             event.preventDefault();

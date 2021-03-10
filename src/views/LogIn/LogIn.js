@@ -1,6 +1,7 @@
 import { APPLICATION } from '../../main.js';
 import { SignUpView } from '../SignUp/SignUp.js';
 import { isValidForm } from '../../utils/isValidForm.js';
+import { asyncGetUsing } from '../../modules/http.js';
 
 /** Class representing a login page view. */
 export class LogInView {
@@ -24,16 +25,46 @@ export class LogInView {
 
         form?.addEventListener(('submit'), event => {
             event.preventDefault();
-            isValidForm(form);
+            const isValid = isValidForm(form);
+
+            if (isValid) {
+                let params = {
+                    url: 'http://89.208.198.192:8081/api/users/login',
+                    method: 'POST',
+                    credentials: 'include',
+                    body: {
+                        email: document.getElementById('email').value,
+                        password: document.getElementById('password').value
+                    }
+                };
+
+                console.log(params.url);
+                asyncGetUsing(params).then(({status, parsedJson}) => {
+                    console.log(status);
+                    console.log(parsedJson);
+                });
+            }
         });
 
         aTag?.addEventListener(('click'), event => {
             event.preventDefault();
 
-            APPLICATION.innerHTML = '';
+            const params = {
+                url: 'http://89.208.198.192:8081/api/me',
+                method: 'GET',
+                credentials: 'include',
+            };
 
-            const signUpView = new SignUpView();
-            signUpView.render();
+            console.log(params.url);
+            asyncGetUsing(params).then(({status, parsedJson}) => {
+                console.log(status);
+                console.log(parsedJson);
+            });
+
+            // APPLICATION.innerHTML = '';
+            //
+            // const signUpView = new SignUpView();
+            // signUpView.render();
         });
     }
 }
