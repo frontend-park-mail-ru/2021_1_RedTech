@@ -71,15 +71,51 @@ const MENU = {
 
 export function homePage() {
     APPLICATION.innerHTML = '';
+    let headerIcons = {};
+
+    if (localStorage.getItem('ID') != null) {
+        headerIcons = [
+            {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
+            {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
+            {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
+            {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
+        ]
+    } else {
+        headerIcons = [
+            {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
+            {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
+            {id: 'loginPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
+        ]
+    }
 
     const formComponent = new HomeComponent({
         parent: APPLICATION,
+        data:{
+            headerIcons,
+        }
     });
     formComponent.render();
 }
 
 export function detailPage() {
     APPLICATION.innerHTML = '';
+
+    let headerIcons = {};
+
+    if (localStorage.getItem('ID') != null) {
+        headerIcons = [
+            {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
+            {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
+            {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
+            {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
+        ]
+    } else {
+        headerIcons = [
+            {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
+            {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
+            {id: 'loginPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
+        ]
+    }
 
     let params = {
         url: URLS.api.media,
@@ -105,6 +141,7 @@ export function detailPage() {
                 parent: APPLICATION,
                 data: {
                     filmData: film,
+                    headerIcons,
                 }
             });
             formComponent.render();
@@ -138,4 +175,4 @@ APPLICATION.addEventListener(('click'), event => {
     }
 });
 
-menuPage();
+homePage();

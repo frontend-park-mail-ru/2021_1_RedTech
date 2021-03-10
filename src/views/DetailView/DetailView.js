@@ -30,8 +30,8 @@ export class DetailComponent {
             signUpView.render();
         });
 
-        const favouriteLink = document.getElementById('favouritePage');
-        favouriteLink?.addEventListener(('click'), event => {
+        const loginPage = document.getElementById('loginPage');
+        loginPage?.addEventListener(('click'), event => {
             event.preventDefault();
 
             APPLICATION.innerHTML = '';
@@ -47,6 +47,8 @@ export class DetailComponent {
             APPLICATION.innerHTML = '';
             homePage();
         });
+
+        // const [aLogout] = document
     }
 }
 

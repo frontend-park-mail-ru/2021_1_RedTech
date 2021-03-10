@@ -40,22 +40,35 @@ export class LogInView {
                     }
                 };
 
-                console.log(params.url);
                 asyncGetUsing(params).then(({status, parsedJson}) => {
                     if (status === 200) {
                         APPLICATION.innerHTML = '';
+                        let headerIcons = {};
+                        if (localStorage.getItem('ID') != null) {
+                            headerIcons = [
+                                {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
+                                {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
+                                {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
+                                {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
+                            ]
+                        } else {
+                            headerIcons = [
+                                {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
+                                {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
+                                {id: 'loginPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
+                            ]
+                        }
 
                         const formComponent = new HomeComponent({
                             parent: APPLICATION,
+                            data: {
+                                headerIcons,
+                            },
                         });
                         localStorage.setItem('ID', parsedJson.id)
                         //USER.ID = parsedJson.id;
                         formComponent.render()
                     }
-                    console.log(status);
-                    console.log(parsedJson);
-
-                    console.log(USER.ID);
                 });
             }
         });

@@ -13,7 +13,7 @@ export class HomeComponent {
     }
 
     render() {
-        const template = puglatizer.HomeView.HomeView();
+        const template = puglatizer.HomeView.HomeView(this._data);
         this._parent.innerHTML = template;
 
         const profileLink = document.getElementById('profilePage');
@@ -26,8 +26,8 @@ export class HomeComponent {
             signUpView.render();
         });
 
-        const favouriteLink = document.getElementById('favouritePage');
-        favouriteLink?.addEventListener(('click'), event => {
+        const loginPage = document.getElementById('loginPage');
+        loginPage?.addEventListener(('click'), event => {
             event.preventDefault();
 
             APPLICATION.innerHTML = '';
@@ -45,5 +45,3 @@ export class HomeComponent {
         });
     }
 }
-
-
