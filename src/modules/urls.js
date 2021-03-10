@@ -5,7 +5,6 @@ export const URLS = {
     },
     api: {
         me: '/me',
-        media: '/media',
-        testUrl: 'https://jsonplaceholder.typicode.com/users',
+        media: 'http://89.208.198.192:8081/api/media/movie/1',
     }
 };

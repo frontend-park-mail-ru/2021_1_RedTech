@@ -9,7 +9,7 @@ export class DetailComponent {
     }
 
     render() {
-        const template = puglatizer.DetailView.DetailView();
+        const template = puglatizer.DetailView.DetailView(this._data);
         //console.log(template())
         this._parent.innerHTML = template;
     }

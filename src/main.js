@@ -84,16 +84,14 @@ function homePage() {
     // })
 
     let params = {
-        url: URLS.api.testUrl,
+        url: URLS.api.media,
         method: 'GET',
     };
 
-    console.log(params.url);
     asyncGetUsing(params).then(({status, parsedJson}) => {
         console.log(status);
-        console.log(parsedJson);
+        console.log('json', parsedJson);
     });
-
     const formComponent = new HomeComponent({
         parent: APPLICATION,
         // data: {
@@ -112,20 +110,34 @@ function detailPage() {
     APPLICATION.innerHTML = '';
 
     let params = {
-        url: 'http://89.208.198.192:8081/api/media/movie/1',
+        url: URLS.api.media,
         method: 'GET',
     };
 
-    console.log(params.url);
-    asyncGetUsing(params).then(({status, parsedJson}) => {
-        console.log(status);
-        console.log(parsedJson);
-    });
+    let film = {}
 
-    const formComponent = new DetailComponent({
-        parent: APPLICATION
+     asyncGetUsing(params).then(({status, parsedJson}) => {
+        console.log(status);
+        console.log('json', parsedJson);
+        film.mainImageSrc = parsedJson.movie_avatar,
+        film.mediaTitle = parsedJson.title
+        film.mediaTag = 'Сериал'
+        film.mediaRank = 'Положительных оценок ' + `${parsedJson.rating}` ?? ''
+        film.mediaYear = 2016
+        film.mediaGenres = parsedJson.genres ?? ''
+        film.mediaDirector = 'Алекс Хирш'
+        film.mediaCountry = parsedJson.countries ?? ''
+        film.mediaActors = parsedJson.actors ?? ''
+        film.mediaDescription = parsedJson.description ?? ''
+         console.log(film)
+         const formComponent = new DetailComponent({
+             parent: APPLICATION,
+             data: {
+                 filmData: film,
+             }
+         });
+         formComponent.render();
     });
-    formComponent.render();
 }
 
 const menuPage = () => {
