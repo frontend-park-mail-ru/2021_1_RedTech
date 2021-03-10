@@ -1,6 +1,6 @@
-import {APPLICATION} from '../../main.js';
+import {APPLICATION, homePage} from '../../main.js';
 import {SignUpView} from '../SignUp/SignUp.js';
-import {HomeComponent} from '../HomeView/HomeView.js';
+// import {HomeComponent} from '../HomeView/HomeView.js';
 
 
 export class DetailComponent {
@@ -33,9 +33,7 @@ export class DetailComponent {
             event.preventDefault();
 
             APPLICATION.innerHTML = '';
-
-            const homeView = new HomeComponent();
-            homeView.render();
+            homePage();
         });
     }
 }

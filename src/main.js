@@ -66,7 +66,7 @@ const MENU = {
     }
 };
 
-function homePage() {
+export function homePage() {
     APPLICATION.innerHTML = '';
 
     const formComponent = new HomeComponent({
