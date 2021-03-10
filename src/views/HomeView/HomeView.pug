@@ -1,27 +1,25 @@
 block variables
     -
         var headerLinks = [
-            {title: 'Главная'},
-            {title: 'Фильмы'},
-            {title: 'Сериалы'},
-            {title: 'Последнее'}
+            {className: 'homePage', title: 'Главная'},
+            {className: 'filmPage', title: 'Фильмы'},
+            {className: 'serialsPage', title: 'Сериалы'},
+            {className: 'lastPage', title: 'Последнее'}
         ]
 
     -
         var headerIcons = [
-            {href:'#', src: '../../assets/search.png', alt:''},
-            {href:'#', src: '../../assets/star.png', alt:''},
-            {href:'#', src: '../../assets/profile.png', alt:''}
-            ]
+            {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
+            {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
+            {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''}
+        ]
 
     -
         var cardFilms = [
-            {src: '../../assets/st.jpeg', alt: '', title: 'Очень странные дела', stars: '* * * * *', description: 'Очень странные дела — американский научно-фантастический сериал, созданный братьями Даффер для сети потокового мультимедиа Redioteka', },
-            {src: '../../assets/st.jpeg', alt: '', title: 'Очень странные дела', stars: '* * * * *', description: 'Очень странные дела — американский научно-фантастический сериал, созданный братьями Даффер для сети потокового мультимедиа Redioteka', },
-
             {
                 src: '../../assets/st.jpeg',
                 alt: '',
+                className: 'film_link_1',
                 title: 'Очень странные дела',
                 stars: '* * * * *',
                 description: 'Очень странные дела — американский научно-фантастический сериал, созданный братьями Даффер для сети потокового мультимедиа Redioteka',
@@ -29,20 +27,7 @@ block variables
             {
                 src: '../../assets/st.jpeg',
                 alt: '',
-                title: 'Очень странные дела',
-                stars: '* * * * *',
-                description: 'Очень странные дела — американский научно-фантастический сериал, созданный братьями Даффер для сети потокового мультимедиа Redioteka',
-            },
-            {
-                src: '../../assets/st.jpeg',
-                alt: '',
-                title: 'Очень странные дела',
-                stars: '* * * * *',
-                description: 'Очень странные дела — американский научно-фантастический сериал, созданный братьями Даффер для сети потокового мультимедиа Redioteka',
-            },
-            {
-                src: '../../assets/st.jpeg',
-                alt: '',
+                className: 'film_link_1',
                 title: 'Очень странные дела',
                 stars: '* * * * *',
                 description: 'Очень странные дела — американский научно-фантастический сериал, созданный братьями Даффер для сети потокового мультимедиа Redioteka',

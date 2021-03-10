@@ -69,22 +69,13 @@ const MENU = {
 function homePage() {
     APPLICATION.innerHTML = '';
 
-    let params = {
-        url: URLS.api.media,
-        method: 'GET',
-    };
-
-    asyncGetUsing(params).then(({status, parsedJson}) => {
-        console.log(status);
-        console.log('json', parsedJson);
-    });
     const formComponent = new HomeComponent({
         parent: APPLICATION,
     });
     formComponent.render();
 }
 
-function detailPage() {
+export function detailPage() {
     APPLICATION.innerHTML = '';
 
     let params = {
@@ -95,26 +86,26 @@ function detailPage() {
     let film = {};
 
     asyncGetUsing(params).then(({status, parsedJson}) => {
-        console.log(status);
-        console.log('json', parsedJson);
-        film.mainImageSrc = './assets/gravity.jpg';
-        film.mediaTitle = parsedJson.title;
-        film.mediaTag = 'Сериал';
-        film.mediaRank = 'Положительных оценок ' + `${parsedJson.rating}` ?? '';
-        film.mediaYear = 2016;
-        film.mediaGenres = parsedJson.genres ?? '';
-        film.mediaDirector = 'Алекс Хирш';
-        film.mediaCountry = parsedJson.countries ?? '';
-        film.mediaActors = parsedJson.actors ?? '';
-        film.mediaDescription = parsedJson.description ?? '';
-        console.log(film);
-        const formComponent = new DetailComponent({
-            parent: APPLICATION,
-            data: {
-                filmData: film,
-            }
-        });
-        formComponent.render();
+        if (status < 300) {
+            film.mainImageSrc = './assets/gravity.jpg';
+            film.mediaTitle = parsedJson.title;
+            film.mediaTag = 'Сериал';
+            film.mediaRank = 'Положительных оценок ' + `${parsedJson.rating}` ?? '';
+            film.mediaYear = 2016;
+            film.mediaGenres = parsedJson.genres ?? '';
+            film.mediaDirector = 'Алекс Хирш';
+            film.mediaCountry = parsedJson.countries ?? '';
+            film.mediaActors = parsedJson.actors ?? '';
+            film.mediaDescription = parsedJson.description ?? '';
+
+            const formComponent = new DetailComponent({
+                parent: APPLICATION,
+                data: {
+                    filmData: film,
+                }
+            });
+            formComponent.render();
+        }
     });
 }
 

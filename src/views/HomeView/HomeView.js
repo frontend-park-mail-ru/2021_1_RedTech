@@ -1,5 +1,6 @@
-import {APPLICATION} from '../../main.js';
+import {APPLICATION, detailPage} from '../../main.js';
 import { SignUpView } from '../SignUp/SignUp.js';
+// import {DetailComponent} from '../DetailView/DetailView.js';
 
 export class HomeComponent {
     constructor({
@@ -13,18 +14,24 @@ export class HomeComponent {
 
     render() {
         const template = puglatizer.HomeView.HomeView();
-        //console.log(template())
         this._parent.innerHTML = template;
 
-        const [aTag] = document.getElementsByClassName('button__logout');
-
-        aTag?.addEventListener(('click'), event => {
+        const profileLink = document.getElementById('profilePage');
+        profileLink?.addEventListener(('click'), event => {
             event.preventDefault();
 
             APPLICATION.innerHTML = '';
 
             const signUpView = new SignUpView();
             signUpView.render();
+        });
+
+        const [linkFilm] = document.getElementsByClassName('film_link_1');
+        linkFilm?.addEventListener(('click'), event => {
+            event.preventDefault();
+
+            APPLICATION.innerHTML = '';
+            detailPage();
         });
     }
 }

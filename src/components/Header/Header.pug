@@ -6,11 +6,11 @@ header
     ul.header-form
         each i in headerLinks
             li
-                a(href= "#")= i.title
+                a(class= i.className href= "#")= i.title
 
     div.header-form__profile
         each i in headerIcons
-            a.button__logout(href= i.href).header-form__profile__link
+            a.button__logout(id= i.id href= i.href).header-form__profile__link
                 img(src= i.src alt= i.alt)
 
 include ../Underline/Underline
