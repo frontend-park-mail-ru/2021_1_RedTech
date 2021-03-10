@@ -43,7 +43,7 @@ div.login-signup
                     div.networks__content
                         for networksSrc in networksAuth
                             div.networks__img
-                                button.networks__button
+                                button.networks__button(disabled)
                                     img.networks__img(src=networksSrc.src alt="")
                 div.form-content__have-acc Еще нет аккаунта?
                     a(class="have-acc__link" href="/") Зарегистрируйтесь!

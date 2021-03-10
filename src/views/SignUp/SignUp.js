@@ -2,6 +2,7 @@ import { APPLICATION } from '../../main.js';
 import { LogInView } from '../LogIn/LogIn.js';
 import { isValidForm } from '../../utils/isValidForm.js';
 import { asyncGetUsing } from '../../modules/http.js';
+import { HomeComponent } from '../HomeView/HomeView.js';
 
 /** Class representing a signup page view. */
 export class SignUpView {
@@ -42,6 +43,14 @@ export class SignUpView {
 
                 console.log(params.url);
                 asyncGetUsing(params).then(({status, parsedJson}) => {
+                    if (status === 200) {
+                        APPLICATION.innerHTML = '';
+
+                        const formComponent = new HomeComponent({
+                            parent: APPLICATION,
+                        });
+                        formComponent.render();
+                    }
                     console.log(status);
                     console.log(parsedJson);
                 });

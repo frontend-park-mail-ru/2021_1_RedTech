@@ -2,6 +2,7 @@ import { APPLICATION } from '../../main.js';
 import { SignUpView } from '../SignUp/SignUp.js';
 import { isValidForm } from '../../utils/isValidForm.js';
 import { asyncGetUsing } from '../../modules/http.js';
+import { HomeComponent } from '../HomeView/HomeView.js';
 
 /** Class representing a login page view. */
 export class LogInView {
@@ -40,6 +41,14 @@ export class LogInView {
 
                 console.log(params.url);
                 asyncGetUsing(params).then(({status, parsedJson}) => {
+                    if (status === 200) {
+                        APPLICATION.innerHTML = '';
+
+                        const formComponent = new HomeComponent({
+                            parent: APPLICATION,
+                        });
+                        formComponent.render();
+                    }
                     console.log(status);
                     console.log(parsedJson);
                 });
@@ -49,22 +58,10 @@ export class LogInView {
         aTag?.addEventListener(('click'), event => {
             event.preventDefault();
 
-            const params = {
-                url: 'http://89.208.198.192:8081/api/me',
-                method: 'GET',
-                credentials: 'include',
-            };
+            APPLICATION.innerHTML = '';
 
-            console.log(params.url);
-            asyncGetUsing(params).then(({status, parsedJson}) => {
-                console.log(status);
-                console.log(parsedJson);
-            });
-
-            // APPLICATION.innerHTML = '';
-            //
-            // const signUpView = new SignUpView();
-            // signUpView.render();
+            const signUpView = new SignUpView();
+            signUpView.render();
         });
     }
 }
