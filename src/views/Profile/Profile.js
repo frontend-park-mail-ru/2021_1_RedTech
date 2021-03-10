@@ -1,5 +1,6 @@
-import { APPLICATION } from '../../main.js';
+import { APPLICATION, USER } from '../../main.js';
 import { isValidForm } from '../../utils/isValidForm.js';
+import { asyncGetUsing } from '../../modules/http.js';
 
 /** Class representing a login page view. */
 export class ProfileView {
@@ -15,47 +16,76 @@ export class ProfileView {
 	 * Render html login page from pug template to parent.
 	 */
     render() {
-        const template = puglatizer.Profile.Profile(this._data);
-        APPLICATION.innerHTML = template;
+        const params = {
+            url: 'http://89.208.198.192:8081/api/users/' + localStorage.getItem('ID'),
+            method: 'GET',
+            credentials: 'include'
+        };
 
-        const [form] = document.getElementsByTagName('form');
-        const [button] = document.getElementsByClassName('input-wrapper__button');
+        console.log(params.url);
+        asyncGetUsing(params).then(({status, parsedJson}) => {
+            let params = {};
+            console.log(status);
+            console.log(parsedJson);
+            params.login = parsedJson.username;
+            params.email = parsedJson.email;
 
-        form?.addEventListener(('submit'), event => {
-            event.preventDefault();
+            if (parsedJson.user_avatar) {
+                params.user_avatar = parsedJson.user_avatar;
+            } else {
+                params.user_avatar = 'img/user.png';
+            }
 
-            const inputs = form.querySelectorAll('.input-wrapper__input');
+            this._data = {
+                profileData: params
+            }
 
-            if (button.textContent === 'Редактировать') {
-                button.textContent = 'Сохранить';
-                inputs.forEach((input) => {
-                    if (input.tagName === 'LABEL') {
-                        input.classList.remove('input-wrapper__input_disabled');
-                    }
 
-                    if (input.tagName !== 'BUTTON') {
-                        input.disabled = false;
-                    }
-                });
-            } else if (button.textContent === 'Сохранить') {
-                const isValid = isValidForm(form);
-                if (isValid) {
-                    const [nick] = document.getElementsByClassName('title-wrapper__nickname');
+            const template = puglatizer.Profile.Profile(this._data);
+            APPLICATION.innerHTML = template;
+            const [form] = document.getElementsByTagName('form');
+            const [button] = document.getElementsByClassName('input-wrapper__button');
 
-                    nick.textContent = document.getElementById('login').value;
-                    button.textContent = 'Редактировать';
+            form?.addEventListener(('submit'), event => {
 
+                event.preventDefault();
+
+                const inputs = form.querySelectorAll('.input-wrapper__input');
+
+                if (button.textContent === 'Редактировать') {
+                    button.textContent = 'Сохранить';
                     inputs.forEach((input) => {
                         if (input.tagName === 'LABEL') {
-                            input.classList.add('input-wrapper__input_disabled');
+                            input.classList.remove('input-wrapper__input_disabled');
                         }
 
                         if (input.tagName !== 'BUTTON') {
-                            input.disabled = true;
+                            input.disabled = false;
                         }
                     });
+                } else if (button.textContent === 'Сохранить') {
+                    const isValid = isValidForm(form);
+                    if (isValid) {
+                        const [nick] = document.getElementsByClassName('title-wrapper__nickname');
+
+                        nick.textContent = document.getElementById('login').value;
+                        button.textContent = 'Редактировать';
+
+                        inputs.forEach((input) => {
+                            if (input.tagName === 'LABEL') {
+                                input.classList.add('input-wrapper__input_disabled');
+                            }
+
+                            if (input.tagName !== 'BUTTON') {
+                                input.disabled = true;
+                            }
+                        });
+
+
+                    }
                 }
-            }
+            });
         });
+
     }
 }

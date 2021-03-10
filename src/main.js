@@ -7,6 +7,9 @@ import { URLS } from './modules/urls.js';
 import { ProfileView } from './views/Profile/Profile.js';
 
 export const APPLICATION = document.getElementById('app');
+export const USER = {
+    ID: 1,
+};
 
 /**
  * Render signup page and check validation of form.

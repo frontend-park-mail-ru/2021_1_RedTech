@@ -1,4 +1,5 @@
 import { APPLICATION } from '../../main.js';
+import { USER } from '../../main.js';
 import { SignUpView } from '../SignUp/SignUp.js';
 import { isValidForm } from '../../utils/isValidForm.js';
 import { asyncGetUsing } from '../../modules/http.js';
@@ -47,10 +48,14 @@ export class LogInView {
                         const formComponent = new HomeComponent({
                             parent: APPLICATION,
                         });
-                        formComponent.render();
+                        localStorage.setItem('ID', parsedJson.id)
+                        //USER.ID = parsedJson.id;
+                        formComponent.render()
                     }
                     console.log(status);
                     console.log(parsedJson);
+
+                    console.log(USER.ID);
                 });
             }
         });
@@ -58,10 +63,22 @@ export class LogInView {
         aTag?.addEventListener(('click'), event => {
             event.preventDefault();
 
-            APPLICATION.innerHTML = '';
+            const params = {
+                url: 'http://89.208.198.192:8081/api/me',
+                method: 'GET',
+                credentials: 'include'
+            };
 
-            const signUpView = new SignUpView();
-            signUpView.render();
+            console.log(params.url);
+            asyncGetUsing(params).then(({status, parsedJson}) => {
+                console.log(status);
+                console.log(parsedJson);
+            });
+
+            // APPLICATION.innerHTML = '';
+            //
+            // const signUpView = new SignUpView();
+            // signUpView.render();
         });
     }
 }

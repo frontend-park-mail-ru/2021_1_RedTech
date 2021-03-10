@@ -33,6 +33,7 @@ export class SignUpView {
                 let params = {
                     url: 'http://89.208.198.192:8081/api/users/signup',
                     method: 'POST',
+                    credentials: 'include',
                     body: {
                         username: document.getElementById('login').value,
                         email: document.getElementById('email').value,
@@ -49,6 +50,7 @@ export class SignUpView {
                         const formComponent = new HomeComponent({
                             parent: APPLICATION,
                         });
+                        localStorage.setItem('ID', parsedJson.id);
                         formComponent.render();
                     }
                     console.log(status);

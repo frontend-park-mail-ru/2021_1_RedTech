@@ -1,6 +1,6 @@
 include ../Input/Input.pug
 
-mixin form(inputs, buttonName, inputWrapper)
+mixin form(inputs, buttonName, inputWrapper, img)
     form(novalidate)
         if !inputWrapper
             div.form_content__inputs
@@ -21,7 +21,7 @@ mixin form(inputs, buttonName, inputWrapper)
                 div.input-wrapper__input-avatar
                     div.input-wrapper__label Аватар
                     div.input-avatar__input-wrapper
-                        img(src="img/user.png" class="input-wrapper__img" width="120px" height="120px")
+                        img(src=img.path class="input-wrapper__img" width="120px" height="120px")
                         input(type="file" id="file" class="input-wrapper__input" accept="image/*" disabled)
                         label(for="file" class="input-wrapper__input input-wrapper__input_disabled") Выбрать...
             div.form__input-wrapper
