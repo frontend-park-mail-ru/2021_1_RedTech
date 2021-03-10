@@ -1,0 +1,56 @@
+block variables
+    -
+        var headerLinks = [
+            {className: 'homePage', title: 'Главная'},
+            {className: 'filmPage', title: 'Фильмы'},
+            {className: 'serialsPage', title: 'Сериалы'},
+            {className: 'lastPage', title: 'Последнее'}
+        ]
+
+    -
+        var cardFilms = [
+            {
+                src: '../../assets/st.jpeg',
+                alt: '',
+                className: 'film_link_1',
+                title: 'Очень странные дела',
+                stars: '* * * * *',
+                description: 'Очень странные дела — американский научно-фантастический сериал, созданный братьями Даффер для сети потокового мультимедиа Redioteka',
+            },
+            {
+                src: '../../assets/st.jpeg',
+                alt: '',
+                className: 'film_link_1',
+                title: 'Очень странные дела',
+                stars: '* * * * *',
+                description: 'Очень странные дела — американский научно-фантастический сериал, созданный братьями Даффер для сети потокового мультимедиа Redioteka',
+            },
+        ]
+
+    -
+        var suggestionsFilms = [
+            {src: '../../assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Подписка'},
+            {src: '../../assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Платно'},
+            {src: '../../assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Бесплатно'},
+            {src: '../../assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Бесплатно'},
+            {src: '../../assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Подписка'},
+            {src: '../../assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Платно'},
+            {src: '../../assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Бесплатно'},
+            {src: '../../assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Бесплатно'},
+            ]
+
+
+block style
+    style
+        include ../../index.css
+
+block header
+    include ../../components/Header/Header
+
+block content
+    div.container
+        each i in cardFilms
+            include ../../components/CardForm/CardForm
+
+    include ../../components/SuggestionForm/SuggestionForm
+

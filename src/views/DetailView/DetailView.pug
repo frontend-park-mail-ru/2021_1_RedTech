@@ -1,0 +1,20 @@
+block variables
+    -
+        var headerLinks = [
+                    {className: 'homePage', title: 'Главная'},
+                    {className: 'filmPage', title: 'Фильмы'},
+                    {className: 'serialsPage', title: 'Сериалы'},
+                    {className: 'lastPage', title: 'Последнее'}
+                ]
+
+
+block style
+    style
+        include ../../index.css
+
+block header
+    include ../../components/Header/Header
+
+block content
+    include ../../components/DetailForm/DetailForm
+

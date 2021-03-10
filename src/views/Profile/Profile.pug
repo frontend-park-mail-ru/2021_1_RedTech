@@ -1,0 +1,19 @@
+include ../../components/Form/Form.pug
+
+-
+    const inputWrapper = [
+        // {for: "firstName", text: "Имя", type: "text", id: "firstName", placeholder: "Иван", value: ""},
+        // {for: "secondName", text: "Фамилия", type: "text", id: "secondName", placeholder: "Иванов", value: ""},
+        {for: "login", text: "Логин", type: "text", id: "login", placeholder: "ivanchik", value: profileData.login},
+        {for: "email", text: "Почта", type: "email", id: "email", placeholder: "ivanchik@mail.ru", value: profileData.email}
+    ];
+
+    const img = { path: profileData.user_avatar }
+
+div.profile
+    div.profile__profile-content
+        div.profile-content__title-wrapper
+            div.title-wrapper__title Настройки профиля:
+            div.title-wrapper__nickname #{profileData.login}
+        div.profile-content__inputs
+            +form(inputs, buttonName, inputWrapper, img)
