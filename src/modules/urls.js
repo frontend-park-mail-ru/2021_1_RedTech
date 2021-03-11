@@ -5,7 +5,7 @@ export const URLS = {
     },
     api: {
         me: '/me',
-        media: 'http://89.208.198.192:8081/api/media/movie/1',
-        logout: 'http://89.208.198.192:8081/api/logout',
+        media: 'https://Redioteka.com/api/media/movie/1',
+        logout: 'https://Redioteka/api/logout',
     }
 };

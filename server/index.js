@@ -17,7 +17,7 @@ app.get('/products', (req, res, next) => {
 app.use('/favicon.ico', express.static('img/favicon.ico'));
 
 app.get('/templates.js', (req, res) => {
-    res.sendFile(path.resolve(`${__dirname}/../templates.js`));
+    res.sendFile(path.resolve(`${__dirname}/templates.js`));
 });
 
 app.get('/*', (req, res) => {

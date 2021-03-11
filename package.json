@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "tmpl": "puglatizer -d src/views -o templates.js",
+    "tmpl": "puglatizer -d src/views -o src/templates.js",
     "prestart": "npm run tmpl",
     "lint": "eslint src/",
     "lint-fix": "eslint --fix src/",
