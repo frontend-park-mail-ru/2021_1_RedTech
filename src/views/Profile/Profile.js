@@ -30,6 +30,7 @@ export class ProfileView {
             console.log(parsedJson);
             params.login = parsedJson.username;
             params.email = parsedJson.email;
+            console.log(parsedJson.user_avatar)
 
             if (parsedJson.user_avatar) {
                 params.user_avatar = parsedJson.user_avatar;
