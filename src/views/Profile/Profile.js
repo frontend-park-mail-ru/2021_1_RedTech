@@ -97,6 +97,22 @@ export class ProfileView {
                         }
 
 
+                        let params = {
+                            url: URLS.api.profile + localStorage.getItem('ID'),
+                            method: 'PATCH',
+                            credentials: 'include',
+                            body: {
+                                email: document.getElementById('email').value,
+                                username: document.getElementById('login').value
+                            }
+                        };
+
+                        asyncGetUsing(params).then(({status, parsedJson}) => {
+                            console.log(status)
+                            console.log(parsedJson)
+                        });
+
+
                         nick.textContent = document.getElementById('login').value;
                         button.textContent = 'Редактировать';
 
