@@ -1,6 +1,6 @@
 import { APPLICATION, USER } from '../../main.js';
 import { isValidForm } from '../../utils/isValidForm.js';
-import { asyncGetUsing } from '../../modules/http.js';
+import {asyncGetUsing, asyncGetUsingAvatar} from '../../modules/http.js';
 import { URLS } from '../../modules/urls.js';
 
 /** Class representing a login page view. */
@@ -84,12 +84,10 @@ export class ProfileView {
                             };
 
                             console.log(params.url);
-                            asyncGetUsing(params).then(({status, parsedJson}) => {
+                            asyncGetUsingAvatar(params).then(({status, parsedJson}) => {
                                 let params = {};
                                 console.log(status);
                                 console.log(parsedJson);
-                                params.login = parsedJson.username;
-                                params.email = parsedJson.email;
                             });
                         }
 
