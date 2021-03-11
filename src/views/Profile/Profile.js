@@ -1,6 +1,7 @@
 import { APPLICATION, USER } from '../../main.js';
 import { isValidForm } from '../../utils/isValidForm.js';
 import { asyncGetUsing } from '../../modules/http.js';
+import { URLS } from '../../modules/urls.js';
 
 /** Class representing a login page view. */
 export class ProfileView {
@@ -17,7 +18,7 @@ export class ProfileView {
 	 */
     render() {
         const params = {
-            url: 'http://89.208.198.192:8081/api/users/' + localStorage.getItem('ID'),
+            url: URLS.api.profile + localStorage.getItem('ID'),
             method: 'GET',
             credentials: 'include'
         };

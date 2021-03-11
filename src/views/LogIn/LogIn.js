@@ -4,6 +4,7 @@ import { SignUpView } from '../SignUp/SignUp.js';
 import { isValidForm } from '../../utils/isValidForm.js';
 import { asyncGetUsing } from '../../modules/http.js';
 import { HomeComponent } from '../HomeView/HomeView.js';
+import { URLS } from '../../modules/urls.js';
 
 /** Class representing a login page view. */
 export class LogInView {
@@ -31,7 +32,7 @@ export class LogInView {
 
             if (isValid) {
                 let params = {
-                    url: 'http://89.208.198.192:8081/api/users/login',
+                    url: URLS.api.login,
                     method: 'POST',
                     credentials: 'include',
                     body: {
