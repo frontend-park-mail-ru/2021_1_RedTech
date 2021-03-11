@@ -69,6 +69,31 @@ export class ProfileView {
                     if (isValid) {
                         const [nick] = document.getElementsByClassName('title-wrapper__nickname');
 
+                        const avatarInput = document.getElementById('file');
+
+                        if (avatarInput.value) {
+                            const avatar = avatarInput.files[0];
+                            const formPut = new FormData();
+                            formPut.append('user_avatar', avatar);
+
+                            const params = {
+                                url: URLS.api.profile + localStorage.getItem('ID') + "/avatar",
+                                method: 'PUT',
+                                credentials: 'include',
+                                body: formPut
+                            };
+
+                            console.log(params.url);
+                            asyncGetUsing(params).then(({status, parsedJson}) => {
+                                let params = {};
+                                console.log(status);
+                                console.log(parsedJson);
+                                params.login = parsedJson.username;
+                                params.email = parsedJson.email;
+                            });
+                        }
+
+
                         nick.textContent = document.getElementById('login').value;
                         button.textContent = 'Редактировать';
 
