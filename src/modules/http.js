@@ -3,6 +3,7 @@ export async function asyncGetUsing(params = {}) {
         method: params.method,
         body: JSON.stringify(params.body),
         mode: 'cors',
+        credentials: 'include',
     });
 
     const parsedJson = await response.json();
