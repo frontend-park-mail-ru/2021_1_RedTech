@@ -74,7 +74,7 @@ export class ProfileView {
                         if (avatarInput.value) {
                             const avatar = avatarInput.files[0];
                             const formPut = new FormData();
-                            formPut.append('user_avatar', avatar);
+                            formPut.append('avatar', avatar);
 
                             const params = {
                                 url: URLS.api.profile + localStorage.getItem('ID') + "/avatar",
