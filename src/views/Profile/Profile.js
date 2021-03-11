@@ -1,6 +1,7 @@
 import { APPLICATION, USER } from '../../main.js';
 import { isValidForm } from '../../utils/isValidForm.js';
 import { asyncGetUsing } from '../../modules/http.js';
+import { URLS } from '../../modules/urls.js';
 
 /** Class representing a login page view. */
 export class ProfileView {
@@ -17,7 +18,7 @@ export class ProfileView {
 	 */
     render() {
         const params = {
-            url: 'http://89.208.198.192:8081/api/users/' + localStorage.getItem('ID'),
+            url: URLS.api.profile + localStorage.getItem('ID'),
             method: 'GET',
             credentials: 'include'
         };
@@ -67,6 +68,31 @@ export class ProfileView {
                     const isValid = isValidForm(form);
                     if (isValid) {
                         const [nick] = document.getElementsByClassName('title-wrapper__nickname');
+
+                        const avatarInput = document.getElementById('file');
+
+                        if (avatarInput.value) {
+                            const avatar = avatarInput.files[0];
+                            const formPut = new FormData();
+                            formPut.append('user_avatar', avatar);
+
+                            const params = {
+                                url: URLS.api.profile + localStorage.getItem('ID') + "/avatar",
+                                method: 'PUT',
+                                credentials: 'include',
+                                body: formPut
+                            };
+
+                            console.log(params.url);
+                            asyncGetUsing(params).then(({status, parsedJson}) => {
+                                let params = {};
+                                console.log(status);
+                                console.log(parsedJson);
+                                params.login = parsedJson.username;
+                                params.email = parsedJson.email;
+                            });
+                        }
+
 
                         nick.textContent = document.getElementById('login').value;
                         button.textContent = 'Редактировать';
