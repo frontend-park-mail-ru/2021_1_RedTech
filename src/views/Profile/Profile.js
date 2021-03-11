@@ -88,7 +88,7 @@ export class ProfileView {
 
                                 if (status === 200) {
                                     const ava = document.getElementById('avatar');
-                                    ava?.src = parsedJson.user_avatar;
+                                    ava.src = parsedJson.user_avatar;
                                 }
                                 console.log(status);
                                 console.log(parsedJson);
