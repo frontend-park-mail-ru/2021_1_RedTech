@@ -1,3 +1,5 @@
+extends ../../idx
+
 block variables
     -
         var headerLinks = [
@@ -61,17 +63,31 @@ block variables
             {src: '../../assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Бесплатно'},
             ]
 
+block style
+    include ../../index.css
 
 block header
     include ../../components/Header/header
 
 block content
-    div.item__page-title
-        h1  Фильмы недели
+    div.item__page-title Фильмы недели
+
     div.container
         each i in cardFilms
             include ../../components/CardForm/CardForm
 
-    div.item__page-title
-        h1  Рекомендуемые фильмы
-    include ../../components/SuggestionForm/SuggestionForm
+
+    include ../../components/SuggestionBar/SuggestionBar
+
+    div.item__page-title Рекомендуемые фильмы
+
+    div.suggestion-film__list
+        each i in suggestionsFilms
+            include ../../components/SuggestionForm/SuggestionForm
+
+
+    div.item__page-title Рекомендуемые сериалы
+
+    div.suggestion-film__list
+        each i in suggestionsFilms
+            include ../../components/SuggestionForm/SuggestionForm

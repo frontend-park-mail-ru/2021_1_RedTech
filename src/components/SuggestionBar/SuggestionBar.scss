@@ -1,0 +1,55 @@
+@import '../../css/consts';
+
+.item__suggestion-bar {
+  max-width: 1700px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px 30px 15px 30px;
+  //padding-top: 30px;
+  //padding-left: 30px;
+  //padding-right: 30px;
+  display: flex;
+
+  height: 112px;
+
+  .item__suggestion-button {
+    width: 50%;
+    margin: 0 25px;
+    background-color: $suggestion-button-color;
+    text-align: center;
+    border-radius: 16px;
+    cursor: pointer;
+
+    transition: 0.2s ease-in;
+
+    .items__container {
+      padding: 18px 0;
+      display: flex;
+      vertical-align: middle;
+      align-self: center;
+      text-align: center;
+      justify-content: center;
+
+      .item__image {
+        width: 48px;
+        height: 48px;
+      }
+
+      .item__title {
+        padding: 12px 10px;
+        height: 20px;
+        font-size: 18px;
+        font-weight: 500;
+        vertical-align: middle;
+        text-align: center;
+      }
+    }
+  }
+
+  .item__suggestion-button:hover {
+    background-color: $suggestion-button-color-hovered;
+    transform: scale(1.024);
+  }
+}
+
+

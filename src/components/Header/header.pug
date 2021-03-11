@@ -1,5 +1,3 @@
-- var isAuthenticated = true
-
 -
     var headerIconsUnlogined = [
         {href:'#', src: '../../assets/search.png', alt:''},
@@ -15,15 +13,9 @@ header
             li
                 a(href= "#")= i.title
 
-    if isAuthenticated
-        div.header-form__profile
-            each i in headerIcons
-                a(href= i.href ).header-form__profile__link
-                    img(src= i.src alt= i.alt)
-    else
-        div.header-form__profile
-            each i in headerIconsUnlogined
-                a(href= i.href ).header-form__profile__link
-                    img(src= i.src alt= i.alt)
+    div.header-form__profile
+        each i in headerIcons
+            a(href= i.href ).header-form__profile__link
+                img(src= i.src alt= i.alt)
 
 include ../Underline/Underline

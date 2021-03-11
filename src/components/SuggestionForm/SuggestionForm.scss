@@ -4,24 +4,36 @@
   gap: 1em;
 
   padding: 20px 30px 20px 30px;
+}
+
+.suggestion-film__list {
+  display: flex;
+  overflow-x: auto;
+  height: 356px;
+  gap: 1em;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  .item__internal:first-child {
+    margin-left: 30px;
+  }
 
   .item__internal {
-    background-color: white;
-    width: 100px;
+    margin-left: 20px;
+    width: 180px;
     background: none;
     display: grid;
+    transition: all 0.15s ease-in-out;
 
     .item__suggestion__image {
       object-fit: contain;
       border-radius: 12px;
       cursor: pointer;
-
-      transition: all 0.15s ease-in-out;
     }
+  }
 
-    .item__suggestion__image:hover {
-      transform: scale(1.02);
-    }
+  .item__internal:hover {
+    transform: translateY(-5px) scale(1.02);
   }
 
   .item__suggestion__title {
@@ -45,3 +57,4 @@
     color: $status-color;
   }
 }
+

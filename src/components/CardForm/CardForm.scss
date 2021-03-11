@@ -1,16 +1,22 @@
 @import '../../css/consts';
 
+.item__film-card:first-child {
+  margin-left: 30px;
+}
+
 .item__film-card {
-  margin: 10px 30px;
+  margin: 15px;
   background-color: $card-form-background-color;
-  padding: 20px 30px 20px 10px;
+  padding: 30px;
   border-radius: 12px;
 
-  width: 500px;
+  width: 600px;
 
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+
+  transition: 0.25s ease-in;
 
   .item__image {
     width: 220px;
@@ -20,7 +26,7 @@
 
     img {
       object-fit: contain;
-      border-radius: 12px;
+      border-radius: 20px;
       width: 220px;
       height: 300px;
       cursor: pointer;
@@ -59,8 +65,49 @@
 
     .item__film-card__buttons {
       margin-block-start: auto;
+      display: flex;
+      justify-content: start;
+
+      .item__button-title {
+        text-align: center;
+        border: 2px solid #fff; /* Белая рамка */
+        border-radius: 10px;
+        padding: 6px;
+        font-size: 14px;
+        vertical-align: middle;
+        cursor: pointer;
+
+        transition: 0.24s ease-in-out;
+      }
+
+      .item__button-title:hover {
+        opacity: 0.75;
+        transform: translateY(-4px);
+      }
+
+      .item__button-img {
+        padding-left: 8px;
+        cursor: pointer;
+
+        transition: 0.24s ease-in-out;
+
+        img {
+          width: 38px;
+          height: 38px;
+        }
+      }
+
+      .item__button-img:hover {
+        opacity: 0.75;
+        transform: translateY(-4px);
+      }
     }
   }
+}
+
+.item__film-card:hover {
+  background-color: $card-form-background-color-hovered;
+  transform: scale(1.04);
 }
 
 
