@@ -85,11 +85,10 @@ export class ProfileView {
 
                             console.log(params.url);
                             asyncGetUsingAvatar(params).then(({status, parsedJson}) => {
-                                let params = {};
 
                                 if (status === 200) {
-                                    const ava = document.getElementById("avatar");
-                                    ava.src = parsedJson;
+                                    const ava = document.getElementById('avatar');
+                                    ava?.src = parsedJson.user_avatar;
                                 }
                                 console.log(status);
                                 console.log(parsedJson);
