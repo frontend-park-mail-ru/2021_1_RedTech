@@ -42,7 +42,6 @@ export class ProfileView {
                 profileData: params
             }
 
-
             const template = puglatizer.Profile.Profile(this._data);
             APPLICATION.innerHTML = template;
             const [form] = document.getElementsByTagName('form');
@@ -87,6 +86,11 @@ export class ProfileView {
                             console.log(params.url);
                             asyncGetUsingAvatar(params).then(({status, parsedJson}) => {
                                 let params = {};
+
+                                if (status === 200) {
+                                    const ava = document.getElementById("avatar");
+                                    ava.src = parsedJson;
+                                }
                                 console.log(status);
                                 console.log(parsedJson);
                             });
