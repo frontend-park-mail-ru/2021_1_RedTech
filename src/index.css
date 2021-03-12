@@ -111,7 +111,7 @@ header .header-form__profile .header-form__profile__link {
   border: 2px solid #fff;
   /* Белая рамка */
   border-radius: 10px;
-  padding: 6px;
+  padding: 8px 6px;
   font-size: 14px;
   vertical-align: middle;
   cursor: pointer;

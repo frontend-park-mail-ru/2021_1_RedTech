@@ -35,20 +35,6 @@ block variables
                 stars: '* * * * *',
                 description: 'Очень странные дела — американский научно-фантастический сериал, созданный братьями Даффер для сети потокового мультимедиа Redioteka',
             },
-            {
-                src: '../../assets/st.jpeg',
-                alt: '',
-                title: 'Очень странные дела',
-                stars: '* * * * *',
-                description: 'Очень странные дела — американский научно-фантастический сериал, созданный братьями Даффер для сети потокового мультимедиа Redioteka',
-            },
-            {
-                src: '../../assets/st.jpeg',
-                alt: '',
-                title: 'Очень странные дела',
-                stars: '* * * * *',
-                description: 'Очень странные дела — американский научно-фантастический сериал, созданный братьями Даффер для сети потокового мультимедиа Redioteka',
-            },
         ]
 
     -
@@ -74,7 +60,7 @@ block content
 
     div.container
         each i in cardFilms
-            include ../../components/CardForm/CardForm
+            include ../../components/FilmCard/FilmCard
 
 
     include ../../components/SuggestionBar/SuggestionBar
@@ -83,11 +69,11 @@ block content
 
     div.suggestion-film__list
         each i in suggestionsFilms
-            include ../../components/SuggestionForm/SuggestionForm
+            include ../../components/SuggestionCard/SuggestionCard
 
 
     div.item__page-title Рекомендуемые сериалы
 
     div.suggestion-film__list
         each i in suggestionsFilms
-            include ../../components/SuggestionForm/SuggestionForm
+            include ../../components/SuggestionCard/SuggestionCard
