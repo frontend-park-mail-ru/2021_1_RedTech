@@ -1,8 +1,8 @@
 export class CardFormComponent {
     constructor({
-                    parent = document.body,
-                    data = [],
-                } = {}) {
+        parent = document.body,
+        data = [],
+    } = {}) {
 
         this._parent = parent;
         this._data = data;
@@ -14,4 +14,3 @@ export class CardFormComponent {
         this._parent.innerHTML = template;
     }
 }
-

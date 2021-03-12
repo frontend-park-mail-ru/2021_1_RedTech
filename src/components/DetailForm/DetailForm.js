@@ -14,4 +14,3 @@ export class DetailFormComponent {
         this._parent.innerHTML = template;
     }
 }
-
