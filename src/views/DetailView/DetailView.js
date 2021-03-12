@@ -1,18 +1,23 @@
-import {APPLICATION, detailPage} from '../../main.js';
-import { LogInView } from '../LogIn/LogIn.js';
-import { ProfileView } from '../Profile/Profile.js';
+import {APPLICATION, homePage} from '../../main.js';
+import {SignUpView} from '../SignUp/SignUp.js';
+import {ProfileView} from '../Profile/Profile.js';
+import {LogInView} from '../LogIn/LogIn.js';
+// import {HomeComponent} from '../HomeView/HomeView.js';
 
-export class HomeComponent {
+
+export class DetailComponent {
     constructor({
         parent = document.body,
         data = [],
     } = {}) {
+
         this._parent = parent;
         this._data = data;
     }
 
     render() {
-        const template = puglatizer.HomeView.HomeView(this._data);
+        const template = puglatizer.DetailView.DetailView(this._data);
+        //console.log(template())
         this._parent.innerHTML = template;
 
         const profileLink = document.getElementById('profilePage');
@@ -35,6 +40,14 @@ export class HomeComponent {
             logInView.render();
         });
 
+        const [aMain] = document.getElementsByClassName('homePage');
+        aMain?.addEventListener(('click'), event => {
+            event.preventDefault();
+
+            APPLICATION.innerHTML = '';
+            homePage();
+        });
+
         const logoutPage = document.getElementById('logoutPage');
         logoutPage?.addEventListener(('click'), event => {
             event.preventDefault();
@@ -46,12 +59,14 @@ export class HomeComponent {
             logInView.render();
         });
 
-        const [linkFilm] = document.getElementsByClassName('film_link_1');
-        linkFilm?.addEventListener(('click'), event => {
+        const [aLogout] = document.getElementsByClassName('logoutPage');
+        aLogout?.addEventListener(('click'), event => {
             event.preventDefault();
 
             APPLICATION.innerHTML = '';
-            detailPage();
+            homePage();
         });
     }
 }
+
+

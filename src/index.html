@@ -2,14 +2,15 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Redioteka</title>
-    <link rel="stylesheet" type="text/css" href="css/main.css" >
-    <link rel="stylesheet" type="text/css" href="css/signup_login.css" />
-    <script src="templates.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
     <div id="app"></div>
+    <script defer type="module" src="modules/urls.js"></script>
+    <script defer type="module" src="modules/http.js"></script>
+    <script src="../templates.js"></script>
     <script type="module" src="main.js"></script>
 </body>
 </html>
-

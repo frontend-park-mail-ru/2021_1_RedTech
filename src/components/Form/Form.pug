@@ -1,0 +1,29 @@
+include ../Input/Input.pug
+
+mixin form(inputs, buttonName, inputWrapper, img)
+    form(novalidate)
+        if !inputWrapper
+            div.form_content__inputs
+                div.inputs__input-wrapper
+                    for input in inputs
+                        div.inputs__input-wrapper
+                            +customInput(input.type, input.class, input.placeholder, input.id)
+                            div.error(id = input.id+'Error')
+            button.form-content__button #{buttonName}
+        else
+            for wrapper in inputWrapper
+                div.form__input-wrapper
+                    label(for=wrapper.for class="input-wrapper__label") #{wrapper.text}
+                    div.input-wrapper__input-with-error
+                        +customInput(wrapper.type, "input-wrapper__input", wrapper.placeholder, wrapper.id, wrapper.value, true)
+                        div.error(id = wrapper.id+'Error')
+            div.form__input-wrapper
+                div.input-wrapper__input-avatar
+                    div.input-wrapper__label Аватар
+                    div.input-avatar__input-wrapper
+                        img(src=img.path class="input-wrapper__img" id="avatar" width="120px" height="120px")
+                        input(type="file" id="file" class="input-wrapper__input" accept="image/*" disabled)
+                        label(for="file" class="input-wrapper__input input-wrapper__input_disabled") Выбрать...
+            div.form__input-wrapper
+                div.input-wrapper__label
+                button.input-wrapper__button.input-wrapper__input Редактировать

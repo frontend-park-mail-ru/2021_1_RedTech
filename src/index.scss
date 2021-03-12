@@ -3,7 +3,7 @@
 @import 'components/SuggestionBar/SuggestionBar';
 @import 'components/SuggestionCard/SuggestionCard';
 @import 'components/Underline/Underline';
-//@import 'components/DetailForm/DetailForm';
+@import 'components/DetailForm/DetailForm';
 @import 'css/consts';
 
 @font-face {
@@ -36,7 +36,6 @@ head, body {
 
   cursor: pointer;
   transition: 0.15s ease-in;
-
 }
 
 .item__button:hover {
@@ -45,27 +44,12 @@ head, body {
   color: $text-hover-color;
 }
 
-button:hover {
-  background-color: $button-background-color;
-  color: $text-hover-color;
-}
-
-button:active {
-  background-color: $button-background-color-hovered;
-}
-
-button:focus {
-  outline: none;
-}
-
-button[disabled] {
-  opacity: 0.48;
-  pointer-events: none;
-  user-select: none;
-}
-
 a:hover {
   opacity: 0.84;
+}
+
+a {
+  text-decoration: none;
 }
 
 .error {
