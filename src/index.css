@@ -57,7 +57,7 @@ header .header-form__profile .header-form__profile__link {
   background-color: #0A0C0E;
   padding: 30px;
   border-radius: 12px;
-  width: 600px;
+  width: 520px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
