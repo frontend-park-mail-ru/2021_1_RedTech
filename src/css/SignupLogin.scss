@@ -1,3 +1,5 @@
+@import 'Consts';
+
 .login-signup {
   width: 100%;
   min-height: 100vh;
@@ -35,7 +37,7 @@
 }
 
 .form__form-content {
-  border: 1px solid var(--border-color);
+  border: 1px solid $border-color;
   border-radius: 4px;
   max-width: 100%;
   padding: 24px;
@@ -57,21 +59,21 @@
 .input-wrapper__input {
   box-sizing: border-box;
   width: 100%;
-  background-color: var(--background-color);
-  border: 1px solid var(--border-color);
+  background-color: $background-color;
+  border: 1px solid $border-color;
   border-radius: 4px;
   padding: 12px 16px;
-  color: var(--font-color);
+  color: $font-color;
   font-size: 20px;
   font-family: 'MontserratMedium', sans-serif;
 }
 
 .input-wrapper__input_error {
-  border: 1px solid var(--alert-color);
+  border: 1px solid $alert-color;
 }
 
 .input-wrapper__input_disabled {
-  color: var(--font-color-disabled);
+  color: $font-color-disabled;
 }
 
 .form-content__hint {
@@ -82,8 +84,8 @@
 }
 
 .form-content__button {
-  background-color: var(--btn-background-color);
-  color: var(--btn-font-color);
+  background-color: $btn-background-color;
+  color: $btn-font-color;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,7 +100,7 @@
 }
 
 .form-content__button:hover {
-  background-color: var(--btn-hover-color);
+  background-color: $btn-hover-color;
 }
 
 .form-content__have-acc {
@@ -107,7 +109,7 @@
 
 .have-acc__link {
   margin-left: 2px;
-  color: var(--alert-color);
+  color: $alert-color;
 }
 
 .networks__title {
@@ -123,7 +125,7 @@
 
 .networks__button {
   border: none;
-  background-color: var(--background-color);
+  background-color: $background-color;
   padding: 0;
   cursor: pointer;
 }
@@ -139,5 +141,5 @@
 
 .input-wrapper__input:focus {
   outline: none;
-  box-shadow: 0 0 12px var(--input-shadow);
+  box-shadow: 0 0 12px $input-shadow;
 }

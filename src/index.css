@@ -391,7 +391,7 @@ header .header-form__profile .header-form__profile__link {
 }
 
 .form__form-content {
-  border: 1px solid var(--border-color);
+  border: 1px solid #a2a2a2;
   border-radius: 4px;
   max-width: 100%;
   padding: 24px;
@@ -413,21 +413,21 @@ header .header-form__profile .header-form__profile__link {
 .input-wrapper__input {
   box-sizing: border-box;
   width: 100%;
-  background-color: var(--background-color);
-  border: 1px solid var(--border-color);
+  background-color: #151B20;
+  border: 1px solid #a2a2a2;
   border-radius: 4px;
   padding: 12px 16px;
-  color: var(--font-color);
+  color: #eaeaea;
   font-size: 20px;
   font-family: "MontserratMedium", sans-serif;
 }
 
 .input-wrapper__input_error {
-  border: 1px solid var(--alert-color);
+  border: 1px solid #ec0c0c;
 }
 
 .input-wrapper__input_disabled {
-  color: var(--font-color-disabled);
+  color: #808080;
 }
 
 .form-content__hint {
@@ -438,8 +438,8 @@ header .header-form__profile .header-form__profile__link {
 }
 
 .form-content__button {
-  background-color: var(--btn-background-color);
-  color: var(--btn-font-color);
+  background-color: #1e252b;
+  color: #9b9b9b;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -454,7 +454,7 @@ header .header-form__profile .header-form__profile__link {
 }
 
 .form-content__button:hover {
-  background-color: var(--btn-hover-color);
+  background-color: #0a0d0e;
 }
 
 .form-content__have-acc {
@@ -463,7 +463,7 @@ header .header-form__profile .header-form__profile__link {
 
 .have-acc__link {
   margin-left: 2px;
-  color: var(--alert-color);
+  color: #ec0c0c;
 }
 
 .networks__title {
@@ -479,7 +479,7 @@ header .header-form__profile .header-form__profile__link {
 
 .networks__button {
   border: none;
-  background-color: var(--background-color);
+  background-color: #151B20;
   padding: 0;
   cursor: pointer;
 }
@@ -495,7 +495,7 @@ header .header-form__profile .header-form__profile__link {
 
 .input-wrapper__input:focus {
   outline: none;
-  box-shadow: 0 0 12px var(--input-shadow);
+  box-shadow: 0 0 12px #b0b0b0;
 }
 
 .profile {
@@ -559,7 +559,7 @@ header .header-form__profile .header-form__profile__link {
 
 #file + label {
   padding: 12px 20px 12px;
-  border: 1px solid var(--border-color);
+  border: 1px solid #a2a2a2;
   border-radius: 4px;
   cursor: pointer;
   width: auto;
@@ -584,7 +584,7 @@ header .header-form__profile .header-form__profile__link {
 }
 
 .input-wrapper__button:hover {
-  background-color: var(--btn-hover-color);
+  background-color: #0a0d0e;
 }
 
 .input-wrapper__input-with-error {
@@ -608,18 +608,6 @@ html, body {
   margin: 0;
   padding: 0;
   border: 0;
-}
-
-:root {
-  --background-color: 151B20;
-  --font-color: #eaeaea;
-  --font-color-disabled: #808080;
-  --border-color: #a2a2a2;
-  --alert-color: #ec0c0c;
-  --btn-background-color: #1e252b;
-  --btn-font-color: #9b9b9b;
-  --btn-hover-color: #0a0d0e;
-  --input-shadow: #b0b0b0;
 }
 
 .container {
@@ -659,7 +647,7 @@ a.main-page__href {
 
 .error {
   margin-top: 4px;
-  color: var(--alert-color);
+  color: #ec0c0c;
   overflow: hidden;
   font-size: 12px;
 }

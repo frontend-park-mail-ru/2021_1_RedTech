@@ -1,3 +1,5 @@
+@import 'Consts';
+
 .profile {
   width: 100%;
   min-height: 100vh;
@@ -59,7 +61,7 @@
 
 #file + label {
   padding: 12px 20px 12px;
-  border: 1px solid var(--border-color);
+  border: 1px solid $border-color;
   border-radius: 4px;
   cursor: pointer;
   width: auto;
@@ -84,7 +86,7 @@
 }
 
 .input-wrapper__button:hover {
-  background-color: var(--btn-hover-color);
+  background-color: $btn-hover-color;
 }
 
 .input-wrapper__input-with-error {
