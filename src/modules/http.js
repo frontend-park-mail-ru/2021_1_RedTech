@@ -63,7 +63,7 @@ export async function MockGetHomeFilms() {
     film.mainImageSrc = './assets/gravity.jpg';
     film.mediaTitle = 'Гравити фолз';
     film.mediaTag = 'Сериал';
-    film.mediaRank = 'Положительных оценок миллиар бублик с дыркой';
+    film.mediaRank = 'Положительных оценок: 10%';
     film.mediaYear = '2016';
     film.mediaGenres = 'Комедия';
     film.mediaDirector = 'Алекс Хирш';

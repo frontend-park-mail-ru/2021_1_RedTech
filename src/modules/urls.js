@@ -12,4 +12,3 @@ export const URLS = {
         profile: 'https://redioteka.com/api/users/',
     }
 };
-
