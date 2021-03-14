@@ -1,3 +1,5 @@
+@import '../../css/Consts';
+
 $transition-time: 0.25s;
 
 header {
@@ -30,7 +32,7 @@ header {
       display: block;
       text-decoration: none;
       color: white;
-      font-size: 20px;
+      font-size: $header-font-size;
       font-weight: 500;
 
       transition: $transition-time ease;
@@ -55,6 +57,8 @@ header {
       align-items: center;
       max-width: 34px;
       max-height: 34px;
+
+      cursor: pointer;
 
       transition: $transition-time ease;
       color: #b7b7b7;
