@@ -1,3 +1,5 @@
+@import '../../css/consts';
+
 .item__suggestion {
   display: grid;
   grid-template-columns: repeat(auto-fill, 180px);
@@ -40,7 +42,7 @@
     padding-top: 5px;
     padding-left: 10px;
     font-weight: 500;
-    font-size: 18px;
+    font-size: $suggestion-card-title;
     justify-items: left;
 
     > a {
@@ -51,7 +53,7 @@
 
   .item__suggestion__status {
     padding: 5px 0 15px 10px;
-    font-size: 14px;
+    font-size: $suggestion-card-status;
     font-weight: 300;
     justify-items: left;
     color: $status-color;

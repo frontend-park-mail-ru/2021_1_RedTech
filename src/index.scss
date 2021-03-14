@@ -1,10 +1,12 @@
+@import 'css/Consts';
 @import 'components/Header/Header';
 @import 'components/FilmCard/FilmdCard';
 @import 'components/SuggestionBar/SuggestionBar';
 @import 'components/SuggestionCard/SuggestionCard';
 @import 'components/Underline/Underline';
 @import 'components/DetailForm/DetailForm';
-@import 'css/consts';
+@import 'css/SignupLogin';
+@import 'css/Profile';
 
 @font-face {
   font-family: "MontserratMedium";
@@ -13,10 +15,18 @@
   font-weight: normal;
 }
 
-head, body {
+html, body {
   font-family: 'MontserratMedium', sans-serif;
-  background-color: $background-color;
+  height: 100%;
   color: $text-color;
+  background-color: $background-color;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+:root {
+
 }
 
 .container {
@@ -52,8 +62,15 @@ a {
   text-decoration: none;
 }
 
+a.main-page__href {
+  display: block;
+}
+
 .error {
-  color: red;
+  margin-top: 4px;
+  color: $alert-color;
+  overflow: hidden;
+  font-size: 12px;
 }
 
 * {
@@ -62,6 +79,6 @@ a {
 
 .item__page-title {
   font-weight: 600;
-  font-size: 30px;
+  font-size: $page-title;
   margin: 15px 35px 15px 35px;
 }
