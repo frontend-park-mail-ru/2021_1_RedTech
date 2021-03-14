@@ -1,23 +1,23 @@
 const express = require('express');
 const path = require('path');
-const cors = require('cors')
+const cors = require('cors');
 const app = express();
 const port = 3000;
 
 app.use(express.static('src'));
 
-app.use(cors())
+app.use(cors());
 
 app.options('*', cors());
 
 app.get('/products', (req, res, next) => {
-    res.json({msg: 'This is CORS-enabled for  all origins!'})
+    res.json({msg: 'This is CORS-enabled for  all origins!'});
 })
 
 app.use('/favicon.ico', express.static('img/favicon.ico'));
 
 app.get('/templates.js', (req, res) => {
-    res.sendFile(path.resolve(`${__dirname}/../templates.js`));
+    res.sendFile(path.resolve(`${__dirname}/templates.js`));
 });
 
 app.get('/*', (req, res) => {
@@ -26,5 +26,5 @@ app.get('/*', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}!`)
+    console.log(`Example app listening on port ${port}!`);
 });

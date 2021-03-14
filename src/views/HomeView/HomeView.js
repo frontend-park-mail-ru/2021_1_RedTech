@@ -1,15 +1,12 @@
 import {APPLICATION, detailPage} from '../../main.js';
 import { LogInView } from '../LogIn/LogIn.js';
-import {ProfileView} from '../Profile/Profile.js';
-import {URLS} from '../../modules/urls.js';
-import {asyncGetUsing} from '../../modules/http.js';
+import { ProfileView } from '../Profile/Profile.js';
 
 export class HomeComponent {
     constructor({
         parent = document.body,
         data = [],
     } = {}) {
-
         this._parent = parent;
         this._data = data;
     }

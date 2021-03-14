@@ -3,6 +3,7 @@ import { LogInView } from '../LogIn/LogIn.js';
 import { isValidForm } from '../../utils/isValidForm.js';
 import { asyncGetUsing } from '../../modules/http.js';
 import { HomeComponent } from '../HomeView/HomeView.js';
+import { URLS } from '../../modules/urls.js';
 
 /** Class representing a signup page view. */
 export class SignUpView {
@@ -31,7 +32,7 @@ export class SignUpView {
             const isValid = isValidForm(form)
             if (isValid) {
                 let params = {
-                    url: 'http://89.208.198.192:8081/api/users/signup',
+                    url: URLS.api.signup,
                     method: 'POST',
                     credentials: 'include',
                     body: {

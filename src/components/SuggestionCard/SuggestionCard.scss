@@ -1,0 +1,60 @@
+.item__suggestion {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 180px);
+  gap: 1em;
+
+  padding: 20px 30px 20px 30px;
+}
+
+.suggestion-film__list {
+  display: flex;
+  overflow-x: auto;
+  height: 356px;
+  gap: 1em;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  .item__internal:first-child {
+    margin-left: 30px;
+  }
+
+  .item__internal {
+    margin-left: 20px;
+    width: 180px;
+    background: none;
+    display: grid;
+    transition: all 0.15s ease-in-out;
+
+    .item__suggestion__image {
+      object-fit: contain;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+  }
+
+  .item__internal:hover {
+    transform: translateY(-5px) scale(1.02);
+  }
+
+  .item__suggestion__title {
+    padding-top: 5px;
+    padding-left: 10px;
+    font-weight: 500;
+    font-size: 18px;
+    justify-items: left;
+
+    > a {
+      text-decoration: none;
+      color: $title-color;
+    }
+  }
+
+  .item__suggestion__status {
+    padding: 5px 0 15px 10px;
+    font-size: 14px;
+    font-weight: 300;
+    justify-items: left;
+    color: $status-color;
+  }
+}
+

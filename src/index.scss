@@ -1,17 +1,20 @@
 @import 'components/Header/Header';
-@import 'components/CardForm/CardForm';
-@import 'components/SuggestionForm/SuggestionForm';
+@import 'components/FilmCard/FilmdCard';
+@import 'components/SuggestionBar/SuggestionBar';
+@import 'components/SuggestionCard/SuggestionCard';
+@import 'components/Underline/Underline';
 @import 'components/DetailForm/DetailForm';
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import 'css/consts';
 
-$background-color: #101417;
-$text-color: white;
-$button-background-color: #101417;
-$button-active-background-color: #101417;
-$text-hover-color: #d9d9d9;
+@font-face {
+  font-family: "MontserratMedium";
+  src: url("fonts/Montserrat-Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
 
 head, body {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'MontserratMedium', sans-serif;
   background-color: $background-color;
   color: $text-color;
 }
@@ -22,43 +25,31 @@ head, body {
   height: auto;
 }
 
-button {
+.item__button {
   height: 32px;
   font-size: 15px;
   padding: 0 15px;
+  background-color: $button-background-color;
 
   border-radius: 12px;
-  background: none;
   color: $text-color;
 
   cursor: pointer;
+  transition: 0.15s ease-in;
 }
 
-button:hover {
-  background-color: $button-background-color;
+.item__button:hover {
+  transform: translateY(-2px);
+  background-color: $button-background-color-hovered;
   color: $text-hover-color;
 }
 
-button:active {
-  background-color: $button-active-background-color;
-}
-
-button:focus {
-  outline: none;
-}
-
-button[disabled] {
-  opacity: 0.48;
-  pointer-events: none;
-  user-select: none;
+a:hover {
+  opacity: 0.84;
 }
 
 a {
   text-decoration: none;
-}
-
-a:hover {
-  opacity: 0.75;
 }
 
 .error {
@@ -69,8 +60,8 @@ a:hover {
   box-sizing: border-box;
 }
 
-.line-underheader {
-  border: 0;
-  border-top: 2px solid #cdcdcd;
+.item__page-title {
+  font-weight: 600;
+  font-size: 30px;
+  margin: 15px 35px 15px 35px;
 }
-

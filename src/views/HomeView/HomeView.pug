@@ -15,6 +15,7 @@ block variables
                 className: 'film_link_1',
                 title: 'Очень странные дела',
                 stars: '* * * * *',
+                className: 'film_link_1',
                 description: 'Очень странные дела — американский научно-фантастический сериал, созданный братьями Даффер для сети потокового мультимедиа Redioteka',
             },
             {
@@ -23,6 +24,16 @@ block variables
                 className: 'film_link_1',
                 title: 'Очень странные дела',
                 stars: '* * * * *',
+                className: 'film_link_1',
+                description: 'Очень странные дела — американский научно-фантастический сериал, созданный братьями Даффер для сети потокового мультимедиа Redioteka',
+            },
+            {
+                src: '../../assets/st.jpeg',
+                alt: '',
+                className: 'film_link_1',
+                title: 'Очень странные дела',
+                stars: '* * * * *',
+                className: 'film_link_1',
                 description: 'Очень странные дела — американский научно-фантастический сериал, созданный братьями Даффер для сети потокового мультимедиа Redioteka',
             },
         ]
@@ -39,18 +50,28 @@ block variables
             {src: '../../assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Бесплатно'},
             ]
 
-
-block style
-    style
-        include ../../index.css
-
 block header
-    include ../../components/Header/Header
+    include ../../components/Header/header
 
 block content
+    div.item__page-title Фильмы недели
+
     div.container
         each i in cardFilms
-            include ../../components/CardForm/CardForm
+            include ../../components/FilmCard/FilmCard
 
-    include ../../components/SuggestionForm/SuggestionForm
 
+    include ../../components/SuggestionBar/SuggestionBar
+
+    div.item__page-title Рекомендуемые фильмы
+
+    div.suggestion-film__list
+        each i in suggestionsFilms
+            include ../../components/SuggestionCard/SuggestionCard
+
+
+    div.item__page-title Рекомендуемые сериалы
+
+    div.suggestion-film__list
+        each i in suggestionsFilms
+            include ../../components/SuggestionCard/SuggestionCard
