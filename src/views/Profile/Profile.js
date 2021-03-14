@@ -1,6 +1,7 @@
 import { APPLICATION, USER } from '../../main.js';
 import { isValidForm } from '../../utils/isValidForm.js';
-import { asyncGetUsing } from '../../modules/http.js';
+import {asyncGetUsing, asyncGetUsingAvatar} from '../../modules/http.js';
+import { URLS } from '../../modules/urls.js';
 
 /** Class representing a login page view. */
 export class ProfileView {
@@ -17,7 +18,7 @@ export class ProfileView {
 	 */
     render() {
         const params = {
-            url: 'http://89.208.198.192:8081/api/users/' + localStorage.getItem('ID'),
+            url: URLS.api.profile + localStorage.getItem('ID'),
             method: 'GET',
             credentials: 'include'
         };
@@ -29,9 +30,10 @@ export class ProfileView {
             console.log(parsedJson);
             params.login = parsedJson.username;
             params.email = parsedJson.email;
+            console.log(parsedJson.avatar)
 
-            if (parsedJson.user_avatar) {
-                params.user_avatar = parsedJson.user_avatar;
+            if (parsedJson.avatar) {
+                params.user_avatar = parsedJson.avatar;
             } else {
                 params.user_avatar = 'img/user.png';
             }
@@ -39,7 +41,6 @@ export class ProfileView {
             this._data = {
                 profileData: params
             }
-
 
             const template = puglatizer.Profile.Profile(this._data);
             APPLICATION.innerHTML = template;
@@ -68,6 +69,49 @@ export class ProfileView {
                     if (isValid) {
                         const [nick] = document.getElementsByClassName('title-wrapper__nickname');
 
+                        const avatarInput = document.getElementById('file');
+
+                        if (avatarInput.value) {
+                            const avatar = avatarInput.files[0];
+                            const formPut = new FormData();
+                            formPut.append('avatar', avatar);
+
+                            const params = {
+                                url: URLS.api.profile + localStorage.getItem('ID') + "/avatar",
+                                method: 'PUT',
+                                credentials: 'include',
+                                body: formPut
+                            };
+
+                            console.log(params.url);
+                            asyncGetUsingAvatar(params).then(({status, parsedJson}) => {
+
+                                if (status === 200) {
+                                    const ava = document.getElementById('avatar');
+                                    ava.src = parsedJson.user_avatar;
+                                }
+                                console.log(status);
+                                console.log(parsedJson);
+                            });
+                        }
+
+
+                        let params = {
+                            url: URLS.api.profile + localStorage.getItem('ID'),
+                            method: 'PATCH',
+                            credentials: 'include',
+                            body: {
+                                email: document.getElementById('email').value,
+                                username: document.getElementById('login').value
+                            }
+                        };
+
+                        asyncGetUsing(params).then(({status, parsedJson}) => {
+                            console.log(status)
+                            console.log(parsedJson)
+                        });
+
+
                         nick.textContent = document.getElementById('login').value;
                         button.textContent = 'Редактировать';
 
@@ -80,12 +124,9 @@ export class ProfileView {
                                 input.disabled = true;
                             }
                         });
-
-
                     }
                 }
             });
         });
-
     }
 }

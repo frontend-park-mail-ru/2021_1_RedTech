@@ -149,21 +149,6 @@ export function detailPage() {
     });
 }
 
-const menuPage = () => {
-    APPLICATION.innerHTML = '';
-    Object
-        .entries(MENU)
-        .forEach(([menuKey, {text, href}]) => {
-            const menuItem = document.createElement('a');
-            menuItem.className = 'main-page__href';
-            menuItem.href = href;
-            menuItem.textContent = text;
-            menuItem.dataset.section = menuKey;
-            APPLICATION.appendChild(menuItem);
-        })
-    ;
-};
-
 APPLICATION.addEventListener(('click'), event => {
     const { target } = event;
 
