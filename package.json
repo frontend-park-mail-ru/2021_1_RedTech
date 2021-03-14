@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "tmpl": "puglatizer -d src/views -o src/templates.js",
-    "prestart": "npm run tmpl",
+    "tmpl": "puglatizer -d src/views -o src/templates.js && node-sass src/index.scss -o src/",
+    "prestart": "npm run tmpl  ",
     "lint": "eslint src/",
     "lint-fix": "eslint --fix src/",
     "prepare": "husky install"
@@ -17,6 +17,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "node-sass": "^5.0.0",
     "pug": "^3.0.2",
     "puglatizer": "^1.1.9",
     "tmpl": "^1.0.4"
