@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "tmpl": "puglatizer -d src/views -o src/templates.js && node-sass src/index.scss -o src/",
-    "prestart": "npm run tmpl  ",
+    "tmpl": "puglatizer -d src/views -o src/templates.js",
+    "scss": "node-sass src/index.scss -o src/",
+    "prestart": "npm run tmpl && npm run scss",
     "lint": "eslint src/",
     "lint-fix": "eslint --fix src/",
     "prepare": "husky install"
