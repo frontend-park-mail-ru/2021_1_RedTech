@@ -1,0 +1,95 @@
+.profile {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile__profile-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  position: relative;
+  margin: 80px auto auto;
+  width: auto;
+}
+
+.profile-content__title-wrapper {
+  font-size: 36px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 40px;
+}
+
+.title-wrapper__nickname {
+  margin-left: 20px;
+}
+
+.profile-content__inputs {
+  font-size: 24px;
+  width: 100%;
+}
+
+.form__input-wrapper {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.input-wrapper__label {
+  padding-top: 12px;
+  min-width: 100px;
+}
+
+.input-wrapper__input-avatar {
+  display: flex;
+  flex-direction: row;
+}
+
+#file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+#file + label {
+  padding: 12px 20px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  cursor: pointer;
+  width: auto;
+  margin-left: 0;
+}
+
+.input-avatar__input-wrapper {
+  margin-left: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-wrapper__img {
+  align-self: center;
+  margin-bottom: 12px;
+}
+
+.input-wrapper__button {
+  width: auto;
+  margin-left: 32px;
+  cursor: pointer;
+}
+
+.input-wrapper__button:hover {
+  background-color: var(--btn-hover-color);
+}
+
+.input-wrapper__input-with-error {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 32px;
+}
