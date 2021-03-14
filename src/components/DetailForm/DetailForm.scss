@@ -53,8 +53,8 @@ $tag-color: #962f2f;
       font-size: 18px;
       padding-bottom: 15px;
 
-
       .item__type {
+        max-height: 52px;
         flex-direction: column;
         background: $tag-color;
         border-radius: 6px;
@@ -65,6 +65,7 @@ $tag-color: #962f2f;
       }
 
       .item__marks {
+        max-width: 290px;
         background: $tag-color;
         border-radius: 6px;
         margin-left: 10px;
@@ -74,8 +75,6 @@ $tag-color: #962f2f;
         padding: 5px;
       }
     }
-
-
 
     .description__items {
       display: flex;
