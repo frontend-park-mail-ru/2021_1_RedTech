@@ -33,7 +33,7 @@ Redioteka — это стриминговый сервис, позволяющи
 
 ## Демо
 
-[redioteka.com](http://redioteka.com)
+[redioteka.com](https://redioteka.com)
 
 ## API
 
