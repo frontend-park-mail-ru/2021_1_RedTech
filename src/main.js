@@ -148,4 +148,4 @@ APPLICATION.addEventListener(('click'), event => {
     }
 });
 
-homePage();
+detailPage();

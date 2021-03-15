@@ -2,13 +2,16 @@
 div.detail_preview
     div.detail_preview-left
         div.detail-preview__image
-            img(src= filmData.mainImageSrc
-                alt= '')
+            img(src= filmData.mainImageSrc alt= '')
         div.detail_description__buttons
-            button.button__item Play
-            button.button__item Favourite
-            button.button__item Like
-            button.button__item Dislike
+            div.button__item
+                img(src= '../../assets/playDetail.png' alt= '')
+            div.button__item
+                img(src= '../../assets/favourite.png' alt= '')
+            div.button__item
+                img(src= '../../assets/like.png' alt= '')
+            div.button__item
+                img(src= '../../assets/dislike.png' alt= '')
     div.detail_preview-right
         div.detail_preview__title=filmData.mediaTitle
         div.detail_preview__tags

@@ -69,7 +69,7 @@ export async function MockGetHomeFilms() {
     film.mediaDirector = 'Алекс Хирш';
     film.mediaCountry = 'Америка';
     film.mediaActors = 'Мейбл и Дипер Пайнс';
-    film.mediaDescription = 'Описание';
+    film.mediaDescription = 'Описание что-то написано что-то написано что-то написано что-то написано что-то написано что-то написано что-то написано что-то написано что-то написано что-то написано что-то написано что-то написано что-то написано что-то написано ';
     return {
         film
     };
