@@ -1,10 +1,10 @@
-import { asyncGetUsing, MockGetHomeFilms } from './modules/http.js';
+import { asyncGetUsing } from './modules/http.js';
 import { DetailComponent } from './views/DetailView/DetailView.js';
 import { HomeComponent } from './views/HomeView/HomeView.js';
 import { ProfileView } from './views/Profile/Profile.js';
 import { SignUpView } from './views/SignUp/SignUp.js';
 import { LogInView } from './views/LogIn/LogIn.js';
-import { URLS } from './modules/urls.js';
+import { URLS, currentUrl } from './modules/urls.js';
 
 
 export const APPLICATION = document.getElementById('app');
@@ -124,13 +124,32 @@ export function detailPage() {
         ];
     }
 
+    let params = {
+        url: URLS.api.media,
+        method: 'GET',
+    };
 
-    MockGetHomeFilms().then(({film}) => {
+    let film = {};
+
+    asyncGetUsing(params).then(({status, parsedJson}) => {
+        if (status < 300) {
+            film.mainImageSrc = `${currentUrl}${parsedJson.movie_avatar}`;
+            film.mediaTitle = parsedJson.title;
+            film.mediaTag = parsedJson.type;
+            film.mediaRank = `Положительных оценок ${parsedJson.rating}` ?? '';
+            film.mediaYear = 2016;
+            film.mediaGenres = parsedJson.genres ?? '';
+            film.mediaDirector = parsedJson.director ?? '';
+            film.mediaCountry = parsedJson.countries ?? '';
+            film.mediaActors = parsedJson.actors ?? '';
+            film.mediaDescription = parsedJson.description ?? '';
+        }
+    }).then(() => {
         const formComponent = new DetailComponent({
             parent: APPLICATION,
-            data: {
-                filmData: film,
+            data:{
                 headerIcons,
+                filmData: film,
             }
         });
         formComponent.render();

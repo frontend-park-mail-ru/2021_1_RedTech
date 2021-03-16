@@ -10,7 +10,7 @@ export async function asyncGetUsing(params = {}) {
         credentials: 'include',
     });
 
-    const parsedJson = await response.json();
+    const parsedJson = await response.json() ?? {};
 
     return {
         status: response.status,
@@ -56,21 +56,4 @@ export async function getHomeFilms() {
             film.mediaDescription = parsedJson.description ?? '';
         }
     });
-}
-
-export async function MockGetHomeFilms() {
-    let film = {};
-    film.mainImageSrc = './assets/gravity.jpg';
-    film.mediaTitle = 'Гравити фолз';
-    film.mediaTag = 'Сериал';
-    film.mediaRank = 'Положительных оценок: 10%';
-    film.mediaYear = '2016';
-    film.mediaGenres = 'Комедия';
-    film.mediaDirector = 'Алекс Хирш';
-    film.mediaCountry = 'Америка';
-    film.mediaActors = 'Мейбл и Дипер Пайнс';
-    film.mediaDescription = 'Описание что-то написано что-то написано что-то написано что-то написано что-то написано что-то написано что-то написано что-то написано что-то написано что-то написано что-то написано что-то написано что-то написано что-то написано ';
-    return {
-        film
-    };
 }

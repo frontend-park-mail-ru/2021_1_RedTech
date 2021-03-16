@@ -81,7 +81,7 @@
       }
 
       .item__button-title:hover {
-        opacity: 0.75;
+        opacity: $interactive-items-opacity;
       }
 
       .item__button-img {
@@ -97,7 +97,7 @@
       }
 
       .item__button-img:hover {
-        opacity: 0.75;
+        opacity: $interactive-items-opacity;
       }
     }
   }
