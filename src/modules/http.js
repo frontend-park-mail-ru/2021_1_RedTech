@@ -1,4 +1,5 @@
 import { URLS } from './urls.js';
+import { jsonFilmToFilm } from './adapters.js';
 
 export async function asyncGetUsing(params = {}) {
     const response = await fetch(params.url, {
@@ -38,20 +39,9 @@ export async function getHomeFilms() {
         method: 'GET',
     };
 
-    const film = {};
-
     asyncGetUsing(params).then(({status, parsedJson}) => {
         if (status < 300) {
-            film.mainImageSrc = './assets/gravity.jpg';
-            film.mediaTitle = parsedJson.title;
-            film.mediaTag = 'Сериал';
-            film.mediaRank = 'Положительных оценок ' + `${parsedJson.rating}` ?? '';
-            film.mediaYear = 2016;
-            film.mediaGenres = parsedJson.genres ?? '';
-            film.mediaDirector = 'Алекс Хирш';
-            film.mediaCountry = parsedJson.countries ?? '';
-            film.mediaActors = parsedJson.actors ?? '';
-            film.mediaDescription = parsedJson.description ?? '';
+            jsonFilmToFilm(parsedJson);
         }
     });
 }

@@ -5,6 +5,7 @@ import {ProfileView} from './views/Profile/Profile.js';
 import {SignUpView} from './views/SignUp/SignUp.js';
 import {LogInView} from './views/LogIn/LogIn.js';
 import {currentUrl, URLS} from './modules/urls.js';
+import { jsonFilmToFilm } from './modules/adapters.js';
 
 export const APPLICATION = document.getElementById('app');
 export const USER = {
@@ -69,18 +70,7 @@ const MENU = {
     }
 };
 
-const jsonFilmToFilm = (jsonFilm) => {
-    const filmKeys = ['title', 'type', 'year', 'genres', 'director', 'countries', 'actors', 'description'];
-    const film = {
-        movieAvatar: `${currentUrl}${jsonFilm.movie_avatar}`,
-        rating: `Положительных оценок ${jsonFilm.rating ?? ''}`,
-    };
 
-    filmKeys.forEach((value) => {
-        film[value] = jsonFilm[value];
-    });
-    return film;
-};
 
 /**
  * Render home page with all recomended content.
@@ -136,7 +126,7 @@ export function detailPage() {
         ];
     }
 
-    let params = {
+    const params = {
         url: URLS.api.media,
         method: 'GET',
     };
