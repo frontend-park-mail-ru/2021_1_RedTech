@@ -1,10 +1,10 @@
-import { asyncGetUsing } from './modules/http.js';
-import { DetailComponent } from './views/DetailView/DetailView.js';
-import { HomeComponent } from './views/HomeView/HomeView.js';
-import { ProfileView } from './views/Profile/Profile.js';
-import { SignUpView } from './views/SignUp/SignUp.js';
-import { LogInView } from './views/LogIn/LogIn.js';
-import { URLS, currentUrl } from './modules/urls.js';
+import {asyncGetUsing} from './modules/http.js';
+import {DetailComponent} from './views/DetailView/DetailView.js';
+import {HomeComponent} from './views/HomeView/HomeView.js';
+import {ProfileView} from './views/Profile/Profile.js';
+import {SignUpView} from './views/SignUp/SignUp.js';
+import {LogInView} from './views/LogIn/LogIn.js';
+import {currentUrl, URLS} from './modules/urls.js';
 
 
 export const APPLICATION = document.getElementById('app');
@@ -70,6 +70,19 @@ const MENU = {
     }
 };
 
+const jsonFilmToFilm = (jsonFilm) => {
+    const filmConsts = ['title', 'type', 'year', 'genres', 'director', 'countries', 'actors', 'description'];
+    const film = {
+        movie_avatar: `${currentUrl}${jsonFilm.movie_avatar}`,
+        rating: `Положительных оценок ${jsonFilm.rating}` ?? '',
+    };
+
+    filmConsts.forEach((value) => {
+        film[value] = jsonFilm[value];
+    });
+    return film;
+};
+
 /**
  * Render home page with all recomended content.
  */
@@ -133,16 +146,7 @@ export function detailPage() {
 
     asyncGetUsing(params).then(({status, parsedJson}) => {
         if (status < 300) {
-            film.mainImageSrc = `${currentUrl}${parsedJson.movie_avatar}`;
-            film.mediaTitle = parsedJson.title;
-            film.mediaTag = parsedJson.type;
-            film.mediaRank = `Положительных оценок ${parsedJson.rating}` ?? '';
-            film.mediaYear = 2016;
-            film.mediaGenres = parsedJson.genres ?? '';
-            film.mediaDirector = parsedJson.director ?? '';
-            film.mediaCountry = parsedJson.countries ?? '';
-            film.mediaActors = parsedJson.actors ?? '';
-            film.mediaDescription = parsedJson.description ?? '';
+            film = jsonFilmToFilm(parsedJson);
         }
     }).then(() => {
         const formComponent = new DetailComponent({
