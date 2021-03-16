@@ -1,6 +1,4 @@
-import {DetailComponent} from '../views/DetailView/DetailView.js';
-import {APPLICATION} from '../main.js';
-import {URLS} from './urls.js';
+import { URLS } from './urls.js';
 
 export async function asyncGetUsing(params = {}) {
     const response = await fetch(params.url, {
@@ -35,12 +33,12 @@ export async function asyncGetUsingAvatar(params = {}) {
 }
 
 export async function getHomeFilms() {
-    let params = {
+    const params = {
         url: URLS.api.media,
         method: 'GET',
     };
 
-    let film = {};
+    const film = {};
 
     asyncGetUsing(params).then(({status, parsedJson}) => {
         if (status < 300) {
