@@ -6,7 +6,6 @@ import {SignUpView} from './views/SignUp/SignUp.js';
 import {LogInView} from './views/LogIn/LogIn.js';
 import {currentUrl, URLS} from './modules/urls.js';
 
-
 export const APPLICATION = document.getElementById('app');
 export const USER = {
     ID: 1,
@@ -71,13 +70,13 @@ const MENU = {
 };
 
 const jsonFilmToFilm = (jsonFilm) => {
-    const filmConsts = ['title', 'type', 'year', 'genres', 'director', 'countries', 'actors', 'description'];
+    const filmKeys = ['title', 'type', 'year', 'genres', 'director', 'countries', 'actors', 'description'];
     const film = {
-        movie_avatar: `${currentUrl}${jsonFilm.movie_avatar}`,
-        rating: `Положительных оценок ${jsonFilm.rating}` ?? '',
+        movieAvatar: `${currentUrl}${jsonFilm.movie_avatar}`,
+        rating: `Положительных оценок ${jsonFilm.rating ?? ''}`,
     };
 
-    filmConsts.forEach((value) => {
+    filmKeys.forEach((value) => {
         film[value] = jsonFilm[value];
     });
     return film;
@@ -96,13 +95,13 @@ export function homePage() {
             {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
             {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
             {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
-        ]
+        ];
     } else {
         headerIcons = [
             {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
             {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
             {id: 'loginPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
-        ]
+        ];
     }
 
     const formComponent = new HomeComponent({

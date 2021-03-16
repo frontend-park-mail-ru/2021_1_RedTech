@@ -1,6 +1,6 @@
 const localUrl = 'http://localhost:8081';
 const deployUrl = 'https://redioteka';
-export let currentUrl = localUrl;
+export let currentUrl = deployUrl;
 
 export const URLS = {
     pages: {
@@ -16,4 +16,3 @@ export const URLS = {
         profile: `${localUrl}/api/users/`,
     }
 };
-
