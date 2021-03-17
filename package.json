@@ -7,7 +7,7 @@
     "start": "node server",
     "tmpl": "puglatizer -d src/views -o src/templates.js",
     "scss": "node-sass src/index.scss -o src/",
-    "prestart": "npm run tmpl && npm run scss",
+    "prestart": "npm run scss && npm run tmpl",
     "lint": "eslint src/",
     "lint-fix": "eslint --fix src/",
     "prepare": "husky install"
@@ -24,7 +24,7 @@
     "tmpl": "^1.0.4"
   },
   "devDependencies": {
-    "eslint": "^7.21.0",
+    "eslint": "^7.22.0",
     "husky": "^5.1.3",
     "lint-staged": "^10.5.4"
   },
