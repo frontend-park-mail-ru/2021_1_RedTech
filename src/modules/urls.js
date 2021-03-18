@@ -1,6 +1,6 @@
 const localUrl = 'http://localhost:8081';
 const deployUrl = 'https://redioteka';
-export let currentUrl = localUrl;
+export const currentUrl = localUrl;
 
 export const URLS = {
     pages: {
