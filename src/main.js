@@ -1,10 +1,10 @@
-import {asyncGetUsing} from './modules/http.js';
-import {DetailComponent} from './views/DetailView/DetailView.js';
-import {HomeComponent} from './views/HomeView/HomeView.js';
-import {ProfileView} from './views/Profile/Profile.js';
-import {SignUpView} from './views/SignUp/SignUp.js';
-import {LogInView} from './views/LogIn/LogIn.js';
-import {currentUrl, URLS} from './modules/urls.js';
+import { asyncGetUsing } from './modules/http.js';
+import { DetailComponent } from './views/DetailView/DetailView.js';
+import { HomeComponent } from './views/HomeView/HomeView.js';
+import { ProfileView } from './views/Profile/Profile.js';
+import { SignUpView } from './views/SignUp/SignUp.js';
+import { LogInView } from './views/LogIn/LogIn.js';
+import { currentUrl, URLS } from './modules/urls.js';
 import { jsonFilmToFilm } from './modules/adapters.js';
 
 export const APPLICATION = document.getElementById('app');
