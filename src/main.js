@@ -5,7 +5,7 @@ import { ProfileView } from './views/Profile/Profile.js';
 import { SignUpView } from './views/SignUp/SignUp.js';
 import { LogInView } from './views/LogIn/LogIn.js';
 import { currentUrl, URLS } from './modules/urls.js';
-import { jsonFilmToFilm } from './modules/adapters.js';
+import { filmJsonToFilm } from './modules/adapters.js';
 
 export const APPLICATION = document.getElementById('app');
 export const USER = {
@@ -135,7 +135,7 @@ export function detailPage() {
 
     asyncGetUsing(params).then(({status, parsedJson}) => {
         if (status < 300) {
-            film = jsonFilmToFilm(parsedJson);
+            film = filmJsonToFilm(parsedJson);
         }
     }).then(() => {
         const formComponent = new DetailComponent({

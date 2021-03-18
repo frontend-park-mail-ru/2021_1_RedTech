@@ -1,5 +1,5 @@
 import { URLS } from './urls.js';
-import { jsonFilmToFilm } from './adapters.js';
+import { filmJsonToFilm } from './adapters.js';
 
 export async function asyncGetUsing(params = {}) {
     const response = await fetch(params.url, {
@@ -41,7 +41,7 @@ export async function getHomeFilms() {
 
     asyncGetUsing(params).then(({status, parsedJson}) => {
         if (status < 300) {
-            jsonFilmToFilm(parsedJson);
+            filmJsonToFilm(parsedJson);
         }
     });
 }
