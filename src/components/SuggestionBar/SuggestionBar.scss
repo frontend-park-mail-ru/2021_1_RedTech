@@ -48,6 +48,6 @@
 
   .item__suggestion-button:hover {
     background-color: $suggestion-button-color-hovered;
-    transform: scale(1.024);
+    transform: scale($suggestion-bar-scale);
   }
 }

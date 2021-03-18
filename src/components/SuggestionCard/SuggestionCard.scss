@@ -35,7 +35,7 @@
   }
 
   .item__internal:hover {
-    transform: translateY(-5px) scale(1.02);
+    transform: translateY(-5px) scale($suggestion-card-scale);
   }
 
   .item__suggestion__title {

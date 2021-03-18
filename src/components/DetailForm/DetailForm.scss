@@ -24,7 +24,6 @@
     .detail-preview__image {
       margin-bottom: 20px;
       height: 412px;
-      cursor: pointer;
 
       img {
         width: 100%;
@@ -32,10 +31,6 @@
         object-fit: cover;
         border-radius: 24px;
       }
-    }
-
-    .detail-preview__image:hover {
-      opacity: $interactive-items-opacity;
     }
 
     .detail_description__buttons {
