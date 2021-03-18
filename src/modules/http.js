@@ -1,3 +1,6 @@
+import { URLS } from './urls.js';
+import { filmJsonToFilm } from './adapters.js';
+
 export async function asyncGetUsing(params = {}) {
     const response = await fetch(params.url, {
         method: params.method,
@@ -6,7 +9,7 @@ export async function asyncGetUsing(params = {}) {
         credentials: 'include',
     });
 
-    const parsedJson = await response.json();
+    const parsedJson = await response.json() ?? {};
 
     return {
         status: response.status,
@@ -29,3 +32,17 @@ export async function asyncGetUsingAvatar(params = {}) {
         parsedJson,
     };
 }
+
+export async function getHomeFilms() {
+    const params = {
+        url: URLS.api.media,
+        method: 'GET',
+    };
+
+    asyncGetUsing(params).then(({status, parsedJson}) => {
+        if (status < 300) {
+            filmJsonToFilm(parsedJson);
+        }
+    });
+}
+

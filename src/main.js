@@ -1,10 +1,11 @@
+import { asyncGetUsing } from './modules/http.js';
+import { DetailComponent } from './views/DetailView/DetailView.js';
+import { HomeComponent } from './views/HomeView/HomeView.js';
+import { ProfileView } from './views/Profile/Profile.js';
 import { SignUpView } from './views/SignUp/SignUp.js';
 import { LogInView } from './views/LogIn/LogIn.js';
-import { HomeComponent } from './views/HomeView/HomeView.js';
-import { DetailComponent } from './views/DetailView/DetailView.js';
-import { asyncGetUsing } from './modules/http.js';
-import { URLS } from './modules/urls.js';
-import { ProfileView } from './views/Profile/Profile.js';
+import { currentUrl, URLS } from './modules/urls.js';
+import { filmJsonToFilm } from './modules/adapters.js';
 
 export const APPLICATION = document.getElementById('app');
 export const USER = {
@@ -69,6 +70,11 @@ const MENU = {
     }
 };
 
+
+
+/**
+ * Render home page with all recomended content.
+ */
 export function homePage() {
     APPLICATION.innerHTML = '';
     let headerIcons = {};
@@ -79,13 +85,13 @@ export function homePage() {
             {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
             {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
             {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
-        ]
+        ];
     } else {
         headerIcons = [
             {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
             {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
             {id: 'loginPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
-        ]
+        ];
     }
 
     const formComponent = new HomeComponent({
@@ -97,6 +103,9 @@ export function homePage() {
     formComponent.render();
 }
 
+/**
+ * Render detail page with detail information about media.
+ */
 export function detailPage() {
     APPLICATION.innerHTML = '';
 
@@ -108,16 +117,16 @@ export function detailPage() {
             {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
             {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
             {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
-        ]
+        ];
     } else {
         headerIcons = [
             {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
             {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
             {id: 'loginPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
-        ]
+        ];
     }
 
-    let params = {
+    const params = {
         url: URLS.api.media,
         method: 'GET',
     };
@@ -126,26 +135,17 @@ export function detailPage() {
 
     asyncGetUsing(params).then(({status, parsedJson}) => {
         if (status < 300) {
-            film.mainImageSrc = './assets/gravity.jpg';
-            film.mediaTitle = parsedJson.title;
-            film.mediaTag = 'Сериал';
-            film.mediaRank = 'Положительных оценок ' + `${parsedJson.rating}` ?? '';
-            film.mediaYear = 2016;
-            film.mediaGenres = parsedJson.genres ?? '';
-            film.mediaDirector = 'Алекс Хирш';
-            film.mediaCountry = parsedJson.countries ?? '';
-            film.mediaActors = parsedJson.actors ?? '';
-            film.mediaDescription = parsedJson.description ?? '';
-
-            const formComponent = new DetailComponent({
-                parent: APPLICATION,
-                data: {
-                    filmData: film,
-                    headerIcons,
-                }
-            });
-            formComponent.render();
+            film = filmJsonToFilm(parsedJson);
         }
+    }).then(() => {
+        const formComponent = new DetailComponent({
+            parent: APPLICATION,
+            data:{
+                headerIcons,
+                filmData: film,
+            }
+        });
+        formComponent.render();
     });
 }
 

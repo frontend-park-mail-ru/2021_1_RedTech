@@ -1,41 +1,43 @@
-
 div.detail_preview
     div.detail_preview-left
         div.detail-preview__image
-            img(src= filmData.mainImageSrc
-                alt= '')
+            img(src= filmData.movieAvatar alt= '')
         div.detail_description__buttons
-            button.button__item Play
-            button.button__item Favourite
-            button.button__item Like
-            button.button__item Dislike
+            div.button__item
+                img(src= '../../assets/playDetail.png' alt= '')
+            div.button__item
+                img(src= '../../assets/favourite.png' alt= '')
+            div.button__item
+                img(src= '../../assets/like.png' alt= '')
+            div.button__item
+                img(src= '../../assets/dislike.png' alt= '')
     div.detail_preview-right
-        div.detail_preview__title=filmData.mediaTitle
+        div.detail_preview__title=filmData.title
         div.detail_preview__tags
-            span.item__type=filmData.mediaTag
-            span.item__marks=filmData.mediaRank
+            span.item__type=filmData.type
+            span.item__marks=filmData.rating
 
 
         div(class= 'detail_description__year description__items')
             span.country__title Год:
-            span.country__text=filmData.mediaYear
+            span.country__text=filmData.year
         div(class= 'detail_description__genre description__items')
             span.country__title Жанр:
-            span.country__text=filmData.mediaGenres
+            span.country__text=filmData.genres
         div(class= 'detail_description__director description__items')
             span.country__title Режжисер:
-            span.country__text=filmData.mediaDirector
+            span.country__text=filmData.director
         div(class= 'detail_description__country description__items')
             span.country__title Страны:
-            span.country__text=filmData.mediaCountry
+            span.country__text=filmData.countries
 
         div(class= 'detail_description__actors description__items')
             span.country__title Актеры:
-            span.country__text=filmData.mediaActors
+            span.country__text=filmData.actors
 
 
 div.detail_description
     div.detail_description-left
         div.detail_description__text
-            span=filmData.mediaDescription
+            span=filmData.description
     div.detail_description-right

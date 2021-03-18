@@ -1,12 +1,13 @@
-@import 'css/Consts';
-@import 'components/Header/Header';
-@import 'components/FilmCard/FilmdCard';
-@import 'components/SuggestionBar/SuggestionBar';
 @import 'components/SuggestionCard/SuggestionCard';
-@import 'components/Underline/Underline';
+@import 'components/SuggestionBar/SuggestionBar';
 @import 'components/DetailForm/DetailForm';
+@import 'components/Underline/Underline';
+@import 'components/FilmCard/FilmdCard';
+@import 'components/Header/Header';
+
 @import 'css/SignupLogin';
 @import 'css/Profile';
+@import 'css/Consts';
 
 @font-face {
   font-family: "MontserratMedium";

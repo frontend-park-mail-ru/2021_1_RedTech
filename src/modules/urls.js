@@ -1,17 +1,18 @@
+const localUrl = 'http://localhost:8081';
+const deployUrl = 'https://redioteka';
+export const currentUrl = localUrl;
+
 export const URLS = {
     pages: {
         main: '/',
         profile: '/profile',
     },
     api: {
-        media: 'http://89.208.198.192:8081/api/media/movie/1',
-        logout: 'http://89.208.198.192:8081/api/logout',
-        me: 'http://redioteka.com/api/me',
-        media: 'https://redioteka.com/api/media/movie/1',
-        logout: 'https://redioteka.com/api/logout',
-        login: 'https://redioteka.com/api/users/login',
-        signup: 'https://redioteka.com/api/users/signup',
-        profile: 'https://redioteka.com/api/users/',
+        me: `${localUrl}/api/me`,
+        media: `${localUrl}/api/media/movie/1`,
+        logout: `${localUrl}/api/logout`,
+        login: `${localUrl}/api/users/login`,
+        signup: `${localUrl}/api/users/signup`,
+        profile: `${localUrl}/api/users/`,
     }
 };
-

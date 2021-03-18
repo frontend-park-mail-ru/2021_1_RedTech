@@ -1,12 +1,11 @@
 header
     a(class= 'homePage' href= "" ).header-logo
-        img(src= "../../assets/RediotekaLogo.png"
-            alt= "")
+        img(src= "../../assets/RediotekaLogo.png" alt= "")
 
     ul.header-form
         each i in headerLinks
             li
-                a(class= i.className)= i.title
+                a(class= i.className href="")= i.title
 
     div.header-form__profile
         each i in headerIcons
@@ -14,4 +13,3 @@ header
                 img(src= i.src alt= i.alt)
 
 include ../Underline/Underline
-

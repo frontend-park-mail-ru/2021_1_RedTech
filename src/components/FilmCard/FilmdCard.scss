@@ -9,6 +9,7 @@
   background-color: $card-form-background-color;
   padding: 30px;
   border-radius: 12px;
+  cursor: pointer;
 
   width: 520px;
 
@@ -29,7 +30,6 @@
       border-radius: 20px;
       width: 220px;
       height: 300px;
-      cursor: pointer;
     }
   }
 
@@ -75,18 +75,16 @@
         padding: 8px 6px;
         font-size: $card-button-font-size;
         vertical-align: middle;
-        cursor: pointer;
 
         transition: 0.24s ease-in-out;
       }
 
       .item__button-title:hover {
-        opacity: 0.75;
+        opacity: $interactive-items-opacity;
       }
 
       .item__button-img {
         padding-left: 8px;
-        cursor: pointer;
 
         transition: 0.24s ease-in-out;
 
@@ -97,7 +95,7 @@
       }
 
       .item__button-img:hover {
-        opacity: 0.75;
+        opacity: $interactive-items-opacity;
       }
     }
   }
@@ -105,7 +103,5 @@
 
 .item__film-card:hover {
   background-color: $card-form-background-color-hovered;
-  transform: scale(1.04);
+  transform: scale($card-scale);
 }
-
-

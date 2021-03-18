@@ -1,4 +1,4 @@
-@import '../../css/consts';
+@import '../../css/Consts';
 
 .item__suggestion {
   display: grid;
@@ -21,6 +21,7 @@
   }
 
   .item__internal {
+    cursor: pointer;
     margin-left: 20px;
     width: 180px;
     background: none;
@@ -30,12 +31,11 @@
     .item__suggestion__image {
       object-fit: contain;
       border-radius: 12px;
-      cursor: pointer;
     }
   }
 
   .item__internal:hover {
-    transform: translateY(-5px) scale(1.02);
+    transform: translateY(-5px) scale($suggestion-card-scale);
   }
 
   .item__suggestion__title {
@@ -59,4 +59,3 @@
     color: $status-color;
   }
 }
-
