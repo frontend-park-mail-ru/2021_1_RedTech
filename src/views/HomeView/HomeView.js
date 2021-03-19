@@ -1,4 +1,4 @@
-import {APPLICATION, detailPage} from '../../main.js';
+import {APPLICATION, detailPage, homePage} from '../../main.js';
 import { LogInView } from '../LogIn/LogIn.js';
 import { ProfileView } from '../Profile/Profile.js';
 
@@ -15,33 +15,34 @@ export class HomeComponent {
         const template = puglatizer.HomeView.HomeView(this._data);
         this._parent.innerHTML = template;
 
-        const profileLink = document.getElementById('profilePage');
+        const [profileLink] = document.getElementsByClassName('js-profile-page');
         profileLink?.addEventListener(('click'), event => {
             event.preventDefault();
 
             APPLICATION.innerHTML = '';
 
-            const signUpView = new ProfileView();
-            signUpView.render();
+            const profileView = new ProfileView();
+            profileView.render();
         });
 
-        const loginPage = document.getElementById('loginPage');
-        loginPage?.addEventListener(('click'), event => {
+        const [aLogin] = document.getElementsByClassName('js-login-page');
+        aLogin?.addEventListener(('click'), event => {
             event.preventDefault();
 
-            APPLICATION.innerHTML = '';
+            localStorage.removeItem('ID');
 
+            APPLICATION.innerHTML = '';
             const logInView = new LogInView();
             logInView.render();
         });
 
-        const logoutPage = document.getElementById('logoutPage');
-        logoutPage?.addEventListener(('click'), event => {
+        const [aLogout] = document.getElementsByClassName('js-logout-page');
+        aLogout?.addEventListener(('click'), event => {
             event.preventDefault();
 
-            APPLICATION.innerHTML = '';
-
             localStorage.removeItem('ID');
+
+            APPLICATION.innerHTML = '';
             const logInView = new LogInView();
             logInView.render();
         });

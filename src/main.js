@@ -77,28 +77,26 @@ const MENU = {
  */
 export function homePage() {
     APPLICATION.innerHTML = '';
-    let headerIcons = {};
+    let data = {};
 
     if (localStorage.getItem('ID') != null) {
-        headerIcons = [
-            {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
-            {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
-            {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
-            {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
-        ];
+        data = {
+            isLogined: true,
+            headerIcons: [
+                {className: 'js-profile-page', href: '#', title: 'Профиль', alt: ''},
+                {className: 'js-favourite-page', href: '#', title: 'Избранное', alt: ''},
+                {className: 'js-logout-page', href: '#', title: 'Выйти', alt: ''},
+            ],
+        };
     } else {
-        headerIcons = [
-            {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
-            {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
-            {id: 'loginPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
-        ];
+        data = {
+            isLogined: false,
+        };
     }
 
     const formComponent = new HomeComponent({
         parent: APPLICATION,
-        data:{
-            headerIcons,
-        }
+        data: data,
     });
     formComponent.render();
 }
@@ -109,21 +107,21 @@ export function homePage() {
 export function detailPage() {
     APPLICATION.innerHTML = '';
 
-    let headerIcons = {};
+    let data = {};
 
     if (localStorage.getItem('ID') != null) {
-        headerIcons = [
-            {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
-            {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
-            {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
-            {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
-        ];
+        data = {
+            isLogined: true,
+            headerIcons: [
+                {className: 'js-profile-page', href: '#', title: 'Профиль', alt: ''},
+                {className: 'js-favourite-page', href: '#', title: 'Избранное', alt: ''},
+                {className: 'js-logout-page', href: '#', title: 'Выйти', alt: ''},
+            ],
+        };
     } else {
-        headerIcons = [
-            {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
-            {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
-            {id: 'loginPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
-        ];
+        data = {
+            isLogined: false,
+        };
     }
 
     const params = {
@@ -136,14 +134,12 @@ export function detailPage() {
     asyncGetUsing(params).then(({status, parsedJson}) => {
         if (status < 300) {
             film = filmJsonToFilm(parsedJson);
+            data.filmData = film;
         }
     }).then(() => {
         const formComponent = new DetailComponent({
             parent: APPLICATION,
-            data:{
-                headerIcons,
-                filmData: film,
-            }
+            data: data,
         });
         formComponent.render();
     });

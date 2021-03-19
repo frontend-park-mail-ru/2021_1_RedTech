@@ -7,9 +7,21 @@ header
             li
                 a(class= i.className href="")= i.title
 
-    div.header-form__profile
-        each i in headerIcons
-            a.button__logout(id= i.id).header-form__profile__link
-                img(src= i.src alt= i.alt)
+    if isLogined
+        div.header-form__profile
+            a(class= 'header-form__profile__link js-search-button')
+                img(src= '../../assets/search.png')
+        div.dropdown
+            img(class="dropbtn" src='../../assets/profileDropdown.png')
+            div(id="myDropdown" class="dropdown-content")
+                each i in headerIcons
+                    a(class='header-form__profile__link ' +  i.className)= i.title
+    else
+        div.header-form__profile
+            a(class= 'header-form__profile__link js-search-button')
+                img(src= '../../assets/search.png')
+            a(class= 'header-form__profile__link js-login-page')
+                img(src= '../../assets/unlogined.png')
+
 
 include ../Underline/Underline
