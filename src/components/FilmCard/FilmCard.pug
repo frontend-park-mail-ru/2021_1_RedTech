@@ -1,9 +1,9 @@
-div.item__film-card
+div(class= "item__film-card" + " " + i.className)
     div.item__image
-        img(id= i.className src= i.src alt= i.alt)
+        img(src= i.src alt= i.alt)
     div.item__details
         div.item__film-card__title
-            a(class= i.className href= "#")= i.title
+            a(href= "#")= i.title
 
         div.item__film-card__stars= i.stars
 
