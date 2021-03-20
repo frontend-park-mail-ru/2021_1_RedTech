@@ -26,7 +26,7 @@ export class DetailComponent {
             APPLICATION.innerHTML = '';
 
             const profileView = new ProfileView();
-            profileView.render();
+            profileVeiew.render();
         });
 
         const [aMain] = document.getElementsByClassName('homePage');
