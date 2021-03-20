@@ -8,11 +8,11 @@ export const URLS = {
         profile: '/profile',
     },
     api: {
-        me: `${localUrl}/api/me`,
-        media: `${localUrl}/api/media/movie/1`,
-        logout: `${localUrl}/api/users/logout`,
-        login: `${localUrl}/api/users/login`,
-        signup: `${localUrl}/api/users/signup`,
-        profile: `${localUrl}/api/users/`,
+        me: `${deployUrl}/api/me`,
+        media: `${deployUrl}/api/media/movie/1`,
+        logout: `${deployUrl}/api/users/logout`,
+        login: `${deployUrl}/api/users/login`,
+        signup: `${deployUrl}/api/users/signup`,
+        profile: `${deployUrl}/api/users/`,
     }
 };
