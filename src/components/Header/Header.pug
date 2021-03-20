@@ -9,13 +9,13 @@ header
 
     if isLogined
         div.header-form__profile
-            a(class= 'header-form__profile__link js-search-button')
+            a(class= 'header-form__profile__link item__right-link js-search-button')
                 img(src= '../../assets/search.png')
-        div.dropdown
-            img(class="dropbtn" src='../../assets/profileDropdown.png')
-            div(id="myDropdown" class="dropdown-content")
-                each i in headerIcons
-                    a(class='header-form__profile__link ' +  i.className)= i.title
+            div.dropdown-profile
+                img(class="dropdown-profile__image" src='../../assets/profileDropdown.png')
+                div(class="dropdown-profile__content")
+                    each i in headerIcons
+                        a(class='item__dropdown-profile ' +  i.className)= i.title
     else
         div.header-form__profile
             a(class= 'header-form__profile__link js-search-button')
