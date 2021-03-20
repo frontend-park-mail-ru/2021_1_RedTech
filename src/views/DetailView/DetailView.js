@@ -1,33 +1,73 @@
-import {APPLICATION, homePage} from '../../main.js';
-import {SignUpView} from '../SignUp/SignUp.js';
-import {ProfileView} from '../Profile/Profile.js';
-import {LogInView} from '../LogIn/LogIn.js';
-// import {HomeComponent} from '../HomeView/HomeView.js';
+import { APPLICATION } from '../../main.js';
+import { ProfileView } from '../Profile/Profile.js';
+import { LogInView } from '../LogIn/LogIn.js';
+import { getCurrentUser, getDetailFilmPage, getLogout } from '../../modules/http.js';
+import { HomeComponent } from '../HomeView/HomeView.js';
+import { filmJsonToFilm } from '../../modules/adapters.js';
 
-
+/** Class representing film detail page view. */
 export class DetailComponent {
+    /**
+     * Create a home page view.
+     * @param {Object} data - Parameters for film detail page view.
+     */
     constructor({
-        parent = document.body,
         data = [],
     } = {}) {
-
-        this._parent = parent;
         this._data = data;
     }
+    /**
+     * Render html film detail page from pug template to parent.
+     */
+    async render() {
 
-    render() {
-        const template = puglatizer.DetailView.DetailView(this._data);
-        //console.log(template())
-        this._parent.innerHTML = template;
+        let {status: responseStatus, parsedJson: responseBody} = await getCurrentUser();
+        const idUser = responseBody.id;
+        let headerIcons = {};
+
+        if (responseStatus === 200) {
+            headerIcons = [
+                {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
+                {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
+                {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
+                {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
+            ];
+        } else {
+            headerIcons = [
+                {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
+                {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
+                {id: 'loginPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
+            ];
+        }
+
+        let response = await getDetailFilmPage();
+
+        responseStatus = response.status;
+        responseBody = response.parsedJson;
+
+        let film = {};
+        if (responseStatus === 200) {
+            film = filmJsonToFilm(responseBody);
+            this._data = {
+                headerIcons,
+                filmData: film,
+            };
+            const template = puglatizer.DetailView.DetailView(this._data);
+            APPLICATION.innerHTML = template;
+        }
 
         const profileLink = document.getElementById('profilePage');
-        profileLink?.addEventListener(('click'), event => {
+        profileLink?.addEventListener(('click'), async event => {
             event.preventDefault();
 
             APPLICATION.innerHTML = '';
 
-            const signUpView = new ProfileView();
-            signUpView.render();
+            const profileView = new ProfileView({
+                data: {
+                    idUser: idUser,
+                }
+            });
+            await profileView.render();
         });
 
         const loginPage = document.getElementById('loginPage');
@@ -41,30 +81,27 @@ export class DetailComponent {
         });
 
         const [aMain] = document.getElementsByClassName('homePage');
-        aMain?.addEventListener(('click'), event => {
+        aMain?.addEventListener(('click'), async event => {
             event.preventDefault();
 
             APPLICATION.innerHTML = '';
-            homePage();
+
+            const homeComponent = new HomeComponent();
+            homeComponent.render();
         });
 
         const logoutPage = document.getElementById('logoutPage');
-        logoutPage?.addEventListener(('click'), event => {
+        logoutPage?.addEventListener(('click'), async event => {
             event.preventDefault();
 
-            APPLICATION.innerHTML = '';
+            let responseStatus = await getLogout();
 
-            localStorage.removeItem('ID');
-            const logInView = new LogInView();
-            logInView.render();
-        });
+            if (responseStatus === 200) {
+                APPLICATION.innerHTML = '';
 
-        const [aLogout] = document.getElementsByClassName('logoutPage');
-        aLogout?.addEventListener(('click'), event => {
-            event.preventDefault();
-
-            APPLICATION.innerHTML = '';
-            homePage();
+                const homeView = new HomeComponent();
+                await homeView.render();
+            }
         });
     }
 }

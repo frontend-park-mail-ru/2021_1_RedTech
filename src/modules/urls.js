@@ -10,7 +10,7 @@ export const URLS = {
     api: {
         me: `${localUrl}/api/me`,
         media: `${localUrl}/api/media/movie/1`,
-        logout: `${localUrl}/api/logout`,
+        logout: `${localUrl}/api/users/logout`,
         login: `${localUrl}/api/users/login`,
         signup: `${localUrl}/api/users/signup`,
         profile: `${localUrl}/api/users/`,

@@ -1,28 +1,62 @@
-import {APPLICATION, detailPage} from '../../main.js';
+import { APPLICATION } from '../../main.js';
 import { LogInView } from '../LogIn/LogIn.js';
 import { ProfileView } from '../Profile/Profile.js';
+import { getCurrentUser, getLogout } from '../../modules/http.js';
+import { DetailComponent } from '../DetailView/DetailView.js';
 
+/** Class representing home page view. */
 export class HomeComponent {
+    /**
+     * Create a home page view.
+     * @param {Object} data - Parameters for home page view.
+     */
     constructor({
-        parent = document.body,
         data = [],
     } = {}) {
-        this._parent = parent;
         this._data = data;
     }
+    /**
+     * Render html home page from pug template to parent.
+     */
+    async render() {
 
-    render() {
+        let {status: responseStatus, parsedJson: responseBody} = await getCurrentUser();
+        
+        let headerIcons = {};
+        
+        if (responseStatus === 200) {
+            headerIcons = [
+                {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
+                {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
+                {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
+                {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
+            ];
+        } else {
+            headerIcons = [
+                {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
+                {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
+                {id: 'loginPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
+            ];
+        }
+
+        this._data = { headerIcons };
+
+        
         const template = puglatizer.HomeView.HomeView(this._data);
-        this._parent.innerHTML = template;
+        APPLICATION.innerHTML = template;
 
         const profileLink = document.getElementById('profilePage');
-        profileLink?.addEventListener(('click'), event => {
+        profileLink?.addEventListener(('click'), async event => {
             event.preventDefault();
 
             APPLICATION.innerHTML = '';
 
-            const signUpView = new ProfileView();
-            signUpView.render();
+            const profileView = new ProfileView({
+                data: {
+                    idUser: responseBody.id,
+                }
+            });
+            await profileView.render();
         });
 
         const loginPage = document.getElementById('loginPage');
@@ -36,14 +70,16 @@ export class HomeComponent {
         });
 
         const logoutPage = document.getElementById('logoutPage');
-        logoutPage?.addEventListener(('click'), event => {
+        logoutPage?.addEventListener(('click'), async event => {
             event.preventDefault();
 
-            APPLICATION.innerHTML = '';
+            responseStatus = await getLogout();
 
-            localStorage.removeItem('ID');
-            const logInView = new LogInView();
-            logInView.render();
+            if (responseStatus === 200) {
+                APPLICATION.innerHTML = '';
+
+                await this.render();
+            }
         });
 
         const [linkFilm] = document.getElementsByClassName('film_link_1');
@@ -51,7 +87,10 @@ export class HomeComponent {
             event.preventDefault();
 
             APPLICATION.innerHTML = '';
-            detailPage();
+            const detailComponent = new DetailComponent({
+                parent: APPLICATION,
+            });
+            detailComponent.render();
         });
     }
 }

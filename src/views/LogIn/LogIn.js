@@ -1,10 +1,8 @@
 import { APPLICATION } from '../../main.js';
-import { USER } from '../../main.js';
 import { SignUpView } from '../SignUp/SignUp.js';
 import { isValidForm } from '../../utils/isValidForm.js';
-import { asyncGetUsing } from '../../modules/http.js';
+import { postUserForLogin } from '../../modules/http.js';
 import { HomeComponent } from '../HomeView/HomeView.js';
-import { URLS } from '../../modules/urls.js';
 
 /** Class representing a login page view. */
 export class LogInView {
@@ -26,43 +24,26 @@ export class LogInView {
         const [form] = document.getElementsByTagName('form');
         const [aTag] = document.getElementsByClassName('have-acc__link');
 
-        form?.addEventListener(('submit'), event => {
+        form?.addEventListener(('submit'), async event => {
             event.preventDefault();
             const isValid = isValidForm(form);
-
+            let responseStatus;
+            
             if (isValid) {
-                let params = {
-                    url: URLS.api.login,
-                    method: 'POST',
-                    credentials: 'include',
-                    body: {
-                        email: document.getElementById('email').value,
-                        password: document.getElementById('password').value
-                    }
-                };
+                responseStatus = await postUserForLogin(
+                    document.getElementById('email').value,
+                    document.getElementById('password').value
+                );
+            }
+             
+            if (responseStatus === 200) {
+                APPLICATION.innerHTML = '';
 
-                asyncGetUsing(params).then(({status, parsedJson}) => {
-                    if (status === 200) {
-                        APPLICATION.innerHTML = '';
-                        localStorage.setItem('ID', parsedJson.id);
-                        let headerIcons = [
-                            {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
-                            {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
-                            {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
-                            {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
-                        ];
-
-                        const formComponent = new HomeComponent({
-                            parent: APPLICATION,
-                            data: {
-                                headerIcons,
-                            },
-                        });
-
-                        //USER.ID = parsedJson.id;
-                        formComponent.render();
-                    }
+                const homeComponent = new HomeComponent({
+                    parent: APPLICATION
                 });
+
+                await homeComponent.render();
             }
         });
 
