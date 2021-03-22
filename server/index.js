@@ -14,7 +14,7 @@ app.get('/products', (req, res, next) => {
     res.json({msg: 'This is CORS-enabled for  all origins!'});
 })
 
-app.use('/favicon.ico', express.static('img/favicon.ico'));
+app.use('/favicon.ico', express.static('src/assets/favicon.ico'));
 
 app.get('/templates.js', (req, res) => {
     res.sendFile(path.resolve(`${__dirname}/templates.js`));
