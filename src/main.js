@@ -79,12 +79,12 @@ export function homePage() {
     APPLICATION.innerHTML = '';
     let data = {};
 
-    if (localStorage.getItem('ID') != null) {
+    if (localStorage.getItem('ID') == null) {
         data = {
             isLogined: true,
             headerIcons: [
                 {className: 'js-profile-page', href: '#', title: 'Профиль', alt: ''},
-                {className: 'js-favourite-page', href: '#', title: 'Избранное', alt: ''},
+                // {className: 'js-favourite-page', href: '#', title: 'Избранное', alt: ''},
                 {className: 'js-logout-page', href: '#', title: 'Выйти', alt: ''},
             ],
         };
@@ -114,7 +114,7 @@ export function detailPage() {
             isLogined: true,
             headerIcons: [
                 {className: 'js-profile-page', href: '#', title: 'Профиль', alt: ''},
-                {className: 'js-favourite-page', href: '#', title: 'Избранное', alt: ''},
+                // {className: 'js-favourite-page', href: '#', title: 'Избранное', alt: ''},
                 {className: 'js-logout-page', href: '#', title: 'Выйти', alt: ''},
             ],
         };
