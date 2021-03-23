@@ -16,81 +16,102 @@ export class HomeComponent {
         this._data = data;
     }
     /**
-     * Render html home page from pug template to parent.
+     * Render html home page from pug template.
      */
-    async render() {
-
-        let {status: responseStatus, parsedJson: responseBody} = await getCurrentUser();
-        
+    render() {
         let headerIcons = {};
-        
-        if (responseStatus === 200) {
-            headerIcons = [
-                {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
-                {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
-                {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
-                {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
-            ];
-        } else {
-            headerIcons = [
-                {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
-                {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
-                {id: 'loginPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
-            ];
-        }
-
-        this._data = { headerIcons };
-
-        
-        const template = puglatizer.HomeView.HomeView(this._data);
-        APPLICATION.innerHTML = template;
-
-        const profileLink = document.getElementById('profilePage');
-        profileLink?.addEventListener(('click'), async event => {
-            event.preventDefault();
-
-            APPLICATION.innerHTML = '';
-
+        getCurrentUser().then((idUser) => {
             const profileView = new ProfileView({
                 data: {
-                    idUser: responseBody.id,
+                    idUser,
                 }
             });
-            await profileView.render();
-        });
-
-        const loginPage = document.getElementById('loginPage');
-        loginPage?.addEventListener(('click'), event => {
-            event.preventDefault();
-
-            APPLICATION.innerHTML = '';
-
             const logInView = new LogInView();
-            logInView.render();
-        });
+            const detailComponent = new DetailComponent();
+            
+            if (idUser) {
+                headerIcons = [
+                    {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
+                    {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
+                    {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
+                    {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
+                ];
+            } else {
+                headerIcons = [
+                    {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
+                    {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
+                    {id: 'loginPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
+                ];
+            }
 
-        const logoutPage = document.getElementById('logoutPage');
-        logoutPage?.addEventListener(('click'), async event => {
-            event.preventDefault();
+            this._data = {headerIcons};
 
-            responseStatus = await getLogout();
+            const template = puglatizer.HomeView.HomeView(this._data);
+            APPLICATION.innerHTML = template;
+            
+            const profileLinkHandler = (event) => {
+                profileLink?.removeEventListener(('click'), profileLinkHandler);
+                loginPage?.removeEventListener(('click'), loginPageHandler);
+                logoutPage?.removeEventListener(('click'), logoutPageHandler);
+                linkFilm?.removeEventListener(('click'), linkFilmHandler);
 
-            if (responseStatus === 200) {
+                event.preventDefault();
+
                 APPLICATION.innerHTML = '';
 
-                await this.render();
-            }
-        });
+                profileView.render();
+            };
+            const loginPageHandler = (event) => {
+                profileLink?.removeEventListener(('click'), profileLinkHandler);
+                loginPage?.removeEventListener(('click'), loginPageHandler);
+                logoutPage?.removeEventListener(('click'), logoutPageHandler);
+                linkFilm?.removeEventListener(('click'), linkFilmHandler);
 
-        const [linkFilm] = document.getElementsByClassName('film_link_1');
-        linkFilm?.addEventListener(('click'), event => {
-            event.preventDefault();
+                event.preventDefault();
 
-            APPLICATION.innerHTML = '';
-            const detailComponent = new DetailComponent({
-                parent: APPLICATION,
-            });
-            detailComponent.render();
+                APPLICATION.innerHTML = '';
+
+                logInView.render();
+            };
+            const logoutPageHandler = (event) => {
+                event.preventDefault();
+
+                getLogout().then((responseStatus) => {
+                    if (responseStatus) {
+                        profileLink?.removeEventListener(('click'), profileLinkHandler);
+                        loginPage?.removeEventListener(('click'), loginPageHandler);
+                        logoutPage?.removeEventListener(('click'), logoutPageHandler);
+                        linkFilm?.removeEventListener(('click'), linkFilmHandler);
+                        APPLICATION.innerHTML = '';
+
+                        this.render();
+                    }
+                });
+            };
+            const linkFilmHandler = (event) => {
+                profileLink?.removeEventListener(('click'), profileLinkHandler);
+                loginPage?.removeEventListener(('click'), loginPageHandler);
+                logoutPage?.removeEventListener(('click'), logoutPageHandler);
+                linkFilm?.removeEventListener(('click'), linkFilmHandler);
+
+                event.preventDefault();
+
+                APPLICATION.innerHTML = '';
+
+                detailComponent.render();
+            };
+            
+            const profileLink = document.getElementById('profilePage');
+            profileLink?.addEventListener(('click'), profileLinkHandler);
+
+            const loginPage = document.getElementById('loginPage');
+            loginPage?.addEventListener(('click'), loginPageHandler);
+
+            const logoutPage = document.getElementById('logoutPage');
+            logoutPage?.addEventListener(('click'), logoutPageHandler);
+
+            const [linkFilm] = document.getElementsByClassName('film_link_1');
+            linkFilm?.addEventListener(('click'), linkFilmHandler);
         });
     }
 }

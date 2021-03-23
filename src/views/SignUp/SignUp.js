@@ -15,47 +15,53 @@ export class SignUpView {
     }
 
     /**
-     * Render html signup page from pug template to parent.
+     * Render html signup page from pug template.
      */
     render() {
+        const homeComponent = new HomeComponent();
+        const loginView = new LogInView();
+
         const template = puglatizer.SignUp.SignUp();
         APPLICATION.innerHTML = template;
 
         const [form] = document.getElementsByTagName('form');
         const [aTag] = document.getElementsByClassName('have-acc__link');
 
-        form?.addEventListener(('submit'), async event => {
+        const formHandler = (event) => {
             event.preventDefault();
             const isValid = isValidForm(form);
-            let responseStatus;
 
             if (isValid) {
-                responseStatus = await postUserForSignUp(
-                    document.getElementById('login').value,
-                    document.getElementById('email').value,
-                    document.getElementById('password').value,
-                    document.getElementById('confirmPassword').value
-                );
-            }
+                postUserForSignUp(
+                    document?.getElementById('login').value,
+                    document?.getElementById('email').value,
+                    document?.getElementById('password').value,
+                    document?.getElementById('confirmPassword').value
+                ).then((responseFlag) => {
+                    if (responseFlag) {
+                        form?.removeEventListener(('submit'), formHandler);
+                        aTag?.removeEventListener(('click'), aTagHandler);
 
-            if (responseStatus === 200) {
-                APPLICATION.innerHTML = '';
+                        APPLICATION.innerHTML = '';
 
-                const homeComponent = new HomeComponent({
-                    parent: APPLICATION
+                        homeComponent.render();
+                    }
                 });
-
-                await homeComponent.render();
             }
-        });
+        };
 
-        aTag?.addEventListener(('click'), event => {
+        const aTagHandler = (event) => {
+            form?.removeEventListener(('submit'), formHandler);
+            aTag?.removeEventListener(('click'), aTagHandler);
             event.preventDefault();
 
             APPLICATION.innerHTML = '';
 
-            const loginView = new LogInView();
             loginView.render();
-        });
+        };
+
+        form?.addEventListener(('submit'), formHandler);
+
+        aTag?.addEventListener(('click'), aTagHandler);
     }
 }
