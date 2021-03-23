@@ -1,32 +1,12 @@
 import { URLS } from './urls.js';
+import { filmJsonToFilm } from './adapters.js';
 
 /**
- * Send async response to the server with parsed params.
- * @param {Object} params - parameters for response.
- * @returns {Object} - returns status and parsed respond.
+ * Send async request to the server.
+ * @param {Object} params - parameters for request.
+ * @returns {Object} - returns status and parsed response.
  */
-async function asyncGetUsing(params = {}) {
-    const response = await fetch(params.url, {
-        method: params.method,
-        body: JSON.stringify(params.body),
-        mode: 'cors',
-        credentials: 'include',
-    });
-
-    const parsedJson = await response.json() ?? {};
-
-    return {
-        status: response.status,
-        parsedJson,
-    };
-}
-
-/**
- * Send async response to the server, using for send avatar.
- * @param {Object} params - parameters for response.
- * @returns {Object} - returns status and parsed respond.
- */
-async function asyncGetUsingAvatar(params = {}) {
+const sendRequest = async (params = {}) => {
     const response = await fetch(params.url, {
         method: params.method,
         body: params.body,
@@ -40,100 +20,149 @@ async function asyncGetUsingAvatar(params = {}) {
         status: response.status,
         parsedJson,
     };
-}
+};
 
 /**
- * Send async post response using async func asyncGetUsing.
- * @param {string} email - email parameter for response.
- * @param {string} password - password parameter for response.
- * @returns {int} - status from respond.
+ * Send async post request using async func.
+ * @param {string} email - email parameter for request.
+ * @param {string} password - password parameter for request.
+ * @returns {boolean} - flag success of request.
  */
-async function postUserForLogin(email, password) {
+const postUserForLogin = async (email, password) => {
+    if (!email || !password) {
+        return false;
+    }
+
     const params = {
         url: URLS.api.login,
         method: 'POST',
-        body: {
+        body: JSON.stringify({
             email: email,
             password: password
-        }
+        })
     };
 
-    return (await asyncGetUsing(params)).status;
-}
+    try {
+        const responseStatus = (await sendRequest(params)).status;
+        return responseStatus === 200;
+    } catch (err) {
+        return false;
+    }
+};
 
 /**
- * Send async post response using async func asyncGetUsing.
- * @param {string} username - username parameter for response.
- * @param {string} email - email parameter for response.
- * @param {string} password - password parameter for response.
- * @param {string} confirmPassword - confirm password parameter for response.
- * @returns {int} - status from respond.
+ * Send async post request using async func.
+ * @param {string} username - username parameter for request.
+ * @param {string} email - email parameter for request.
+ * @param {string} password - password parameter for request.
+ * @param {string} confirmPassword - confirm password parameter for request.
+ * @returns {boolean} - flag success of request.
  */
-async function postUserForSignUp(username, email, password, confirmPassword) {
+const postUserForSignUp = async (username, email, password, confirmPassword) => {
+    if (!username || !email || !password || !confirmPassword) {
+        return false;
+    }
+
     const params = {
         url: URLS.api.signup,
         method: 'POST',
         credentials: 'include',
-        body: {
+        body: JSON.stringify({
             username: username,
             email: email,
             password: password,
             confirm_password: confirmPassword
-        }
+        })
     };
 
-    return (await asyncGetUsing(params)).status;
-}
+    try {
+        const responseStatus = (await sendRequest(params)).status;
+        return responseStatus === 200;
+    } catch (err) {
+        return false;
+    }
+};
 
 /**
- * Send async get response using async func asyncGetUsing.
- * @returns {Object} - object from async func asyncGetUsing.
+ * Send async get request using async func.
+ * @returns {Promise} - user id if you authorized, null in another case.
  */
-async function getCurrentUser() {
+const getCurrentUser = async () => {
     const params = {
         url: URLS.api.me,
         method: 'GET',
         credentials: 'include',
     };
 
-    return await asyncGetUsing(params);
-}
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return responseBody.id;
+        } else {
+            return null;
+        }
+    } catch (err) {
+        return null;
+    }
+};
 
 /**
- * Send async get response using async func asyncGetUsing.
- * @returns {int} - status from respond.
+ * Send async get request using async func.
+ * @returns {boolean} - flag success of request.
  */
-async function getLogout() {
+const getLogout = async () => {
     const params = {
         url: URLS.api.logout,
         method: 'GET',
         credentials: 'include',
     };
 
-    return (await asyncGetUsing(params)).status;
-}
+    try {
+        const responseStatus = (await sendRequest(params)).status;
+        return responseStatus === 200;
+    } catch (err) {
+        return false;
+    }
+};
 
 /**
- * Send async get response using async func asyncGetUsing.
- * @returns {Object} - object from async func asyncGetUsing.
+ * Send async get request using async func.
+ * @returns {Object} - response body with login, email and src of avatar.
  */
-async function getProfile(idUser) {
+const getProfile = async (idUser) => {
+    if (!idUser) {
+        return null;
+    }
+
     const params = {
         url: URLS.api.profile + idUser,
         method: 'GET',
         credentials: 'include'
     };
 
-    return await asyncGetUsing(params);
-}
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return responseBody;
+        } else {
+            return null;
+        }
+    } catch (err) {
+        return null;
+    }
+};
 
 /**
- * Send async post response using async func asyncGetUsingAvatar.
- * @param {string} idUser - user id parameter for response.
- * @param {FormData} formPut - avatar for response.
- * @returns {int} - object from async func asyncGetUsing.
+ * Send async post request using async func.
+ * @param {string} idUser - user id parameter for request.
+ * @param {FormData} formPut - avatar for request.
+ * @returns {string} - src of avatar.
  */
-async function postAvatar(idUser, formPut) {
+const postAvatar = async (idUser, formPut) => {
+    if (!idUser || !formPut) {
+        return null;
+    }
+
     const params = {
         url: URLS.api.profile + idUser + '/avatar',
         method: 'PUT',
@@ -141,42 +170,69 @@ async function postAvatar(idUser, formPut) {
         body: formPut
     };
 
-    return await asyncGetUsingAvatar(params);
-}
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return responseBody.user_avatar;
+        } else {
+            return null;
+        }
+    } catch (err) {
+        return null;
+    }
+};
 
 /**
- * Send async patch response using async func asyncGetUsingAvatar.
- * @param {string} idUser - user id parameter for response.
- * @param {string} email - email parameter for response.
- * @param {string} login - login parameter for response.
- * @returns {int} - status from respond.
+ * Send async patch request using async func.
+ * @param {string} idUser - user id parameter for request.
+ * @param {string} email - email parameter for request.
+ * @param {string} login - login parameter for request.
+ * @returns {boolean} - flag success of request.
  */
-async function patchProfile(idUser, email, login) {
+const patchProfile = async (idUser, email, login) => {
+    if (!idUser || !email || !login) {
+        return null;
+    }
+
     const params = {
         url: URLS.api.profile + idUser,
         method: 'PATCH',
         credentials: 'include',
-        body: {
+        body: JSON.stringify({
             email: email,
             username: login
-        }
+        })
     };
 
-    return (await asyncGetUsing(params)).status;
-}
+    try {
+        const responseStatus = (await sendRequest(params)).status;
+        return responseStatus === 200;
+    } catch (err) {
+        return false;
+    }
+};
 
 /**
- * Send async get response using async func asyncGetUsing.
- * @returns {Object} - object from async func asyncGetUsing.
+ * Send async get request using async func.
+ * @returns {Object} - detail info about film in object.
  */
-async function getDetailFilmPage() {
+const getDetailFilmPage = async () => {
     const params = {
         url: URLS.api.media,
         method: 'GET',
     };
 
-    return await asyncGetUsing(params);
-}
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return filmJsonToFilm(responseBody);
+        } else {
+            return null;
+        }
+    } catch (err) {
+        return null;
+    }
+};
 
 export {
     postUserForLogin,
