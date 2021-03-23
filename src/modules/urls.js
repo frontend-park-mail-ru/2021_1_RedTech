@@ -1,6 +1,8 @@
+// eslint-disable-next-line no-unused-vars
 const localUrl = 'http://localhost:8081';
+// eslint-disable-next-line no-unused-vars
 const deployUrl = 'https://redioteka.com';
-export const currentUrl = deployUrl;
+export const currentUrl = localUrl;
 
 export const URLS = {
     pages: {
@@ -8,11 +10,11 @@ export const URLS = {
         profile: '/profile',
     },
     api: {
-        me: `${deployUrl}/api/me`,
-        media: `${deployUrl}/api/media/movie/1`,
-        logout: `${deployUrl}/api/users/logout`,
-        login: `${deployUrl}/api/users/login`,
-        signup: `${deployUrl}/api/users/signup`,
-        profile: `${deployUrl}/api/users/`,
+        me: `${currentUrl}/api/me`,
+        media: `${currentUrl}/api/media/movie/1`,
+        logout: `${currentUrl}/api/users/logout`,
+        login: `${currentUrl}/api/users/login`,
+        signup: `${currentUrl}/api/users/signup`,
+        profile: `${currentUrl}/api/users/`,
     }
 };
