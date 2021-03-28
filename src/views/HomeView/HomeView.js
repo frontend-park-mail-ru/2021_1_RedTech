@@ -47,7 +47,7 @@ export class HomeComponent {
             logInView.render();
         });
 
-        const [linkFilm] = document.getElementsByClassName('film_link_1');
+        const [linkFilm] = document.getElementsByClassName('js-film-card-link');
         linkFilm?.addEventListener(('click'), event => {
             event.preventDefault();
 
