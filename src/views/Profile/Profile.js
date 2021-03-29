@@ -37,12 +37,15 @@ export class ProfileView {
                 APPLICATION.innerHTML = template;
 
                 const imgAvatar = document?.getElementById('avatar');
-                imgAvatar.onerror = () => {
-                    imgAvatar.src='img/user.png';
-                };
 
                 const [form] = document.getElementsByTagName('form');
                 const [button] = document.getElementsByClassName('input-wrapper__button');
+
+                const imgHandler = () => {
+                    imgAvatar.src='img/user.png';
+                };
+
+                imgAvatar.addEventListener('error', imgHandler);
 
                 const formHandler = (event) => {
                     event.preventDefault();
