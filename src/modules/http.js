@@ -43,8 +43,8 @@ const postUserForLogin = async (email, password) => {
     };
 
     try {
-        const responseStatus = (await sendRequest(params)).status;
-        return responseStatus === 200;
+        const response = await sendRequest(params);
+        return response.status === 200;
     } catch (err) {
         return false;
     }
@@ -76,8 +76,8 @@ const postUserForSignUp = async (username, email, password, confirmPassword) => 
     };
 
     try {
-        const responseStatus = (await sendRequest(params)).status;
-        return responseStatus === 200;
+        const response = await sendRequest(params);
+        return response.status === 200;
     } catch (err) {
         return false;
     }
@@ -118,8 +118,8 @@ const getLogout = async () => {
     };
 
     try {
-        const responseStatus = (await sendRequest(params)).status;
-        return responseStatus === 200;
+        const response = await sendRequest(params);
+        return response.status === 200;
     } catch (err) {
         return false;
     }
@@ -205,8 +205,8 @@ const patchProfile = async (idUser, email, login) => {
     };
 
     try {
-        const responseStatus = (await sendRequest(params)).status;
-        return responseStatus === 200;
+        const response = await sendRequest(params);
+        return response.status === 200;
     } catch (err) {
         return false;
     }
