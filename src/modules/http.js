@@ -6,10 +6,10 @@ import { filmJsonToFilm } from './adapters.js';
  * @param {Object} params - parameters for request.
  * @returns {Object} - returns status and parsed response.
  */
-const sendRequest = async (params = {}) => {
-    const response = await fetch(params.url, {
-        method: params.method,
-        body: params.body,
+const sendRequest = async ({ url: url, method: method, body: body } = {}) => {
+    const response = await fetch(url, {
+        method: method,
+        body: body,
         mode: 'cors',
         credentials: 'include',
     });
