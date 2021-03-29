@@ -17,27 +17,16 @@ export class DetailComponent {
 
     render() {
         const template = puglatizer.DetailView.DetailView(this._data);
-        //console.log(template())
         this._parent.innerHTML = template;
 
-        const profileLink = document.getElementById('profilePage');
+        const [profileLink] = document.getElementsByClassName('js-profile-page');
         profileLink?.addEventListener(('click'), event => {
             event.preventDefault();
 
             APPLICATION.innerHTML = '';
 
-            const signUpView = new ProfileView();
-            signUpView.render();
-        });
-
-        const loginPage = document.getElementById('loginPage');
-        loginPage?.addEventListener(('click'), event => {
-            event.preventDefault();
-
-            APPLICATION.innerHTML = '';
-
-            const logInView = new LogInView();
-            logInView.render();
+            const profileView = new ProfileView();
+            profileView.render();
         });
 
         const [aMain] = document.getElementsByClassName('homePage');
@@ -48,23 +37,26 @@ export class DetailComponent {
             homePage();
         });
 
-        const logoutPage = document.getElementById('logoutPage');
-        logoutPage?.addEventListener(('click'), event => {
+        const [aLogin] = document.getElementsByClassName('js-login-page');
+        aLogin?.addEventListener(('click'), event => {
             event.preventDefault();
 
-            APPLICATION.innerHTML = '';
-
             localStorage.removeItem('ID');
+
+            APPLICATION.innerHTML = '';
             const logInView = new LogInView();
             logInView.render();
         });
 
-        const [aLogout] = document.getElementsByClassName('logoutPage');
+        const [aLogout] = document.getElementsByClassName('js-logout-page');
         aLogout?.addEventListener(('click'), event => {
             event.preventDefault();
 
+            localStorage.removeItem('ID');
+
             APPLICATION.innerHTML = '';
-            homePage();
+            const logInView = new LogInView();
+            logInView.render();
         });
     }
 }
