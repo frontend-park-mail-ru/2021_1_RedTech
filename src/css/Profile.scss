@@ -84,10 +84,22 @@
   width: auto;
   margin-left: 32px;
   cursor: pointer;
+  box-sizing: border-box;
+  background-color: $background-color;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  padding: 12px 16px;
+  color: $font-color;
+  font-size: 20px;
+  font-family: 'MontserratMedium', sans-serif;
 }
 
 .input-wrapper__button:hover {
   background-color: $btn-hover-color;
+}
+
+.input-wrapper__button:focus {
+  outline: none;
 }
 
 .input-wrapper__input-with-error {

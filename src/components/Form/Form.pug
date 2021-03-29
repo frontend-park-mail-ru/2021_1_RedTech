@@ -15,7 +15,7 @@ mixin form(inputs, buttonName, inputWrapper, img)
                 div.form__input-wrapper
                     label(for=wrapper.for class="input-wrapper__label") #{wrapper.text}
                     div.input-wrapper__input-with-error
-                        +customInput(wrapper.type, "input-wrapper__input", wrapper.placeholder, wrapper.id, wrapper.value, true)
+                        +customInput(wrapper.type, "input-wrapper__input input-wrapper__input_disabled", wrapper.placeholder, wrapper.id, wrapper.value, true)
                         div.error(id = wrapper.id+'Error')
             div.form__input-wrapper
                 div.input-wrapper__input-avatar
@@ -26,4 +26,4 @@ mixin form(inputs, buttonName, inputWrapper, img)
                         label(for="file" class="input-wrapper__input input-wrapper__input_disabled") Выбрать...
             div.form__input-wrapper
                 div.input-wrapper__label
-                button.input-wrapper__button.input-wrapper__input Редактировать
+                button.input-wrapper__button Редактировать

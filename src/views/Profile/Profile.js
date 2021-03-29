@@ -52,12 +52,8 @@ export class ProfileView {
                     if (button.textContent === 'Редактировать') {
                         button.textContent = 'Сохранить';
                         inputs.forEach((input) => {
-                            if (input.tagName === 'LABEL') {
-                                input.classList.remove('input-wrapper__input_disabled');
-                            }
-                            if (input.tagName !== 'BUTTON') {
-                                input.disabled = false;
-                            }
+                            input.classList.remove('input-wrapper__input_disabled');
+                            input.disabled = false;
                         });
                     } else if (button.textContent === 'Сохранить') {
                         const isValid = isValidForm(form);
@@ -93,13 +89,9 @@ export class ProfileView {
                                     button.textContent = 'Редактировать';
 
                                     inputs.forEach((input) => {
-                                        if (input.tagName === 'LABEL') {
-                                            input.classList.add('input-wrapper__input_disabled');
-                                        }
+                                        input.classList.add('input-wrapper__input_disabled');
+                                        input.disabled = true;
 
-                                        if (input.tagName !== 'BUTTON') {
-                                            input.disabled = true;
-                                        }
                                     });
                                 }
                             });
