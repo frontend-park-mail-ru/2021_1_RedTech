@@ -1,70 +1,125 @@
-import {APPLICATION, homePage} from '../../main.js';
-import {SignUpView} from '../SignUp/SignUp.js';
-import {ProfileView} from '../Profile/Profile.js';
-import {LogInView} from '../LogIn/LogIn.js';
-// import {HomeComponent} from '../HomeView/HomeView.js';
+import { APPLICATION } from '../../main.js';
+import { ProfileView } from '../Profile/Profile.js';
+import { LogInView } from '../LogIn/LogIn.js';
+import { getCurrentUser, getDetailFilmPage, getLogout } from '../../modules/http.js';
+import { HomeComponent } from '../HomeView/HomeView.js';
 
-
+/** Class representing film detail page view. */
 export class DetailComponent {
+    /**
+     * Create a home page view.
+     * @param {Object} data - Parameters for film detail page view.
+     */
     constructor({
-        parent = document.body,
         data = [],
     } = {}) {
-
-        this._parent = parent;
         this._data = data;
     }
-
+    /**
+     * Render html film detail page from pug template.
+     */
     render() {
-        const template = puglatizer.DetailView.DetailView(this._data);
-        //console.log(template())
-        this._parent.innerHTML = template;
+        getCurrentUser().then((idUser) => {
+            const headerIcons = [];
+            if (idUser) {
+                headerIcons.push(
+                    {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
+                    {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
+                    {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
+                    {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''}
+                );
+            } else {
+                headerIcons.push(
+                    {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
+                    {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
+                    {id: 'loginPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
+                );
+            }
 
-        const profileLink = document.getElementById('profilePage');
-        profileLink?.addEventListener(('click'), event => {
-            event.preventDefault();
+            getDetailFilmPage().then((film) => {
+                const profileView = new ProfileView({
+                    data: {
+                        idUser,
+                    }
+                });
+                const logInView = new LogInView();
+                const homeComponent = new HomeComponent();
+                const homeView = new HomeComponent();
 
-            APPLICATION.innerHTML = '';
+                if (film) {
+                    this._data = {
+                        headerIcons,
+                        filmData: film,
+                    };
+                    const template = puglatizer.DetailView.DetailView(this._data);
+                    APPLICATION.innerHTML = template;
+                }
 
-            const signUpView = new ProfileView();
-            signUpView.render();
-        });
+                const profileLinkHandler = (event) => {
+                    profileLink?.removeEventListener(('click'), profileLinkHandler);
+                    loginPage?.removeEventListener(('click'), loginPageHandler);
+                    aMain?.removeEventListener(('click'), aMainHandler);
+                    logoutPage?.removeEventListener(('click'), logoutPageHandler);
 
-        const loginPage = document.getElementById('loginPage');
-        loginPage?.addEventListener(('click'), event => {
-            event.preventDefault();
+                    event.preventDefault();
 
-            APPLICATION.innerHTML = '';
+                    APPLICATION.innerHTML = '';
 
-            const logInView = new LogInView();
-            logInView.render();
-        });
+                    profileView.render();
+                };
+                const loginPageHandler = (event) => {
+                    profileLink?.removeEventListener(('click'), profileLinkHandler);
+                    loginPage?.removeEventListener(('click'), loginPageHandler);
+                    aMain?.removeEventListener(('click'), aMainHandler);
+                    logoutPage?.removeEventListener(('click'), logoutPageHandler);
 
-        const [aMain] = document.getElementsByClassName('homePage');
-        aMain?.addEventListener(('click'), event => {
-            event.preventDefault();
+                    event.preventDefault();
 
-            APPLICATION.innerHTML = '';
-            homePage();
-        });
+                    APPLICATION.innerHTML = '';
 
-        const logoutPage = document.getElementById('logoutPage');
-        logoutPage?.addEventListener(('click'), event => {
-            event.preventDefault();
+                    logInView.render();
+                };
+                const aMainHandler = (event) => {
+                    profileLink?.removeEventListener(('click'), profileLinkHandler);
+                    loginPage?.removeEventListener(('click'), loginPageHandler);
+                    aMain?.removeEventListener(('click'), aMainHandler);
+                    logoutPage?.removeEventListener(('click'), logoutPageHandler);
 
-            APPLICATION.innerHTML = '';
+                    event.preventDefault();
 
-            localStorage.removeItem('ID');
-            const logInView = new LogInView();
-            logInView.render();
-        });
+                    APPLICATION.innerHTML = '';
 
-        const [aLogout] = document.getElementsByClassName('logoutPage');
-        aLogout?.addEventListener(('click'), event => {
-            event.preventDefault();
+                    homeComponent.render();
+                };
+                const logoutPageHandler = (event) => {
+                    event.preventDefault();
 
-            APPLICATION.innerHTML = '';
-            homePage();
+                    getLogout().then((responseStatus) => {
+                        if (responseStatus) {
+                            profileLink?.removeEventListener(('click'), profileLinkHandler);
+                            loginPage?.removeEventListener(('click'), loginPageHandler);
+                            aMain?.removeEventListener(('click'), aMainHandler);
+                            logoutPage?.removeEventListener(('click'), logoutPageHandler);
+
+                            APPLICATION.innerHTML = '';
+
+                            homeView.render();
+                        }
+                    });
+                };
+
+                const profileLink = document?.getElementById('profilePage');
+                profileLink?.addEventListener(('click'), profileLinkHandler);
+
+                const loginPage = document.getElementById('loginPage');
+                loginPage?.addEventListener(('click'), loginPageHandler);
+
+                const [aMain] = document.getElementsByClassName('homePage');
+                aMain?.addEventListener(('click'), aMainHandler);
+
+                const logoutPage = document.getElementById('logoutPage');
+                logoutPage?.addEventListener(('click'), logoutPageHandler);
+            });
         });
     }
 }
