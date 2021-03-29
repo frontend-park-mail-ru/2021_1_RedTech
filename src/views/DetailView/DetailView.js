@@ -25,7 +25,7 @@ export class DetailComponent {
                 this._data.isLogined = true;
                 headerIcons.push(
                     {className: 'js-profile-page', href: '', title: 'Профиль', alt: ''},
-                    {className: 'js-login-page', href: '', title: 'Выйти', alt: ''},
+                    {className: 'js-logout-page', href: '', title: 'Выйти', alt: ''},
                 );
             } else {
                 this._data.isLogined = false;
@@ -115,7 +115,7 @@ export class DetailComponent {
                 const loginPage = document.querySelector('.js-login-page');
                 loginPage?.addEventListener(('click'), loginPageHandler);
 
-                const logoutPage = document.querySelector('.js-login-page');
+                const logoutPage = document.querySelector('.js-logout-page');
                 logoutPage?.addEventListener(('click'), logoutPageHandler);
             });
         });

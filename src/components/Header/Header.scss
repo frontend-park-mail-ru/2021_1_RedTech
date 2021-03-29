@@ -23,6 +23,8 @@ header {
   .header-form {
     list-style-type: none;
 
+    $self: &;
+
     li {
       display: inline-block;
       margin-right: 75px;
@@ -70,12 +72,12 @@ header {
       position: relative;
       display: inline-block;
 
-      .dropdown-profile__image {
+      &__image {
         border: none;
         max-height: 34px;
       }
 
-      .dropdown-profile__content {
+      &__content {
         border-radius: 12px;
         cursor: pointer;
         position: absolute;
@@ -98,13 +100,13 @@ header {
 
           &:hover {
             border-radius: 12px;
-            background-color: $dropdown-background-hovered#0e1212;
+            background-color: $dropdown-background-hovered;
           }
         }
       }
     }
 
-    .dropdown-profile:hover {
+    &:hover {
       .dropdown-profile__content {
         visibility: visible;
         opacity: 1;
