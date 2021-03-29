@@ -35,6 +35,12 @@ export class ProfileView {
 
                 const template = puglatizer.Profile.Profile(this._data);
                 APPLICATION.innerHTML = template;
+
+                const imgAvatar = document?.getElementById('avatar');
+                imgAvatar.onerror = () => {
+                    imgAvatar.src='img/user.png';
+                };
+
                 const [form] = document.getElementsByTagName('form');
                 const [button] = document.getElementsByClassName('input-wrapper__button');
 
