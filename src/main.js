@@ -1,4 +1,3 @@
-import { asyncGetUsing } from './modules/http.js';
 import { DetailComponent } from './views/DetailView/DetailView.js';
 import { HomeComponent } from './views/HomeView/HomeView.js';
 import { ProfileView } from './views/Profile/Profile.js';
@@ -6,12 +5,8 @@ import { SignUpView } from './views/SignUp/SignUp.js';
 import { LogInView } from './views/LogIn/LogIn.js';
 import { currentUrl, URLS } from './modules/urls.js';
 import { filmJsonToFilm } from './modules/adapters.js';
-import {VideoPlayer} from './components/VideoPlayer/VideoPlayer.js';
 
 export const APPLICATION = document.getElementById('app');
-export const USER = {
-    ID: 1,
-};
 
 /**
  * Render signup page and check validation of form.
@@ -43,6 +38,26 @@ const profilePage = () => {
     profileView.render();
 };
 
+/**
+ * Render home page with all recommended content.
+ */
+const homePage = () => {
+    APPLICATION.innerHTML = '';
+
+    const homeComponent = new HomeComponent();
+    homeComponent.render();
+};
+
+/**
+ * Render detail page with detail information about media.
+ */
+const detailPage = () => {
+    APPLICATION.innerHTML = '';
+
+    const formComponent = new DetailComponent();
+    formComponent.render();
+};
+
 const MENU = {
     signup: {
         href: '/signup',
@@ -70,81 +85,6 @@ const MENU = {
         open: detailPage,
     }
 };
-
-
-
-/**
- * Render home page with all recomended content.
- */
-export function homePage() {
-    APPLICATION.innerHTML = '';
-    let data = {};
-
-    if (localStorage.getItem('ID') != null) {
-        data = {
-            isLogined: true,
-            headerIcons: [
-                {className: 'js-profile-page', href: '#', title: 'Профиль', alt: ''},
-                // {className: 'js-favourite-page', href: '#', title: 'Избранное', alt: ''},
-                {className: 'js-logout-page', href: '#', title: 'Выйти', alt: ''},
-            ],
-        };
-    } else {
-        data = {
-            isLogined: false,
-        };
-    }
-
-    const formComponent = new HomeComponent({
-        parent: APPLICATION,
-        data: data,
-    });
-    formComponent.render();
-}
-
-/**
- * Render detail page with detail information about media.
- */
-export function detailPage() {
-    APPLICATION.innerHTML = '';
-
-    let data = {};
-
-    if (localStorage.getItem('ID') != null) {
-        data = {
-            isLogined: true,
-            headerIcons: [
-                {className: 'js-profile-page', href: '#', title: 'Профиль', alt: ''},
-                // {className: 'js-favourite-page', href: '#', title: 'Избранное', alt: ''},
-                {className: 'js-logout-page', href: '#', title: 'Выйти', alt: ''},
-            ],
-        };
-    } else {
-        data = {
-            isLogined: false,
-        };
-    }
-
-    const params = {
-        url: URLS.api.media,
-        method: 'GET',
-    };
-
-    let film = {};
-
-    asyncGetUsing(params).then(({status, parsedJson}) => {
-        if (status < 300) {
-            film = filmJsonToFilm(parsedJson);
-            data.filmData = film;
-        }
-    }).then(() => {
-        const formComponent = new DetailComponent({
-            parent: APPLICATION,
-            data: data,
-        });
-        formComponent.render();
-    });
-}
 
 APPLICATION.addEventListener(('click'), event => {
     const { target } = event;

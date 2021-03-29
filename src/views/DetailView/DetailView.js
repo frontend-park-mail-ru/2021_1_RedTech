@@ -1,62 +1,123 @@
-import {APPLICATION, homePage} from '../../main.js';
-import {SignUpView} from '../SignUp/SignUp.js'; // eslint-disable-line
-import {ProfileView} from '../Profile/Profile.js';
-import {LogInView} from '../LogIn/LogIn.js';
-// import {HomeComponent} from '../HomeView/HomeView.js';
+import { APPLICATION } from '../../main.js';
+import { ProfileView } from '../Profile/Profile.js';
+import { LogInView } from '../LogIn/LogIn.js';
+import { getCurrentUser, getDetailFilmPage, getLogout } from '../../modules/http.js';
+import { HomeComponent } from '../HomeView/HomeView.js';
 
-
+/** Class representing film detail page view. */
 export class DetailComponent {
+    /**
+     * Create a home page view.
+     * @param {Object} data - Parameters for film detail page view.
+     */
     constructor({
-        parent = document.body,
         data = [],
     } = {}) {
-
-        this._parent = parent;
         this._data = data;
     }
-
+    /**
+     * Render html film detail page from pug template.
+     */
     render() {
-        const template = puglatizer.DetailView.DetailView(this._data);
-        this._parent.innerHTML = template;
+        getCurrentUser().then((idUser) => {
+            const headerIcons = [];
+            if (idUser) {
+                this._data.isLogined = true;
+                headerIcons.push(
+                    {className: 'js-profile-page', href: '', title: 'Профиль', alt: ''},
+                    {className: 'js-login-page', href: '', title: 'Выйти', alt: ''},
+                );
+            } else {
+                this._data.isLogined = false;
+            }
 
-        const [profileLink] = document.getElementsByClassName('js-profile-page');
-        profileLink?.addEventListener(('click'), event => {
-            event.preventDefault();
+            this._data.headerIcons = headerIcons;
 
-            APPLICATION.innerHTML = '';
+            getDetailFilmPage().then((film) => {
+                const profileView = new ProfileView({
+                    data: {
+                        idUser,
+                    }
+                });
+                const logInView = new LogInView();
+                const homeComponent = new HomeComponent();
+                const homeView = new HomeComponent();
 
-            const profileView = new ProfileView();
-            profileView.render();
-        });
+                if (film) {
+                    this._data = {
+                        headerIcons,
+                        isLogined: this._data.isLogined,
+                        filmData: film,
+                    };
+                    const template = puglatizer.DetailView.DetailView(this._data);
+                    APPLICATION.innerHTML = template;
+                }
 
-        const [aMain] = document.getElementsByClassName('homePage');
-        aMain?.addEventListener(('click'), event => {
-            event.preventDefault();
+                const profileLinkHandler = (event) => {
+                    profileLink?.removeEventListener(('click'), profileLinkHandler);
+                    loginPage?.removeEventListener(('click'), loginPageHandler);
+                    aMain?.removeEventListener(('click'), aMainHandler);
+                    logoutPage?.removeEventListener(('click'), logoutPageHandler);
 
-            APPLICATION.innerHTML = '';
-            homePage();
-        });
+                    event.preventDefault();
 
-        const [aLogin] = document.getElementsByClassName('js-login-page');
-        aLogin?.addEventListener(('click'), event => {
-            event.preventDefault();
+                    APPLICATION.innerHTML = '';
 
-            localStorage.removeItem('ID');
+                    profileView.render();
+                };
+                const loginPageHandler = (event) => {
+                    profileLink?.removeEventListener(('click'), profileLinkHandler);
+                    loginPage?.removeEventListener(('click'), loginPageHandler);
+                    aMain?.removeEventListener(('click'), aMainHandler);
+                    logoutPage?.removeEventListener(('click'), logoutPageHandler);
 
-            APPLICATION.innerHTML = '';
-            const logInView = new LogInView();
-            logInView.render();
-        });
+                    event.preventDefault();
 
-        const [aLogout] = document.getElementsByClassName('js-logout-page');
-        aLogout?.addEventListener(('click'), event => {
-            event.preventDefault();
+                    APPLICATION.innerHTML = '';
 
-            localStorage.removeItem('ID');
+                    logInView.render();
+                };
+                const aMainHandler = (event) => {
+                    profileLink?.removeEventListener(('click'), profileLinkHandler);
+                    loginPage?.removeEventListener(('click'), loginPageHandler);
+                    aMain?.removeEventListener(('click'), aMainHandler);
+                    logoutPage?.removeEventListener(('click'), logoutPageHandler);
 
-            APPLICATION.innerHTML = '';
-            const logInView = new LogInView();
-            logInView.render();
+                    event.preventDefault();
+
+                    APPLICATION.innerHTML = '';
+
+                    homeComponent.render();
+                };
+                const logoutPageHandler = (event) => {
+                    event.preventDefault();
+
+                    getLogout().then((responseStatus) => {
+                        if (responseStatus) {
+                            profileLink?.removeEventListener(('click'), profileLinkHandler);
+                            loginPage?.removeEventListener(('click'), loginPageHandler);
+                            aMain?.removeEventListener(('click'), aMainHandler);
+                            logoutPage?.removeEventListener(('click'), logoutPageHandler);
+
+                            APPLICATION.innerHTML = '';
+
+                            homeView.render();
+                        }
+                    });
+                };
+
+                const aMain = document.querySelector('.js-home-link');
+                aMain?.addEventListener(('click'), aMainHandler);
+
+                const profileLink = document.querySelector('.js-profile-page');
+                profileLink?.addEventListener(('click'), profileLinkHandler);
+
+                const loginPage = document.querySelector('.js-login-page');
+                loginPage?.addEventListener(('click'), loginPageHandler);
+
+                const logoutPage = document.querySelector('.js-login-page');
+                logoutPage?.addEventListener(('click'), logoutPageHandler);
+            });
         });
     }
 }

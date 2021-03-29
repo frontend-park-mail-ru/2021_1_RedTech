@@ -1,5 +1,13 @@
+-
+    var headerLinks = [
+        {className: 'homePage js-home-link', title: 'Главная'},
+        {className: 'filmPage js-films-link', title: 'Фильмы'},
+        {className: 'serialsPage js-serials-link', title: 'Сериалы'},
+        {className: 'lastPage js-latest-link', title: 'Последнее'}
+    ]
+
 header
-    a(class= 'homePage' href= "" ).header-logo
+    a(class= 'homePage js-home-link' href= "" ).header-logo
         img(src= "../../assets/RediotekaLogo.png" alt= "")
 
     ul.header-form

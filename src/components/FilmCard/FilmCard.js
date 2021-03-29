@@ -9,8 +9,7 @@ export class CardFormComponent {
     }
 
     render() {
-        const template = puglatizer.CardForm.CardForm()
-        //console.log(template())
+        const template = puglatizer.CardForm.CardForm();
         this._parent.innerHTML = template;
     }
 }

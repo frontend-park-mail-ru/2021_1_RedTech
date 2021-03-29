@@ -1,10 +1,8 @@
 import { APPLICATION } from '../../main.js';
-import { USER } from '../../main.js';
 import { SignUpView } from '../SignUp/SignUp.js';
 import { isValidForm } from '../../utils/isValidForm.js';
-import { asyncGetUsing } from '../../modules/http.js';
+import { postUserForLogin } from '../../modules/http.js';
 import { HomeComponent } from '../HomeView/HomeView.js';
-import { URLS } from '../../modules/urls.js';
 
 /** Class representing a login page view. */
 export class LogInView {
@@ -17,61 +15,51 @@ export class LogInView {
     }
 
     /**
-     * Render html login page from pug template to parent.
+     * Render html login page from pug template.
      */
     render() {
+        const homeComponent = new HomeComponent();
+        const signUpView = new SignUpView();
+
         const template = puglatizer.LogIn.LogIn();
         APPLICATION.innerHTML = template;
 
         const [form] = document.getElementsByTagName('form');
         const [aTag] = document.getElementsByClassName('have-acc__link');
 
-        form?.addEventListener(('submit'), event => {
+        const formHandler = (event) => {
             event.preventDefault();
             const isValid = isValidForm(form);
 
             if (isValid) {
-                let params = {
-                    url: URLS.api.login,
-                    method: 'POST',
-                    credentials: 'include',
-                    body: {
-                        email: document.getElementById('email').value,
-                        password: document.getElementById('password').value
-                    }
-                };
+                postUserForLogin(
+                    document?.getElementById('email').value,
+                    document?.getElementById('password').value
+                ).then((responseFlag) => {
+                    if (responseFlag) {
+                        form?.removeEventListener(('submit'), formHandler);
+                        aTag?.removeEventListener(('click'), aTagHandler);
 
-                asyncGetUsing(params).then(({status, parsedJson}) => {
-                    if (status === 200) {
                         APPLICATION.innerHTML = '';
-                        localStorage.setItem('ID', parsedJson.id);
-                        let headerIcons = [
-                            {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
-                            {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
-                            {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
-                            {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
-                        ];
 
-                        const formComponent = new HomeComponent({
-                            parent: APPLICATION,
-                            data: {
-                                headerIcons,
-                            },
-                        });
-
-                        //USER.ID = parsedJson.id;
-                        formComponent.render();
+                        homeComponent.render();
                     }
                 });
             }
-        });
+        };
 
-        aTag?.addEventListener(('click'), event => {
+        const aTagHandler = (event) => {
             event.preventDefault();
+            form?.removeEventListener(('submit'), formHandler);
+            aTag?.removeEventListener(('click'), aTagHandler);
+
             APPLICATION.innerHTML = '';
 
-            const signUpView = new SignUpView();
             signUpView.render();
-        });
+        };
+
+        form?.addEventListener(('submit'), formHandler);
+
+        aTag?.addEventListener(('click'), aTagHandler);
     }
 }

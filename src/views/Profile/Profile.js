@@ -1,9 +1,8 @@
-import { APPLICATION, USER } from '../../main.js';
+import { APPLICATION } from '../../main.js';
 import { isValidForm } from '../../utils/isValidForm.js';
-import {asyncGetUsing, asyncGetUsingAvatar} from '../../modules/http.js';
-import { URLS } from '../../modules/urls.js';
+import { getProfile, patchProfile, postAvatar } from '../../modules/http.js';
 
-/** Class representing a login page view. */
+/** Class representing a profile page view. */
 export class ProfileView {
     /**
 	 * Create a profile page view.
@@ -14,119 +13,97 @@ export class ProfileView {
     }
 
     /**
-	 * Render html login page from pug template to parent.
+	 * Render html profile page from pug template to parent.
 	 */
     render() {
-        const params = {
-            url: URLS.api.profile + localStorage.getItem('ID'),
-            method: 'GET',
-            credentials: 'include'
-        };
+        const idUser = this._data.idUser;
+        getProfile(idUser).then((responseBody) => {
+            if (responseBody) {
+                let params = {};
+                params.login = responseBody.username;
+                params.email = responseBody.email;
 
-        console.log(params.url);
-        asyncGetUsing(params).then(({status, parsedJson}) => {
-            let params = {};
-            console.log(status);
-            console.log(parsedJson);
-            params.login = parsedJson.username;
-            params.email = parsedJson.email;
-            console.log(parsedJson.avatar)
+                if (responseBody.avatar) {
+                    params.user_avatar = responseBody.avatar;
+                } else {
+                    params.user_avatar = 'img/user.png';
+                }
 
-            if (parsedJson.avatar) {
-                params.user_avatar = parsedJson.avatar;
-            } else {
-                params.user_avatar = 'img/user.png';
-            }
+                this._data = {
+                    profileData: params
+                };
 
-            this._data = {
-                profileData: params
-            }
+                const template = puglatizer.Profile.Profile(this._data);
+                APPLICATION.innerHTML = template;
 
-            const template = puglatizer.Profile.Profile(this._data);
-            APPLICATION.innerHTML = template;
-            const [form] = document.getElementsByTagName('form');
-            const [button] = document.getElementsByClassName('input-wrapper__button');
+                const imgAvatar = document?.getElementById('avatar');
 
-            form?.addEventListener(('submit'), event => {
+                const [form] = document.getElementsByTagName('form');
+                const [button] = document.getElementsByClassName('input-wrapper__button');
 
-                event.preventDefault();
+                const imgHandler = () => {
+                    imgAvatar.src='img/user.png';
+                };
 
-                const inputs = form.querySelectorAll('.input-wrapper__input');
+                imgAvatar.addEventListener('error', imgHandler);
 
-                if (button.textContent === 'Редактировать') {
-                    button.textContent = 'Сохранить';
-                    inputs.forEach((input) => {
-                        if (input.tagName === 'LABEL') {
+                const formHandler = (event) => {
+                    event.preventDefault();
+
+                    const inputs = form.querySelectorAll('.input-wrapper__input');
+
+                    if (button.textContent === 'Редактировать') {
+                        button.textContent = 'Сохранить';
+                        inputs.forEach((input) => {
                             input.classList.remove('input-wrapper__input_disabled');
-                        }
-
-                        if (input.tagName !== 'BUTTON') {
                             input.disabled = false;
-                        }
-                    });
-                } else if (button.textContent === 'Сохранить') {
-                    const isValid = isValidForm(form);
-                    if (isValid) {
-                        const [nick] = document.getElementsByClassName('title-wrapper__nickname');
+                        });
+                    } else if (button.textContent === 'Сохранить') {
+                        const isValid = isValidForm(form);
+                        if (isValid) {
+                            const [nick] = document.getElementsByClassName('title-wrapper__nickname');
 
-                        const avatarInput = document.getElementById('file');
+                            const avatarInput = document.getElementById('file');
 
-                        if (avatarInput.value) {
-                            const avatar = avatarInput.files[0];
-                            const formPut = new FormData();
-                            formPut.append('avatar', avatar);
+                            if (avatarInput.value) {
+                                button.disabled = true;
 
-                            const params = {
-                                url: URLS.api.profile + localStorage.getItem('ID') + "/avatar",
-                                method: 'PUT',
-                                credentials: 'include',
-                                body: formPut
-                            };
+                                const avatar = avatarInput.files[0];
+                                const formPut = new FormData();
+                                formPut.append('avatar', avatar);
 
-                            console.log(params.url);
-                            asyncGetUsingAvatar(params).then(({status, parsedJson}) => {
+                                const { avatarSrc } =  postAvatar(idUser, formPut);
 
-                                if (status === 200) {
-                                    const ava = document.getElementById('avatar');
-                                    ava.src = parsedJson.user_avatar;
+                                if (avatarSrc) {
+                                    const imgAvatar = document?.getElementById('avatar');
+                                    imgAvatar.src = avatarSrc;
                                 }
-                                console.log(status);
-                                console.log(parsedJson);
+
+                                button.disabled = false;
+                            }
+
+                            patchProfile(
+                                idUser,
+                                document.getElementById('email').value,
+                                document.getElementById('login').value
+                            ).then((responseStatus) => {
+                                if (responseStatus) {
+                                    nick.textContent = document.getElementById('login').value;
+                                    button.textContent = 'Редактировать';
+
+                                    inputs.forEach((input) => {
+                                        input.classList.add('input-wrapper__input_disabled');
+                                        input.disabled = true;
+
+                                    });
+                                }
                             });
                         }
-
-
-                        let params = {
-                            url: URLS.api.profile + localStorage.getItem('ID'),
-                            method: 'PATCH',
-                            credentials: 'include',
-                            body: {
-                                email: document.getElementById('email').value,
-                                username: document.getElementById('login').value
-                            }
-                        };
-
-                        asyncGetUsing(params).then(({status, parsedJson}) => {
-                            console.log(status)
-                            console.log(parsedJson)
-                        });
-
-
-                        nick.textContent = document.getElementById('login').value;
-                        button.textContent = 'Редактировать';
-
-                        inputs.forEach((input) => {
-                            if (input.tagName === 'LABEL') {
-                                input.classList.add('input-wrapper__input_disabled');
-                            }
-
-                            if (input.tagName !== 'BUTTON') {
-                                input.disabled = true;
-                            }
-                        });
                     }
-                }
-            });
+                };
+
+                form?.addEventListener(('submit'), formHandler);
+            }
         });
     }
 }
