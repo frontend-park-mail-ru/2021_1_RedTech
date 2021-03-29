@@ -80,7 +80,7 @@ export function homePage() {
     APPLICATION.innerHTML = '';
     let data = {};
 
-    if (localStorage.getItem('ID') == null) {
+    if (localStorage.getItem('ID') != null) {
         data = {
             isLogined: true,
             headerIcons: [
