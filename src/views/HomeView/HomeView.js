@@ -1,6 +1,7 @@
 import {APPLICATION, detailPage} from '../../main.js';
 import { LogInView } from '../LogIn/LogIn.js';
 import { ProfileView } from '../Profile/Profile.js';
+import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer.js';
 
 export class HomeComponent {
     constructor({
@@ -55,3 +56,4 @@ export class HomeComponent {
         });
     }
 }
+

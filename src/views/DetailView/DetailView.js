@@ -1,5 +1,5 @@
 import {APPLICATION, homePage} from '../../main.js';
-import {SignUpView} from '../SignUp/SignUp.js';
+import {SignUpView} from '../SignUp/SignUp.js'; // eslint-disable-line
 import {ProfileView} from '../Profile/Profile.js';
 import {LogInView} from '../LogIn/LogIn.js';
 // import {HomeComponent} from '../HomeView/HomeView.js';

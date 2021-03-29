@@ -6,6 +6,7 @@ import { SignUpView } from './views/SignUp/SignUp.js';
 import { LogInView } from './views/LogIn/LogIn.js';
 import { currentUrl, URLS } from './modules/urls.js';
 import { filmJsonToFilm } from './modules/adapters.js';
+import {VideoPlayer} from './components/VideoPlayer/VideoPlayer.js';
 
 export const APPLICATION = document.getElementById('app');
 export const USER = {

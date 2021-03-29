@@ -20,6 +20,10 @@ app.get('/templates.js', (req, res) => {
     res.sendFile(path.resolve(`${__dirname}/templates.js`));
 });
 
+app.get('/video.mp4', (req, res) => {
+    res.sendFile(path.resolve(`${__dirname}/../src/components/VideoPlayer/video.mp4`));
+});
+
 app.get('/*', (req, res) => {
     console.log(req.ip, 'page request', req.url);
     res.sendFile(path.resolve(`${__dirname}/../src/index.html`));
