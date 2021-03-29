@@ -19,7 +19,7 @@ export class HomeComponent {
      * Render html home page from pug template.
      */
     render() {
-        let headerIcons = {};
+        const headerIcons = [];
         getCurrentUser().then((idUser) => {
             const profileView = new ProfileView({
                 data: {
@@ -30,18 +30,18 @@ export class HomeComponent {
             const detailComponent = new DetailComponent();
             
             if (idUser) {
-                headerIcons = [
+                headerIcons.push(
                     {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
                     {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
                     {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
-                    {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
-                ];
+                    {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''}
+                );
             } else {
-                headerIcons = [
+                headerIcons.push(
                     {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
                     {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
                     {id: 'loginPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
-                ];
+                );
             }
 
             this._data = {headerIcons};
