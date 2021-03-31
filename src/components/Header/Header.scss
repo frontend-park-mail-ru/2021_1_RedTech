@@ -104,13 +104,12 @@ header {
           }
         }
       }
-    }
-
-    &:hover {
-      .dropdown-profile__content {
-        visibility: visible;
-        opacity: 1;
-        transform: translateY(0);
+      &:hover {
+        .dropdown-profile__content {
+          visibility: visible;
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
     }
   }
