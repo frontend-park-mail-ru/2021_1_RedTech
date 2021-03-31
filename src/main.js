@@ -3,6 +3,8 @@ import { HomeComponent } from './views/HomeView/HomeView.js';
 import { ProfileView } from './views/Profile/Profile.js';
 import { SignUpView } from './views/SignUp/SignUp.js';
 import { LogInView } from './views/LogIn/LogIn.js';
+import { currentUrl, URLS } from './modules/urls.js';
+import { filmJsonToFilm } from './modules/adapters.js';
 
 export const APPLICATION = document.getElementById('app');
 

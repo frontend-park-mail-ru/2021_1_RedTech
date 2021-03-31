@@ -19,8 +19,8 @@ export class HomeComponent {
      * Render html home page from pug template.
      */
     render() {
-        const headerIcons = [];
         getCurrentUser().then((idUser) => {
+            const headerIcons = [];
             const profileView = new ProfileView({
                 data: {
                     idUser,
@@ -28,27 +28,22 @@ export class HomeComponent {
             });
             const logInView = new LogInView();
             const detailComponent = new DetailComponent();
-            
+
             if (idUser) {
+                this._data.isLogined = true;
                 headerIcons.push(
-                    {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
-                    {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
-                    {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
-                    {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''}
+                    {className: 'js-profile-page', href: '', title: 'Профиль', alt: ''},
+                    {className: 'js-logout-page', href: '', title: 'Выйти', alt: ''},
                 );
             } else {
-                headerIcons.push(
-                    {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
-                    {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
-                    {id: 'loginPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
-                );
+                this._data.isLogined = false;
             }
 
-            this._data = {headerIcons};
+            this._data.headerIcons = headerIcons;
 
             const template = puglatizer.HomeView.HomeView(this._data);
             APPLICATION.innerHTML = template;
-            
+
             const profileLinkHandler = (event) => {
                 profileLink?.removeEventListener(('click'), profileLinkHandler);
                 loginPage?.removeEventListener(('click'), loginPageHandler);
@@ -61,6 +56,7 @@ export class HomeComponent {
 
                 profileView.render();
             };
+
             const loginPageHandler = (event) => {
                 profileLink?.removeEventListener(('click'), profileLinkHandler);
                 loginPage?.removeEventListener(('click'), loginPageHandler);
@@ -100,18 +96,19 @@ export class HomeComponent {
 
                 detailComponent.render();
             };
-            
-            const profileLink = document.getElementById('profilePage');
+
+            const profileLink = document.querySelector('.js-profile-page');
             profileLink?.addEventListener(('click'), profileLinkHandler);
 
-            const loginPage = document.getElementById('loginPage');
+            const loginPage = document.querySelector('.js-login-page');
             loginPage?.addEventListener(('click'), loginPageHandler);
 
-            const logoutPage = document.getElementById('logoutPage');
+            const logoutPage = document.querySelector('.js-logout-page');
             logoutPage?.addEventListener(('click'), logoutPageHandler);
 
-            const [linkFilm] = document.getElementsByClassName('film_link_1');
+            const linkFilm = document.querySelector('.js-film-card-link');
             linkFilm?.addEventListener(('click'), linkFilmHandler);
         });
     }
 }
+

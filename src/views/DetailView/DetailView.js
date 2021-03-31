@@ -22,19 +22,16 @@ export class DetailComponent {
         getCurrentUser().then((idUser) => {
             const headerIcons = [];
             if (idUser) {
+                this._data.isLogined = true;
                 headerIcons.push(
-                    {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
-                    {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
-                    {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
-                    {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''}
+                    {className: 'js-profile-page', href: '', title: 'Профиль', alt: ''},
+                    {className: 'js-logout-page', href: '', title: 'Выйти', alt: ''},
                 );
             } else {
-                headerIcons.push(
-                    {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
-                    {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
-                    {id: 'loginPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
-                );
+                this._data.isLogined = false;
             }
+
+            this._data.headerIcons = headerIcons;
 
             getDetailFilmPage().then((film) => {
                 const profileView = new ProfileView({
@@ -49,6 +46,7 @@ export class DetailComponent {
                 if (film) {
                     this._data = {
                         headerIcons,
+                        isLogined: this._data.isLogined,
                         filmData: film,
                     };
                     const template = puglatizer.DetailView.DetailView(this._data);
@@ -108,16 +106,16 @@ export class DetailComponent {
                     });
                 };
 
-                const profileLink = document?.getElementById('profilePage');
-                profileLink?.addEventListener(('click'), profileLinkHandler);
-
-                const loginPage = document.getElementById('loginPage');
-                loginPage?.addEventListener(('click'), loginPageHandler);
-
-                const [aMain] = document.getElementsByClassName('homePage');
+                const aMain = document.querySelector('.js-home-link');
                 aMain?.addEventListener(('click'), aMainHandler);
 
-                const logoutPage = document.getElementById('logoutPage');
+                const profileLink = document.querySelector('.js-profile-page');
+                profileLink?.addEventListener(('click'), profileLinkHandler);
+
+                const loginPage = document.querySelector('.js-login-page');
+                loginPage?.addEventListener(('click'), loginPageHandler);
+
+                const logoutPage = document.querySelector('.js-logout-page');
                 logoutPage?.addEventListener(('click'), logoutPageHandler);
             });
         });
