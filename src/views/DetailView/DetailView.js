@@ -1,5 +1,6 @@
 import { APPLICATION } from '../../main.js';
 import { ProfileView } from '../Profile/Profile.js';
+import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer.js';
 import { LogInView } from '../LogIn/LogIn.js';
 import { getCurrentUser, getDetailFilmPage, getLogout } from '../../modules/http.js';
 import { HomeComponent } from '../HomeView/HomeView.js';
@@ -49,9 +50,11 @@ export class DetailComponent {
                         isLogined: this._data.isLogined,
                         filmData: film,
                     };
+
                     const template = puglatizer.DetailView.DetailView(this._data);
                     APPLICATION.innerHTML = template;
                 }
+                const videoPlayer = new VideoPlayer('.video-player');
 
                 const profileLinkHandler = (event) => {
                     profileLink?.removeEventListener(('click'), profileLinkHandler);
@@ -105,6 +108,17 @@ export class DetailComponent {
                         }
                     });
                 };
+
+                const openPlayerHandler = (event) => {
+                    event.preventDefault();
+
+                    videoPlayer.visibleVideo();
+                    // const videoContainer = document.querySelector('.video-player__container');
+                    // videoContainer.style.visibility = 'visible';
+                };
+
+                const closeOpenVideo = document.querySelector('.js-play-detail');
+                closeOpenVideo.addEventListener(('click'), openPlayerHandler);
 
                 const aMain = document.querySelector('.js-home-link');
                 aMain?.addEventListener(('click'), aMainHandler);

@@ -52,7 +52,8 @@ export class VideoPlayer {
     }
 
     initVideoPlayerListeners() {
-        this.videoPlayer.addEventListener('fullscreenchange', this.checkFullScreen.bind(this))
+        this.videoPlayer.addEventListener('fullscreenchange', this.checkFullScreen.bind(this));
+        this.videoPlayer.querySelector('.js-close-video').addEventListener('click', this.hideVideo.bind(this));
         this.videoPlayer.querySelector('.js-toggle-video').addEventListener('click', this.toggleVideo.bind(this));
         this.videoPlayer.querySelector('.js-volume').addEventListener('input', this.setVolume.bind(this));
         this.videoPlayer.querySelector('.js-volume-image').addEventListener('click', this.toggleVolume.bind(this));
@@ -92,7 +93,17 @@ export class VideoPlayer {
                     this.video.volume -= 0.1;
                 }
             }
-        })
+        });
+    }
+
+    hideVideo() {
+        this.videoPlayer.style.visibility = 'hidden';
+        this.isPlaying = true;
+        this.toggleVideo();
+    }
+
+    visibleVideo() {
+        this.videoPlayer.style.visibility = 'visible';
     }
 
     minusFifteen() {
