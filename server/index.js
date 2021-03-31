@@ -1,3 +1,4 @@
+/*eslint-disable */
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
@@ -30,3 +31,4 @@ app.get('/*', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}!`);
 });
+/*eslint-disable */
