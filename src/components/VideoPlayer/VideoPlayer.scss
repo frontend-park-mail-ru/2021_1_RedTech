@@ -9,6 +9,37 @@ $spinner-size: 50px;
   right: 0;
 }
 
+@keyframes showing {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes hiding {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.video-player__show-animation {
+  animation: showing 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.video-player__hide-animation {
+  animation: hiding 0.5s;
+  animation-fill-mode: forwards;
+}
 
 .video-player {
   width: 100%;

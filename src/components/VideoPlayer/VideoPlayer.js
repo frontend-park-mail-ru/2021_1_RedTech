@@ -97,13 +97,21 @@ export class VideoPlayer {
     }
 
     hideVideo() {
-        this.videoPlayer.style.visibility = 'hidden';
+        const fullscreenImg = this.videoPlayer.querySelector('.js-fullscreen-img');
+        if (document.fullscreenElement) {
+            fullscreenImg.src = FULLSCREEN_ICONS.fullscreen;
+            document.exitFullscreen();
+        }
         this.isPlaying = true;
+        this.videoPlayer.classList.remove('video-player__show-animation');
+        this.videoPlayer.classList.add('video-player__hide-animation');
         this.toggleVideo();
     }
 
     visibleVideo() {
-        this.videoPlayer.style.visibility = 'visible';
+        // this.videoPlayer.style.visibility = 'visible';
+        this.videoPlayer.classList.remove('video-player__hide-animation');
+        this.videoPlayer.classList.add('video-player__show-animation');
     }
 
     minusFifteen() {

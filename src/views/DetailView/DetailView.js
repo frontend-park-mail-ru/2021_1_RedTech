@@ -113,8 +113,6 @@ export class DetailComponent {
                     event.preventDefault();
 
                     videoPlayer.visibleVideo();
-                    // const videoContainer = document.querySelector('.video-player__container');
-                    // videoContainer.style.visibility = 'visible';
                 };
 
                 const closeOpenVideo = document.querySelector('.js-play-detail');
