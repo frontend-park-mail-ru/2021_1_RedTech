@@ -21,9 +21,11 @@
     "node-sass": "^5.0.0",
     "pug": "^3.0.2",
     "puglatizer": "^1.1.9",
-    "tmpl": "^1.0.4"
+    "tmpl": "^1.0.4",
+    "webpack": "^5.28.0"
   },
   "devDependencies": {
+    "dotenv-webpack": "^7.0.2",
     "eslint": "^7.22.0",
     "husky": "^5.1.3",
     "lint-staged": "^10.5.4"
