@@ -4,7 +4,7 @@ module.exports = {
         'es2021': true
     },
     'globals': {
-      'puglatizer': true
+        'puglatizer': true
     },
     'extends': 'eslint:recommended',
     'parserOptions': {
