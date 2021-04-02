@@ -5,15 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "tmpl": "puglatizer -d src/views -o src/templates.js",
+    "tmpl": "puglatizer -d src/ -o src/templates.js",
     "scss": "node-sass src/index.scss -o src/",
     "prestart": "npm run scss && npm run tmpl",
     "lint": "eslint src/",
     "lint-fix": "eslint --fix src/",
     "prepare": "husky install"
   },
+  "eslintIgnore": ["src/templates.js"],
   "keywords": [],
-  "author": "",
+  "author": "",a
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
