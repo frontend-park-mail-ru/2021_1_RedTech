@@ -1,0 +1,65 @@
+block variables
+    -
+        var cardFilms = [
+            {
+                src: '../../assets/st.jpeg',
+                alt: '',
+                className: 'film_link_1',
+                title: 'Очень странные дела',
+                stars: '* * * * *',
+                className: 'film_link_1',
+                description: 'Очень странные дела — американский научно-фантастический сериал, созданный братьями Даффер для сети потокового мультимедиа Redioteka',
+            },
+            {
+                src: '../../assets/st.jpeg',
+                alt: '',
+                className: 'film_link_1',
+                title: 'Очень странные дела',
+                stars: '* * * * *',
+                className: 'film_link_1',
+                description: 'Очень странные дела — американский научно-фантастический сериал, созданный братьями Даффер для сети потокового мультимедиа Redioteka',
+            },
+            {
+                src: '../../assets/st.jpeg',
+                alt: '',
+                className: 'film_link_1',
+                title: 'Очень странные дела',
+                stars: '* * * * *',
+                className: 'film_link_1',
+                description: 'Очень странные дела — американский научно-фантастический сериал, созданный братьями Даффер для сети потокового мультимедиа Redioteka',
+            },
+        ]
+
+    -
+        var suggestionsFilms = [
+            {src: '../../assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Подписка'},
+            {src: '../../assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Платно'},
+            {src: '../../assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Бесплатно'},
+            {src: '../../assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Бесплатно'},
+            {src: '../../assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Подписка'},
+            {src: '../../assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Платно'},
+            {src: '../../assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Бесплатно'},
+            {src: '../../assets/joker.jpeg', alt: '', title: 'Джокер', status: 'Бесплатно'},
+        ]
+
+div.item__page-title С наивысшим рейтингом
+
+div.container
+    each i in cardFilms
+        include ../FilmCard/FilmCard
+
+
+include ../SuggestionBar/SuggestionBar
+
+div.item__page-title Новые фильмы
+
+div.suggestion-film__list
+    each i in suggestionsFilms
+        include ../SuggestionCard/SuggestionCard
+
+
+div.item__page-title Новые сериалы
+
+div.suggestion-film__list
+    each i in suggestionsFilms
+        include ../SuggestionCard/SuggestionCard

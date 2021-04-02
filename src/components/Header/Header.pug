@@ -1,3 +1,29 @@
+block variables
+-
+    const headerIcons = [];
+
+    if (isAuthorized) {
+        headerIcons.push(
+                {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
+                {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
+                {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
+                {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''}
+        );
+    } else {
+        headerIcons.push(
+                {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
+                {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
+                {id: 'loginPage', href: '#', src: '../../assets/unlogined.png', alt: ''}
+        );
+    }
+
+    const headerLinks = [
+        {className: 'homePage', title: 'Главная'},
+        {className: 'filmPage', title: 'Фильмы'},
+        {className: 'serialsPage', title: 'Сериалы'},
+        {className: 'lastPage', title: 'Последнее'}
+    ]
+
 header
     a(class= 'homePage' href= "" ).header-logo
         img(src= "../../assets/RediotekaLogo.png" alt= "")
@@ -11,5 +37,3 @@ header
         each i in headerIcons
             a.button__logout(id= i.id).header-form__profile__link
                 img(src= i.src alt= i.alt)
-
-include ../Underline/Underline
