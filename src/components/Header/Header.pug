@@ -4,28 +4,20 @@ block variables
 
     if (isAuthorized) {
         headerIcons.push(
-                {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
-                {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
-                {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
-                {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''}
-        );
-    } else {
-        headerIcons.push(
-                {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
-                {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
-                {id: 'loginPage', href: '#', src: '../../assets/unlogined.png', alt: ''}
+                {className: 'js-profile-page', href: '', title: 'Профиль', alt: ''},
+                {className: 'js-logout-page', href: '', title: 'Выйти', alt: ''}
         );
     }
 
     const headerLinks = [
-        {className: 'homePage', title: 'Главная'},
-        {className: 'filmPage', title: 'Фильмы'},
-        {className: 'serialsPage', title: 'Сериалы'},
-        {className: 'lastPage', title: 'Последнее'}
+        {className: 'homePage js-home-link', title: 'Главная'},
+        {className: 'filmPage js-films-link', title: 'Фильмы'},
+        {className: 'serialsPage js-serials-link', title: 'Сериалы'},
+        {className: 'lastPage js-latest-link', title: 'Последнее'}
     ]
 
 header
-    a(class= 'homePage' href= "" ).header-logo
+    a(class= 'homePage js-home-link' href= "" ).header-logo
         img(src= "../../assets/RediotekaLogo.png" alt= "")
 
     ul.header-form
@@ -33,7 +25,19 @@ header
             li
                 a(class= i.className href="")= i.title
 
-    div.header-form__profile
-        each i in headerIcons
-            a.button__logout(id= i.id).header-form__profile__link
-                img(src= i.src alt= i.alt)
+    if isAuthorized
+        div.header-form__profile
+            a(class= 'header-form__profile__link item__right-link js-search-button')
+                img(src= '../../assets/search.png')
+            div.dropdown-profile
+                img(class="dropdown-profile__image" src='../../assets/profileDropdown.png')
+                div(class="dropdown-profile__content")
+                    each i in headerIcons
+                        a(class='item__dropdown-profile ' +  i.className)= i.title
+    else
+        div.header-form__profile
+            a(class= 'header-form__profile__link js-search-button')
+                img(src= '../../assets/search.png')
+            a(class= 'header-form__profile__link js-login-page')
+                img(src= '../../assets/unlogined.png')
+

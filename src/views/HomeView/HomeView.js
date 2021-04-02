@@ -86,14 +86,14 @@ export class HomePageView extends BaseView {
             this.eventBus.emit('homepage:logout');
         };
 
-        const profileLink = document.getElementById('profilePage');
-        profileLink?.addEventListener(('click'), profileLinkHandler);
+        const profileLink = document.querySelector('.js-profile-page');
+            profileLink?.addEventListener(('click'), profileLinkHandler);
 
-        const loginPage = document.getElementById('loginPage');
-        loginPage?.addEventListener(('click'), loginPageHandler);
+            const loginPage = document.querySelector('.js-login-page');
+            loginPage?.addEventListener(('click'), loginPageHandler);
 
-        const logoutPage = document.getElementById('logoutPage');
-        logoutPage?.addEventListener(('click'), logoutPageHandler);
+            const logoutPage = document.querySelector('.js-logout-page');
+            logoutPage?.addEventListener(('click'), logoutPageHandler);
 
         const [aMain] = document.getElementsByClassName('homePage');
         aMain?.addEventListener(('click'), aMainHandler);
@@ -121,3 +121,4 @@ export class HomePageView extends BaseView {
         this.eventBus.on('homepage:removeEventListeners', removeEventListeners);
     }
 }
+

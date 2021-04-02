@@ -1,7 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 const localUrl = 'http://localhost:8081';
+
 // eslint-disable-next-line no-unused-vars
 const deployUrl = 'https://redioteka.com';
+
 export const currentUrl = deployUrl;
 
 export const URLS = {
