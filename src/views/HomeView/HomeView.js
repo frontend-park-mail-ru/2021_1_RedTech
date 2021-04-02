@@ -1,117 +1,123 @@
 import { APPLICATION } from '../../main.js';
-import { LogInView } from '../LogIn/LogIn.js';
-import { ProfileView } from '../Profile/Profile.js';
-import { getCurrentUser, getLogout } from '../../modules/http.js';
-import { DetailComponent } from '../DetailView/DetailView.js';
+import { BaseView } from '../BaseView/BaseView.js';
 
 /** Class representing home page view. */
-export class HomeComponent {
+export class HomePageView extends BaseView {
     /**
      * Create a home page view.
+     * @param {EventBus} eventBus - Global Event Bus.
      * @param {Object} data - Parameters for home page view.
      */
-    constructor({
-        data = [],
-    } = {}) {
-        this._data = data;
+    constructor(eventBus, { data = [] } = {}) {
+        super(eventBus, data);
+        this.eventBus.on('homepage:render', this.render.bind(this));
+        this.eventBus.on('homepage:renderHeader', this.renderHeader.bind(this));
+        this.eventBus.on('homepage:setEventListenersForHeader', this.setEventListenersForHeader.bind(this));
+        this.eventBus.on('homepage:renderContent', this.renderContent.bind(this));
     }
     /**
      * Render html home page from pug template.
      */
     render() {
-        const headerIcons = [];
-        getCurrentUser().then((idUser) => {
-            const profileView = new ProfileView({
-                data: {
-                    idUser,
-                }
-            });
-            const logInView = new LogInView();
-            const detailComponent = new DetailComponent();
-            
-            if (idUser) {
-                headerIcons.push(
-                    {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
-                    {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
-                    {id: 'profilePage', href: '#', src: '../../assets/profile.png', alt: ''},
-                    {id: 'logoutPage', href: '#', src: '../../assets/unlogined.png', alt: ''}
-                );
-            } else {
-                headerIcons.push(
-                    {id: 'searchPage', href: '#', src: '../../assets/search.png', alt: ''},
-                    {id: 'favouritePage', href: '#', src: '../../assets/star.png', alt: ''},
-                    {id: 'loginPage', href: '#', src: '../../assets/unlogined.png', alt: ''},
-                );
-            }
+        const template = puglatizer.views.HomeView.HomeView(this._data);
+        APPLICATION.innerHTML = template;
+        this.eventBus.emit('homepage:getCurrentUser');
+        this.setEventListeners.bind(this)();
+    }
 
-            this._data = {headerIcons};
+    /**
+     * Render header from pug template.
+     * @param {boolean} isAuthorized - Flag of authorizing.
+     */
+    renderHeader(isAuthorized) {
+        const data = { isAuthorized: isAuthorized };
+        const template = puglatizer.components.Header.Header(data);
+        const [header] = document.getElementsByTagName('header');
+        header.outerHTML = template;
+    }
+    /**
+     * Render content home page from pug template to content div.
+     */
+    renderContent() {
+        const template = puglatizer.components.HomeContent.HomeContent();
+        const [content] = document.getElementsByClassName('content');
+        content.innerHTML = template;
+        this.setEventListeners.bind(this)();
+    }
 
-            const template = puglatizer.HomeView.HomeView(this._data);
-            APPLICATION.innerHTML = template;
-            
-            const profileLinkHandler = (event) => {
-                profileLink?.removeEventListener(('click'), profileLinkHandler);
-                loginPage?.removeEventListener(('click'), loginPageHandler);
-                logoutPage?.removeEventListener(('click'), logoutPageHandler);
-                linkFilm?.removeEventListener(('click'), linkFilmHandler);
+    /**
+     * Set event listeners for header.
+     */
+    setEventListenersForHeader() {
+        const removeAllListeners = () => {
+            this.eventBus.emit('homepage:removeEventListeners');
+            this.eventBus.emit('profile:removeEventListeners');
+            profileLink?.removeEventListener(('click'), profileLinkHandler);
+            loginPage?.removeEventListener(('click'), loginPageHandler);
+            logoutPage?.removeEventListener(('click'), logoutPageHandler);
+            aMain?.removeEventListener(('click'), aMainHandler);
+        };
 
-                event.preventDefault();
+        const aMainHandler = (event) => {
+            this.eventBus.emit('homepage:removeEventListeners');
+            this.eventBus.emit('profile:removeEventListeners');
+            event.preventDefault();
 
-                APPLICATION.innerHTML = '';
+            this.eventBus.emit('homepage:renderContent');
+        };
 
-                profileView.render();
-            };
-            const loginPageHandler = (event) => {
-                profileLink?.removeEventListener(('click'), profileLinkHandler);
-                loginPage?.removeEventListener(('click'), loginPageHandler);
-                logoutPage?.removeEventListener(('click'), logoutPageHandler);
-                linkFilm?.removeEventListener(('click'), linkFilmHandler);
+        const profileLinkHandler = (event) => {
+            this.eventBus.emit('homepage:removeEventListeners');
+            this.eventBus.emit('profile:removeEventListeners');
+            event.preventDefault();
 
-                event.preventDefault();
+            this.eventBus.emit('profile:getCurrentUser');
+        };
+        const loginPageHandler = (event) => {
+            removeAllListeners();
+            event.preventDefault();
 
-                APPLICATION.innerHTML = '';
+            this.eventBus.emit('login:render');
+        };
+        const logoutPageHandler = (event) => {
+            removeAllListeners();
+            event.preventDefault();
 
-                logInView.render();
-            };
-            const logoutPageHandler = (event) => {
-                event.preventDefault();
+            this.eventBus.emit('homepage:logout');
+        };
 
-                getLogout().then((responseStatus) => {
-                    if (responseStatus) {
-                        profileLink?.removeEventListener(('click'), profileLinkHandler);
-                        loginPage?.removeEventListener(('click'), loginPageHandler);
-                        logoutPage?.removeEventListener(('click'), logoutPageHandler);
-                        linkFilm?.removeEventListener(('click'), linkFilmHandler);
-                        APPLICATION.innerHTML = '';
+        const profileLink = document.getElementById('profilePage');
+        profileLink?.addEventListener(('click'), profileLinkHandler);
 
-                        this.render();
-                    }
-                });
-            };
-            const linkFilmHandler = (event) => {
-                profileLink?.removeEventListener(('click'), profileLinkHandler);
-                loginPage?.removeEventListener(('click'), loginPageHandler);
-                logoutPage?.removeEventListener(('click'), logoutPageHandler);
-                linkFilm?.removeEventListener(('click'), linkFilmHandler);
+        const loginPage = document.getElementById('loginPage');
+        loginPage?.addEventListener(('click'), loginPageHandler);
 
-                event.preventDefault();
+        const logoutPage = document.getElementById('logoutPage');
+        logoutPage?.addEventListener(('click'), logoutPageHandler);
 
-                APPLICATION.innerHTML = '';
+        const [aMain] = document.getElementsByClassName('homePage');
+        aMain?.addEventListener(('click'), aMainHandler);
+    }
 
-                detailComponent.render();
-            };
-            
-            const profileLink = document.getElementById('profilePage');
-            profileLink?.addEventListener(('click'), profileLinkHandler);
+    /**
+     * Set event listeners.
+     */
+    setEventListeners() {
+        const linkFilmHandler = (event) => {
+            linkFilm?.removeEventListener(('click'), linkFilmHandler);
 
-            const loginPage = document.getElementById('loginPage');
-            loginPage?.addEventListener(('click'), loginPageHandler);
+            event.preventDefault();
 
-            const logoutPage = document.getElementById('logoutPage');
-            logoutPage?.addEventListener(('click'), logoutPageHandler);
+            this.eventBus.emit('detailpage:getDetailsAboutFilm');
+        };
 
-            const [linkFilm] = document.getElementsByClassName('film_link_1');
-            linkFilm?.addEventListener(('click'), linkFilmHandler);
-        });
+        const [linkFilm] = document.getElementsByClassName('film_link_1');
+        linkFilm?.addEventListener(('click'), linkFilmHandler);
+
+        const removeEventListeners = () => {
+            linkFilm?.removeEventListener(('click'), linkFilmHandler);
+        };
+
+        this.eventBus.on('homepage:removeEventListeners', removeEventListeners);
     }
 }

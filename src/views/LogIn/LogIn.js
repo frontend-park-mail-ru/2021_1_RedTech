@@ -1,65 +1,59 @@
 import { APPLICATION } from '../../main.js';
-import { SignUpView } from '../SignUp/SignUp.js';
-import { isValidForm } from '../../utils/isValidForm.js';
-import { postUserForLogin } from '../../modules/http.js';
-import { HomeComponent } from '../HomeView/HomeView.js';
+import { BaseView } from '../BaseView/BaseView.js';
 
 /** Class representing a login page view. */
-export class LogInView {
+export class LogInView extends BaseView {
     /**
      * Create a login page view.
      * @param {Object} data - Parameters for render login view.
+     * @param {EventBus} eventBus - Global Event Bus.
      */
-    constructor({ data = {} } = {}) {
-        this._data = data;
+    constructor(eventBus, { data = [] } = {}) {
+        super(eventBus, data);
+        this.eventBus.on('login:render', this.render.bind(this));
     }
 
     /**
      * Render html login page from pug template.
      */
     render() {
-        const homeComponent = new HomeComponent();
-        const signUpView = new SignUpView();
-
-        const template = puglatizer.LogIn.LogIn();
+        const template = puglatizer.views.LogIn.LogIn();
         APPLICATION.innerHTML = template;
+        this.setEventListeners.bind(this)();
+    }
 
+    /**
+     * Set event listeners.
+     */
+    setEventListeners() {
         const [form] = document.getElementsByTagName('form');
         const [aTag] = document.getElementsByClassName('have-acc__link');
 
         const formHandler = (event) => {
             event.preventDefault();
-            const isValid = isValidForm(form);
-
-            if (isValid) {
-                postUserForLogin(
-                    document?.getElementById('email').value,
-                    document?.getElementById('password').value
-                ).then((responseFlag) => {
-                    if (responseFlag) {
-                        form?.removeEventListener(('submit'), formHandler);
-                        aTag?.removeEventListener(('click'), aTagHandler);
-
-                        APPLICATION.innerHTML = '';
-
-                        homeComponent.render();
-                    }
-                });
-            }
+            this.eventBus.emit(
+                'login:postUser',
+                form,
+                document?.getElementById('email').value,
+                document?.getElementById('password').value
+            );
         };
 
         const aTagHandler = (event) => {
             event.preventDefault();
-            form?.removeEventListener(('submit'), formHandler);
-            aTag?.removeEventListener(('click'), aTagHandler);
-
-            APPLICATION.innerHTML = '';
-
-            signUpView.render();
+            this.eventBus.emit('login:removeEventListeners');
+            this.eventBus.emit('signup:render');
         };
 
         form?.addEventListener(('submit'), formHandler);
 
         aTag?.addEventListener(('click'), aTagHandler);
+
+        const removeEventListeners = () => {
+            form?.removeEventListener(('submit'), formHandler);
+            aTag?.removeEventListener(('click'), aTagHandler);
+        };
+
+        this.eventBus.on('login:removeEventListeners', removeEventListeners);
     }
 }
