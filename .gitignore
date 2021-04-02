@@ -1,5 +1,6 @@
 .idea
 .DS_Store
+index.csss
 node_modules
 prepros.config
 templates.js
