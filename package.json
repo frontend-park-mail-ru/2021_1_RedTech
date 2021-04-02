@@ -12,9 +12,11 @@
     "lint-fix": "eslint --fix src/",
     "prepare": "husky install"
   },
-  "eslintIgnore": ["src/templates.js"],
+  "eslintIgnore": [
+    "src/templates.js"
+  ],
   "keywords": [],
-  "author": "",a
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
