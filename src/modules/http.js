@@ -1,5 +1,5 @@
 import { URLS } from './urls.js';
-import { filmJsonToFilm } from './adapters.js';
+import {filmJsonToFilm, arrayFilmsToFilmCards, arrayContentToNewFilmsSeries} from './adapters.js';
 
 /**
  * Send async request to the server.
@@ -216,9 +216,9 @@ const patchProfile = async (idUser, email, login) => {
  * Send async get request using async func.
  * @returns {Object} - detail info about film in object.
  */
-const getDetailFilmPage = async () => {
+const getDetailFilmPage = async (filmId) => {
     const params = {
-        url: URLS.api.media,
+        url: URLS.api.media + filmId,
         method: 'GET',
     };
 
@@ -226,6 +226,60 @@ const getDetailFilmPage = async () => {
         const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
         if (responseStatus === 200) {
             return filmJsonToFilm(responseBody);
+        } else {
+            return null;
+        }
+    } catch (err) {
+        return null;
+    }
+};
+
+const getTopFilmsAndSeries = async () => {
+    const params = {
+        url: URLS.api.mediaContent + '/top' + '?limit=5',
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayFilmsToFilmCards(responseBody.top);
+        } else {
+            return null;
+        }
+    } catch (err) {
+        return null;
+    }
+};
+
+const getNewFilms = async () => {
+    const params = {
+        url: URLS.api.mediaContent + '/newFilms' + '?limit=10&type=movie',
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayContentToNewFilmsSeries(responseBody.newFilms);
+        } else {
+            return null;
+        }
+    } catch (err) {
+        return null;
+    }
+};
+
+const getNewSeries = async () => {
+    const params = {
+        url: URLS.api.mediaContent + '/newSeries' + '?limit=10&type=series',
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayContentToNewFilmsSeries(responseBody.newSeries);
         } else {
             return null;
         }
@@ -242,5 +296,8 @@ export {
     getProfile,
     postAvatar,
     patchProfile,
-    getDetailFilmPage
+    getDetailFilmPage,
+    getTopFilmsAndSeries,
+    getNewFilms,
+    getNewSeries
 };

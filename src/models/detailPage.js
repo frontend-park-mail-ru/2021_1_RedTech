@@ -6,8 +6,8 @@ export class DetailPageModel {
         this.eventBus.on('detailpage:getDetailsAboutFilm', this.getDetailsAboutFilm.bind(this));
     }
 
-    getDetailsAboutFilm() {
-        getDetailFilmPage().then((film) => {
+    getDetailsAboutFilm(filmId) {
+        getDetailFilmPage(filmId).then((film) => {
             this.eventBus.emit('detailpage:renderDetailsAboutFilm', film);
         });
     }

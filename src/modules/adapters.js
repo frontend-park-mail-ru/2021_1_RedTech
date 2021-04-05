@@ -12,3 +12,34 @@ export const filmJsonToFilm = (jsonFilm) => {
     });
     return film;
 };
+
+export const arrayFilmsToFilmCards = (arrayFilms) => {
+    const filmCards = [];
+
+    arrayFilms.forEach((jsonFilm) => {
+        filmCards.push({
+            id: jsonFilm.id,
+            title: jsonFilm.title,
+            description: jsonFilm.description,
+            movieAvatar: `${currentUrl}${jsonFilm.movie_avatar}`,
+            stars: '* '.repeat(jsonFilm.rating)
+        });
+    });
+
+    return filmCards;
+};
+
+export const arrayContentToNewFilmsSeries = (arrayContent) => {
+    const newFilmsSeries = [];
+
+    arrayContent.forEach((jsonFilm) => {
+        newFilmsSeries.push({
+            id: jsonFilm.id,
+            title: jsonFilm.title,
+            movieAvatar: `${currentUrl}${jsonFilm.movie_avatar}`,
+            status: jsonFilm.is_free ? 'Бесплатно' : 'Подписка',
+        });
+    });
+
+    return newFilmsSeries;
+};

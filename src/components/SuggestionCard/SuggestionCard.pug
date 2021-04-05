@@ -1,5 +1,5 @@
-div.item__internal
-    img.item__suggestion__image(src= i.src alt= i.alt)
+div.item__internal(id = 'suggest' + i.id)
+    img.item__suggestion__image(src= i.movieAvatar alt= i.alt)
     div.item__suggestion__title
         a(href= "#")= i.title
     div.item__suggestion__status

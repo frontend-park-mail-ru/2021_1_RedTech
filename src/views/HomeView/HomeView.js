@@ -12,6 +12,7 @@ export class HomePageView extends BaseView {
         super(eventBus, data);
         this.eventBus.on('homepage:render', this.render.bind(this));
         this.eventBus.on('homepage:renderHeader', this.renderHeader.bind(this));
+        this.eventBus.on('homepage:setEventListeners', this.setEventListeners.bind(this));
         this.eventBus.on('homepage:setEventListenersForHeader', this.setEventListenersForHeader.bind(this));
         this.eventBus.on('homepage:renderContent', this.renderContent.bind(this));
     }
@@ -19,10 +20,15 @@ export class HomePageView extends BaseView {
      * Render html home page from pug template.
      */
     render() {
+        this._data = {
+            cardFilms: [],
+            newFilms: [],
+            newSeries: [],
+        };
         const template = puglatizer.views.HomeView.HomeView(this._data);
         APPLICATION.innerHTML = template;
         this.eventBus.emit('homepage:getCurrentUser');
-        this.setEventListeners.bind(this)();
+        this.eventBus.emit('homepage:getMainPageFilms');
     }
 
     /**
@@ -38,11 +44,15 @@ export class HomePageView extends BaseView {
     /**
      * Render content home page from pug template to content div.
      */
-    renderContent() {
-        const template = puglatizer.components.HomeContent.HomeContent();
+    renderContent(cardFilms, newFilms, newSeries) {
+        this._data = {
+            cardFilms,
+            newFilms,
+            newSeries,
+        };
+        const template = puglatizer.components.HomeContent.HomeContent(this._data);
         const [content] = document.getElementsByClassName('content');
         content.innerHTML = template;
-        this.setEventListeners.bind(this)();
     }
 
     /**
@@ -63,7 +73,7 @@ export class HomePageView extends BaseView {
             this.eventBus.emit('profile:removeEventListeners');
             event.preventDefault();
 
-            this.eventBus.emit('homepage:renderContent');
+            this.eventBus.emit('homepage:getMainPageFilms');
         };
 
         const profileLinkHandler = (event) => {
@@ -87,13 +97,13 @@ export class HomePageView extends BaseView {
         };
 
         const profileLink = document.querySelector('.js-profile-page');
-            profileLink?.addEventListener(('click'), profileLinkHandler);
+        profileLink?.addEventListener(('click'), profileLinkHandler);
 
-            const loginPage = document.querySelector('.js-login-page');
-            loginPage?.addEventListener(('click'), loginPageHandler);
+        const loginPage = document.querySelector('.js-login-page');
+        loginPage?.addEventListener(('click'), loginPageHandler);
 
-            const logoutPage = document.querySelector('.js-logout-page');
-            logoutPage?.addEventListener(('click'), logoutPageHandler);
+        const logoutPage = document.querySelector('.js-logout-page');
+        logoutPage?.addEventListener(('click'), logoutPageHandler);
 
         const [aMain] = document.getElementsByClassName('homePage');
         aMain?.addEventListener(('click'), aMainHandler);
@@ -103,19 +113,43 @@ export class HomePageView extends BaseView {
      * Set event listeners.
      */
     setEventListeners() {
-        const linkFilmHandler = (event) => {
-            linkFilm?.removeEventListener(('click'), linkFilmHandler);
+        const topFilmSeriesHandler = (event) => {
+            window.scrollTo(0, 0);
+            removeEventListeners();
 
+            const target = event.target.closest('.item__film-card');
             event.preventDefault();
 
-            this.eventBus.emit('detailpage:getDetailsAboutFilm');
+            if (target) {
+                this.eventBus.emit('detailpage:getDetailsAboutFilm', target.id.substr('top'.length));
+            }
         };
 
-        const [linkFilm] = document.getElementsByClassName('film_link_1');
-        linkFilm?.addEventListener(('click'), linkFilmHandler);
+        const newFilmSeriesHandler = (event) => {
+            window.scrollTo(0, 0);
+            removeEventListeners();
+
+            const target = event.target.closest('.item__internal');
+            event.preventDefault();
+
+            if (target) {
+                this.eventBus.emit('detailpage:getDetailsAboutFilm', target.id.substr('suggest'.length));
+            }
+        };
+
+        const [filmContainer] = document.getElementsByClassName('container');
+        filmContainer?.addEventListener(('click'), topFilmSeriesHandler);
+
+        const [newFilms] = document.getElementsByClassName('new_films');
+        newFilms?.addEventListener(('click'), newFilmSeriesHandler);
+
+        const [newSeries] = document.getElementsByClassName('new_series');
+        newSeries?.addEventListener(('click'), newFilmSeriesHandler);
 
         const removeEventListeners = () => {
-            linkFilm?.removeEventListener(('click'), linkFilmHandler);
+            filmContainer?.removeEventListener(('click'), topFilmSeriesHandler);
+            newSeries?.removeEventListener(('click'), newFilmSeriesHandler);
+            newFilms?.removeEventListener(('click'), newFilmSeriesHandler);
         };
 
         this.eventBus.on('homepage:removeEventListeners', removeEventListeners);
