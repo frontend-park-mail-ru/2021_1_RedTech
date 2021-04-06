@@ -1,4 +1,4 @@
-import eventBus from '../modules/eventBus.js';
+import { eventBus } from '../modules/eventBus.js';
 import { HomePageModel } from '../models/homePage.js';
 import { HomePageView } from '../views/HomeView/HomeView.js';
 

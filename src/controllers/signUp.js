@@ -1,4 +1,4 @@
-import eventBus from '../modules/eventBus.js';
+import { eventBus } from '../modules/eventBus.js';
 import { SignUpModel } from '../models/signUp.js';
 import { SignUpView } from '../views/SignUp/SignUp.js';
 
