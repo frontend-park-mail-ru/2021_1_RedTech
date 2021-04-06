@@ -13,7 +13,7 @@ class EventBus {
      * @param {function} callback - Callback function.
      */
     on(event, callback) {
-        (this._listeners[event] || (this._listeners[event] = [])).push(callback);
+        (this._listeners[event] || (this._listeners[event] = new Map())).set(callback.name, callback);
     }
 
     /**
@@ -23,7 +23,7 @@ class EventBus {
      */
     off(event, callback) {
         this._listeners[event] = this._listeners[event]
-            ?.filter(function (listener) { return listener !== callback; });
+            ?.delete(callback.name);
     }
 
     /**

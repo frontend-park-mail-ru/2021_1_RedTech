@@ -24,6 +24,8 @@ export class HomePageModel {
             const [topFilmsAndSeriesValue, newFilmsValue, newSeriesValue] = values;
             this.eventBus.emit('homepage:renderContent', topFilmsAndSeriesValue, newFilmsValue, newSeriesValue);
             this.eventBus.emit('homepage:setEventListeners');
+        }).catch(() => {
+            this.eventBus.emit('homepage:renderErrorPage');
         });
     }
 
@@ -33,11 +35,19 @@ export class HomePageModel {
     getInfoForHeader = () => {
         getCurrentUser().then((idUser) => {
             if (idUser) {
-                this.eventBus.emit('homepage:renderHeader', true);
+                const data = {
+                    isAuthorized: true,
+                };
+                this.eventBus.emit('homepage:renderHeader', data);
             } else {
-                this.eventBus.emit('homepage:renderHeader', false);
+                const data = {
+                    isAuthorized: false,
+                };
+                this.eventBus.emit('homepage:renderHeader', data);
             }
             this.eventBus.emit('homepage:setEventListenersForHeader');
+        }).catch(() => {
+            this.eventBus.emit('homepage:renderErrorPage');
         });
     }
 
@@ -47,6 +57,8 @@ export class HomePageModel {
     logout = () => {
         getLogout().then(() => {
             this.eventBus.emit('homepage:render');
+        }).catch(() => {
+            this.eventBus.emit('homepage:renderErrorPage');
         });
     }
 }

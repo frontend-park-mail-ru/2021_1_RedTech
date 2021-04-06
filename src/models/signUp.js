@@ -32,7 +32,11 @@ export class SignUpModel {
                 if (responseFlag) {
                     this.eventBus.emit('signup:removeEventListeners');
                     this.eventBus.emit('homepage:render');
+                } else {
+                    this.eventBus.emit('homepage:renderErrorPage');
                 }
+            }).catch(() => {
+                this.eventBus.emit('homepage:renderErrorPage');
             });
         }
     }

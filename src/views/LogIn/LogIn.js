@@ -5,27 +5,27 @@ import { BaseView } from '../BaseView/BaseView.js';
 export class LogInView extends BaseView {
     /**
      * Create a login page view.
-     * @param {Object} data - Parameters for render login view.
+     * @param {Object} - Parameters for render login view.
      * @param {EventBus} eventBus - Global Event Bus.
      */
-    constructor(eventBus, { data = [] } = {}) {
+    constructor(eventBus, { data = {} } = {}) {
         super(eventBus, data);
-        this.eventBus.on('login:render', this.render.bind(this));
+        this.eventBus.on('login:render', this.render);
     }
 
     /**
      * Render html login page from pug template.
      */
-    render() {
+    render = () => {
         const template = puglatizer.views.LogIn.LogIn();
         APPLICATION.innerHTML = template;
-        this.setEventListeners.bind(this)();
+        this.setEventListeners();
     }
 
     /**
      * Set event listeners.
      */
-    setEventListeners() {
+    setEventListeners = () => {
         const [form] = document.getElementsByTagName('form');
         const [aTag] = document.getElementsByClassName('have-acc__link');
 

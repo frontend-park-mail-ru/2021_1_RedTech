@@ -6,26 +6,22 @@ export class HomePageView extends BaseView {
     /**
      * Create a home page view.
      * @param {EventBus} eventBus - Global Event Bus.
-     * @param {Object} data - Parameters for home page view.
+     * @param {Object}- Parameters for home page view.
      */
-    constructor(eventBus, { data = [] } = {}) {
+    constructor(eventBus, { data = {} } = {}) {
         super(eventBus, data);
-        this.eventBus.on('homepage:render', this.render.bind(this));
-        this.eventBus.on('homepage:renderHeader', this.renderHeader.bind(this));
-        this.eventBus.on('homepage:setEventListeners', this.setEventListeners.bind(this));
-        this.eventBus.on('homepage:setEventListenersForHeader', this.setEventListenersForHeader.bind(this));
-        this.eventBus.on('homepage:renderContent', this.renderContent.bind(this));
+        this.eventBus.on('homepage:render', this.render);
+        this.eventBus.on('homepage:renderHeader', this.renderHeader);
+        this.eventBus.on('homepage:setEventListeners', this.setEventListeners);
+        this.eventBus.on('homepage:setEventListenersForHeader', this.setEventListenersForHeader);
+        this.eventBus.on('homepage:renderContent', this.renderContent);
+        this.eventBus.on('homepage:renderErrorPage', this.renderErrorPage);
     }
     /**
      * Render html home page from pug template.
      */
-    render() {
-        this._data = {
-            cardFilms: [],
-            newFilms: [],
-            newSeries: [],
-        };
-        const template = puglatizer.views.HomeView.HomeView(this._data);
+    render = () => {
+        const template = puglatizer.components.Loader.Loader();
         APPLICATION.innerHTML = template;
         this.eventBus.emit('homepage:InfoForHeader');
         this.eventBus.emit('homepage:getMainPageContent');
@@ -33,32 +29,47 @@ export class HomePageView extends BaseView {
 
     /**
      * Render header from pug template.
-     * @param {boolean} isAuthorized - Flag of authorizing.
+     * @param {Object} data - Contains flag of authorizing.
      */
-    renderHeader(isAuthorized) {
-        const data = { isAuthorized: isAuthorized };
+    renderHeader = (data) => {
         const template = puglatizer.components.Header.Header(data);
         const [header] = document.getElementsByTagName('header');
-        header.outerHTML = template;
+        if (header) {
+            header.outerHTML = template;
+        } else {
+            this.eventBus.emit('homepage:renderErrorPage');
+        }
     }
     /**
      * Render content home page from pug template to content div.
      */
-    renderContent(cardFilms, newFilms, newSeries) {
+    renderContent = (cardFilms, newFilms, newSeries) => {
         this._data = {
             cardFilms,
             newFilms,
             newSeries,
         };
         const template = puglatizer.components.HomeContent.HomeContent(this._data);
-        const [content] = document.getElementsByClassName('content');
-        content.innerHTML = template;
+        const content = document.querySelector('.content');
+        if (content) {
+            content.innerHTML = template;
+        } else {
+            this.eventBus.emit('homepage:renderErrorPage');
+        }
+    }
+
+    /**
+     * Render error page from pug template.
+     */
+    renderErrorPage = () => {
+        const template = puglatizer.components.ErrorPage.ErrorPage();
+        APPLICATION.innerHTML = template;
     }
 
     /**
      * Set event listeners for header.
      */
-    setEventListenersForHeader() {
+    setEventListenersForHeader = () => {
         const removeAllListeners = () => {
             this.eventBus.emit('homepage:removeEventListeners');
             this.eventBus.emit('profile:removeEventListeners');
@@ -112,7 +123,7 @@ export class HomePageView extends BaseView {
     /**
      * Set event listeners.
      */
-    setEventListeners() {
+    setEventListeners = () => {
         const topFilmSeriesHandler = (event) => {
             window.scrollTo(0, 0);
             removeEventListeners();

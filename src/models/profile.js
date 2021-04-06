@@ -25,6 +25,8 @@ export class ProfileModel {
             } else {
                 this.eventBus.emit('homepage:render');
             }
+        }).catch(() => {
+            this.eventBus.emit('homepage:renderErrorPage');
         });
     }
 
@@ -35,18 +37,19 @@ export class ProfileModel {
     getInfoForProfile = (idUser) => {
         getProfile(idUser).then((responseBody) => {
             if (responseBody) {
-                let params = {};
-                params.login = responseBody.username;
-                params.email = responseBody.email;
+                const params = {
+                    login: responseBody.username,
+                    email: responseBody.email,
+                    user_avatar: responseBody.avatar ?? 'img/user.png',
+                };
 
-                if (responseBody.avatar) {
-                    params.user_avatar = responseBody.avatar;
-                } else {
-                    params.user_avatar = 'img/user.png';
-                }
                 this.eventBus.emit('profile:renderProfileInfo', params);
                 this.eventBus.emit('profile:setEventListeners', idUser);
+            } else {
+                this.eventBus.emit('homepage:renderErrorPage');
             }
+        }).catch(() => {
+            this.eventBus.emit('homepage:renderErrorPage');
         });
     }
 
@@ -56,14 +59,16 @@ export class ProfileModel {
      * @param {HTMLElement} avatarInput - Avatar input field.
      */
     updateAvatar = (idUser, avatarInput) => {
-        const avatar = avatarInput.files[0];
-        const formPut = new FormData();
-        formPut.append('avatar', avatar);
+        const [avatar] = avatarInput.files;
+        if (avatar) {
+            const formPut = new FormData();
+            formPut.append('avatar', avatar);
 
-        const { avatarSrc } =  postAvatar(idUser, formPut);
+            const { avatarSrc } =  postAvatar(idUser, formPut);
 
-        if (avatarSrc) {
-            this.eventBus.emit('profile:renderNewAvatar', avatarSrc);
+            if (avatarSrc) {
+                this.eventBus.emit('profile:renderNewAvatar', avatarSrc);
+            }
         }
     }
 
@@ -83,6 +88,8 @@ export class ProfileModel {
             if (responseStatus) {
                 this.eventBus.emit('profile:updateProfile', form);
             }
+        }).catch(() => {
+            this.eventBus.emit('homepage:renderErrorPage');
         });
     }
 

@@ -17,7 +17,13 @@ export class DetailPageModel {
      */
     getInfoAboutFilm = (filmId) => {
         getDetailFilmPage(filmId).then((film) => {
-            this.eventBus.emit('detailpage:renderDetailsAboutFilm', film);
+            if (film) {
+                this.eventBus.emit('detailpage:renderDetailsAboutFilm', film);
+            } else {
+                this.eventBus.emit('homepage:renderErrorPage');
+            }
+        }).catch(() => {
+            this.eventBus.emit('homepage:renderErrorPage');
         });
     };
 }

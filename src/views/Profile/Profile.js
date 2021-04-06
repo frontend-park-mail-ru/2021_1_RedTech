@@ -6,25 +6,22 @@ export class ProfileView extends BaseView {
     /**
      * Create a profile page view.
      * @param {EventBus} eventBus - Global Event Bus.
-     * @param {Object} data - Parameters for render profile view.
+     * @param {Object} - Parameters for render profile view.
      */
-    constructor(eventBus, { data = [] } = {}) {
+    constructor(eventBus, { data = {} } = {}) {
         super(eventBus, data);
-        this.eventBus.on('profile:render', this.render.bind(this));
-        this.eventBus.on('profile:renderProfileInfo', this.renderProfileInfo.bind(this));
-        this.eventBus.on('profile:setEventListeners', this.setEventListeners.bind(this));
-        this.eventBus.on('profile:renderNewAvatar', this.renderNewAvatar.bind(this));
-        this.eventBus.on('profile:updateProfile', this.updateProfile.bind(this));
+        this.eventBus.on('profile:render', this.render);
+        this.eventBus.on('profile:renderProfileInfo', this.renderProfileInfo);
+        this.eventBus.on('profile:setEventListeners', this.setEventListeners);
+        this.eventBus.on('profile:renderNewAvatar', this.renderNewAvatar);
+        this.eventBus.on('profile:updateProfile', this.updateProfile);
     }
 
     /**
 	 * Render html profile page from pug template.
 	 */
-    render() {
-        this._data = {
-            profileData: {}
-        };
-        const template = puglatizer.views.Profile.Profile(this._data);
+    render = () => {
+        const template = puglatizer.components.Loader.Loader();
         APPLICATION.innerHTML = template;
         this.eventBus.emit('profile:getInfoAboutCurrentUser');
         this.eventBus.emit('homepage:InfoForHeader');
@@ -34,20 +31,24 @@ export class ProfileView extends BaseView {
      * Render html profile info from pug template to content div.
      * @param {Object} params - Profile data.
      */
-    renderProfileInfo(params) {
+    renderProfileInfo = (params) => {
         this._data = {
             profileData: params
         };
         const template = puglatizer.components.ProfileContent.ProfileContent(this._data);
-        const [content] = document.getElementsByClassName('content');
-        content.innerHTML = template;
+        const content = document.querySelector('.content');
+        if (content) {
+            content.innerHTML = template;
+        } else {
+            this.eventBus.emit('homepage:renderErrorPage');
+        }
     }
 
     /**
      * Render avatar from pug template.
      * @param {string} avatarSrc - Source of new avatar.
      */
-    renderNewAvatar(avatarSrc) {
+    renderNewAvatar = (avatarSrc) => {
         const imgAvatar = document?.getElementById('avatar');
         imgAvatar.src = avatarSrc;
     }
@@ -56,7 +57,7 @@ export class ProfileView extends BaseView {
      * Setting for input form and button.
      * @param {HTMLFormElement} form - Form element that will be updated.
      */
-    updateProfile(form) {
+    updateProfile = (form) => {
         const [nick] = document.getElementsByClassName('title-wrapper__nickname');
         const [button] = document.getElementsByClassName('input-wrapper__button');
         const inputs = form.querySelectorAll('.input-wrapper__input');
@@ -74,7 +75,7 @@ export class ProfileView extends BaseView {
      * Set event listeners.
      * @param {string} idUser - idUser that needed for render some data.
      */
-    setEventListeners(idUser) {
+    setEventListeners = (idUser) => {
         const imgAvatar = document?.getElementById('avatar');
 
         const [form] = document.getElementsByTagName('form');

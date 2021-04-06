@@ -1,4 +1,4 @@
-import eventBus from './modules/eventBus.js';
+import { eventBus } from './modules/eventBus.js';
 import { LogInController } from './controllers/logIn.js';
 import { SignUpController } from './controllers/signUp.js';
 import { ProfileController } from './controllers/profile.js';

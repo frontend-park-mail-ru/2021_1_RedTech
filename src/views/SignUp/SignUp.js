@@ -6,26 +6,26 @@ export class SignUpView extends BaseView {
     /**
      * Create a signup page view.
      * @param {EventBus} eventBus
-     * @param {Object} data - Parameters for render signup view.
+     * @param {Object} - Parameters for render signup view.
      */
-    constructor(eventBus, { data = [] } = {}) {
+    constructor(eventBus, { data = {} } = {}) {
         super(eventBus, data);
-        this.eventBus.on('signup:render', this.render.bind(this));
+        this.eventBus.on('signup:render', this.render);
     }
 
     /**
      * Render html signup page from pug template.
      */
-    render() {
+    render = () => {
         const template = puglatizer.views.SignUp.SignUp();
         APPLICATION.innerHTML = template;
-        this.setEventListeners.bind(this)();
+        this.setEventListeners();
     }
 
     /**
      * Setting event listeners.
      */
-    setEventListeners() {
+    setEventListeners = () => {
         const [form] = document.getElementsByTagName('form');
         const [aTag] = document.getElementsByClassName('have-acc__link');
 
