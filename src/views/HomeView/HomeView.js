@@ -155,4 +155,3 @@ export class HomePageView extends BaseView {
         this.eventBus.on('homepage:removeEventListeners', removeEventListeners);
     }
 }
-
