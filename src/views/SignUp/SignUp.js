@@ -33,7 +33,7 @@ export class SignUpView extends BaseView {
             event.preventDefault();
 
             this.eventBus.emit(
-                'signup:postUser',
+                'signup:signUpUser',
                 form,
                 document?.getElementById('login').value,
                 document?.getElementById('email').value,

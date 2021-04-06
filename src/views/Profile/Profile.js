@@ -26,8 +26,8 @@ export class ProfileView extends BaseView {
         };
         const template = puglatizer.views.Profile.Profile(this._data);
         APPLICATION.innerHTML = template;
-        this.eventBus.emit('profile:getCurrentUser');
-        this.eventBus.emit('homepage:getCurrentUser');
+        this.eventBus.emit('profile:getInfoAboutCurrentUser');
+        this.eventBus.emit('homepage:InfoForHeader');
     }
 
     /**

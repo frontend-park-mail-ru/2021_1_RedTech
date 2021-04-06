@@ -1,5 +1,5 @@
 import { URLS } from './urls.js';
-import {filmJsonToFilm, arrayFilmsToFilmCards, arrayContentToNewFilmsSeries} from './adapters.js';
+import { filmJsonToFilm, arrayFilmsToFilmCards, arrayContentToNewFilmsSeries } from './adapters.js';
 
 /**
  * Send async request to the server.
@@ -234,6 +234,10 @@ const getDetailFilmPage = async (filmId) => {
     }
 };
 
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects for render top slider.
+ */
 const getTopFilmsAndSeries = async () => {
     const params = {
         url: URLS.api.mediaContent + '/top' + '?limit=5',
@@ -252,6 +256,10 @@ const getTopFilmsAndSeries = async () => {
     }
 };
 
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects new films.
+ */
 const getNewFilms = async () => {
     const params = {
         url: URLS.api.mediaContent + '/newFilms' + '?limit=10&type=movie',
@@ -270,6 +278,10 @@ const getNewFilms = async () => {
     }
 };
 
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects new series.
+ */
 const getNewSeries = async () => {
     const params = {
         url: URLS.api.mediaContent + '/newSeries' + '?limit=10&type=series',

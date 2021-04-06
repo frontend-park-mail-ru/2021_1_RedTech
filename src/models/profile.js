@@ -1,25 +1,38 @@
 import { getProfile, getCurrentUser, postAvatar, patchProfile } from '../modules/http.js';
 import { isValidForm } from '../utils/isValidForm.js';
 
+/** Class representing profile page model. */
 export class ProfileModel {
+    /**
+     * Create a profile page model.
+     * @param {EventBus} eventBus - Global Event Bus.
+     */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on('profile:getCurrentUser', this.getCurrentUser.bind(this));
-        this.eventBus.on('profile:getProfile', this.getProfile.bind(this));
-        this.eventBus.on('profile:saveChanges', this.saveChanges.bind(this));
+        this.eventBus.on('profile:getInfoAboutCurrentUser', this.getInfoAboutCurrentUser);
+        this.eventBus.on('profile:getInfoForProfile', this.getInfoForProfile);
+        this.eventBus.on('profile:saveChanges', this.saveChanges);
     }
 
-    getCurrentUser() {
+    /**
+     * Call func to full info about logged user for render profile page in success case.
+     * In other case, rerender home page.
+     */
+    getInfoAboutCurrentUser = () => {
         getCurrentUser().then((idUser) => {
             if (idUser) {
-                this.eventBus.emit('profile:getProfile', idUser);
+                this.eventBus.emit('profile:getInfoForProfile', idUser);
             } else {
                 this.eventBus.emit('homepage:render');
             }
         });
     }
 
-    getProfile(idUser) {
+    /**
+     * Get full info about user and emit render profile page.
+     * @param {string} idUser - Current user id.
+     */
+    getInfoForProfile = (idUser) => {
         getProfile(idUser).then((responseBody) => {
             if (responseBody) {
                 let params = {};
@@ -37,7 +50,12 @@ export class ProfileModel {
         });
     }
 
-    postAvatar(idUser, avatarInput) {
+    /**
+     * Update avatar and emit render new avatar.
+     * @param {string} idUser - Current user id.
+     * @param {HTMLElement} avatarInput - Avatar input field.
+     */
+    updateAvatar = (idUser, avatarInput) => {
         const avatar = avatarInput.files[0];
         const formPut = new FormData();
         formPut.append('avatar', avatar);
@@ -49,7 +67,14 @@ export class ProfileModel {
         }
     }
 
-    patchProfile(idUser, email, login, form) {
+    /**
+     * Update profile info.
+     * @param {string} idUser - Current user id.
+     * @param {string} email - New user email.
+     * @param {string} login - New user login.
+     * @param {HTMLFormElement} form - Profile page form.
+     */
+    updateProfileInfo = (idUser, email, login, form) => {
         patchProfile(
             idUser,
             email,
@@ -61,13 +86,21 @@ export class ProfileModel {
         });
     }
 
-    saveChanges(idUser, form, avatarInput, email, login) {
+    /**
+     * Calls when was submitted profile form button, save all changes.
+     * @param {string} idUser - Current user id.
+     * @param {HTMLFormElement} form - Profile page form.
+     * @param {HTMLElement} avatarInput - Avatar input field.
+     * @param {string} email - New user email.
+     * @param {string} login - New user login.
+     */
+    saveChanges = (idUser, form, avatarInput, email, login) => {
         const isValid = isValidForm(form);
         if (isValid) {
             if (avatarInput.value) {
-                this.postAvatar(idUser, avatarInput);
+                this.updateAvatar(idUser, avatarInput);
             }
-            this.patchProfile(idUser, email, login, form);
+            this.updateProfileInfo(idUser, email, login, form);
         }
     }
 }

@@ -27,8 +27,8 @@ export class HomePageView extends BaseView {
         };
         const template = puglatizer.views.HomeView.HomeView(this._data);
         APPLICATION.innerHTML = template;
-        this.eventBus.emit('homepage:getCurrentUser');
-        this.eventBus.emit('homepage:getMainPageFilms');
+        this.eventBus.emit('homepage:InfoForHeader');
+        this.eventBus.emit('homepage:getMainPageContent');
     }
 
     /**
@@ -73,7 +73,7 @@ export class HomePageView extends BaseView {
             this.eventBus.emit('profile:removeEventListeners');
             event.preventDefault();
 
-            this.eventBus.emit('homepage:getMainPageFilms');
+            this.eventBus.emit('homepage:getMainPageContent');
         };
 
         const profileLinkHandler = (event) => {
@@ -81,7 +81,7 @@ export class HomePageView extends BaseView {
             this.eventBus.emit('profile:removeEventListeners');
             event.preventDefault();
 
-            this.eventBus.emit('profile:getCurrentUser');
+            this.eventBus.emit('profile:getInfoAboutCurrentUser');
         };
         const loginPageHandler = (event) => {
             removeAllListeners();
@@ -121,7 +121,7 @@ export class HomePageView extends BaseView {
             event.preventDefault();
 
             if (target) {
-                this.eventBus.emit('detailpage:getDetailsAboutFilm', target.id.substr('top'.length));
+                this.eventBus.emit('detailpage:getInfoAboutFilm', target.id.substr('top'.length));
             }
         };
 
@@ -133,7 +133,7 @@ export class HomePageView extends BaseView {
             event.preventDefault();
 
             if (target) {
-                this.eventBus.emit('detailpage:getDetailsAboutFilm', target.id.substr('suggest'.length));
+                this.eventBus.emit('detailpage:getInfoAboutFilm', target.id.substr('suggest'.length));
             }
         };
 

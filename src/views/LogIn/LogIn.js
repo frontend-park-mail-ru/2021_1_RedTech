@@ -32,7 +32,7 @@ export class LogInView extends BaseView {
         const formHandler = (event) => {
             event.preventDefault();
             this.eventBus.emit(
-                'login:postUser',
+                'login:loginUser',
                 form,
                 document?.getElementById('email').value,
                 document?.getElementById('password').value
