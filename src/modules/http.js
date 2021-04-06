@@ -98,9 +98,8 @@ const getCurrentUser = async () => {
         const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
         if (responseStatus === 200) {
             return responseBody.id;
-        } else {
-            return null;
         }
+        return null;
     } catch (err) {
         return null;
     }
@@ -144,9 +143,8 @@ const getProfile = async (idUser) => {
         const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
         if (responseStatus === 200) {
             return responseBody;
-        } else {
-            return null;
         }
+        return null;
     } catch (err) {
         return null;
     }
@@ -174,9 +172,8 @@ const postAvatar = async (idUser, formPut) => {
         const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
         if (responseStatus === 200) {
             return responseBody.user_avatar;
-        } else {
-            return null;
         }
+        return null;
     } catch (err) {
         return null;
     }
@@ -226,9 +223,8 @@ const getDetailFilmPage = async (filmId) => {
         const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
         if (responseStatus === 200) {
             return filmJsonToFilm(responseBody);
-        } else {
-            return null;
         }
+        return null;
     } catch (err) {
         return null;
     }
@@ -248,9 +244,8 @@ const getTopFilmsAndSeries = async () => {
         const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
         if (responseStatus === 200) {
             return arrayFilmsToFilmCards(responseBody.top);
-        } else {
-            return null;
         }
+        return null;
     } catch (err) {
         return null;
     }
@@ -270,9 +265,8 @@ const getNewFilms = async () => {
         const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
         if (responseStatus === 200) {
             return arrayContentToNewFilmsSeries(responseBody.newFilms);
-        } else {
-            return null;
         }
+        return null;
     } catch (err) {
         return null;
     }
@@ -292,9 +286,8 @@ const getNewSeries = async () => {
         const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
         if (responseStatus === 200) {
             return arrayContentToNewFilmsSeries(responseBody.newSeries);
-        } else {
-            return null;
         }
+        return null;
     } catch (err) {
         return null;
     }
