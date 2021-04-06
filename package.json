@@ -12,9 +12,6 @@
     "lint-fix": "eslint --fix src/",
     "prepare": "husky install"
   },
-  "eslintIgnore": [
-    "src/templates.js"
-  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
