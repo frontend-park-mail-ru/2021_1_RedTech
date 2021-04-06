@@ -21,7 +21,8 @@ export class HomePageModel {
         const newFilms = getNewFilms();
         const newSeries = getNewSeries();
         Promise.all([topFilmsAndSeries, newFilms, newSeries]).then((values) => {
-            this.eventBus.emit('homepage:renderContent', values[0], values[1], values[2]);
+            const [topFilmsAndSeriesValue, newFilmsValue, newSeriesValue] = values;
+            this.eventBus.emit('homepage:renderContent', topFilmsAndSeriesValue, newFilmsValue, newSeriesValue);
             this.eventBus.emit('homepage:setEventListeners');
         });
     }
