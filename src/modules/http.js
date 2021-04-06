@@ -236,7 +236,7 @@ const getDetailFilmPage = async (filmId) => {
  */
 const getTopFilmsAndSeries = async () => {
     const params = {
-        url: URLS.api.mediaContent + '/top' + '?limit=5',
+        url: URLS.api.topFilmsAndSeries,
         method: 'GET'
     };
 
@@ -257,7 +257,7 @@ const getTopFilmsAndSeries = async () => {
  */
 const getNewFilms = async () => {
     const params = {
-        url: URLS.api.mediaContent + '/newFilms' + '?limit=10&type=movie',
+        url: URLS.api.newFilms,
         method: 'GET'
     };
 
@@ -278,7 +278,7 @@ const getNewFilms = async () => {
  */
 const getNewSeries = async () => {
     const params = {
-        url: URLS.api.mediaContent + '/newSeries' + '?limit=10&type=series',
+        url: URLS.api.newSeries,
         method: 'GET'
     };
 
