@@ -26,7 +26,7 @@ export const filmJsonToFilm = (jsonFilm) => {
 export const arrayFilmsToFilmCards = (arrayFilms) => {
     const filmCards = [];
 
-    arrayFilms.forEach((jsonFilm) => {
+    arrayFilms.reduce((_, jsonFilm) => {
         filmCards.push({
             id: jsonFilm.id,
             title: jsonFilm.title,
@@ -47,7 +47,7 @@ export const arrayFilmsToFilmCards = (arrayFilms) => {
 export const arrayContentToNewFilmsSeries = (arrayContent) => {
     const newFilmsSeries = [];
 
-    arrayContent.forEach((jsonFilm) => {
+    arrayContent.reduce((_, jsonFilm) => {
         newFilmsSeries.push({
             id: jsonFilm.id,
             title: jsonFilm.title,
