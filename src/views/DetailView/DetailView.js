@@ -2,8 +2,9 @@ import { APPLICATION } from '../../main.js';
 import { ProfileView } from '../Profile/Profile.js';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer.js';
 import { LogInView } from '../LogIn/LogIn.js';
-import { getCurrentUser, getDetailFilmPage, getLogout } from '../../modules/http.js';
+import { getCurrentUser, getDetailFilmPage, getLogout, getFilmStream } from '../../modules/http.js';
 import { HomeComponent } from '../HomeView/HomeView.js';
+import {currentUrl} from '../../modules/urls.js';
 
 /** Class representing film detail page view. */
 export class DetailComponent {
@@ -68,6 +69,7 @@ export class DetailComponent {
 
                     profileView.render();
                 };
+
                 const loginPageHandler = (event) => {
                     profileLink?.removeEventListener(('click'), profileLinkHandler);
                     loginPage?.removeEventListener(('click'), loginPageHandler);
@@ -109,10 +111,19 @@ export class DetailComponent {
                     });
                 };
 
+                let isLoadedVideo = false;
                 const openPlayerHandler = (event) => {
                     event.preventDefault();
 
-                    videoPlayer.visibleVideo();
+                    if (!isLoadedVideo) {
+                        getFilmStream('1').then((filmPath) => {
+                            videoPlayer.setSrc(`${currentUrl}${filmPath}`);
+                            videoPlayer.visibleVideo();
+                            isLoadedVideo = true;
+                        });
+                    } else {
+                        videoPlayer.visibleVideo();
+                    }
                 };
 
                 const closeOpenVideo = document.querySelector('.js-play-detail');

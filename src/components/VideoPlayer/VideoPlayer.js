@@ -96,6 +96,10 @@ export class VideoPlayer {
         });
     }
 
+    setSrc(newSrc) {
+        this.video.src = `${newSrc}`;
+    }
+
     hideVideo() {
         const fullscreenImg = this.videoPlayer.querySelector('.js-fullscreen-img');
         if (document.fullscreenElement) {
