@@ -5,6 +5,7 @@ import { ProfileController } from './controllers/profile.js';
 import { HomePageController } from './controllers/homePage.js';
 import { DetailPageController } from './controllers/detailPage.js';
 import Router from './modules/router.js';
+import Routes from './consts/routes.js';
 
 export const APPLICATION = document.getElementById('app');
 
@@ -17,11 +18,11 @@ const detailPageController = new DetailPageController();
 
 const router = new Router(APPLICATION);
 
-router.register('/home', homePageController)
-    .register('/signup', signupController)
-    .register('/login', loginController)
-    .register('/profile', profileController)
-    .register('/movie/:id', detailPageController)
+router.register('/home', Routes.HomePage)
+    .register('/signup', Routes.SignUpPage)
+    .register('/login', Routes.LoginPage)
+    .register('/profile', Routes.ProfilePage)
+    .register('/movie/:id', Routes.MoviePage)
     .start();
 
-eventBus.emit('homepage:render');
+// eventBus.emit('homepage:render');

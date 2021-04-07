@@ -1,4 +1,4 @@
-import { currentUrl } from './urls.js';
+import { currentUrl } from '../consts/urls.js';
 
 /**
  * Make object for render detail info about film from json.

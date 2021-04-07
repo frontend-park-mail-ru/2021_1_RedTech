@@ -1,4 +1,4 @@
-import { isValidForm } from '../utils/isValidForm.js';
+import { isValidForm } from '../modules/isValidForm.js';
 import { postUserForSignUp } from '../modules/http.js';
 
 /** Class representing signup page model. */

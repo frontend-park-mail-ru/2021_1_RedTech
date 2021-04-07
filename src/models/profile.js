@@ -1,5 +1,5 @@
 import { getProfile, getCurrentUser, postAvatar, patchProfile } from '../modules/http.js';
-import { isValidForm } from '../utils/isValidForm.js';
+import { isValidForm } from '../modules/isValidForm.js';
 
 /** Class representing profile page model. */
 export class ProfileModel {

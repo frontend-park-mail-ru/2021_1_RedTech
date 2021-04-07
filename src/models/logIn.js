@@ -1,4 +1,4 @@
-import { isValidForm } from '../utils/isValidForm.js';
+import { isValidForm } from '../modules/isValidForm.js';
 import { postUserForLogin } from '../modules/http.js';
 
 /** Class representing login page model. */

@@ -1,4 +1,4 @@
-import { URLS } from './urls.js';
+import { URLS } from '../consts/urls.js';
 import { filmJsonToFilm, arrayFilmsToFilmCards, arrayContentToNewFilmsSeries } from './adapters.js';
 
 /**
