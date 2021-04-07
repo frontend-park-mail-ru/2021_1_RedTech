@@ -1,5 +1,5 @@
 import { URLS } from './urls.js';
-import { filmJsonToFilm } from './adapters.js';
+import { filmJsonToFilm, arrayFilmsToFilmCards, arrayContentToNewFilmsSeries } from './adapters.js';
 
 /**
  * Send async request to the server.
@@ -98,9 +98,8 @@ const getCurrentUser = async () => {
         const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
         if (responseStatus === 200) {
             return responseBody.id;
-        } else {
-            return null;
         }
+        return null;
     } catch (err) {
         return null;
     }
@@ -144,9 +143,8 @@ const getProfile = async (idUser) => {
         const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
         if (responseStatus === 200) {
             return responseBody;
-        } else {
-            return null;
         }
+        return null;
     } catch (err) {
         return null;
     }
@@ -174,9 +172,8 @@ const postAvatar = async (idUser, formPut) => {
         const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
         if (responseStatus === 200) {
             return responseBody.user_avatar;
-        } else {
-            return null;
         }
+        return null;
     } catch (err) {
         return null;
     }
@@ -216,9 +213,9 @@ const patchProfile = async (idUser, email, login) => {
  * Send async get request using async func.
  * @returns {Object} - detail info about film in object.
  */
-const getDetailFilmPage = async () => {
+const getDetailFilmPage = async (filmId) => {
     const params = {
-        url: URLS.api.media,
+        url: URLS.api.media + filmId,
         method: 'GET',
     };
 
@@ -226,9 +223,71 @@ const getDetailFilmPage = async () => {
         const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
         if (responseStatus === 200) {
             return filmJsonToFilm(responseBody);
-        } else {
-            return null;
         }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects for render top slider.
+ */
+const getTopFilmsAndSeries = async () => {
+    const params = {
+        url: URLS.api.topFilmsAndSeries,
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayFilmsToFilmCards(responseBody.top);
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects new films.
+ */
+const getNewFilms = async () => {
+    const params = {
+        url: URLS.api.newFilms,
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayContentToNewFilmsSeries(responseBody.newFilms);
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects new series.
+ */
+const getNewSeries = async () => {
+    const params = {
+        url: URLS.api.newSeries,
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayContentToNewFilmsSeries(responseBody.newSeries);
+        }
+        return null;
     } catch (err) {
         return null;
     }
@@ -242,5 +301,8 @@ export {
     getProfile,
     postAvatar,
     patchProfile,
-    getDetailFilmPage
+    getDetailFilmPage,
+    getTopFilmsAndSeries,
+    getNewFilms,
+    getNewSeries
 };

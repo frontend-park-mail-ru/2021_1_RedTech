@@ -1,3 +1,4 @@
+/*eslint-disable */
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
@@ -14,10 +15,12 @@ app.get('/products', (req, res, next) => {
     res.json({msg: 'This is CORS-enabled for  all origins!'});
 })
 
-app.use('/favicon.ico', express.static('img/favicon.ico'));
-
 app.get('/templates.js', (req, res) => {
     res.sendFile(path.resolve(`${__dirname}/templates.js`));
+});
+
+app.get('/video.mp4', (req, res) => {
+    res.sendFile(path.resolve(`${__dirname}/../src/components/VideoPlayer/video.mp4`));
 });
 
 app.get('/*', (req, res) => {
@@ -28,3 +31,4 @@ app.get('/*', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}!`);
 });
+/*eslint-disable */

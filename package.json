@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "tmpl": "puglatizer -d src/views -o src/templates.js",
+    "tmpl": "puglatizer -d src/ -o src/templates.js",
     "scss": "node-sass src/index.scss -o src/",
     "prestart": "npm run scss && npm run tmpl",
     "lint": "eslint src/",
@@ -24,6 +24,7 @@
     "tmpl": "^1.0.4"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "eslint": "^7.22.0",
     "husky": "^5.1.3",
     "lint-staged": "^10.5.4"
