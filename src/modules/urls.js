@@ -24,5 +24,9 @@ export const URLS = {
         newSeries: `${currentUrl}/api/media/category/newSeries?limit=${NUMBER_OF_BOTTOM_SLIDER_CONTENT}&type=series`,
         newFilms: `${currentUrl}/api/media/category/newFilms?limit=${NUMBER_OF_BOTTOM_SLIDER_CONTENT}&type=movie`,
         topFilmsAndSeries: `${currentUrl}/api/media/category/top?limit=${NUMBER_OF_TOP_SLIDER_CONTENT}`,
+        topFilms: `${currentUrl}/api/media/category/top?limit=${NUMBER_OF_TOP_SLIDER_CONTENT}&type=movie`,
+        topSeries: `${currentUrl}/api/media/category/top?limit=${NUMBER_OF_TOP_SLIDER_CONTENT}&type=series`,
+        genreFilms: `${currentUrl}/api/media/category/genre?limit=100&type=movie&genres=`,
+        genreSeries: `${currentUrl}/api/media/category/genre?limit=100&type=series&genres=`,
     }
 };

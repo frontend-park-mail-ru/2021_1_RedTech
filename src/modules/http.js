@@ -293,6 +293,90 @@ const getNewSeries = async () => {
     }
 };
 
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects for render top slider.
+ */
+const getTopFilms = async () => {
+    const params = {
+        url: URLS.api.topFilms,
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayFilmsToFilmCards(responseBody.top);
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects for render top slider.
+ */
+const getTopSeries = async () => {
+    const params = {
+        url: URLS.api.topSeries,
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayFilmsToFilmCards(responseBody.top);
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects for render bottom slider.
+ */
+const getGenreFilms = async (genreName) => {
+    const params = {
+        url: URLS.api.genreFilms + genreName,
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayContentToNewFilmsSeries(responseBody.genre);
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects for render bottom slider.
+ */
+const getGenreSeries = async (genreName) => {
+    const params = {
+        url: URLS.api.genreSeries + genreName,
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayContentToNewFilmsSeries(responseBody.genre);
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
 export {
     postUserForLogin,
     postUserForSignUp,
@@ -304,5 +388,9 @@ export {
     getDetailFilmPage,
     getTopFilmsAndSeries,
     getNewFilms,
-    getNewSeries
+    getNewSeries,
+    getTopFilms,
+    getGenreFilms,
+    getTopSeries,
+    getGenreSeries
 };
