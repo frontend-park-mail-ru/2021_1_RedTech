@@ -37,12 +37,12 @@ class Router {
 
     start() {
         window.addEventListener('popstate', () => {
-            this.go(window.location.pathname + window.location.search);
             console.log(window.location.pathname + window.location.search);
+            this.go(window.location.pathname + window.location.search);
         });
 
-        this.go(window.location.pathname + window.location.search);
         console.log(window.location.pathname + window.location.search);
+        this.go(window.location.pathname + window.location.search);
     }
 
     getRouteData(path) {
@@ -50,10 +50,12 @@ class Router {
         const result = this.getParam(path);
 
         this.routes.forEach(({path, controller}) => {
+            console.log(path, controller);
             const res = result.path.match(path);
 
             if (res) {
                 targetController = controller;
+                console.log("RESULT ", targetController);
             }
         })
 
@@ -71,17 +73,24 @@ class Router {
         const parsedURL = new URL(window.location.origin + path);
 
         const getParams = parsedURL.searchParams;
+        let pathParams = null;
         let resultPath = parsedURL.pathname;
-        console.log(resultPath);
+        console.log('params', getParams);
+
+        if (getParams && getParams.has('mid')) {
+            resultPath = `/movie/${getParams.get('mid')}`;
+            pathParams = getParams.get('mid');
+        }
 
         return {
             path: resultPath,
-            pathParams: null,
+            pathParams: pathParams,
             getParams: getParams,
         };
     }
 
     go(path, data = {}) {
+        console.log('GO');
         const routeData = this.getRouteData(path);
         data = {...data, ...routeData};
 
@@ -91,13 +100,13 @@ class Router {
         }
 
         if (this.currentController) {
-            console.log('Что-то эдакое');
+            console.log('Проверка');
         }
 
         this.currentController = routeData.controller;
 
         if (!this.currentController) {
-            path = Routes.LoginPage;
+            path = Routes.HomePage;
             this.currentController = this.getRouteData(path).controller;
         }
 
@@ -107,6 +116,7 @@ class Router {
 
         console.log(data);
         console.log('Нужен switch on');
+        this.currentController.view.render();
     }
 
     back() {

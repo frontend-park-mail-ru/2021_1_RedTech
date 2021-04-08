@@ -18,11 +18,11 @@ const detailPageController = new DetailPageController();
 
 const router = new Router(APPLICATION);
 
-router.register('/home', Routes.HomePage)
-    .register('/signup', Routes.SignUpPage)
-    .register('/login', Routes.LoginPage)
-    .register('/profile', Routes.ProfilePage)
-    .register('/movie/:id', Routes.MoviePage)
+router.register(Routes.HomePage, homePageController)
+    .register(Routes.SignUpPage, signupController)
+    .register(Routes.LoginPage, loginController)
+    .register(Routes.ProfilePage, profileController)
+    .register(Routes.MoviePage, detailPageController)
     .start();
 
 // eventBus.emit('homepage:render');

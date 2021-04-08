@@ -4,16 +4,16 @@ block variables
 
     if (isAuthorized) {
         headerIcons.push(
-                {className: 'js-profile-page', href: '', title: 'Профиль', alt: ''},
+                {className: '', href: '/profile', title: 'Профиль', alt: ''},
                 {className: 'js-logout-page', href: '', title: 'Выйти', alt: ''}
         );
     }
 
     const headerLinks = [
-        {className: 'homePage js-home-link', title: 'Главная'},
-        {className: 'filmPage js-films-link', title: 'Фильмы'},
-        {className: 'serialsPage js-serials-link', title: 'Сериалы'},
-        {className: 'lastPage js-latest-link', title: 'Последнее'}
+        {className: 'homePage js-home-link', href:'/home',  title: 'Главная'},
+        {className: 'filmPage js-films-link', href:'/movies', title: 'Фильмы'},
+        {className: 'serialsPage js-serials-link', href:'/serials', title: 'Сериалы'},
+        {className: 'lastPage js-latest-link', href:'/last', title: 'Последнее'}
     ]
 
 header
@@ -23,7 +23,7 @@ header
     ul.header-form
         each i in headerLinks
             li
-                a(class= i.className href="")= i.title
+                a(href=i.href)= i.title
 
     if isAuthorized
         div.header-form__profile
@@ -36,7 +36,7 @@ header
                         a(class='item__dropdown-profile ' +  i.className)= i.title
     else
         div.header-form__profile
-            a(class= 'header-form__profile__link js-search-button')
+            a(class= 'header-form__profile__link' href='/search')
                 img(src= '../../assets/search.png')
-            a(class= 'header-form__profile__link js-login-page')
+            a(class= 'header-form__profile__link' href='/login')
                 img(src= '../../assets/unlogined.png')

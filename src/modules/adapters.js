@@ -32,7 +32,8 @@ export const arrayFilmsToFilmCards = (arrayFilms) => {
             title: jsonFilm.title,
             description: jsonFilm.description,
             movieAvatar: `${currentUrl}${jsonFilm.movie_avatar}`,
-            stars: '* '.repeat(jsonFilm.rating)
+            stars: '* '.repeat(jsonFilm.rating),
+            href: `/movie/?mid=${jsonFilm.id}`,
         });
     });
 
@@ -53,6 +54,7 @@ export const arrayContentToNewFilmsSeries = (arrayContent) => {
             title: jsonFilm.title,
             movieAvatar: `${currentUrl}${jsonFilm.movie_avatar}`,
             status: jsonFilm.is_free ? 'Бесплатно' : 'Подписка',
+            href: `/movie/?mid=${jsonFilm.id}`,
         });
     });
 
