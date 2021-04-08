@@ -73,23 +73,51 @@ export class HomePageView extends BaseView {
         const removeAllListeners = () => {
             this.eventBus.emit('homepage:removeEventListeners');
             this.eventBus.emit('profile:removeEventListeners');
+            this.eventBus.emit('film-seriespage:removeEventListener');
+            this.eventBus.emit('genrepage:removeEventListener');
             profileLink?.removeEventListener(('click'), profileLinkHandler);
             loginPage?.removeEventListener(('click'), loginPageHandler);
             logoutPage?.removeEventListener(('click'), logoutPageHandler);
-            aMain?.removeEventListener(('click'), aMainHandler);
+            homeLink.forEach((element) => {
+                element?.removeEventListener(('click'), aMainHandler);
+            });
+            filmPage?.removeEventListener(('click'), filmPageHandler);
+            seriesPage?.removeEventListener(('click'), filmPageHandler);
         };
 
         const aMainHandler = (event) => {
             this.eventBus.emit('homepage:removeEventListeners');
             this.eventBus.emit('profile:removeEventListeners');
+            this.eventBus.emit('film-seriespage:removeEventListener');
+            this.eventBus.emit('genrepage:removeEventListener');
             event.preventDefault();
 
             this.eventBus.emit('homepage:getMainPageContent');
         };
 
+        const filmPageHandler = (event) => {
+            this.eventBus.emit('homepage:removeEventListeners');
+            this.eventBus.emit('profile:removeEventListeners');
+            this.eventBus.emit('film-seriespage:removeEventListener');
+            this.eventBus.emit('genrepage:removeEventListener');
+            event.preventDefault();
+
+            const data = {
+                isFilm: false
+            };
+
+            if (event.target.className.includes('filmPage')) {
+                data.isFilm = true;
+            }
+
+            this.eventBus.emit('film-seriespage:getPageContent', data);
+        };
+
         const profileLinkHandler = (event) => {
             this.eventBus.emit('homepage:removeEventListeners');
             this.eventBus.emit('profile:removeEventListeners');
+            this.eventBus.emit('film-seriespage:removeEventListener');
+            this.eventBus.emit('genrepage:removeEventListener');
             event.preventDefault();
 
             this.eventBus.emit('profile:getInfoAboutCurrentUser');
@@ -116,8 +144,16 @@ export class HomePageView extends BaseView {
         const logoutPage = document.querySelector('.js-logout-page');
         logoutPage?.addEventListener(('click'), logoutPageHandler);
 
-        const [aMain] = document.getElementsByClassName('homePage');
-        aMain?.addEventListener(('click'), aMainHandler);
+        const filmPage = document.querySelector('.js-films-link');
+        filmPage?.addEventListener(('click'), filmPageHandler);
+
+        const seriesPage = document.querySelector('.js-serials-link');
+        seriesPage?.addEventListener(('click'), filmPageHandler);
+
+        const homeLink = document.querySelectorAll('.js-home-link');
+        homeLink.forEach((element) => {
+            element?.addEventListener(('click'), aMainHandler);
+        });
     }
 
     /**

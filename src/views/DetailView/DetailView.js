@@ -20,7 +20,7 @@ export class DetailPageView extends BaseView {
         const template = puglatizer.components.Loader.Loader();
         APPLICATION.innerHTML = template;
         this.eventBus.emit('detailpage:getInfoAboutFilm');
-        this.eventBus.emit('homepage:getCurrentUser');
+        this.eventBus.emit('homepage:InfoForHeader');
     }
 
     /**
