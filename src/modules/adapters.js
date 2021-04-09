@@ -24,9 +24,7 @@ export const filmJsonToFilm = (jsonFilm) => {
  * @return {Array} - Array of objects for render top slider.
  */
 export const arrayFilmsToFilmCards = (arrayFilms) => {
-    const filmCards = [];
-
-    arrayFilms.reduce((_, jsonFilm) => {
+    return arrayFilms.reduce((filmCards, jsonFilm) => {
         filmCards.push({
             id: jsonFilm.id,
             title: jsonFilm.title,
@@ -34,9 +32,8 @@ export const arrayFilmsToFilmCards = (arrayFilms) => {
             movieAvatar: `${currentUrl}${jsonFilm.movie_avatar}`,
             stars: '* '.repeat(jsonFilm.rating)
         });
-    });
-
-    return filmCards;
+        return filmCards;
+    }, []);
 };
 
 /**
@@ -45,16 +42,13 @@ export const arrayFilmsToFilmCards = (arrayFilms) => {
  * @return {Object} - Array of objects for render bottom slider.
  */
 export const arrayContentToNewFilmsSeries = (arrayContent) => {
-    const newFilmsSeries = [];
-
-    arrayContent.reduce((_, jsonFilm) => {
+    return arrayContent.reduce((newFilmsSeries, jsonFilm) => {
         newFilmsSeries.push({
             id: jsonFilm.id,
             title: jsonFilm.title,
             movieAvatar: `${currentUrl}${jsonFilm.movie_avatar}`,
             status: jsonFilm.is_free ? 'Бесплатно' : 'Подписка',
         });
-    });
-
-    return newFilmsSeries;
+        return newFilmsSeries;
+    }, []);
 };

@@ -213,7 +213,7 @@ const patchProfile = async (idUser, email, login) => {
  * Send async get request using async func.
  * @returns {Object} - detail info about film in object.
  */
-const getDetailFilmPage = async (filmId) => {
+const getDetailFilm = async (filmId) => {
     const params = {
         url: URLS.api.media + filmId,
         method: 'GET',
@@ -301,7 +301,7 @@ export {
     getProfile,
     postAvatar,
     patchProfile,
-    getDetailFilmPage,
+    getDetailFilm,
     getTopFilmsAndSeries,
     getNewFilms,
     getNewSeries
