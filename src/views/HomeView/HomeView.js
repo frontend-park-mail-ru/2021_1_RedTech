@@ -1,5 +1,6 @@
 import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
+import { scrollToTop } from '../../modules/utils.js';
 
 /** Class representing home page view. */
 export class HomePageView extends BaseView {
@@ -161,7 +162,7 @@ export class HomePageView extends BaseView {
      */
     setEventListeners = () => {
         const topFilmSeriesHandler = (event) => {
-            window.scrollTo(0, 0);
+            scrollToTop();
             removeEventListeners();
 
             const target = event.target.closest('.item__film-card');
@@ -173,7 +174,7 @@ export class HomePageView extends BaseView {
         };
 
         const newFilmSeriesHandler = (event) => {
-            window.scrollTo(0, 0);
+            scrollToTop();
             removeEventListeners();
 
             const target = event.target.closest('.item__internal');

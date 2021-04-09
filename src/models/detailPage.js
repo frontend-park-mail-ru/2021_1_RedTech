@@ -1,4 +1,4 @@
-import { getDetailFilmPage } from '../modules/http.js';
+import { getDetailFilm } from '../modules/http.js';
 
 /** Class representing detail page about film model. */
 export class DetailPageModel {
@@ -16,7 +16,7 @@ export class DetailPageModel {
      * @param {string} filmId - Film id, needed to get info about film.
      */
     getInfoAboutFilm = (filmId) => {
-        getDetailFilmPage(filmId).then((film) => {
+        getDetailFilm(filmId).then((film) => {
             if (film) {
                 this.eventBus.emit('detailpage:renderDetailsAboutFilm', film);
             } else {

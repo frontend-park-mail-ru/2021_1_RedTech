@@ -1,5 +1,6 @@
 import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
+import {scrollToTop} from '../../modules/utils';
 
 /** Class representing film/series page view. */
 export class FilmSeriesPageView extends BaseView {
@@ -46,7 +47,7 @@ export class FilmSeriesPageView extends BaseView {
         this.eventBus.emit('homepage:setEventListeners');
 
         const genresHandler = (event) => {
-            window.scrollTo(0, 0);
+            scrollToTop();
             removeEventListener();
 
             const target = event.target.closest('.item__internal');
