@@ -37,25 +37,22 @@ class Router {
 
     start() {
         window.addEventListener('popstate', () => {
-            console.log(window.location.pathname + window.location.search);
             this.go(window.location.pathname + window.location.search);
         });
 
-        console.log(window.location.pathname + window.location.search);
         this.go(window.location.pathname + window.location.search);
     }
 
     getRouteData(path) {
         let targetController = null;
         const result = this.getParam(path);
+        console.log(result);
 
         this.routes.forEach(({path, controller}) => {
-            console.log(path, controller);
             const res = result.path.match(path);
 
             if (res) {
                 targetController = controller;
-                console.log("RESULT ", targetController);
             }
         })
 
@@ -65,27 +62,26 @@ class Router {
                 path: result.path,
                 resourceId: +result.pathParams,
             },
-            query: result.getParams,
         }
     }
 
     getParam(path) {
-        const parsedURL = new URL(window.location.origin + path);
+        const reg = new RegExp(/\d+/);
+        const result = path.match(reg);
 
-        const getParams = parsedURL.searchParams;
+        const parsedURL = new URL(window.location.origin + path);
         let pathParams = null;
         let resultPath = parsedURL.pathname;
-        console.log('params', getParams);
 
-        if (getParams && getParams.has('mid')) {
-            resultPath = `/movie/${getParams.get('mid')}`;
-            pathParams = getParams.get('mid');
+        if (result) {
+            if (result[0]) {
+                pathParams = result[0];
+            }
         }
 
         return {
             path: resultPath,
             pathParams: pathParams,
-            getParams: getParams,
         };
     }
 
@@ -114,9 +110,9 @@ class Router {
             window.history.pushState(null, null, path);
         }
 
-        console.log(data);
         console.log('Нужен switch on');
-        this.currentController.view.render();
+        console.log(data);
+        this.currentController.view.render(data);
     }
 
     back() {

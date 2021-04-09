@@ -16,10 +16,10 @@ export class DetailPageView extends BaseView {
     /**
      * Render html film detail page from pug template.
      */
-    render = () => {
+    render = (data = {}) => {
         const template = puglatizer.components.Loader.Loader();
         APPLICATION.innerHTML = template;
-        this.eventBus.emit('detailpage:getInfoAboutFilm');
+        this.eventBus.emit('detailpage:getInfoAboutFilm', data.resourceId);
         this.eventBus.emit('homepage:getCurrentUser');
     }
 
