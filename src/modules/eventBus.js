@@ -22,8 +22,7 @@ class EventBus {
      * @param {function} callback - Callback function.
      */
     off(event, callback) {
-        this._listeners[event] = this._listeners[event]
-            ?.delete(callback.name);
+        this._listeners[event] = this._listeners[event]?.delete(callback.name);
     }
 
     /**
@@ -32,9 +31,7 @@ class EventBus {
      * @param {any} data - Data for callback function.
      */
     emit(event, ...data) {
-        this._listeners[event]?.forEach((listener) => {
-            listener(...data);
-        });
+        this._listeners[event]?.forEach((listener) => listener(...data));
     }
 }
 
