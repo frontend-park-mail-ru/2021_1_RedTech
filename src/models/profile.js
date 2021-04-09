@@ -36,18 +36,19 @@ export class ProfileModel {
      */
     getInfoForProfile = (idUser) => {
         getProfile(idUser).then((responseBody) => {
-            if (responseBody) {
-                const params = {
-                    login: responseBody.username,
-                    email: responseBody.email,
-                    user_avatar: responseBody.avatar ?? 'img/user.png',
-                };
-
-                this.eventBus.emit('profile:renderProfileInfo', params);
-                this.eventBus.emit('profile:setEventListeners', idUser);
-            } else {
+            if (!responseBody) {
                 this.eventBus.emit('homepage:renderErrorPage');
+                return;
             }
+
+            const params = {
+                login: responseBody.username,
+                email: responseBody.email,
+                user_avatar: responseBody.avatar ?? 'img/user.png',
+            };
+
+            this.eventBus.emit('profile:renderProfileInfo', params);
+            this.eventBus.emit('profile:setEventListeners', idUser);
         }).catch(() => {
             this.eventBus.emit('homepage:renderErrorPage');
         });
