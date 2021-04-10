@@ -1,0 +1,20 @@
+include ../TopSlider/TopSlider
+include ../BottomSlider/BottomSlider
+
+div.item__page-title С наивысшим рейтингом
+
+div.container
+    +TopSlider(cardFilms)
+
+include ../SuggestionBar/SuggestionBar
+
+div.item__page-title Новые фильмы
+
+div.suggestion-film__list.new_films
+    +BottomSlider(newFilms)
+
+
+div.item__page-title Новые сериалы
+
+div.suggestion-film__list.new_series
+    +BottomSlider(newSeries)

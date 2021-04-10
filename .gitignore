@@ -1,5 +1,7 @@
 .idea
 .DS_Store
+index.css
 node_modules
 prepros.config
+package-lock.json
 templates.js

@@ -1,109 +1,119 @@
 import { APPLICATION } from '../../main.js';
-import { isValidForm } from '../../utils/isValidForm.js';
-import { getProfile, patchProfile, postAvatar } from '../../modules/http.js';
+import { BaseView } from '../BaseView/BaseView.js';
 
 /** Class representing a profile page view. */
-export class ProfileView {
+export class ProfileView extends BaseView {
     /**
-	 * Create a profile page view.
-	 * @param {Object} data - Parameters for render profile view.
-	 */
-    constructor({data = {}} = {}) {
-        this._data = data;
+     * Create a profile page view.
+     * @param {EventBus} eventBus - Global Event Bus.
+     * @param {Object} - Parameters for render profile view.
+     */
+    constructor(eventBus, { data = {} } = {}) {
+        super(eventBus, data);
+        this.eventBus.on('profile:render', this.render);
+        this.eventBus.on('profile:renderProfileInfo', this.renderProfileInfo);
+        this.eventBus.on('profile:setEventListeners', this.setEventListeners);
+        this.eventBus.on('profile:renderNewAvatar', this.renderNewAvatar);
+        this.eventBus.on('profile:updateProfile', this.updateProfile);
     }
 
     /**
-	 * Render html profile page from pug template to parent.
+	 * Render html profile page from pug template.
 	 */
-    render() {
-        const idUser = this._data.idUser;
-        getProfile(idUser).then((responseBody) => {
-            if (responseBody) {
-                let params = {};
-                params.login = responseBody.username;
-                params.email = responseBody.email;
+    render = () => {
+        const template = puglatizer.components.Loader.Loader();
+        APPLICATION.innerHTML = template;
+        this.eventBus.emit('profile:getInfoAboutCurrentUser');
+        this.eventBus.emit('homepage:InfoForHeader');
+    }
 
-                if (responseBody.avatar) {
-                    params.user_avatar = responseBody.avatar;
-                } else {
-                    params.user_avatar = 'img/user.png';
-                }
+    /**
+     * Render html profile info from pug template to content div.
+     * @param {Object} params - Profile data.
+     */
+    renderProfileInfo = (params) => {
+        this._data = {
+            profileData: params
+        };
+        const template = puglatizer.components.ProfileContent.ProfileContent(this._data);
+        const content = document.querySelector('.content');
+        if (content) {
+            content.innerHTML = template;
+        } else {
+            this.eventBus.emit('homepage:renderErrorPage');
+        }
+    }
 
-                this._data = {
-                    profileData: params
-                };
+    /**
+     * Render avatar from pug template.
+     * @param {string} avatarSrc - Source of new avatar.
+     */
+    renderNewAvatar = (avatarSrc) => {
+        const imgAvatar = document?.getElementById('avatar');
+        imgAvatar.src = avatarSrc;
+    }
 
-                const template = puglatizer.Profile.Profile(this._data);
-                APPLICATION.innerHTML = template;
+    /**
+     * Setting for input form and button.
+     * @param {HTMLFormElement} form - Form element that will be updated.
+     */
+    updateProfile = (form) => {
+        const [nick] = document.getElementsByClassName('title-wrapper__nickname');
+        const [button] = document.getElementsByClassName('input-wrapper__button');
+        const inputs = form.querySelectorAll('.input-wrapper__input');
 
-                const imgAvatar = document?.getElementById('avatar');
+        nick.textContent = document.getElementById('login').value;
+        button.textContent = 'Редактировать';
 
-                const [form] = document.getElementsByTagName('form');
-                const [button] = document.getElementsByClassName('input-wrapper__button');
-
-                const imgHandler = () => {
-                    imgAvatar.src='img/user.png';
-                };
-
-                imgAvatar.addEventListener('error', imgHandler);
-
-                const formHandler = (event) => {
-                    event.preventDefault();
-
-                    const inputs = form.querySelectorAll('.input-wrapper__input');
-
-                    if (button.textContent === 'Редактировать') {
-                        button.textContent = 'Сохранить';
-                        inputs.forEach((input) => {
-                            input.classList.remove('input-wrapper__input_disabled');
-                            input.disabled = false;
-                        });
-                    } else if (button.textContent === 'Сохранить') {
-                        const isValid = isValidForm(form);
-                        if (isValid) {
-                            const [nick] = document.getElementsByClassName('title-wrapper__nickname');
-
-                            const avatarInput = document.getElementById('file');
-
-                            if (avatarInput.value) {
-                                button.disabled = true;
-
-                                const avatar = avatarInput.files[0];
-                                const formPut = new FormData();
-                                formPut.append('avatar', avatar);
-
-                                const { avatarSrc } =  postAvatar(idUser, formPut);
-
-                                if (avatarSrc) {
-                                    const imgAvatar = document?.getElementById('avatar');
-                                    imgAvatar.src = avatarSrc;
-                                }
-
-                                button.disabled = false;
-                            }
-
-                            patchProfile(
-                                idUser,
-                                document.getElementById('email').value,
-                                document.getElementById('login').value
-                            ).then((responseStatus) => {
-                                if (responseStatus) {
-                                    nick.textContent = document.getElementById('login').value;
-                                    button.textContent = 'Редактировать';
-
-                                    inputs.forEach((input) => {
-                                        input.classList.add('input-wrapper__input_disabled');
-                                        input.disabled = true;
-
-                                    });
-                                }
-                            });
-                        }
-                    }
-                };
-
-                form?.addEventListener(('submit'), formHandler);
-            }
+        inputs.forEach((input) => {
+            input.classList.add('input-wrapper__input_disabled');
+            input.disabled = true;
         });
+    }
+
+    /**
+     * Set event listeners.
+     * @param {string} idUser - idUser that needed for render some data.
+     */
+    setEventListeners = (idUser) => {
+        const imgAvatar = document?.getElementById('avatar');
+
+        const [form] = document.getElementsByTagName('form');
+        const [button] = document.getElementsByClassName('input-wrapper__button');
+
+        const imgHandler = () => {
+            imgAvatar.src='img/user.png';
+        };
+
+        imgAvatar.addEventListener('error', imgHandler);
+
+        const formHandler = (event) => {
+            event.preventDefault();
+
+            const inputs = form.querySelectorAll('.input-wrapper__input');
+
+            if (button.textContent === 'Редактировать') {
+                button.textContent = 'Сохранить';
+                inputs.forEach((input) => {
+                    input.classList.remove('input-wrapper__input_disabled');
+                    input.disabled = false;
+                });
+            } else if (button.textContent === 'Сохранить') {
+                const avatarInput = document.getElementById('file');
+                const email = document.getElementById('email').value;
+                const login = document.getElementById('login').value;
+
+                this.eventBus.emit('profile:saveChanges', idUser, form, avatarInput, email, login);
+            }
+        };
+
+        form?.addEventListener(('submit'), formHandler);
+
+        const removeEventListeners = () => {
+            form?.removeEventListener(('submit'), formHandler);
+            imgAvatar.removeEventListener('error', imgHandler);
+        };
+
+        this.eventBus.on('profile:removeEventListeners', removeEventListeners);
     }
 }

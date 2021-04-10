@@ -1,5 +1,15 @@
+block variables
 -
-    var headerLinks = [
+    const headerIcons = [];
+
+    if (isAuthorized) {
+        headerIcons.push(
+                {className: 'js-profile-page', href: '', title: 'Профиль', alt: ''},
+                {className: 'js-logout-page', href: '', title: 'Выйти', alt: ''}
+        );
+    }
+
+    const headerLinks = [
         {className: 'homePage js-home-link', title: 'Главная'},
         {className: 'filmPage js-films-link', title: 'Фильмы'},
         {className: 'serialsPage js-serials-link', title: 'Сериалы'},
@@ -15,7 +25,7 @@ header
             li
                 a(class= i.className href="")= i.title
 
-    if isLogined
+    if isAuthorized
         div.header-form__profile
             a(class= 'header-form__profile__link item__right-link js-search-button')
                 img(src= '../../assets/search.png')
@@ -30,6 +40,3 @@ header
                 img(src= '../../assets/search.png')
             a(class= 'header-form__profile__link js-login-page')
                 img(src= '../../assets/unlogined.png')
-
-
-include ../Underline/Underline
