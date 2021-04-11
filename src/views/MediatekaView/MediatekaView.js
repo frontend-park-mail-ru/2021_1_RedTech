@@ -3,7 +3,7 @@ import { BaseView } from '../BaseView/BaseView.js';
 import { scrollToTop } from '../../modules/utils.js';
 
 /** Class representing film/series page view. */
-export class FilmSeriesPageView extends BaseView {
+export class MediatekaView extends BaseView {
     /**
      * Create a film/series page view.
      * @param {EventBus} eventBus - Global Event Bus.
@@ -11,9 +11,9 @@ export class FilmSeriesPageView extends BaseView {
      */
     constructor(eventBus, { data = {} } = {}) {
         super(eventBus, data);
-        this.eventBus.on('film-seriespage:render', this.render);
-        this.eventBus.on('film-seriespage:setEventListeners', this.setEventListeners);
-        this.eventBus.on('film-seriespage:renderContent', this.renderContent);
+        this.eventBus.on('mediateka:render', this.render);
+        this.eventBus.on('mediateka:setEventListeners', this.setEventListeners);
+        this.eventBus.on('mediateka:renderContent', this.renderContent);
     }
     /**
      * Render html film/series page from pug template.
@@ -23,7 +23,7 @@ export class FilmSeriesPageView extends BaseView {
         const template = puglatizer.components.Loader.Loader();
         APPLICATION.innerHTML = template;
         this.eventBus.emit('homepage:InfoForHeader');
-        this.eventBus.emit('film-seriespage:getPageContent', this._data);
+        this.eventBus.emit('mediateka:getPageContent', this._data);
     }
 
     /**
@@ -67,7 +67,7 @@ export class FilmSeriesPageView extends BaseView {
             genresContainer?.removeEventListener(('click'), genresHandler);
         };
 
-        this.eventBus.on('film-seriespage:removeEventListener', removeEventListener);
+        this.eventBus.on('mediateka:removeEventListener', removeEventListener);
 
     }
 }

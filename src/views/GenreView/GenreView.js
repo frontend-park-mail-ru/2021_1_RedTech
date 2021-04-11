@@ -1,6 +1,6 @@
 import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
-import {scrollToTop} from '../../modules/utils';
+import { scrollToTop } from '../../modules/utils.js';
 
 /** Class representing genre page view. */
 export class GenrePageView extends BaseView {
@@ -60,6 +60,14 @@ export class GenrePageView extends BaseView {
 
         const genresContent = document.querySelector('.suggestion-film__list');
         genresContent?.addEventListener(('click'), genresContentHandler);
+
+        const contentImages = document.querySelectorAll('.item__suggestion__image');
+
+        contentImages.forEach((img) => {
+            img.addEventListener('error', () => {
+                img.src = 'img/not-found.jpeg';
+            });
+        });
 
         const removeEventListener = () => {
             genresContent?.removeEventListener(('click'), genresContentHandler);

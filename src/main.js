@@ -4,7 +4,7 @@ import { SignUpController } from './controllers/signUp.js';
 import { ProfileController } from './controllers/profile.js';
 import { HomePageController } from './controllers/homePage.js';
 import { DetailPageController } from './controllers/detailPage.js';
-import { FilmSeriesPageController } from './controllers/filmSeriesPage.js';
+import { MediatekaPageController } from './controllers/mediatekaPage.js';
 import { GenrePageController } from './controllers/genrePage.js';
 
 export const APPLICATION = document.getElementById('app');
@@ -15,7 +15,7 @@ const loginController = new LogInController();
 const profileController = new ProfileController();
 const homePageController = new HomePageController();
 const detailPageController = new DetailPageController();
-const filmPageController = new FilmSeriesPageController();
+const filmPageController = new MediatekaPageController();
 const genrePageController = new GenrePageController();
 
 eventBus.emit('homepage:render');

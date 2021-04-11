@@ -12,6 +12,7 @@ export class DetailPageView extends BaseView {
         super(eventBus, data);
         this.eventBus.on('detailpage:render', this.render);
         this.eventBus.on('detailpage:renderDetailsAboutFilm', this.renderDetailsAboutFilm);
+        this.eventBus.on('detailpage:setEventListeners', this.setEventListeners);
     }
     /**
      * Render html film detail page from pug template.
@@ -36,5 +37,21 @@ export class DetailPageView extends BaseView {
         } else {
             this.eventBus.emit('homepage:renderErrorPage');
         }
+    }
+
+    setEventListeners = () => {
+        const contentImage = document.querySelector('.js-preview-image');
+
+        const imageErrorHandler = () => {
+            contentImage.src = 'img/not-found.jpeg';
+        };
+
+        contentImage.addEventListener('error', imageErrorHandler);
+
+        const removeEventListeners = () => {
+            contentImage.removeEventListener('error', imageErrorHandler);
+        };
+
+        this.eventBus.emit('detailpage:removeEventListeners', this.setEventListeners);
     }
 }

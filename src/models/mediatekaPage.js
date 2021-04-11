@@ -1,14 +1,14 @@
 import { getNewFilms, getNewSeries, getTopFilms, getTopSeries } from '../modules/http.js';
 
 /** Class representing film/series page model. */
-export class FilmSeriesPageModel {
+export class MediatekaPageModel {
     /**
      * Create a film/series page model.
      * @param {EventBus} eventBus - Global Event Bus.
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on('film-seriespage:getPageContent', this.getPageContent);
+        this.eventBus.on('mediateka:getPageContent', this.getPageContent);
     }
 
     /**
@@ -27,10 +27,9 @@ export class FilmSeriesPageModel {
         }
         Promise.all([topContent, newContent]).then((values) => {
             [data.cardContent, data.newContent] = values;
-            this.eventBus.emit('film-seriespage:renderContent', data);
-            this.eventBus.emit('film-seriespage:setEventListeners', data);
-        }).catch((err) => {
-            console.log(err)
+            this.eventBus.emit('mediateka:renderContent', data);
+            this.eventBus.emit('mediateka:setEventListeners', data);
+        }).catch(() => {
             this.eventBus.emit('homepage:renderErrorPage');
         });
     }

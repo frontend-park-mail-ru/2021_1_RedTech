@@ -26,11 +26,11 @@ export const filmJsonToFilm = (jsonFilm) => {
 export const arrayFilmsToFilmCards = (arrayFilms) => {
     return arrayFilms.reduce((filmCards, jsonFilm) => {
         filmCards.push({
-            id: jsonFilm.id,
-            title: jsonFilm.title,
-            description: jsonFilm.description,
-            movieAvatar: `${currentUrl}${jsonFilm.movie_avatar}`,
-            stars: '* '.repeat(jsonFilm.rating)
+            id: jsonFilm?.id,
+            title: jsonFilm?.title,
+            description: jsonFilm?.description,
+            movieAvatar: `${currentUrl}${jsonFilm?.movie_avatar}`,
+            //stars: '* '.repeat(jsonFilm.rating)
         });
         return filmCards;
     }, []);
@@ -44,10 +44,10 @@ export const arrayFilmsToFilmCards = (arrayFilms) => {
 export const arrayContentToNewFilmsSeries = (arrayContent) => {
     return arrayContent.reduce((newFilmsSeries, jsonFilm) => {
         newFilmsSeries.push({
-            id: jsonFilm.id,
-            title: jsonFilm.title,
-            movieAvatar: `${currentUrl}${jsonFilm.movie_avatar}`,
-            status: jsonFilm.is_free ? 'Бесплатно' : 'Подписка',
+            id: jsonFilm?.id,
+            title: jsonFilm?.title,
+            movieAvatar: `${currentUrl}${jsonFilm?.movie_avatar}`,
+            status: jsonFilm?.is_free ? 'Бесплатно' : 'Подписка',
         });
         return newFilmsSeries;
     }, []);

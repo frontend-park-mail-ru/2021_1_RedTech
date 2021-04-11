@@ -19,6 +19,7 @@ export class DetailPageModel {
         getDetailFilm(filmId).then((film) => {
             if (film) {
                 this.eventBus.emit('detailpage:renderDetailsAboutFilm', film);
+                this.eventBus.emit('detailpage:setEventListeners');
             } else {
                 this.eventBus.emit('homepage:renderErrorPage');
             }
