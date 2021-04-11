@@ -52,6 +52,6 @@ export class DetailPageView extends BaseView {
             contentImage.removeEventListener('error', imageErrorHandler);
         };
 
-        this.eventBus.emit('detailpage:removeEventListeners', this.setEventListeners);
+        this.eventBus.emit('detailpage:removeEventListeners', removeEventListeners);
     }
 }
