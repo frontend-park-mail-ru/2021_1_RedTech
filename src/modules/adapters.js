@@ -1,5 +1,7 @@
 import { currentUrl } from './urls.js';
 
+const MAX_DESCRIPTION_LENGTH = 240;
+
 /**
  * Make object for render detail info about film from json.
  * @param {Object} jsonFilm - Info about film from json.
@@ -25,12 +27,18 @@ export const filmJsonToFilm = (jsonFilm) => {
  */
 export const arrayFilmsToFilmCards = (arrayFilms) => {
     return arrayFilms.reduce((filmCards, jsonFilm) => {
+        let description = jsonFilm?.description;
+        if (description.length > MAX_DESCRIPTION_LENGTH) {
+            description = description.substr(0, MAX_DESCRIPTION_LENGTH);
+            const to = description.lastIndexOf(' ');
+            description = description.substr(0, to);
+            description += '...';
+        }
         filmCards.push({
             id: jsonFilm?.id,
             title: jsonFilm?.title,
-            description: jsonFilm?.description,
+            description: description,
             movieAvatar: `${currentUrl}${jsonFilm?.movie_avatar}`,
-            //stars: '* '.repeat(jsonFilm.rating)
         });
         return filmCards;
     }, []);
