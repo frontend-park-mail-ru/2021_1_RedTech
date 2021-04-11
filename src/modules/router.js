@@ -11,6 +11,13 @@ class Router {
         eventBus.on(Events.PathChanged, this.onPathChanged.bind(this));
         eventBus.on(Events.RedirectBack, this.back.bind(this));
         eventBus.on(Events.RedirectForward, this.forward.bind(this));
+
+        document.getElementById('app').addEventListener('click', (e) => {
+            if (e.target.dataset.routlink) {
+                e.preventDefault();
+                this.changeRoute(e.target.dataset.routlink);
+            }
+        });
     }
 
     /**
@@ -73,12 +80,6 @@ class Router {
         let pathParams = null;
         let resultPath = parsedURL.pathname;
 
-        if (result) {
-            if (result[0]) {
-                pathParams = result[0];
-            }
-        }
-
         return {
             path: resultPath,
             pathParams: pathParams,
@@ -86,13 +87,13 @@ class Router {
     }
 
     go(path, data = {}) {
-        console.log('GO');
+
         const routeData = this.getRouteData(path);
         data = {...data, ...routeData};
 
-        if (this.currentController === routeData.controller && !routeData.query) {
+        if (this.currentController === routeData.controller) {
             console.log('Тот же контроллер');
-            return;
+            return
         }
 
         if (this.currentController) {
@@ -110,9 +111,7 @@ class Router {
             window.history.pushState(null, null, path);
         }
 
-        console.log('Нужен switch on');
-        console.log(data);
-        this.currentController.view.render(data);
+        this.currentController.view.render();
     }
 
     back() {

@@ -3,7 +3,7 @@ export const Routes = {
     SignUpPage : '/signup',
     LoginPage : '/login',
     ProfilePage : '/profile',
-    MoviePage: '/movie/:id',
+    MoviePage: '\\/movie\\/\\d+',
 }
 
 export default Routes;
