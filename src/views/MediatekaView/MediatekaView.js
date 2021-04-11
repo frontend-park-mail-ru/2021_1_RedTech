@@ -1,6 +1,6 @@
 import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
-import {scrollToTop} from '../../modules/utils';
+import { scrollToTop } from '../../modules/utils.js';
 
 /** Class representing film/series page view. */
 export class FilmSeriesPageView extends BaseView {

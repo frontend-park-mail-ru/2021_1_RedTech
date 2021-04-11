@@ -29,7 +29,8 @@ export class FilmSeriesPageModel {
             [data.cardContent, data.newContent] = values;
             this.eventBus.emit('film-seriespage:renderContent', data);
             this.eventBus.emit('film-seriespage:setEventListeners', data);
-        }).catch(() => {
+        }).catch((err) => {
+            console.log(err)
             this.eventBus.emit('homepage:renderErrorPage');
         });
     }
