@@ -2,6 +2,7 @@ import { eventBus } from '../modules/eventBus.js';
 import { DetailPageModel } from '../models/detailPage.js';
 import { DetailPageView } from '../views/DetailView/DetailView.js';
 
+/** Class representing detail page about film model. */
 export class DetailPageController {
     constructor() {
         this.eventBus = eventBus;

@@ -2,6 +2,7 @@ import { eventBus } from '../modules/eventBus.js';
 import { LogInView } from '../views/LogIn/LogIn.js';
 import { LogInModel } from '../models/logIn.js';
 
+/** Class representing login page model. */
 export class LogInController {
     constructor() {
         this.eventBus = eventBus;

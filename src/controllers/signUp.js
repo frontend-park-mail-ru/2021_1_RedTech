@@ -2,6 +2,7 @@ import { eventBus } from '../modules/eventBus.js';
 import { SignUpModel } from '../models/signUp.js';
 import { SignUpView } from '../views/SignUp/SignUp.js';
 
+/** Class representing signup page model. */
 export class SignUpController {
     constructor() {
         this.eventBus = eventBus;

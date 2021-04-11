@@ -2,6 +2,7 @@ import { eventBus } from '../modules/eventBus.js';
 import { HomePageModel } from '../models/homePage.js';
 import { HomePageView } from '../views/HomeView/HomeView.js';
 
+/** Class representing home page model. */
 export class HomePageController {
     constructor() {
         this.eventBus = eventBus;
