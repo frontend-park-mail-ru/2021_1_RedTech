@@ -34,8 +34,8 @@ export class LogInView extends BaseView {
             this.eventBus.emit(
                 'login:loginUser',
                 form,
-                document?.getElementById('email').value,
-                document?.getElementById('password').value
+                document.getElementById('email').value,
+                document.getElementById('password').value
             );
         };
 

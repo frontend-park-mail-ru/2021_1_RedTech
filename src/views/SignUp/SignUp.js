@@ -35,10 +35,10 @@ export class SignUpView extends BaseView {
             this.eventBus.emit(
                 'signup:signUpUser',
                 form,
-                document?.getElementById('login').value,
-                document?.getElementById('email').value,
-                document?.getElementById('password').value,
-                document?.getElementById('confirmPassword').value
+                document.getElementById('login').value,
+                document.getElementById('email').value,
+                document.getElementById('password').value,
+                document.getElementById('confirmPassword').value
             );
         };
 

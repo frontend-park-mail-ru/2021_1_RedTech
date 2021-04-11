@@ -21,7 +21,7 @@ export class HomePageView extends BaseView {
      * Render html home page from pug template.
      */
     render = () => {
-        const template = puglatizer.components.Loader.Loader();
+        const template = require('./HomeView.pug')();
         APPLICATION.innerHTML = template;
         this.eventBus.emit('homepage:InfoForHeader');
         this.eventBus.emit('homepage:getMainPageContent');

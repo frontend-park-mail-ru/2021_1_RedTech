@@ -93,7 +93,6 @@ class Router {
 
         if (this.currentController === routeData.controller) {
             console.log('Тот же контроллер');
-            return
         }
 
         if (this.currentController) {

@@ -49,7 +49,7 @@ export class ProfileView extends BaseView {
      * @param {string} avatarSrc - Source of new avatar.
      */
     renderNewAvatar = (avatarSrc) => {
-        const imgAvatar = document?.getElementById('avatar');
+        const imgAvatar = document.getElementById('avatar');
         imgAvatar.src = avatarSrc;
     }
 
@@ -76,7 +76,7 @@ export class ProfileView extends BaseView {
      * @param {string} idUser - idUser that needed for render some data.
      */
     setEventListeners = (idUser) => {
-        const imgAvatar = document?.getElementById('avatar');
+        const imgAvatar = document.getElementById('avatar');
 
         const [form] = document.getElementsByTagName('form');
         const [button] = document.getElementsByClassName('input-wrapper__button');
