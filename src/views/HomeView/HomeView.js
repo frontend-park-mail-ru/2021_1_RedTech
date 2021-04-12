@@ -1,6 +1,11 @@
 import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
 
+import HomeView from './HomeView.pug';
+import Header from '../../components/Header/Header.pug'
+import HomeContent from '../../components/HomeContent/HomeContent.pug'
+import ErrorPage from '../../components/ErrorPage/ErrorPage.pug'
+
 /** Class representing home page view. */
 export class HomePageView extends BaseView {
     /**
@@ -21,7 +26,7 @@ export class HomePageView extends BaseView {
      * Render html home page from pug template.
      */
     render = () => {
-        const template = require('./HomeView.pug')();
+        const template = HomeView;
         APPLICATION.innerHTML = template;
         this.eventBus.emit('homepage:InfoForHeader');
         this.eventBus.emit('homepage:getMainPageContent');
@@ -32,7 +37,7 @@ export class HomePageView extends BaseView {
      * @param {Object} data - Contains flag of authorizing.
      */
     renderHeader = (data) => {
-        const template = puglatizer.components.Header.Header(data);
+        const template = Header(data);
         const [header] = document.getElementsByTagName('header');
         if (header) {
             header.outerHTML = template;
@@ -49,7 +54,8 @@ export class HomePageView extends BaseView {
             newFilms,
             newSeries,
         };
-        const template = puglatizer.components.HomeContent.HomeContent(this._data);
+
+        const template = HomeContent(this._data);
         const content = document.querySelector('.content');
         if (content) {
             content.innerHTML = template;
@@ -62,7 +68,7 @@ export class HomePageView extends BaseView {
      * Render error page from pug template.
      */
     renderErrorPage = () => {
-        const template = puglatizer.components.ErrorPage.ErrorPage();
+        const template = ErrorPage();
         APPLICATION.innerHTML = template;
     }
 
