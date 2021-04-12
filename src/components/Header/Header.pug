@@ -1,39 +1,67 @@
-block variables
 -
     const headerIcons = [];
 
+    const headerLinks = [
+        {
+            className: '',
+            href: '/home',
+            title: 'Главная'
+        },
+        {
+            className: '',
+            href: '/movies',
+            title: 'Фильмы'
+        },
+        {
+            className: '',
+            href: '/serials',
+            title: 'Сериалы'
+        },
+    ];
+
+
+
     if (isAuthorized) {
         headerIcons.push(
-                {className: '', href: '/profile', title: 'Профиль', alt: ''},
-                {className: 'js-logout-page', href: '', title: 'Выйти', alt: ''}
+                {
+                    className: '',
+                    href: '/profile',
+                    title: 'Профиль',
+                    alt: ''
+                },
+                {
+                    className: '',
+                    href: '/login',
+                    title: 'Выйти',
+                    alt: ''
+                },
+                {
+                    className: '',
+                    href: '/favourite',
+                    title: 'Избранное'
+                }
         );
-    }
+    };
 
-    const headerLinks = [
-        {className: 'homePage js-home-link', href:'/home',  title: 'Главная'},
-        {className: 'filmPage js-films-link', href:'/movies', title: 'Фильмы'},
-        {className: 'serialsPage js-serials-link', href:'/serials', title: 'Сериалы'},
-        {className: 'lastPage js-latest-link', href:'/last', title: 'Последнее'}
-    ]
 
 header
-    a(class= 'homePage js-home-link' href= "" ).header-logo
+    a(class= '' href= "/home" ).header-logo
         img(src= "../../assets/RediotekaLogo.png" alt= "")
 
     ul.header-form
         each i in headerLinks
             li
-                a(href=i.href)= i.title
+                a(class= i.className href=i.href)= i.title
 
     if isAuthorized
         div.header-form__profile
-            a(class= 'header-form__profile__link item__right-link js-search-button')
+            a(class= 'header-form__profile__link item__right-link' href='/search')
                 img(src= '../../assets/search.png')
             div.dropdown-profile
                 img(class="dropdown-profile__image" src='../../assets/profileDropdown.png')
                 div(class="dropdown-profile__content")
                     each i in headerIcons
-                        a(class='item__dropdown-profile ' +  i.className)= i.title
+                        a(class='item__dropdown-profile ' +  i.className  href=i.href)= i.title
     else
         div.header-form__profile
             a(class= 'header-form__profile__link' href='/search')

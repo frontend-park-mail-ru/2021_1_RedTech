@@ -1,6 +1,8 @@
 import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
 
+import SignUp from './SignUp.pug';
+
 /** Class representing a signup page view. */
 export class SignUpView extends BaseView {
     /**
@@ -17,7 +19,7 @@ export class SignUpView extends BaseView {
      * Render html signup page from pug template.
      */
     render = () => {
-        const template = puglatizer.views.SignUp.SignUp();
+        const template = SignUp();
         APPLICATION.innerHTML = template;
         this.setEventListeners();
     }

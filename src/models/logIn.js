@@ -1,5 +1,6 @@
 import { isValidForm } from '../modules/isValidForm.js';
 import { postUserForLogin } from '../modules/http.js';
+import { Events } from '../consts/events.js';
 
 /** Class representing login page model. */
 export class LogInModel {
@@ -28,7 +29,8 @@ export class LogInModel {
             ).then((responseFlag) => {
                 if (responseFlag) {
                     this.eventBus.emit('login:removeEventListeners');
-                    this.eventBus.emit('homepage:render');
+                    this.eventBus.emit(Events.PathChanged, '/home')
+                    console.log('GO TO HOME');
                 } else {
                     this.eventBus.emit('homepage:renderErrorPage');
                 }

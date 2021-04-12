@@ -2,6 +2,24 @@ import { eventBus } from './eventBus.js';
 import { Events } from '../consts/events.js';
 import Routes from '../consts/routes.js';
 
+export function getPathArgs(path, template) {
+    if (!template) return {};
+    const splitPath = path.split('/');
+
+    // noinspection UnnecessaryLocalVariableJS
+    const pathArgs = template
+        .split('/')
+        .reduce((args, propName, index) => {
+            if (propName.startsWith(':')) {
+                args[propName.slice(1)] = splitPath[index];
+            }
+
+            return args;
+        }, {});
+
+    return pathArgs;
+}
+
 class Router {
     constructor(app) {
         this.application = app;

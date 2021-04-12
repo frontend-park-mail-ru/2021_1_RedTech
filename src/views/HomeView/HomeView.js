@@ -6,6 +6,7 @@ import Header from '../../components/Header/Header.pug'
 import HomeContent from '../../components/HomeContent/HomeContent.pug'
 import ErrorPage from '../../components/ErrorPage/ErrorPage.pug'
 import Loader from '../../components/Loader/Loader.pug'
+import { Events } from '../../consts/events.js';
 
 /** Class representing home page view. */
 export class HomePageView extends BaseView {
@@ -40,7 +41,6 @@ export class HomePageView extends BaseView {
     renderHeader = (data) => {
         const template = Header(data);
         const [header] = document.getElementsByTagName('header');
-        console.log('KEK renderHeader', content);
         if (header) {
             header.outerHTML = template;
         } else {
@@ -84,15 +84,6 @@ export class HomePageView extends BaseView {
             profileLink?.removeEventListener(('click'), profileLinkHandler);
             loginPage?.removeEventListener(('click'), loginPageHandler);
             logoutPage?.removeEventListener(('click'), logoutPageHandler);
-            aMain?.removeEventListener(('click'), aMainHandler);
-        };
-
-        const aMainHandler = (event) => {
-            this.eventBus.emit('homepage:removeEventListeners');
-            this.eventBus.emit('profile:removeEventListeners');
-            event.preventDefault();
-
-            this.eventBus.emit('homepage:getMainPageContent');
         };
 
         const profileLinkHandler = (event) => {
@@ -123,9 +114,6 @@ export class HomePageView extends BaseView {
 
         const logoutPage = document.querySelector('.js-logout-page');
         logoutPage?.addEventListener(('click'), logoutPageHandler);
-
-        const [aMain] = document.getElementsByClassName('homePage');
-        aMain?.addEventListener(('click'), aMainHandler);
     }
 
     /**
@@ -140,7 +128,12 @@ export class HomePageView extends BaseView {
             event.preventDefault();
 
             if (target) {
-                this.eventBus.emit('detailpage:getInfoAboutFilm', target.id.substr('top'.length));
+                const transmitData = {
+                    path: target.getAttribute('href'),
+                }
+
+                console.log(transmitData);
+                this.eventBus.emit(Events.PathChanged, transmitData);
             }
         };
 

@@ -3,3 +3,5 @@ export const Events = {
     RedirectBack: 'redirectBack',
     RedirectForward: 'redirectForward',
 }
+
+export default Events;

@@ -24,8 +24,7 @@ export class HomePageModel {
             const [topFilmsAndSeriesValue, newFilmsValue, newSeriesValue] = values;
             this.eventBus.emit('homepage:renderContent', topFilmsAndSeriesValue, newFilmsValue, newSeriesValue);
             this.eventBus.emit('homepage:setEventListeners');
-        }).catch((err) => {
-            console.log(err);
+        }).catch(() => {
             this.eventBus.emit('homepage:renderErrorPage');
         });
     }

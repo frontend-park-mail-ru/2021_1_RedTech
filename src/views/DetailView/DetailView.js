@@ -1,5 +1,10 @@
 import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
+import { getPathArgs } from '../../modules/router.js'
+
+import Loader from '../../components/Loader/Loader.pug';
+import DetailForm from '../../components/DetailForm/DetailForm.pug';
+
 
 /** Class representing film detail page view. */
 export class DetailPageView extends BaseView {
@@ -17,9 +22,13 @@ export class DetailPageView extends BaseView {
      * Render html film detail page from pug template.
      */
     render = (data = {}) => {
-        const template = puglatizer.components.Loader.Loader();
+        const template = Loader();
         APPLICATION.innerHTML = template;
-            this.eventBus.emit('detailpage:getInfoAboutFilm', '1');
+        console.log('Rendkek', window.location.pathname);
+
+        let pathArgs = getPathArgs(window.location.pathname, '/movie/:id');
+
+        this.eventBus.emit('detailpage:getInfoAboutFilm', pathArgs.id);
         this.eventBus.emit('homepage:getCurrentUser');
     }
 
@@ -29,7 +38,7 @@ export class DetailPageView extends BaseView {
      */
     renderDetailsAboutFilm = (filmData) => {
         this._data = { filmData };
-        const template = puglatizer.components.DetailForm.DetailForm(this._data);
+        const template = DetailForm(this._data);
         const content = document.querySelector('.content');
         if (content) {
             content.innerHTML = template;
