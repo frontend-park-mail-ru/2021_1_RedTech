@@ -2,18 +2,45 @@ block variables
 -
     const headerIcons = [];
 
+    const headerLinks = [
+        {
+            className: 'homePage js-home-link',
+            title: 'Главная'
+        },
+        {
+            className: 'filmPage js-films-link',
+            title: 'Фильмы'
+        },
+        {
+            className: 'serialsPage js-serials-link',
+            title: 'Сериалы'
+        },
+    ];
+
+
+
     if (isAuthorized) {
         headerIcons.push(
-                {className: 'js-profile-page', href: '', title: 'Профиль', alt: ''},
-                {className: 'js-logout-page', href: '', title: 'Выйти', alt: ''}
+                {
+                    className: 'js-profile-page',
+                    href: '', title: 'Профиль',
+                    alt: ''
+                },
+                {
+                    className: 'js-logout-page',
+                    href: '',
+                    title: 'Выйти',
+                    alt: ''
+                }
         );
-    }
+        headerLinks.push(
+            {
+                className: 'favouritesPage js-favourites-link',
+                title: 'Избранное'
+            }
+        );
+    };
 
-    const headerLinks = [
-        {className: 'homePage js-home-link', title: 'Главная'},
-        {className: 'filmPage js-films-link', title: 'Фильмы'},
-        {className: 'serialsPage js-serials-link', title: 'Сериалы'},
-    ]
 
 header
     a(class= 'homePage js-home-link' href= "" ).header-logo

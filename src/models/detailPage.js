@@ -1,4 +1,4 @@
-import { getDetailFilm } from '../modules/http.js';
+import { getDetailFilm, postAddToFavourites, postRemoveFromFavourites } from '../modules/http.js';
 
 /** Class representing detail page about film model. */
 export class DetailPageModel {
@@ -9,6 +9,8 @@ export class DetailPageModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.eventBus.on('detailpage:getInfoAboutFilm', this.getInfoAboutFilm);
+        this.eventBus.on('detailpage:addToFavourites', this.addToFavourite);
+        this.eventBus.on('detailpage:removeFromFavourites', this.removeFromFavourite);
     }
 
     /**
@@ -27,4 +29,24 @@ export class DetailPageModel {
             this.eventBus.emit('homepage:renderErrorPage');
         });
     };
+
+    /**
+     * Add film to favourites.
+     * @param {string} filmId - Film id, needed to add to favourites.
+     */
+    addToFavourite = (filmId) => {
+        postAddToFavourites(filmId).then(() => {
+            this.eventBus.emit('detailpage:changeIconOfFav');
+        });
+    }
+
+    /**
+     * Remove film film favourites.
+     * @param {string} filmId - Film id, needed to remove from favourites.
+     */
+    removeFromFavourite = (filmId) => {
+        postRemoveFromFavourites(filmId).then(() => {
+            this.eventBus.emit('detailpage:changeIconOfFav');
+        });
+    }
 }

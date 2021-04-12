@@ -117,6 +117,17 @@ export class HomePageView extends BaseView {
             this.eventBus.emit('mediateka:getPageContent', data);
         };
 
+        const favouritesPageHandler = (event) => {
+            this.eventBus.emit('homepage:removeEventListeners');
+            this.eventBus.emit('profile:removeEventListeners');
+            this.eventBus.emit('mediateka:removeEventListener');
+            this.eventBus.emit('genrepage:removeEventListener');
+            this.eventBus.emit('detailpage:removeEventListeners');
+            event.preventDefault();
+
+            this.eventBus.emit('favouritespage:getPageContent');
+        };
+
         const profileLinkHandler = (event) => {
             this.eventBus.emit('homepage:removeEventListeners');
             this.eventBus.emit('profile:removeEventListeners');
@@ -154,6 +165,9 @@ export class HomePageView extends BaseView {
 
         const seriesPage = document.querySelector('.js-serials-link');
         seriesPage?.addEventListener(('click'), filmPageHandler);
+
+        const favouritesPage = document.querySelector('.js-favourites-link');
+        favouritesPage?.addEventListener(('click'), favouritesPageHandler);
 
         const homeLink = document.querySelectorAll('.js-home-link');
         homeLink.forEach((element) => {

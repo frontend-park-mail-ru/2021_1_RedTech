@@ -8,7 +8,7 @@ const MAX_DESCRIPTION_LENGTH = 240;
  * @return {Object} - Object for render detail info about film.
  */
 export const filmJsonToFilm = (jsonFilm) => {
-    const filmKeys = ['title', 'type', 'year', 'genres', 'director', 'countries', 'actors', 'description'];
+    const filmKeys = ['id', 'title', 'type', 'year', 'genres', 'director', 'countries', 'actors', 'description'];
     const film = {
         movieAvatar: `${currentUrl}${jsonFilm.movie_avatar}`,
         rating: jsonFilm.rating ? `Положительных оценок ${jsonFilm.rating}` : '',

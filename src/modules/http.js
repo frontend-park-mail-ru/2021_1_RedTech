@@ -14,12 +14,17 @@ const sendRequest = async ({ url, method, body } = {}) => {
         credentials: 'include',
     });
 
-    const parsedJson = await response.json();
-
-    return {
-        status: response.status,
-        parsedJson,
-    };
+    try {
+        const parsedJson = await response?.json();
+        return {
+            status: response.status,
+            parsedJson,
+        };
+    } catch {
+        return {
+            status: response.status,
+        };
+    }
 };
 
 /**
@@ -377,6 +382,61 @@ const getGenreSeries = async (genreName) => {
     }
 };
 
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects for render favourite page.
+ */
+const getFavourites = async (userId) => {
+    const params = {
+        url: URLS.api.profile + userId + '/media',
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayContentToNewFilmsSeries(responseBody.favourites);
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {boolean} - Is status of post request add to favourites equal to 200.
+ */
+const postAddToFavourites = async (contentId) => {
+    const params = {
+        url: URLS.api.media + contentId + '/like',
+        method: 'POST'
+    };
+    try {
+        const response = await sendRequest(params);
+        return response.status === 200;
+    } catch (err) {
+        return false;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {boolean} - Is status of post request remove from favourites equal to 200.
+ */
+const postRemoveFromFavourites = async (contentId) => {
+    const params = {
+        url: URLS.api.media + contentId + '/dislike',
+        method: 'POST'
+    };
+    try {
+        const response = await sendRequest(params);
+        return response.status === 200;
+    } catch (err) {
+        return false;
+    }
+};
+
 export {
     postUserForLogin,
     postUserForSignUp,
@@ -392,5 +452,8 @@ export {
     getTopFilms,
     getGenreFilms,
     getTopSeries,
-    getGenreSeries
+    getGenreSeries,
+    getFavourites,
+    postAddToFavourites,
+    postRemoveFromFavourites
 };
