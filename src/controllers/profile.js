@@ -3,6 +3,7 @@ import { ProfileModel } from '../models/profile.js';
 import { ProfileView } from '../views/Profile/Profile.js';
 import Controller from './controller.js';
 
+/** Class representing profile page model. */
 export class ProfileController extends Controller {
     constructor() {
         super(new Controller());

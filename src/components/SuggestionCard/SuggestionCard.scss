@@ -11,20 +11,15 @@
 .suggestion-film__list {
   display: flex;
   overflow-x: auto;
-  height: 356px;
   gap: 1em;
   padding-top: 10px;
   padding-bottom: 10px;
 
-  .item__internal:first-child {
-    margin-left: 30px;
-  }
-
   .item__internal {
     cursor: pointer;
-    margin-left: 20px;
-    width: 180px;
+    margin-left: 30px;
     background: none;
+    width: 180px;
     display: grid;
     transition: all 0.15s ease-in-out;
 
@@ -32,7 +27,7 @@
       object-fit: contain;
       border-radius: 12px;
       width: 180px;
-      height: 240px;
+      height: 252px;
     }
   }
 

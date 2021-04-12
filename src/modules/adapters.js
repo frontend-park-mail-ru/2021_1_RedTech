@@ -1,12 +1,14 @@
 import { currentUrl } from '../consts/urls.js';
 
+const MAX_DESCRIPTION_LENGTH = 240;
+
 /**
  * Make object for render detail info about film from json.
  * @param {Object} jsonFilm - Info about film from json.
  * @return {Object} - Object for render detail info about film.
  */
 export const filmJsonToFilm = (jsonFilm) => {
-    const filmKeys = ['title', 'type', 'year', 'genres', 'director', 'countries', 'actors', 'description'];
+    const filmKeys = ['id', 'title', 'type', 'year', 'genres', 'director', 'countries', 'actors', 'description'];
     const film = {
         movieAvatar: `${currentUrl}${jsonFilm.movie_avatar}`,
         rating: jsonFilm.rating ? `Положительных оценок ${jsonFilm.rating}` : '',
@@ -24,20 +26,23 @@ export const filmJsonToFilm = (jsonFilm) => {
  * @return {Array} - Array of objects for render top slider.
  */
 export const arrayFilmsToFilmCards = (arrayFilms) => {
-    const filmCards = [];
-
-    arrayFilms.reduce((_, jsonFilm) => {
+    return arrayFilms.reduce((filmCards, jsonFilm) => {
+        let description = jsonFilm?.description;
+        if (description.length > MAX_DESCRIPTION_LENGTH) {
+            description = description.substr(0, MAX_DESCRIPTION_LENGTH);
+            const to = description.lastIndexOf(' ');
+            description = description.substr(0, to);
+            description += '...';
+        }
         filmCards.push({
-            id: jsonFilm.id,
-            title: jsonFilm.title,
-            description: jsonFilm.description,
-            movieAvatar: `${currentUrl}${jsonFilm.movie_avatar}`,
-            stars: '* '.repeat(jsonFilm.rating),
+            id: jsonFilm?.id,
+            title: jsonFilm?.title,
+            description: description,
+            movieAvatar: `${currentUrl}${jsonFilm?.movie_avatar}`,
             href: `/movie/${jsonFilm.id}`,
         });
-    });
-
-    return filmCards;
+        return filmCards;
+    }, []);
 };
 
 /**
@@ -46,17 +51,14 @@ export const arrayFilmsToFilmCards = (arrayFilms) => {
  * @return {Object} - Array of objects for render bottom slider.
  */
 export const arrayContentToNewFilmsSeries = (arrayContent) => {
-    const newFilmsSeries = [];
-
-    arrayContent.reduce((_, jsonFilm) => {
+    return arrayContent.reduce((newFilmsSeries, jsonFilm) => {
         newFilmsSeries.push({
-            id: jsonFilm.id,
-            title: jsonFilm.title,
-            movieAvatar: `${currentUrl}${jsonFilm.movie_avatar}`,
-            status: jsonFilm.is_free ? 'Бесплатно' : 'Подписка',
-            href: `/movie/${jsonFilm.id}`,
+            id: jsonFilm?.id,
+            title: jsonFilm?.title,
+            movieAvatar: `${currentUrl}${jsonFilm?.movie_avatar}`,
+            status: jsonFilm?.is_free ? 'Бесплатно' : 'Подписка',
+            href: `/movie/${jsonFilm.id}`
         });
-    });
-
-    return newFilmsSeries;
+        return newFilmsSeries;
+    }, []);
 };

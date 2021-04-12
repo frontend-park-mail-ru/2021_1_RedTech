@@ -1,5 +1,6 @@
 import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
+import { scrollToTop } from '../../modules/utils.js';
 
 import HomeView from './HomeView.pug';
 import Header from '../../components/Header/Header.pug'
@@ -81,14 +82,50 @@ export class HomePageView extends BaseView {
         const removeAllListeners = () => {
             this.eventBus.emit('homepage:removeEventListeners');
             this.eventBus.emit('profile:removeEventListeners');
+            this.eventBus.emit('mediateka:removeEventListener');
+            this.eventBus.emit('genrepage:removeEventListener');
+            this.eventBus.emit('detailpage:removeEventListeners');
             profileLink?.removeEventListener(('click'), profileLinkHandler);
             loginPage?.removeEventListener(('click'), loginPageHandler);
             logoutPage?.removeEventListener(('click'), logoutPageHandler);
         };
 
+        const filmPageHandler = (event) => {
+            this.eventBus.emit('homepage:removeEventListeners');
+            this.eventBus.emit('profile:removeEventListeners');
+            this.eventBus.emit('mediateka:removeEventListener');
+            this.eventBus.emit('genrepage:removeEventListener');
+            this.eventBus.emit('detailpage:removeEventListeners');
+            event.preventDefault();
+
+            const data = {
+                isFilm: false
+            };
+
+            if (event.target.className.includes('filmPage')) {
+                data.isFilm = true;
+            }
+
+            this.eventBus.emit('mediateka:getPageContent', data);
+        };
+
+        const favouritesPageHandler = (event) => {
+            this.eventBus.emit('homepage:removeEventListeners');
+            this.eventBus.emit('profile:removeEventListeners');
+            this.eventBus.emit('mediateka:removeEventListener');
+            this.eventBus.emit('genrepage:removeEventListener');
+            this.eventBus.emit('detailpage:removeEventListeners');
+            event.preventDefault();
+
+            this.eventBus.emit('favouritespage:getPageContent');
+        };
+
         const profileLinkHandler = (event) => {
             this.eventBus.emit('homepage:removeEventListeners');
             this.eventBus.emit('profile:removeEventListeners');
+            this.eventBus.emit('mediateka:removeEventListener');
+            this.eventBus.emit('genrepage:removeEventListener');
+            this.eventBus.emit('detailpage:removeEventListeners');
             event.preventDefault();
 
             this.eventBus.emit('profile:getInfoAboutCurrentUser');
@@ -120,8 +157,23 @@ export class HomePageView extends BaseView {
      * Set event listeners.
      */
     setEventListeners = () => {
+        const topMediaImgs = document.querySelectorAll('.item__card-image');
+        const newMediaImgs = document.querySelectorAll('.item__suggestion__image');
+
+        topMediaImgs.forEach((img) => {
+            img.addEventListener('error', () => {
+                img.src = 'img/not-found.jpeg';
+            });
+        });
+
+        newMediaImgs.forEach((img) => {
+            img.addEventListener('error', () => {
+                img.src = 'img/not-found.jpeg';
+            });
+        });
+
         const topFilmSeriesHandler = (event) => {
-            window.scrollTo(0, 0);
+            scrollToTop();
             removeEventListeners();
 
             const target = event.target.closest('.item__film-card');
@@ -138,7 +190,7 @@ export class HomePageView extends BaseView {
         };
 
         const newFilmSeriesHandler = (event) => {
-            window.scrollTo(0, 0);
+            scrollToTop();
             removeEventListeners();
 
             const target = event.target.closest('.item__internal');

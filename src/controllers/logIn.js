@@ -3,6 +3,7 @@ import { LogInView } from '../views/LogIn/LogIn.js';
 import { LogInModel } from '../models/logIn.js';
 import Controller from './controller.js';
 
+/** Class representing login page model. */
 export class LogInController extends Controller {
     constructor() {
         super(new Controller());

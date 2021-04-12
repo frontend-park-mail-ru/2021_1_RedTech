@@ -3,6 +3,7 @@ import { HomePageModel } from '../models/homePage.js';
 import { HomePageView } from '../views/HomeView/HomeView.js';
 import Controller from './controller.js';
 
+/** Class representing home page model. */
 export class HomePageController extends Controller {
     constructor() {
         super(new Controller());

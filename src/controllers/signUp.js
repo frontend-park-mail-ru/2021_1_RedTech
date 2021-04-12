@@ -3,6 +3,7 @@ import { SignUpModel } from '../models/signUp.js';
 import { SignUpView } from '../views/SignUp/SignUp.js';
 import Controller from './controller.js';
 
+/** Class representing signup page model. */
 export class SignUpController extends Controller {
     constructor() {
         super(new Controller());

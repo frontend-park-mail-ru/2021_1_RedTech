@@ -14,12 +14,17 @@ const sendRequest = async ({ url, method, body } = {}) => {
         credentials: 'include',
     });
 
-    const parsedJson = await response.json();
-
-    return {
-        status: response.status,
-        parsedJson,
-    };
+    try {
+        const parsedJson = await response?.json();
+        return {
+            status: response.status,
+            parsedJson,
+        };
+    } catch {
+        return {
+            status: response.status,
+        };
+    }
 };
 
 /**
@@ -214,7 +219,7 @@ const patchProfile = async (idUser, email, login) => {
  * Send async get request using async func.
  * @returns {Object} - detail info about film in object.
  */
-const getDetailFilmPage = async (filmId) => {
+const getDetailFilm = async (filmId) => {
     const params = {
         url: URLS.api.media + filmId,
         method: 'GET',
@@ -294,6 +299,145 @@ const getNewSeries = async () => {
     }
 };
 
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects for render top slider.
+ */
+const getTopFilms = async () => {
+    const params = {
+        url: URLS.api.topFilms,
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayFilmsToFilmCards(responseBody.top);
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects for render top slider.
+ */
+const getTopSeries = async () => {
+    const params = {
+        url: URLS.api.topSeries,
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayFilmsToFilmCards(responseBody.top);
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects for render bottom slider.
+ */
+const getGenreFilms = async (genreName) => {
+    const params = {
+        url: URLS.api.genreFilms + genreName,
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayContentToNewFilmsSeries(responseBody.genre);
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects for render bottom slider.
+ */
+const getGenreSeries = async (genreName) => {
+    const params = {
+        url: URLS.api.genreSeries + genreName,
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayContentToNewFilmsSeries(responseBody.genre);
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects for render favourite page.
+ */
+const getFavourites = async (userId) => {
+    const params = {
+        url: URLS.api.profile + userId + '/media',
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayContentToNewFilmsSeries(responseBody.favourites);
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {boolean} - Is status of post request add to favourites equal to 200.
+ */
+const postAddToFavourites = async (contentId) => {
+    const params = {
+        url: URLS.api.media + contentId + '/like',
+        method: 'POST'
+    };
+    try {
+        const response = await sendRequest(params);
+        return response.status === 200;
+    } catch (err) {
+        return false;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {boolean} - Is status of post request remove from favourites equal to 200.
+ */
+const postRemoveFromFavourites = async (contentId) => {
+    const params = {
+        url: URLS.api.media + contentId + '/dislike',
+        method: 'POST'
+    };
+    try {
+        const response = await sendRequest(params);
+        return response.status === 200;
+    } catch (err) {
+        return false;
+    }
+};
+
 export {
     postUserForLogin,
     postUserForSignUp,
@@ -302,8 +446,15 @@ export {
     getProfile,
     postAvatar,
     patchProfile,
-    getDetailFilmPage,
+    getDetailFilm,
     getTopFilmsAndSeries,
     getNewFilms,
-    getNewSeries
+    getNewSeries,
+    getTopFilms,
+    getGenreFilms,
+    getTopSeries,
+    getGenreSeries,
+    getFavourites,
+    postAddToFavourites,
+    postRemoveFromFavourites
 };
