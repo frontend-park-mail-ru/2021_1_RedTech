@@ -90,10 +90,10 @@ class Router {
         }
     }
 
-    getParam(path) {
-        const reg = new RegExp(/\d+/);
-        const result = path.match(reg);
-
+    getParam(path = '/') {
+        console.log(window.location.origin);
+        console.log(path);
+        console.log(window.location.origin + path);
         const parsedURL = new URL(window.location.origin + path);
         let pathParams = null;
         let resultPath = parsedURL.pathname;

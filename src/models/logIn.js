@@ -34,6 +34,7 @@ export class LogInModel {
                     this.eventBus.emit('homepage:renderErrorPage');
                 }
             }).catch(() => {
+                this.eventBus.emit(Events.PathChanged, '/');
                 this.eventBus.emit('homepage:renderErrorPage');
             });
         }

@@ -39,6 +39,7 @@ export class HomePageView extends BaseView {
      * @param {Object} data - Contains flag of authorizing.
      */
     renderHeader = (data) => {
+        console.log('KEK -> ', data)
         const template = Header(data);
         const [header] = document.getElementsByTagName('header');
         if (header) {

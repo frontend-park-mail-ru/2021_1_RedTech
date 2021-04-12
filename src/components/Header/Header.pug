@@ -1,6 +1,7 @@
 -
     const headerIcons = [];
 
+-
     const headerLinks = [
         {
             className: '',
@@ -19,8 +20,7 @@
         },
     ];
 
-
-
+-
     if (isAuthorized) {
         headerIcons.push(
                 {
@@ -43,7 +43,6 @@
         );
     };
 
-
 header
     a(class= '' href= "/" ).header-logo
         img(src= "../../assets/RediotekaLogo.png" alt= "")
@@ -61,7 +60,7 @@ header
                 img(class="dropdown-profile__image" src='../../assets/profileDropdown.png')
                 div(class="dropdown-profile__content")
                     each i in headerIcons
-                        a(class='item__dropdown-profile ' +  i.className  href=i.href)= i.title
+                        a(class='item__dropdown-profile ' + i.className  href=i.href)= i.title
     else
         div.header-form__profile
             a(class= 'header-form__profile__link' href='/search')
