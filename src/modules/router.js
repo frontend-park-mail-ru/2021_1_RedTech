@@ -104,7 +104,7 @@ class Router {
         };
     }
 
-    go(path, data = {}) {
+    go(path = '/', data = {}) {
 
         const routeData = this.getRouteData(path);
         data = {...data, ...routeData};
@@ -114,6 +114,8 @@ class Router {
         }
 
         if (this.currentController) {
+            console.log(window.location.pathname);
+            console.log(routeData.path);
             console.log('Проверка');
         }
 

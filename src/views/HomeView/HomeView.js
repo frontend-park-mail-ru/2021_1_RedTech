@@ -28,7 +28,7 @@ export class HomePageView extends BaseView {
      * Render html home page from pug template.
      */
     render = () => {
-        const template = Loader;
+        const template = Loader();
         APPLICATION.innerHTML = template;
         this.eventBus.emit('homepage:InfoForHeader');
         this.eventBus.emit('homepage:getMainPageContent');
@@ -39,7 +39,6 @@ export class HomePageView extends BaseView {
      * @param {Object} data - Contains flag of authorizing.
      */
     renderHeader = (data) => {
-        console.log('KEK -> ', data)
         const template = Header(data);
         const [header] = document.getElementsByTagName('header');
         if (header) {

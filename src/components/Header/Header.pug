@@ -1,8 +1,8 @@
 -
-    const headerIcons = [];
+    var headerIcons = []
 
 -
-    const headerLinks = [
+    var headerLinks = [
         {
             className: '',
             href: '/',
@@ -20,28 +20,25 @@
         },
     ];
 
--
-    if (isAuthorized) {
-        headerIcons.push(
-                {
-                    className: '',
-                    href: '/profile',
-                    title: 'Профиль',
-                    alt: ''
-                },
-                {
-                    className: '',
-                    href: '/login',
-                    title: 'Выйти',
-                    alt: ''
-                },
-                {
-                    className: '',
-                    href: '/favourite',
-                    title: 'Избранное'
-                }
-        );
-    };
+if isAuthorized
+    -
+        headerIcons = [
+            {
+                className: '',
+                href: '/profile',
+                title: 'Профиль',
+            },
+            {
+                className: '',
+                href: '/favourite',
+                title: 'Избранное'
+            },
+            {
+                className: '',
+                href: '/login',
+                title: 'Выйти',
+            }
+        ]
 
 header
     a(class= '' href= "/" ).header-logo
@@ -52,6 +49,8 @@ header
             li
                 a(class= i.className href=i.href)= i.title
 
+    -
+        console.log('isAuthorized',isAuthorized);
     if isAuthorized
         div.header-form__profile
             a(class= 'header-form__profile__link item__right-link' href='/search')

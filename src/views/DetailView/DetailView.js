@@ -24,12 +24,11 @@ export class DetailPageView extends BaseView {
     render = (data = {}) => {
         const template = Loader();
         APPLICATION.innerHTML = template;
-        console.log('Rendkek', window.location.pathname);
 
         let pathArgs = getPathArgs(window.location.pathname, '/movie/:id');
 
         this.eventBus.emit('detailpage:getInfoAboutFilm', pathArgs.id);
-        this.eventBus.emit('homepage:getCurrentUser');
+        this.eventBus.emit('homepage:InfoForHeader');
     }
 
     /**
