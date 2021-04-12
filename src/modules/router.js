@@ -71,7 +71,6 @@ class Router {
     getRouteData(path) {
         let targetController = null;
         const result = this.getParam(path);
-        console.log(result);
 
         this.routes.forEach(({path, controller}) => {
             const res = result.path.match(path);
@@ -91,9 +90,6 @@ class Router {
     }
 
     getParam(path = '/') {
-        console.log(window.location.origin);
-        console.log(path);
-        console.log(window.location.origin + path);
         const parsedURL = new URL(window.location.origin + path);
         let pathParams = null;
         let resultPath = parsedURL.pathname;
@@ -105,18 +101,10 @@ class Router {
     }
 
     go(path = '/', data = {}) {
-
         const routeData = this.getRouteData(path);
         data = {...data, ...routeData};
 
         if (this.currentController === routeData.controller) {
-            console.log('Тот же контроллер');
-        }
-
-        if (this.currentController) {
-            console.log(window.location.pathname);
-            console.log(routeData.path);
-            console.log('Проверка');
         }
 
         this.currentController = routeData.controller;
