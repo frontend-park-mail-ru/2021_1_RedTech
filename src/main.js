@@ -18,4 +18,8 @@ const detailPageController = new DetailPageController();
 const filmPageController = new MediatekaPageController();
 const genrePageController = new GenrePageController();
 
+if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js');
+}
+
 eventBus.emit('homepage:render');
