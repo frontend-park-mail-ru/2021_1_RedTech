@@ -1,5 +1,5 @@
 mixin SuggestionCardCreate (i)
-    div.item__internal(id = 'suggest' + i.id)
+    div.item__internal(href= i.href)
         img.item__suggestion__image(src= i.movieAvatar alt= i.alt)
         div.item__suggestion__title
             a(href= "#")= i.title

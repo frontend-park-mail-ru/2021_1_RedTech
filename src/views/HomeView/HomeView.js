@@ -145,7 +145,12 @@ export class HomePageView extends BaseView {
             event.preventDefault();
 
             if (target) {
-                this.eventBus.emit('detailpage:getInfoAboutFilm', target.id.substr('suggest'.length));
+                const transmitData = {
+                    path: target.getAttribute('href'),
+                }
+
+                console.log(transmitData);
+                this.eventBus.emit(Events.PathChanged, transmitData);
             }
         };
 
