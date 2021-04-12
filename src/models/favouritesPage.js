@@ -18,7 +18,6 @@ export class FavouritesPageModel {
         getCurrentUser().then((idUser) => {
             if (idUser) {
                 getFavourites(idUser).then((contentData) => {
-
                     const data = {
                         contentData: contentData ?? [],
                         genreTitle: 'Избранное'
