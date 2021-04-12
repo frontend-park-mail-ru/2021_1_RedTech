@@ -29,8 +29,7 @@ export class LogInModel {
             ).then((responseFlag) => {
                 if (responseFlag) {
                     this.eventBus.emit('login:removeEventListeners');
-                    this.eventBus.emit(Events.PathChanged, '/home')
-                    console.log('GO TO HOME');
+                    this.eventBus.emit(Events.PathChanged, '/');
                 } else {
                     this.eventBus.emit('homepage:renderErrorPage');
                 }
