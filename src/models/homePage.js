@@ -24,7 +24,8 @@ export class HomePageModel {
             const [topFilmsAndSeriesValue, newFilmsValue, newSeriesValue] = values;
             this.eventBus.emit('homepage:renderContent', topFilmsAndSeriesValue, newFilmsValue, newSeriesValue);
             this.eventBus.emit('homepage:setEventListeners');
-        }).catch(() => {
+        }).catch((err) => {
+            console.log(err);
             this.eventBus.emit('homepage:renderErrorPage');
         });
     }
@@ -46,6 +47,7 @@ export class HomePageModel {
                 this.eventBus.emit('homepage:renderHeader', data);
             }
             this.eventBus.emit('homepage:setEventListenersForHeader');
+
         }).catch(() => {
             this.eventBus.emit('homepage:renderErrorPage');
         });

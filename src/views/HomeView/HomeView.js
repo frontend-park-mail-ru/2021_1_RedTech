@@ -5,6 +5,7 @@ import HomeView from './HomeView.pug';
 import Header from '../../components/Header/Header.pug'
 import HomeContent from '../../components/HomeContent/HomeContent.pug'
 import ErrorPage from '../../components/ErrorPage/ErrorPage.pug'
+import Loader from '../../components/Loader/Loader.pug'
 
 /** Class representing home page view. */
 export class HomePageView extends BaseView {
@@ -26,7 +27,7 @@ export class HomePageView extends BaseView {
      * Render html home page from pug template.
      */
     render = () => {
-        const template = HomeView;
+        const template = Loader;
         APPLICATION.innerHTML = template;
         this.eventBus.emit('homepage:InfoForHeader');
         this.eventBus.emit('homepage:getMainPageContent');
@@ -39,6 +40,7 @@ export class HomePageView extends BaseView {
     renderHeader = (data) => {
         const template = Header(data);
         const [header] = document.getElementsByTagName('header');
+        console.log('KEK renderHeader', content);
         if (header) {
             header.outerHTML = template;
         } else {

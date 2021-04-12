@@ -1,3 +1,5 @@
+include ../FilmCard/FilmCard
+
 mixin TopSlider (cardFilms)
     each i in cardFilms
-        include ../FilmCard/FilmCard
+        +FilmCardCreate(i)

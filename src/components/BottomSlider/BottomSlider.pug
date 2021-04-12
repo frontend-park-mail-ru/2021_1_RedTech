@@ -1,3 +1,5 @@
+include ../SuggestionCard/SuggestionCard
+
 mixin BottomSlider (content)
     each i in content
-        include ../SuggestionCard/SuggestionCard
+        +SuggestionCardCreate(i)

@@ -101,6 +101,7 @@ const getCurrentUser = async () => {
         }
         return null;
     } catch (err) {
+
         return null;
     }
 };

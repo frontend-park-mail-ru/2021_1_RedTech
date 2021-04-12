@@ -1,14 +1,14 @@
-div(class= "item__film-card" id='top' + i.id href= i.href)
-    div.item__image
-        img(src= i.movieAvatar alt= i.alt)
-    div.item__details
-        div.item__film-card__title
-            a(href= "#")= i.title
+mixin FilmCardCreate (i)
+    div(class= "item__film-card" id='top' + i.id href= i.href)
+        div.item__image
+            img(src= i.movieAvatar alt= i.alt)
+        div.item__details
+            div.item__film-card__title
+                a(href= "#")= i.title
 
-        div.item__film-card__stars= i.stars
+            div.item__film-card__stars= i.stars
 
+            div.item__film-card__description= i.description
 
-        div.item__film-card__description= i.description
-
-        div.item__film-card__buttons
-            div.item__button-title Смотреть
+            div.item__film-card__buttons
+                div.item__button-title Смотреть
