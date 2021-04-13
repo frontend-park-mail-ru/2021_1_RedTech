@@ -4,6 +4,7 @@ import { scrollToTop } from '../../modules/utils.js';
 
 import Loader from '../../components/Loader/Loader.pug';
 import GenreContent from '../../components/GenreContent/GenreContent.pug';
+import { Events } from '../../consts/events.js';
 
 /** Class representing genre page view. */
 export class GenrePageView extends BaseView {
@@ -22,6 +23,7 @@ export class GenrePageView extends BaseView {
      * Render html genre page from pug template.
      */
     render = (genre) => {
+        console.log('GENRE KEK', genre);
         const template = Loader();
         APPLICATION.innerHTML = template;
         this.eventBus.emit('homepage:InfoForHeader');
@@ -57,7 +59,12 @@ export class GenrePageView extends BaseView {
             event.preventDefault();
 
             if (target) {
-                this.eventBus.emit('detailpage:getInfoAboutFilm', target.id.substr('suggest'.length));
+                const transmitData = {
+                    path: target.getAttribute('href'),
+                }
+
+                console.log(transmitData);
+                this.eventBus.emit(Events.PathChanged, transmitData);
             }
         };
 

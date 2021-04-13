@@ -8,6 +8,7 @@ export const Routes = {
     MoviesGenrePage: '\\/movies\\/genre\\/\\w+',
     SeriesPage: '/series',
     SeriesGenrePage: '\\/series\\/genre\\/\\w+',
+    FavouritePage: '/favourite',
 }
 
 export default Routes;

@@ -57,6 +57,7 @@ class Router {
     }
 
     onPathChanged(data) {
+        console.log('onPathChanged', data);
         this.go(data.path, data || {});
     }
 
@@ -113,7 +114,9 @@ class Router {
 
     go(path = '/', data = {}) {
         const routeData = this.getRouteData(path);
+        console.log('go', data);
         data = {...data, ...routeData};
+        console.log('go', data);
 
         if (this.currentController === routeData.controller) {
         }

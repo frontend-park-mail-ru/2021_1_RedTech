@@ -1,4 +1,5 @@
 import { APPLICATION } from '../../main.js';
+import { Events } from '../../consts/events.js';
 import { BaseView } from '../BaseView/BaseView.js';
 import { scrollToTop } from '../../modules/utils.js';
 
@@ -57,9 +58,16 @@ export class MediatekaView extends BaseView {
             event.preventDefault();
 
             if (target) {
-                data.id = target.id;
-                data.genre = target.dataset.genre;
-                this.eventBus.emit('genrepage:getPageContent', data);
+                const transmitData = {}
+                if (this._data.isFilm) {
+                    transmitData.path = `/movies/genre/${target.id}`;
+                } else {
+                    transmitData.path = `/series/genre/${target.id}`;
+                }
+                transmitData.genre = target.dataset.genre;
+                transmitData.isFilm = this._data.isFilm;
+                transmitData.id = target.id;
+                this.eventBus.emit(Events.PathChanged, transmitData);
             }
         };
 

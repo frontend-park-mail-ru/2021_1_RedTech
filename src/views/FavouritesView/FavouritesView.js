@@ -1,6 +1,9 @@
 import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
 
+import Loader from '../../components/Loader/Loader.pug';
+import GenreContent from '../../components/GenreContent/GenreContent.pug';
+
 /** Class representing favourites page view. */
 export class FavouritesView extends BaseView {
     /**
@@ -17,7 +20,7 @@ export class FavouritesView extends BaseView {
      * Render html favourites page from pug template.
      */
     render = () => {
-        const template = puglatizer.components.Loader.Loader();
+        const template = Loader();
         APPLICATION.innerHTML = template;
         this.eventBus.emit('homepage:InfoForHeader');
         this.eventBus.emit('favouritespage:getPageContent');
@@ -28,7 +31,8 @@ export class FavouritesView extends BaseView {
      */
     renderContent = (data) => {
         this._data = data;
-        const template = puglatizer.components.GenreContent.GenreContent(this._data);
+        console.log('renderContent', this._data);
+        const template = GenreContent(this._data);
         const content = document.querySelector('.content');
         if (content) {
             content.innerHTML = template;

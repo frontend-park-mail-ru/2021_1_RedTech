@@ -22,6 +22,7 @@ export class FavouritesPageModel {
                         contentData: contentData ?? [],
                         genreTitle: 'Избранное'
                     };
+                    console.log(data);
                     this.eventBus.emit('favouritespage:renderContent', data);
                     this.eventBus.emit('genrepage:setEventListeners');
                 }).catch(() => {
