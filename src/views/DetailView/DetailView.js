@@ -44,40 +44,11 @@ export class DetailPageView extends BaseView {
      * Change icon of add/remove to/from favourites.
      */
     changeIconOfFav = () => {
-        const favIcon = document.querySelector('.item__favourite-icon');
-        if (favIcon.id === 'add_to_fav') {
-            favIcon.src = '../../assets/favourite.png';
-            favIcon.id = 'remove_from_fav';
-            this.eventBus.emit('detailpage:removeEventFromAddToFav');
+        const addToFav = document.querySelector('.js-add-favourite-detail');
+        const removeFromFav = document.querySelector('.js-remove-favourite-detail');
 
-            const removeFromFavourites = (event) => {
-                event.preventDefault();
-                const contentId = document.querySelector('.detail_preview').id;
-                this.eventBus.emit('detailpage:removeFromFavourites', contentId);
-            };
-
-            favIcon.addEventListener('click', removeFromFavourites);
-
-            const removeEventFromRemoveFromFav = () => {
-                favIcon.removeEventListener('submit', removeFromFavourites);
-            };
-            this.eventBus.emit('detailpage:removeEventFromAddToFav');
-            this.eventBus.on('detailpage:removeEventFromRemoveFromFav', removeEventFromRemoveFromFav);
-
-        } else {
-            favIcon.src = '../../assets/star.png';
-            favIcon.id = 'add_to_fav';
-
-            this.eventBus.emit('detailpage:removeEventFromRemoveFromFav');
-
-            const addToFavourites = (event) => {
-                event.preventDefault();
-                const contentId = document.querySelector('.detail_preview').id;
-                this.eventBus.emit('detailpage:addToFavourites', contentId);
-            };
-
-            favIcon.addEventListener('click', addToFavourites);
-        }
+        addToFav.hidden = !addToFav.hidden;
+        removeFromFav.hidden = !removeFromFav.hidden;
     }
 
     /**
@@ -96,21 +67,26 @@ export class DetailPageView extends BaseView {
             this.eventBus.emit('detailpage:addToFavourites', contentId);
         };
 
+        const removeFromFavourites = (event) => {
+            event.preventDefault();
+            const contentId = document.querySelector('.detail_preview').id;
+            this.eventBus.emit('detailpage:removeFromFavourites', contentId);
+        };
+
         const addToFav = document.getElementById('add_to_fav');
         addToFav.addEventListener('click', addToFavourites);
+
+        const removeFromFav = document.getElementById('remove_from_fav');
+        removeFromFav.addEventListener('click', removeFromFavourites);
 
         contentImage.addEventListener('error', imageErrorHandler);
 
         const removeEventListeners = () => {
             contentImage.removeEventListener('error', imageErrorHandler);
             addToFav.removeEventListener('click', addToFavourites);
+            removeFromFav.removeEventListener('click', removeFromFavourites);
         };
 
-        const removeEventFromAddToFav = () => {
-            addToFav.removeEventListener('click', addToFavourites);
-        };
-
-        this.eventBus.on('detailpage:removeEventFromAddToFav', removeEventFromAddToFav);
         this.eventBus.on('detailpage:removeEventListeners', removeEventListeners);
     }
 }
