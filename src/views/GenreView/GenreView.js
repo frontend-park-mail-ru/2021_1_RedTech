@@ -2,6 +2,9 @@ import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
 import { scrollToTop } from '../../modules/utils.js';
 
+import Loader from '../../components/Loader/Loader.pug';
+import GenreContent from '../../components/GenreContent/GenreContent.pug';
+
 /** Class representing genre page view. */
 export class GenrePageView extends BaseView {
     /**
@@ -19,7 +22,7 @@ export class GenrePageView extends BaseView {
      * Render html genre page from pug template.
      */
     render = (genre) => {
-        const template = puglatizer.components.Loader.Loader();
+        const template = Loader();
         APPLICATION.innerHTML = template;
         this.eventBus.emit('homepage:InfoForHeader');
         this.eventBus.emit('genrepage:getPageContent', genre);
@@ -33,7 +36,7 @@ export class GenrePageView extends BaseView {
             contentData,
             genreTitle
         };
-        const template = puglatizer.components.GenreContent.GenreContent(this._data);
+        const template = GenreContent(this._data);
         const content = document.querySelector('.content');
         if (content) {
             content.innerHTML = template;
