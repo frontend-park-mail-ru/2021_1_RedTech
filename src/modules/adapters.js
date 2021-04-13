@@ -10,7 +10,7 @@ const MAX_DESCRIPTION_LENGTH = 240;
 export const filmJsonToFilm = (jsonFilm) => {
     const filmKeys = ['id', 'title', 'type', 'year', 'genres', 'director', 'countries', 'actors', 'description'];
     const film = {
-        movieAvatar: `${currentUrl}${jsonFilm.movie_avatar}`,
+        movieAvatar: `${jsonFilm.movie_avatar}`,
         rating: jsonFilm.rating ? `Положительных оценок ${jsonFilm.rating}` : '',
     };
 
@@ -38,7 +38,7 @@ export const arrayFilmsToFilmCards = (arrayFilms) => {
             id: jsonFilm?.id,
             title: jsonFilm?.title,
             description: description,
-            movieAvatar: `${currentUrl}${jsonFilm?.movie_avatar}`,
+            movieAvatar: `${jsonFilm?.movie_avatar}`,
         });
         return filmCards;
     }, []);
@@ -54,7 +54,7 @@ export const arrayContentToNewFilmsSeries = (arrayContent) => {
         newFilmsSeries.push({
             id: jsonFilm?.id,
             title: jsonFilm?.title,
-            movieAvatar: `${currentUrl}${jsonFilm?.movie_avatar}`,
+            movieAvatar: `${jsonFilm?.movie_avatar}`,
             status: jsonFilm?.is_free ? 'Бесплатно' : 'Подписка',
         });
         return newFilmsSeries;
