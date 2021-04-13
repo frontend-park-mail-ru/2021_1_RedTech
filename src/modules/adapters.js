@@ -16,6 +16,7 @@ export const filmJsonToFilm = (jsonFilm) => {
         countries: insertSpaceAfterComa(jsonFilm.countries),
         movieAvatar: `${jsonFilm.movie_avatar}`,
         rating: jsonFilm.rating ? `Положительных оценок ${jsonFilm.rating}` : '',
+        is_fav: jsonFilm?.is_fav,
     };
 
     filmKeys.forEach((value) => {
