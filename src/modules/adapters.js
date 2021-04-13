@@ -1,5 +1,3 @@
-import { currentUrl } from './urls.js';
-
 const MAX_DESCRIPTION_LENGTH = 240;
 
 /**
