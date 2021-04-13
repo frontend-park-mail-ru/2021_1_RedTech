@@ -232,6 +232,7 @@ const getDetailFilm = async (filmId) => {
         }
         return null;
     } catch (err) {
+        console.log(err)
         return null;
     }
 };
@@ -427,7 +428,7 @@ const getGenres = async () => {
  */
 const postAddToFavourites = async (contentId) => {
     const params = {
-        url: URLS.api.media + contentId + '/like',
+        url: URLS.api.media + contentId + '/favourites?action=save',
         method: 'POST'
     };
     try {
@@ -444,7 +445,7 @@ const postAddToFavourites = async (contentId) => {
  */
 const postRemoveFromFavourites = async (contentId) => {
     const params = {
-        url: URLS.api.media + contentId + '/dislike',
+        url: URLS.api.media + contentId + '/favourites?action=delete',
         method: 'POST'
     };
     try {

@@ -1,4 +1,5 @@
 import { getCurrentUser, getLogout, getNewFilms, getNewSeries, getTopFilmsAndSeries } from '../modules/http.js';
+import { Events } from '../consts/events.js';
 
 /** Class representing home page model. */
 export class HomePageModel {
@@ -57,7 +58,7 @@ export class HomePageModel {
      */
     logout = () => {
         getLogout().then(() => {
-            this.eventBus.emit('homepage:render');
+            this.eventBus.emit(Events.PathChanged, '/login');
         }).catch(() => {
             this.eventBus.emit('homepage:renderErrorPage');
         });

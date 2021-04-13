@@ -106,7 +106,7 @@ export class HomePageView extends BaseView {
             this.eventBus.emit('login:render');
         };
         const logoutPageHandler = (event) => {
-            removeAllListeners();
+            // removeAllListeners();
             event.preventDefault();
 
             this.eventBus.emit('homepage:logout');

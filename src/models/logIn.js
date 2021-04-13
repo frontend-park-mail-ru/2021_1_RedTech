@@ -31,11 +31,10 @@ export class LogInModel {
                     this.eventBus.emit('login:removeEventListeners');
                     this.eventBus.emit(Events.PathChanged, '/');
                 } else {
-                    this.eventBus.emit('homepage:renderErrorPage');
+                    this.eventBus.emit(Events.PathChanged, '/login');
                 }
             }).catch(() => {
-                this.eventBus.emit(Events.PathChanged, '/');
-                this.eventBus.emit('homepage:renderErrorPage');
+                this.eventBus.emit(Events.PathChanged, '/login');
             });
         }
     }

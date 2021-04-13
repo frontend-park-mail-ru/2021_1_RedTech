@@ -54,7 +54,8 @@ export class DetailPageView extends BaseView {
 
                 if (!isLoadedVideo) {
                     getFilmStream('1').then((filmPath) => {
-                        videoPlayer.setSrc(`${currentUrl}${filmPath}`);
+                        // videoPlayer.setSrc(`${currentUrl}${filmPath}`);
+                        videoPlayer.setSrc('https://redioteka.com/static/media/img/movies/default.mp4');
                         videoPlayer.visibleVideo();
                         isLoadedVideo = true;
                     });
