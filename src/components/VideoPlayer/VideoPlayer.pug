@@ -1,0 +1,23 @@
+div(class="video-player js-video-player")
+    video(class="video-player__video js-video" src="")
+    div.spinner
+    button(class="video-player__close-button js-close-video")
+        img(class="video-player__close-icon" src="../../assets/VideoPlayerAssets/CloseButton.png")
+    div.video-player__panel
+        div(class="video-player__lines js-line")
+            div(class="video-player__hint js-hint")
+            div(class="video-player__line video-player__line-current")
+            div(class="video-player__line video-player__line-full")
+        div.video-player__panel-block
+            button(class="video-player__panel-button js-toggle-video")
+                img(class="panel-button js-play-button" src="../../assets/VideoPlayerAssets/ButtonPlay.png")
+            button(class="video-player__panel-button video-player__panel-button-volume js-volume-control")
+                img(class="video-player__volume-icon js-volume-image" src="../../assets/VideoPlayerAssets/VolumeFull.png" alt="")
+                input(class="video-player__volume js-volume" type="range")
+            button(class="video-player__panel-button js-move-left")
+                img(class="video-player__move-left-icon" src="../../assets/VideoPlayerAssets/MoveLeft.png")
+            button(class="video-player__panel-button js-move-right")
+                img(class="video-player__move-right-icon" src="../../assets/VideoPlayerAssets/MoveRight.png")
+            span(class="video-player__panel-button js-duration")
+        div(class="video-player__panel-button js-fullscreen")
+            img(class="video-player__fullscreen-img js-fullscreen-img" src="../../assets/VideoPlayerAssets/MakeFullScreen.png" alt="")

@@ -1,6 +1,8 @@
 import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
 import { getPathArgs } from '../../modules/router.js';
+import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer.js';
+import { getFilmStream } from '../../modules/http.js';
 
 import Loader from '../../components/Loader/Loader.pug';
 import DetailForm from '../../components/DetailForm/DetailForm.pug';
@@ -41,7 +43,28 @@ export class DetailPageView extends BaseView {
         const template = DetailForm(this._data);
         const content = document.querySelector('.content');
         if (content) {
+
             content.innerHTML = template;
+
+            const videoPlayer = new VideoPlayer('.video-player');
+
+            let isLoadedVideo = false;
+            const openPlayerHandler = (event) => {
+                event.preventDefault();
+
+                if (!isLoadedVideo) {
+                    getFilmStream('1').then((filmPath) => {
+                        videoPlayer.setSrc(`${currentUrl}${filmPath}`);
+                        videoPlayer.visibleVideo();
+                        isLoadedVideo = true;
+                    });
+                } else {
+                    videoPlayer.visibleVideo();
+                }
+            };
+
+            const closeOpenVideo = document.querySelector('.js-play-detail');
+            closeOpenVideo.addEventListener(('click'), openPlayerHandler);
         } else {
             this.eventBus.emit('homepage:renderErrorPage');
         }

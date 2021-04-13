@@ -455,6 +455,29 @@ const postRemoveFromFavourites = async (contentId) => {
     }
 };
 
+/**
+ * Send async get request using async func.
+ * @returns {Promise} - video path.
+ */
+const getFilmStream = async (filmID) => {
+    const params = {
+        url: URLS.api.stream,
+        method: 'GET',
+        credentials: 'include',
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return responseBody.video_path;
+        } else {
+            return null;
+        }
+    } catch (err) {
+        return null;
+    }
+};
+
 export {
     postUserForLogin,
     postUserForSignUp,
@@ -474,5 +497,6 @@ export {
     getFavourites,
     postAddToFavourites,
     postRemoveFromFavourites,
-    getGenres
+    getGenres,
+    getFilmStream
 };

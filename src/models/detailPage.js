@@ -25,7 +25,8 @@ export class DetailPageModel {
             } else {
                 this.eventBus.emit('homepage:renderErrorPage');
             }
-        }).catch(() => {
+        }).catch((error) => {
+            console.log(error);
             this.eventBus.emit('homepage:renderErrorPage');
         });
     };
