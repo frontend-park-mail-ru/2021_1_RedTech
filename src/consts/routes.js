@@ -9,6 +9,6 @@ export const Routes = {
     SeriesPage: '/series',
     SeriesGenrePage: '\\/series\\/genre\\/\\w+',
     FavouritePage: '/favourite',
-}
+};
 
 export default Routes;

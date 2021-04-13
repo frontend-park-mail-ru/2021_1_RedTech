@@ -1,4 +1,4 @@
-import { getNewFilms, getNewSeries, getTopFilms, getTopSeries } from '../modules/http.js';
+import { getGenres, getNewFilms, getNewSeries, getTopFilms, getTopSeries } from '../modules/http.js';
 
 /** Class representing film/series page model. */
 export class MediatekaPageModel {
@@ -17,7 +17,7 @@ export class MediatekaPageModel {
     getPageContent = (data) => {
         let topContent, newContent;
 
-        console.log('data.isFilm =', data.isFilm);
+        const genres = getGenres();
         if (data.isFilm) {
             topContent = getTopFilms();
             newContent = getNewFilms();
@@ -25,12 +25,11 @@ export class MediatekaPageModel {
             topContent = getTopSeries();
             newContent = getNewSeries();
         }
-        Promise.all([topContent, newContent]).then((values) => {
-            [data.cardContent, data.newContent] = values;
+        Promise.all([topContent, newContent, genres]).then((values) => {
+            [data.cardContent, data.newContent, data.genres] = values;
             this.eventBus.emit('mediateka:renderContent', data);
             this.eventBus.emit('mediateka:setEventListeners', data);
-        }).catch((error) => {
-            console.log('EKEKEK', error);
+        }).catch(() => {
             this.eventBus.emit('homepage:renderErrorPage');
         });
     }

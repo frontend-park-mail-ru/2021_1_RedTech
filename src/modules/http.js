@@ -270,7 +270,7 @@ const getNewFilms = async () => {
     try {
         const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
         if (responseStatus === 200) {
-            return arrayContentToNewFilmsSeries(responseBody.newFilms);
+            return arrayContentToNewFilmsSeries(responseBody.newest);
         }
         return null;
     } catch (err) {
@@ -291,7 +291,7 @@ const getNewSeries = async () => {
     try {
         const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
         if (responseStatus === 200) {
-            return arrayContentToNewFilmsSeries(responseBody.newSeries);
+            return arrayContentToNewFilmsSeries(responseBody.newest);
         }
         return null;
     } catch (err) {
@@ -404,6 +404,23 @@ const getFavourites = async (userId) => {
     }
 };
 
+const getGenres = async () => {
+    const params = {
+        url: URLS.api.genres,
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return responseBody;
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
 /**
  * Send async get request using async func.
  * @returns {boolean} - Is status of post request add to favourites equal to 200.
@@ -456,5 +473,6 @@ export {
     getGenreSeries,
     getFavourites,
     postAddToFavourites,
-    postRemoveFromFavourites
+    postRemoveFromFavourites,
+    getGenres
 };

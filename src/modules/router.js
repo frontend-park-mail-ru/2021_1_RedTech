@@ -57,7 +57,6 @@ class Router {
     }
 
     onPathChanged(data) {
-        console.log('onPathChanged', data);
         this.go(data.path, data || {});
     }
 
@@ -79,7 +78,7 @@ class Router {
             if (res) {
                 targetController = controller;
             }
-        })
+        });
 
         return {
             controller: targetController,
@@ -88,11 +87,11 @@ class Router {
                 path: result.path,
                 resourceId: +result.pathParams,
             },
-        }
+        };
     }
 
     getParam(path = '/') {
-        let data = {}
+        let data = {};
         const parsedURL = new URL(window.location.origin + path);
         let pathParams = null;
         let resultPath = parsedURL.pathname;
@@ -114,12 +113,7 @@ class Router {
 
     go(path = '/', data = {}) {
         const routeData = this.getRouteData(path);
-        console.log('go', data);
         data = {...data, ...routeData};
-        console.log('go', data);
-
-        if (this.currentController === routeData.controller) {
-        }
 
         this.currentController = routeData.controller;
 
@@ -132,7 +126,6 @@ class Router {
             window.history.pushState(null, null, path);
         }
 
-        console.log('DATA -> ', data);
         this.currentController.view.render(data);
     }
 

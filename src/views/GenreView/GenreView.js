@@ -1,6 +1,7 @@
 import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
 import { scrollToTop } from '../../modules/utils.js';
+import { getPathArgs } from '../../modules/router.js';
 
 import Loader from '../../components/Loader/Loader.pug';
 import GenreContent from '../../components/GenreContent/GenreContent.pug';
@@ -23,7 +24,12 @@ export class GenrePageView extends BaseView {
      * Render html genre page from pug template.
      */
     render = (genre) => {
-        console.log('GENRE KEK', genre);
+
+        let pathArgs =  genre.isFilm ?
+            getPathArgs(window.location.pathname, '/movies/genre/:id'):
+            getPathArgs(window.location.pathname, '/series/genre/:id');
+        genre.id = pathArgs.id;
+
         const template = Loader();
         APPLICATION.innerHTML = template;
         this.eventBus.emit('homepage:InfoForHeader');
@@ -61,9 +67,8 @@ export class GenrePageView extends BaseView {
             if (target) {
                 const transmitData = {
                     path: target.getAttribute('href'),
-                }
+                };
 
-                console.log(transmitData);
                 this.eventBus.emit(Events.PathChanged, transmitData);
             }
         };

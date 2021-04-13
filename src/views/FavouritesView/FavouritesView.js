@@ -31,7 +31,6 @@ export class FavouritesView extends BaseView {
      */
     renderContent = (data) => {
         this._data = data;
-        console.log('renderContent', this._data);
         const template = GenreContent(this._data);
         const content = document.querySelector('.content');
         if (content) {

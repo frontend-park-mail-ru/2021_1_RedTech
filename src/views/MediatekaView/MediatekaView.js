@@ -47,7 +47,7 @@ export class MediatekaView extends BaseView {
     /**
      * Set event listeners.
      */
-    setEventListeners = (data) => {
+    setEventListeners = () => {
         this.eventBus.emit('homepage:setEventListeners');
 
         const genresHandler = (event) => {
@@ -58,15 +58,13 @@ export class MediatekaView extends BaseView {
             event.preventDefault();
 
             if (target) {
-                const transmitData = {}
+                const transmitData = {};
                 if (this._data.isFilm) {
                     transmitData.path = `/movies/genre/${target.id}`;
                 } else {
                     transmitData.path = `/series/genre/${target.id}`;
                 }
-                transmitData.genre = target.dataset.genre;
                 transmitData.isFilm = this._data.isFilm;
-                transmitData.id = target.id;
                 this.eventBus.emit(Events.PathChanged, transmitData);
             }
         };

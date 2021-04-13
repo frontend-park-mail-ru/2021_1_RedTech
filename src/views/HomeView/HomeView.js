@@ -2,11 +2,10 @@ import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
 import { scrollToTop } from '../../modules/utils.js';
 
-import HomeView from './HomeView.pug';
-import Header from '../../components/Header/Header.pug'
-import HomeContent from '../../components/HomeContent/HomeContent.pug'
-import ErrorPage from '../../components/ErrorPage/ErrorPage.pug'
-import Loader from '../../components/Loader/Loader.pug'
+import Header from '../../components/Header/Header.pug';
+import HomeContent from '../../components/HomeContent/HomeContent.pug';
+import ErrorPage from '../../components/ErrorPage/ErrorPage.pug';
+import Loader from '../../components/Loader/Loader.pug';
 import { Events } from '../../consts/events.js';
 
 /** Class representing home page view. */
@@ -90,36 +89,6 @@ export class HomePageView extends BaseView {
             logoutPage?.removeEventListener(('click'), logoutPageHandler);
         };
 
-        const filmPageHandler = (event) => {
-            this.eventBus.emit('homepage:removeEventListeners');
-            this.eventBus.emit('profile:removeEventListeners');
-            this.eventBus.emit('mediateka:removeEventListener');
-            this.eventBus.emit('genrepage:removeEventListener');
-            this.eventBus.emit('detailpage:removeEventListeners');
-            event.preventDefault();
-
-            const data = {
-                isFilm: false
-            };
-
-            if (event.target.className.includes('filmPage')) {
-                data.isFilm = true;
-            }
-
-            this.eventBus.emit('mediateka:getPageContent', data);
-        };
-
-        const favouritesPageHandler = (event) => {
-            this.eventBus.emit('homepage:removeEventListeners');
-            this.eventBus.emit('profile:removeEventListeners');
-            this.eventBus.emit('mediateka:removeEventListener');
-            this.eventBus.emit('genrepage:removeEventListener');
-            this.eventBus.emit('detailpage:removeEventListeners');
-            event.preventDefault();
-
-            this.eventBus.emit('favouritespage:getPageContent');
-        };
-
         const profileLinkHandler = (event) => {
             this.eventBus.emit('homepage:removeEventListeners');
             this.eventBus.emit('profile:removeEventListeners');
@@ -182,9 +151,8 @@ export class HomePageView extends BaseView {
             if (target) {
                 const transmitData = {
                     path: target.getAttribute('href'),
-                }
+                };
 
-                console.log(transmitData);
                 this.eventBus.emit(Events.PathChanged, transmitData);
             }
         };
@@ -199,9 +167,8 @@ export class HomePageView extends BaseView {
             if (target) {
                 const transmitData = {
                     path: target.getAttribute('href'),
-                }
+                };
 
-                console.log(transmitData);
                 this.eventBus.emit(Events.PathChanged, transmitData);
             }
         };

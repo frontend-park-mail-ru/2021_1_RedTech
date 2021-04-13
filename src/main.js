@@ -11,7 +11,7 @@ import { FavouritesPageController } from './controllers/favouritesPage.js';
 import Router from './modules/router.js';
 import Routes from './consts/routes.js';
 
-import "./index.scss";
+import './index.scss';
 
 export const APPLICATION = document.getElementById('app');
 

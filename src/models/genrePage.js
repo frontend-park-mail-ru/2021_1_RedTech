@@ -1,5 +1,5 @@
 /** Class representing home page model. */
-import {getGenreFilms, getGenreSeries} from '../modules/http.js';
+import { getGenreFilms, getGenres, getGenreSeries } from '../modules/http.js';
 
 export class GenrePageModel {
     /**
@@ -15,22 +15,34 @@ export class GenrePageModel {
      * Get info for genre page about films/series and emit render content.
      */
     getPageContent = (data) => {
-        console.log('getPageContent', data);
-        if (data.isFilm) {
-            getGenreFilms(data.id).then((content) => {
-                console.log('content =',content);
-                this.eventBus.emit('genrepage:renderContent', content, data.genre);
-                this.eventBus.emit('genrepage:setEventListeners');
-            }).catch(() => {
-                this.eventBus.emit('homepage:renderErrorPage');
-            });
-        } else {
-            getGenreSeries(data.id).then((content) => {
-                this.eventBus.emit('genrepage:renderContent', content, data.genre);
-                this.eventBus.emit('genrepage:setEventListeners');
-            }).catch(() => {
-                this.eventBus.emit('homepage:renderErrorPage');
-            });
-        }
+        getGenres().then((genres) => {
+            if (data.isFilm) {
+                genres.forEach((genre) => {
+                    if (genre.name.toLowerCase() === data.id) {
+                        data.genre = genre.label_rus;
+                        return;
+                    }
+                });
+                getGenreFilms(data.id).then((content) => {
+                    this.eventBus.emit('genrepage:renderContent', content, data.genre);
+                    this.eventBus.emit('genrepage:setEventListeners');
+                }).catch(() => {
+                    this.eventBus.emit('homepage:renderErrorPage');
+                });
+            } else {
+                genres.forEach((genre) => {
+                    if (genre.name.toLowerCase() === data.id) {
+                        data.genre = genre.label_rus;
+                        return;
+                    }
+                });
+                getGenreSeries(data.id).then((content) => {
+                    this.eventBus.emit('genrepage:renderContent', content, data.genre);
+                    this.eventBus.emit('genrepage:setEventListeners');
+                }).catch(() => {
+                    this.eventBus.emit('homepage:renderErrorPage');
+                });
+            }
+        });
     }
 }

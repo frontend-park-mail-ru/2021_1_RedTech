@@ -1,6 +1,6 @@
 import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
-import { getPathArgs } from '../../modules/router.js'
+import { getPathArgs } from '../../modules/router.js';
 
 import Loader from '../../components/Loader/Loader.pug';
 import DetailForm from '../../components/DetailForm/DetailForm.pug';
@@ -22,7 +22,7 @@ export class DetailPageView extends BaseView {
     /**
      * Render html film detail page from pug template.
      */
-    render = (data = {}) => {
+    render = () => {
         const template = Loader();
         APPLICATION.innerHTML = template;
 
