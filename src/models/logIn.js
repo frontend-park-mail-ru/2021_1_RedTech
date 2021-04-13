@@ -30,10 +30,10 @@ export class LogInModel {
                     this.eventBus.emit('login:removeEventListeners');
                     this.eventBus.emit('homepage:render');
                 } else {
-                    this.eventBus.emit('homepage:renderErrorPage');
+                    this.eventBus.emit('login:render');
                 }
             }).catch(() => {
-                this.eventBus.emit('homepage:renderErrorPage');
+                this.eventBus.emit('login:render');
             });
         }
     }
