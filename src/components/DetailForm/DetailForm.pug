@@ -9,10 +9,14 @@ div.detail_preview(id= filmData.id)
                 img(class='item__favourite-icon' src= '../../assets/star.png' alt= '' id='add_to_fav')
             div(class='button__item js-remove-favourite-detail' hidden=!filmData.is_fav)
                 img(class='item__favourite-icon' src= '../../assets/favourite.png' alt= '' id='remove_from_fav')
-            div(class='button__item js-like-detail')
-                img(src= '../../assets/like.png' alt= '')
-            div(class='button__item js-dislike-detail')
-                img(src= '../../assets/dislike.png' alt= '')
+            div(class='button__item js-like-detail' hidden=false)
+                img(src= '../../assets/like.png' alt= '' id= 'like')
+            div(class='button__item js-pressed-like-detail' hidden=true)
+                img(src= '../../assets/pressed_like.png' alt= '')
+            div(class='button__item js-dislike-detail' hidden=false)
+                img(src= '../../assets/dislike.png' alt= '' id= 'dislike')
+            div(class='button__item js-pressed-dislike-detail' hidden=true)
+                img(src= '../../assets/pressed_dislike.png' alt= '')
     div.detail_preview-right
         div.detail_preview__title=filmData.title
         div.detail_preview__tags

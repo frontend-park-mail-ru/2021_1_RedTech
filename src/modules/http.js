@@ -231,7 +231,6 @@ const getDetailFilm = async (filmId) => {
         }
         return null;
     } catch (err) {
-        console.log(err)
         return null;
     }
 };
@@ -455,6 +454,33 @@ const postRemoveFromFavourites = async (contentId) => {
     }
 };
 
+
+const postLike = async (contentId) => {
+    const params = {
+        url: URLS.api.media + contentId + '/like',
+        method: 'POST'
+    };
+    try {
+        const response = await sendRequest(params);
+        return response.status === 200;
+    } catch (err) {
+        return false;
+    }
+};
+
+const postDislike = async (contentId) => {
+    const params = {
+        url: URLS.api.media + contentId + '/dislike',
+        method: 'POST'
+    };
+    try {
+        const response = await sendRequest(params);
+        return response.status === 200;
+    } catch (err) {
+        return false;
+    }
+};
+
 export {
     postUserForLogin,
     postUserForSignUp,
@@ -474,5 +500,7 @@ export {
     getFavourites,
     postAddToFavourites,
     postRemoveFromFavourites,
-    getGenres
+    getGenres,
+    postLike,
+    postDislike
 };

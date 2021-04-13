@@ -14,6 +14,7 @@ export class DetailPageView extends BaseView {
         this.eventBus.on('detailpage:renderDetailsAboutFilm', this.renderDetailsAboutFilm);
         this.eventBus.on('detailpage:setEventListeners', this.setEventListeners);
         this.eventBus.on('detailpage:changeIconOfFav', this.changeIconOfFav);
+        this.eventBus.on('detailpage:changeIconOfLike', this.changeIconOfLike);
     }
     /**
      * Render html film detail page from pug template.
@@ -52,6 +53,29 @@ export class DetailPageView extends BaseView {
     }
 
     /**
+     * Change icon of like/dislike.
+     */
+    changeIconOfLike = (data) => {
+        const like = document.querySelector('.js-like-detail');
+        const dislike = document.querySelector('.js-dislike-detail');
+
+        const pressedLike = document.querySelector('.js-pressed-like-detail');
+        const pressedDislike = document.querySelector('.js-pressed-dislike-detail');
+
+        if (data.isLike) {
+            pressedLike.hidden = false;
+            like.hidden = true;
+            pressedDislike.hidden = true;
+            dislike.hidden = false;
+        } else {
+            pressedLike.hidden = true;
+            like.hidden = false;
+            pressedDislike.hidden = false;
+            dislike.hidden = true;
+        }
+    }
+
+    /**
      * Set event listeners.
      */
     setEventListeners = () => {
@@ -73,11 +97,29 @@ export class DetailPageView extends BaseView {
             this.eventBus.emit('detailpage:removeFromFavourites', contentId);
         };
 
+        const like = (event) => {
+            event.preventDefault();
+            const contentId = document.querySelector('.detail_preview').id;
+            this.eventBus.emit('detailpage:like', contentId);
+        };
+
+        const dislike = (event) => {
+            event.preventDefault();
+            const contentId = document.querySelector('.detail_preview').id;
+            this.eventBus.emit('detailpage:dislike', contentId);
+        };
+
         const addToFav = document.getElementById('add_to_fav');
         addToFav.addEventListener('click', addToFavourites);
 
         const removeFromFav = document.getElementById('remove_from_fav');
         removeFromFav.addEventListener('click', removeFromFavourites);
+
+        const likeElem = document.getElementById('like');
+        likeElem.addEventListener('click', like);
+
+        const dislikeElem = document.getElementById('dislike');
+        dislikeElem.addEventListener('click', dislike);
 
         contentImage.addEventListener('error', imageErrorHandler);
 
@@ -85,6 +127,8 @@ export class DetailPageView extends BaseView {
             contentImage.removeEventListener('error', imageErrorHandler);
             addToFav.removeEventListener('click', addToFavourites);
             removeFromFav.removeEventListener('click', removeFromFavourites);
+            dislikeElem.removeEventListener('click', dislike);
+            likeElem.removeEventListener('click', like);
         };
 
         this.eventBus.on('detailpage:removeEventListeners', removeEventListeners);

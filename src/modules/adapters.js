@@ -1,4 +1,4 @@
-import { insertSpaceAfterComa } from './utils.js';
+import { insertSpaceAfterComa, numToFixTruth } from './utils.js';
 
 const MAX_DESCRIPTION_LENGTH = 240;
 
@@ -15,7 +15,7 @@ export const filmJsonToFilm = (jsonFilm) => {
         actors: insertSpaceAfterComa(jsonFilm.actors),
         countries: insertSpaceAfterComa(jsonFilm.countries),
         movieAvatar: `${jsonFilm.movie_avatar}`,
-        rating: jsonFilm.rating ? `Положительных оценок ${jsonFilm.rating}` : '',
+        rating: jsonFilm.rating ? `Рейтинг ${numToFixTruth(jsonFilm.rating)}` : '',
         is_fav: jsonFilm?.is_fav,
     };
 
