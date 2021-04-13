@@ -1,3 +1,5 @@
+import { insertSpaceAfterComa } from './utils.js';
+
 const MAX_DESCRIPTION_LENGTH = 240;
 
 /**
@@ -8,10 +10,10 @@ const MAX_DESCRIPTION_LENGTH = 240;
 export const filmJsonToFilm = (jsonFilm) => {
     const filmKeys = ['id', 'title', 'type', 'year', 'description'];
     const film = {
-        genres: jsonFilm.genres.replace(/,/g, ', '),
-        director: jsonFilm.director.replace(/,/g, ', '),
-        actors: jsonFilm.actors.replace(/,/g, ', '),
-        countries: jsonFilm.countries.replace(/,/g, ', '),
+        genres: insertSpaceAfterComa(jsonFilm.genres),
+        director: insertSpaceAfterComa(jsonFilm.director),
+        actors: insertSpaceAfterComa(jsonFilm.actors),
+        countries: insertSpaceAfterComa(jsonFilm.countries),
         movieAvatar: `${jsonFilm.movie_avatar}`,
         rating: jsonFilm.rating ? `Положительных оценок ${jsonFilm.rating}` : '',
     };
