@@ -5,6 +5,7 @@ export const Routes = {
     ProfilePage : '/profile',
     MoviePage: '\\/movie\\/\\d+',
     MoviesPage: '/movies',
+    SeriesPage: '/series',
 }
 
 export default Routes;

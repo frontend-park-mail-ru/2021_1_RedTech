@@ -82,6 +82,7 @@ class Router {
 
         return {
             controller: targetController,
+            data: result.data,
             path: {
                 path: result.path,
                 resourceId: +result.pathParams,
@@ -90,13 +91,23 @@ class Router {
     }
 
     getParam(path = '/') {
+        let data = {}
         const parsedURL = new URL(window.location.origin + path);
         let pathParams = null;
         let resultPath = parsedURL.pathname;
 
+        if (path == Routes.MoviesPage) {
+            data.isFilm = true;
+        }
+
+        if (path == Routes.SeriesPage) {
+            data.isFilm = false;
+        }
+
         return {
             path: resultPath,
             pathParams: pathParams,
+            data,
         };
     }
 
@@ -118,7 +129,8 @@ class Router {
             window.history.pushState(null, null, path);
         }
 
-        this.currentController.view.render();
+        console.log('DATA -> ', data);
+        this.currentController.view.render(data);
     }
 
     back() {

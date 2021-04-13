@@ -37,6 +37,7 @@ router.register(Routes.HomePage, homePageController)
     .register(Routes.ProfilePage, profileController)
     .register(Routes.MoviePage, detailPageController)
     .register(Routes.MoviesPage, filmPageController)
+    .register(Routes.SeriesPage, filmPageController)
     .start();
 
 // eventBus.emit('homepage:render');

@@ -2,6 +2,9 @@ import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
 import { scrollToTop } from '../../modules/utils.js';
 
+import Loader from '../../components/Loader/Loader.pug';
+import FilmSeriesContent from '../../components/FilmSeriesContent/FilmSeriesContent.pug';
+
 /** Class representing film/series page view. */
 export class MediatekaView extends BaseView {
     /**
@@ -19,8 +22,8 @@ export class MediatekaView extends BaseView {
      * Render html film/series page from pug template.
      */
     render = (data) => {
-        this._data = data;
-        const template = puglatizer.components.Loader.Loader();
+        this._data = data.data;
+        const template = Loader();
         APPLICATION.innerHTML = template;
         this.eventBus.emit('homepage:InfoForHeader');
         this.eventBus.emit('mediateka:getPageContent', this._data);
@@ -31,7 +34,7 @@ export class MediatekaView extends BaseView {
      */
     renderContent = (data) => {
         this._data = data;
-        const template = puglatizer.components.FilmSeriesContent.FilmSeriesContent(this._data);
+        const template = FilmSeriesContent(this._data);
         const content = document.querySelector('.content');
         if (content) {
             content.innerHTML = template;

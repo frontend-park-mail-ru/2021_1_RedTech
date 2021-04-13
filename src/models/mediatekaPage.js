@@ -17,10 +17,10 @@ export class MediatekaPageModel {
     getPageContent = (data) => {
         let topContent, newContent;
 
-        if (true) {
+        console.log('data.isFilm =', data.isFilm);
+        if (data.isFilm) {
             topContent = getTopFilms();
             newContent = getNewFilms();
-
         } else {
             topContent = getTopSeries();
             newContent = getNewSeries();
@@ -29,7 +29,8 @@ export class MediatekaPageModel {
             [data.cardContent, data.newContent] = values;
             this.eventBus.emit('mediateka:renderContent', data);
             this.eventBus.emit('mediateka:setEventListeners', data);
-        }).catch(() => {
+        }).catch((error) => {
+            console.log('EKEKEK', error);
             this.eventBus.emit('homepage:renderErrorPage');
         });
     }
