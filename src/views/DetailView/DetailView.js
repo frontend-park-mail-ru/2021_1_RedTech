@@ -3,6 +3,7 @@ import { BaseView } from '../BaseView/BaseView.js';
 import { getPathArgs } from '../../modules/router.js';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer.js';
 import { getFilmStream } from '../../modules/http.js';
+import { currentUrl } from '../../consts/urls.js';
 
 import Loader from '../../components/Loader/Loader.pug';
 import DetailForm from '../../components/DetailForm/DetailForm.pug';
@@ -54,8 +55,11 @@ export class DetailPageView extends BaseView {
 
                 if (!isLoadedVideo) {
                     getFilmStream('1').then((filmPath) => {
+                        // console.log(`${currentUrl}${filmPath}`);
+                        // console.log(`${currentUrl}${filmPath.video_path}`);
+
                         // videoPlayer.setSrc(`${currentUrl}${filmPath}`);
-                        videoPlayer.setSrc('https://redioteka.com/static/media/img/movies/default.mp4');
+                        videoPlayer.setSrc(`${filmPath}`);
                         videoPlayer.visibleVideo();
                         isLoadedVideo = true;
                     });
