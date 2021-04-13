@@ -33,10 +33,10 @@ export class SignUpModel {
                     this.eventBus.emit('signup:removeEventListeners');
                     this.eventBus.emit('homepage:render');
                 } else {
-                    this.eventBus.emit('homepage:renderErrorPage');
+                    this.eventBus.emit('signup:render');
                 }
             }).catch(() => {
-                this.eventBus.emit('homepage:renderErrorPage');
+                this.eventBus.emit('signup:render');
             });
         }
     }
