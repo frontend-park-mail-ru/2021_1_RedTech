@@ -14,7 +14,7 @@ div.item__page-title Жанры
 div.suggestion-film__list.genres
     each i in genres
         div.item__internal(id= i.name.toLowerCase() data-genre= i.label_rus)
-            img.item__suggestion__image(src= 'http://localhost:8081'+i.image)
+            img.item__suggestion__image(src= i.image)
 if isFilm
     div.item__page-title Новые фильмы
 else
