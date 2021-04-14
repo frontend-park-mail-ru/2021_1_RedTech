@@ -3,8 +3,7 @@ mixin FilmCardCreate (i)
         div.item__image
             img(src= i.movieAvatar alt= i.alt)
         div.item__details
-            div.item__film-card__title
-                a= i.title
+            div.item__film-card__title= i.title
             div.item__film-card__stars= i.stars
 
             div.item__film-card__description= i.description
