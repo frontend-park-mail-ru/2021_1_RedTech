@@ -31,6 +31,8 @@ export class DetailPageView extends BaseView {
         APPLICATION.innerHTML = template;
 
         let pathArgs = getPathArgs(window.location.pathname, '/movie/:id');
+        console.log(window.location.pathname);
+        console.log(pathArgs);
 
         this.eventBus.emit('detailpage:getInfoAboutFilm', pathArgs.id);
         this.eventBus.emit('homepage:InfoForHeader');

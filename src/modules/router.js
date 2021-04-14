@@ -113,6 +113,10 @@ class Router {
         let pathParams = null;
         let resultPath = parsedURL.pathname;
 
+        if (path == Routes.MoviePage) {
+            console.log('Перешел по фильму');
+        }
+
         if (path == Routes.MoviesPage) {
             data.isFilm = true;
         }
