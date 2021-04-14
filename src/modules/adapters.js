@@ -1,4 +1,6 @@
-import { currentUrl } from './urls.js';
+import { insertSpaceAfterComa, numToFixTruth } from './utils.js';
+
+const MAX_DESCRIPTION_LENGTH = 240;
 
 /**
  * Make object for render detail info about film from json.
@@ -6,10 +8,15 @@ import { currentUrl } from './urls.js';
  * @return {Object} - Object for render detail info about film.
  */
 export const filmJsonToFilm = (jsonFilm) => {
-    const filmKeys = ['title', 'type', 'year', 'genres', 'director', 'countries', 'actors', 'description'];
+    const filmKeys = ['id', 'title', 'type', 'year', 'description'];
     const film = {
-        movieAvatar: `${currentUrl}${jsonFilm.movie_avatar}`,
-        rating: jsonFilm.rating ? `Положительных оценок ${jsonFilm.rating}` : '',
+        genres: insertSpaceAfterComa(jsonFilm.genres),
+        director: insertSpaceAfterComa(jsonFilm.director),
+        actors: insertSpaceAfterComa(jsonFilm.actors),
+        countries: insertSpaceAfterComa(jsonFilm.countries),
+        movieAvatar: `${jsonFilm.movie_avatar}`,
+        rating: jsonFilm.rating ? `Рейтинг ${numToFixTruth(jsonFilm.rating)}` : '',
+        is_fav: jsonFilm?.is_fav,
     };
 
     filmKeys.forEach((value) => {
@@ -25,12 +32,19 @@ export const filmJsonToFilm = (jsonFilm) => {
  */
 export const arrayFilmsToFilmCards = (arrayFilms) => {
     return arrayFilms.reduce((filmCards, jsonFilm) => {
+        let description = jsonFilm?.description;
+        if (description.length > MAX_DESCRIPTION_LENGTH) {
+            description = description.substr(0, MAX_DESCRIPTION_LENGTH);
+            const to = description.lastIndexOf(' ');
+            description = description.substr(0, to);
+            description += '...';
+        }
         filmCards.push({
-            id: jsonFilm.id,
-            title: jsonFilm.title,
-            description: jsonFilm.description,
-            movieAvatar: `${currentUrl}${jsonFilm.movie_avatar}`,
-            stars: '* '.repeat(jsonFilm.rating)
+            id: jsonFilm?.id,
+            title: jsonFilm?.title,
+            description: description,
+            movieAvatar: `${jsonFilm?.movie_avatar}`,
+            href: `/movie/${jsonFilm.id}`,
         });
         return filmCards;
     }, []);
@@ -44,10 +58,11 @@ export const arrayFilmsToFilmCards = (arrayFilms) => {
 export const arrayContentToNewFilmsSeries = (arrayContent) => {
     return arrayContent.reduce((newFilmsSeries, jsonFilm) => {
         newFilmsSeries.push({
-            id: jsonFilm.id,
-            title: jsonFilm.title,
-            movieAvatar: `${currentUrl}${jsonFilm.movie_avatar}`,
-            status: jsonFilm.is_free ? 'Бесплатно' : 'Подписка',
+            id: jsonFilm?.id,
+            title: jsonFilm?.title,
+            movieAvatar: `${jsonFilm?.movie_avatar}`,
+            status: jsonFilm?.is_free ? 'Бесплатно' : 'Подписка',
+            href: `/movie/${jsonFilm.id}`
         });
         return newFilmsSeries;
     }, []);

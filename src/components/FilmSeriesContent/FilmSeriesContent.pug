@@ -1,0 +1,24 @@
+include ../TopSlider/TopSlider
+include ../BottomSlider/BottomSlider
+
+if isFilm
+    div.item__page-title Фильмы с наивысшим рейтингом
+else
+    div.item__page-title Сериалы с наивысшим рейтингом
+
+div.container
+    +TopSlider(cardContent)
+
+div.item__page-title Жанры
+
+div.suggestion-film__list.genres
+    each i in genres
+        div.item__internal(id= i.name.toLowerCase() data-genre= i.label_rus)
+            img.item__suggestion__image(src= i.image)
+if isFilm
+    div.item__page-title Новые фильмы
+else
+    div.item__page-title Новые сериалы
+
+div.suggestion-film__list.new_films
+    +BottomSlider(newContent)

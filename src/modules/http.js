@@ -1,4 +1,4 @@
-import { URLS } from './urls.js';
+import { URLS } from '../consts/urls.js';
 import { filmJsonToFilm, arrayFilmsToFilmCards, arrayContentToNewFilmsSeries } from './adapters.js';
 
 /**
@@ -14,12 +14,17 @@ const sendRequest = async ({ url, method, body } = {}) => {
         credentials: 'include',
     });
 
-    const parsedJson = await response.json();
-
-    return {
-        status: response.status,
-        parsedJson,
-    };
+    try {
+        const parsedJson = await response?.json();
+        return {
+            status: response.status,
+            parsedJson,
+        };
+    } catch {
+        return {
+            status: response.status,
+        };
+    }
 };
 
 /**
@@ -101,6 +106,7 @@ const getCurrentUser = async () => {
         }
         return null;
     } catch (err) {
+
         return null;
     }
 };
@@ -264,7 +270,7 @@ const getNewFilms = async () => {
     try {
         const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
         if (responseStatus === 200) {
-            return arrayContentToNewFilmsSeries(responseBody.newFilms);
+            return arrayContentToNewFilmsSeries(responseBody.newest);
         }
         return null;
     } catch (err) {
@@ -285,11 +291,216 @@ const getNewSeries = async () => {
     try {
         const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
         if (responseStatus === 200) {
-            return arrayContentToNewFilmsSeries(responseBody.newSeries);
+            return arrayContentToNewFilmsSeries(responseBody.newest);
         }
         return null;
     } catch (err) {
         return null;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects for render top slider.
+ */
+const getTopFilms = async () => {
+    const params = {
+        url: URLS.api.topFilms,
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayFilmsToFilmCards(responseBody.top);
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects for render top slider.
+ */
+const getTopSeries = async () => {
+    const params = {
+        url: URLS.api.topSeries,
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayFilmsToFilmCards(responseBody.top);
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects for render bottom slider.
+ */
+const getGenreFilms = async (genreName) => {
+    const params = {
+        url: URLS.api.genreFilms + genreName,
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayContentToNewFilmsSeries(responseBody.genre);
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects for render bottom slider.
+ */
+const getGenreSeries = async (genreName) => {
+    const params = {
+        url: URLS.api.genreSeries + genreName,
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayContentToNewFilmsSeries(responseBody.genre);
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects for render favourite page.
+ */
+const getFavourites = async (userId) => {
+    const params = {
+        url: URLS.api.profile + userId + '/media',
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayContentToNewFilmsSeries(responseBody.favourites);
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
+const getGenres = async () => {
+    const params = {
+        url: URLS.api.genres,
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return responseBody;
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {boolean} - Is status of post request add to favourites equal to 200.
+ */
+const postAddToFavourites = async (contentId) => {
+    const params = {
+        url: URLS.api.media + contentId + '/favourites?action=save',
+        method: 'POST'
+    };
+    try {
+        const response = await sendRequest(params);
+        return response.status === 200;
+    } catch (err) {
+        return false;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {boolean} - Is status of post request remove from favourites equal to 200.
+ */
+const postRemoveFromFavourites = async (contentId) => {
+    const params = {
+        url: URLS.api.media + contentId + '/favourites?action=delete',
+        method: 'POST'
+    };
+    try {
+        const response = await sendRequest(params);
+        return response.status === 200;
+    } catch (err) {
+        return false;
+    }
+};
+
+/**
+ * Send async get request using async func.
+ * @returns {Promise} - video path.
+ */
+const getFilmStream = async (filmID) => {
+    const params = {
+        url: URLS.api.stream,
+        method: 'GET',
+        credentials: 'include',
+    };
+
+    try {
+        const {status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return responseBody.video_path;
+        } else {
+            return null;
+        }
+    } catch (err) {
+        return null;
+    }
+}
+
+const postLike = async (contentId) => {
+    const params = {
+        url: URLS.api.media + contentId + '/like',
+        method: 'POST'
+    };
+    try {
+        const response = await sendRequest(params);
+        return response.status === 200;
+    } catch (err) {
+        return false;
+    }
+};
+
+const postDislike = async (contentId) => {
+    const params = {
+        url: URLS.api.media + contentId + '/dislike',
+            method: 'POST'
+    };
+    try {
+        const response = await sendRequest(params);
+        return response.status === 200;
+    } catch (err) {
+    return false;
     }
 };
 
@@ -304,5 +515,16 @@ export {
     getDetailFilm,
     getTopFilmsAndSeries,
     getNewFilms,
-    getNewSeries
+    getNewSeries,
+    getTopFilms,
+    getGenreFilms,
+    getTopSeries,
+    getGenreSeries,
+    getFavourites,
+    postAddToFavourites,
+    postRemoveFromFavourites,
+    getGenres,
+    getFilmStream,
+    postLike,
+    postDislike
 };

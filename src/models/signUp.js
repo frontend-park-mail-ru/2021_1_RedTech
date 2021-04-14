@@ -1,5 +1,6 @@
-import { isValidForm } from '../utils/isValidForm.js';
+import { isValidForm } from '../modules/isValidForm.js';
 import { postUserForSignUp } from '../modules/http.js';
+import { Events } from '../consts/events.js';
 
 /** Class representing signup page model. */
 export class SignUpModel {
@@ -31,12 +32,12 @@ export class SignUpModel {
             ).then((responseFlag) => {
                 if (responseFlag) {
                     this.eventBus.emit('signup:removeEventListeners');
-                    this.eventBus.emit('homepage:render');
+                    this.eventBus.emit(Events.PathChanged, '/');
                 } else {
-                    this.eventBus.emit('homepage:renderErrorPage');
+                    this.eventBus.emit('signup:render');
                 }
             }).catch(() => {
-                this.eventBus.emit('homepage:renderErrorPage');
+                this.eventBus.emit('signup:render');
             });
         }
     }

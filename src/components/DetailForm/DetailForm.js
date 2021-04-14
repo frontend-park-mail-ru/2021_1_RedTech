@@ -10,7 +10,6 @@ export class DetailFormComponent {
 
     render() {
         const template = puglatizer.DetailForm.DetailForm();
-        //console.log(template())
         this._parent.innerHTML = template;
     }
 }

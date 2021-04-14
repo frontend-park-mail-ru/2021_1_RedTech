@@ -1,5 +1,7 @@
 import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
+import Loader from '../../components/Loader/Loader.pug';
+import ProfileContent from '../../components/ProfileContent/ProfileContent.pug';
 
 /** Class representing a profile page view. */
 export class ProfileView extends BaseView {
@@ -21,7 +23,7 @@ export class ProfileView extends BaseView {
 	 * Render html profile page from pug template.
 	 */
     render = () => {
-        const template = puglatizer.components.Loader.Loader();
+        const template = Loader();
         APPLICATION.innerHTML = template;
         this.eventBus.emit('profile:getInfoAboutCurrentUser');
         this.eventBus.emit('homepage:InfoForHeader');
@@ -35,7 +37,7 @@ export class ProfileView extends BaseView {
         this._data = {
             profileData: params
         };
-        const template = puglatizer.components.ProfileContent.ProfileContent(this._data);
+        const template = ProfileContent(this._data);
         const content = document.querySelector('.content');
         if (content) {
             content.innerHTML = template;
@@ -49,7 +51,7 @@ export class ProfileView extends BaseView {
      * @param {string} avatarSrc - Source of new avatar.
      */
     renderNewAvatar = (avatarSrc) => {
-        const imgAvatar = document?.getElementById('avatar');
+        const imgAvatar = document.getElementById('avatar');
         imgAvatar.src = avatarSrc;
     }
 
@@ -76,7 +78,7 @@ export class ProfileView extends BaseView {
      * @param {string} idUser - idUser that needed for render some data.
      */
     setEventListeners = (idUser) => {
-        const imgAvatar = document?.getElementById('avatar');
+        const imgAvatar = document.getElementById('avatar');
 
         const [form] = document.getElementsByTagName('form');
         const [button] = document.getElementsByClassName('input-wrapper__button');
