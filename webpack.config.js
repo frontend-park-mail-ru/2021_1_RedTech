@@ -1,5 +1,3 @@
-
-// const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const webpack = require('webpack');
@@ -15,12 +13,12 @@ const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.p
 
 module.exports = {
     entry: {
-        main: `${PATHS.public}/main.js`,
+        'main': PATHS.public + '/main.js',
+        'service-worker': PATHS.public + '/sw.js',
     },
     output: {
-        path:  PATHS.public,
-        filename:  'bundle.js',
-        publicPath: '/',
+        path:  PATHS.public + '/dist',
+        filename: '[name].[hash:8].js',
     },
 
     devtool: 'source-map',
@@ -43,30 +41,7 @@ module.exports = {
                 ]},
 
             {
-                test: /\.css$/i,
-                use: [
-                    "style-loader",
-                    "css-loader",
-                    {
-                        loader: "postcss-loader",
-                        options: {
-                            postcssOptions: {
-                                plugins: [
-                                    [
-                                        "postcss-preset-env",
-                                        {
-                                            // Options
-                                        },
-                                    ],
-                                ],
-                            },
-                        },
-                    },
-                ],
-            },
-
-            {
-                test: /\.scss$/,
+                test: /\.scss$/i,
                 use: ['style-loader', 'css-loader', 'sass-loader'],
                 exclude: /node_modules/,
             },
@@ -101,13 +76,18 @@ module.exports = {
             filename: 'index.html',
         }),
         new Dotenv(),
+        new HtmlWebpackPlugin({
+            template: PATHS.public + '/index.html',
+            filename: 'index.html',
+            inject: 'body'
+        })
     ],
 
     optimization: {
         minimize: true,
         splitChunks: {
-                minChunks: Infinity,
-                chunks: 'all'
+            minChunks: Infinity,
+            chunks: 'all'
         }
     }
 }
