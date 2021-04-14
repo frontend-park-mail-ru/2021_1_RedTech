@@ -51,14 +51,6 @@ class Router {
                 data.path = closestLink.getAttribute('href');
 
                 eventBus.emit(Events.PathChanged, data);
-            } else if (closestDiv instanceof  HTMLDivElement) {
-                e.preventDefault();
-
-                const data = {...closestLink.dataset};
-
-                data.path = closestLink.getAttribute('href');
-
-                eventBus.emit(Events.PathChanged, data);
             }
         });
     }
