@@ -67,3 +67,12 @@ export const arrayContentToNewFilmsSeries = (arrayContent) => {
         return newFilmsSeries;
     }, []);
 };
+
+/**
+ * Check is needed to get csrf token
+ * @param {Object} responseBody - Response body.
+ * @return {boolean} - Is needed to get csrf token.
+ */
+export const checkCSRFToken = (responseBody) => {
+    return responseBody.message === 'no csrf-token';
+};

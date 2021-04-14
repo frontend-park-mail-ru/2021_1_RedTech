@@ -1,5 +1,5 @@
 import { URLS } from '../consts/urls.js';
-import { filmJsonToFilm, arrayFilmsToFilmCards, arrayContentToNewFilmsSeries } from './adapters.js';
+import {filmJsonToFilm, arrayFilmsToFilmCards, arrayContentToNewFilmsSeries, checkCSRFToken} from './adapters.js';
 
 /**
  * Send async request to the server.
@@ -28,6 +28,23 @@ const sendRequest = async ({ url, method, body } = {}) => {
 };
 
 /**
+ * Send async get request using async func to get csrf token.
+ */
+const getCSRF = async () => {
+    const params = {
+        url: URLS.api.csrf,
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus } = await sendRequest(params);
+        return responseStatus === 204;
+    } catch (err) {
+        return false;
+    }
+};
+
+/**
  * Send async post request using async func.
  * @param {string} email - email parameter for request.
  * @param {string} password - password parameter for request.
@@ -49,6 +66,13 @@ const postUserForLogin = async (email, password) => {
 
     try {
         const response = await sendRequest(params);
+        if (checkCSRFToken(response.parsedJson)) {
+            const successGetCSRF = await getCSRF();
+            if (successGetCSRF) {
+                return postUserForLogin(email, password);
+            }
+            return false;
+        }
         return response.status === 200;
     } catch (err) {
         return false;
@@ -82,6 +106,13 @@ const postUserForSignUp = async (username, email, password, confirmPassword) => 
 
     try {
         const response = await sendRequest(params);
+        if (checkCSRFToken(response.parsedJson)) {
+            const successGetCSRF = await getCSRF();
+            if (successGetCSRF) {
+                return postUserForSignUp(username, email, password, confirmPassword);
+            }
+            return false;
+        }
         return response.status === 200;
     } catch (err) {
         return false;
@@ -101,6 +132,13 @@ const getCurrentUser = async () => {
 
     try {
         const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (checkCSRFToken(responseBody)) {
+            const successGetCSRF = await getCSRF();
+            if (successGetCSRF) {
+                return getCurrentUser();
+            }
+            return false;
+        }
         if (responseStatus === 200) {
             return responseBody.id;
         }
@@ -176,6 +214,13 @@ const postAvatar = async (idUser, formPut) => {
 
     try {
         const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (checkCSRFToken(responseBody)) {
+            const successGetCSRF = await getCSRF();
+            if (successGetCSRF) {
+                return postAvatar(idUser, formPut);
+            }
+            return false;
+        }
         if (responseStatus === 200) {
             return responseBody.user_avatar;
         }
@@ -209,6 +254,13 @@ const patchProfile = async (idUser, email, login) => {
 
     try {
         const response = await sendRequest(params);
+        if (checkCSRFToken(response.parsedJson)) {
+            const successGetCSRF = await getCSRF();
+            if (successGetCSRF) {
+                return patchProfile(idUser, email, login);
+            }
+            return false;
+        }
         return response.status === 200;
     } catch (err) {
         return false;
@@ -422,7 +474,7 @@ const getGenres = async () => {
 };
 
 /**
- * Send async get request using async func.
+ * Send async post request using async func.
  * @returns {boolean} - Is status of post request add to favourites equal to 200.
  */
 const postAddToFavourites = async (contentId) => {
@@ -432,6 +484,13 @@ const postAddToFavourites = async (contentId) => {
     };
     try {
         const response = await sendRequest(params);
+        if (checkCSRFToken(response.parsedJson)) {
+            const successGetCSRF = await getCSRF();
+            if (successGetCSRF) {
+                return postAddToFavourites(contentId);
+            }
+            return false;
+        }
         return response.status === 200;
     } catch (err) {
         return false;
@@ -439,7 +498,7 @@ const postAddToFavourites = async (contentId) => {
 };
 
 /**
- * Send async get request using async func.
+ * Send async post request using async func.
  * @returns {boolean} - Is status of post request remove from favourites equal to 200.
  */
 const postRemoveFromFavourites = async (contentId) => {
@@ -449,6 +508,13 @@ const postRemoveFromFavourites = async (contentId) => {
     };
     try {
         const response = await sendRequest(params);
+        if (checkCSRFToken(response.parsedJson)) {
+            const successGetCSRF = await getCSRF();
+            if (successGetCSRF) {
+                return postRemoveFromFavourites(contentId);
+            }
+            return false;
+        }
         return response.status === 200;
     } catch (err) {
         return false;
@@ -478,6 +544,10 @@ const getFilmStream = async () => {
     }
 };
 
+/**
+ * Send async post request using async func.
+ * @returns {boolean} - Is status of post request like  equal to 200.
+ */
 const postLike = async (contentId) => {
     const params = {
         url: URLS.api.media + contentId + '/like',
@@ -485,12 +555,23 @@ const postLike = async (contentId) => {
     };
     try {
         const response = await sendRequest(params);
+        if (checkCSRFToken(response.parsedJson)) {
+            const successGetCSRF = await getCSRF();
+            if (successGetCSRF) {
+                return postLike(contentId);
+            }
+            return false;
+        }
         return response.status === 200;
     } catch (err) {
         return false;
     }
 };
 
+/**
+ * Send async post request using async func.
+ * @returns {boolean} - Is status of post request like  equal to 200.
+ */
 const postDislike = async (contentId) => {
     const params = {
         url: URLS.api.media + contentId + '/dislike',
@@ -498,6 +579,13 @@ const postDislike = async (contentId) => {
     };
     try {
         const response = await sendRequest(params);
+        if (checkCSRFToken(response.parsedJson)) {
+            const successGetCSRF = await getCSRF();
+            if (successGetCSRF) {
+                return postDislike(contentId);
+            }
+            return false;
+        }
         return response.status === 200;
     } catch (err) {
         return false;
