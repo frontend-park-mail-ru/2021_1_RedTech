@@ -13,7 +13,7 @@ const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.p
 
 module.exports = {
     entry: {
-        'main': PATHS.public + '/main.js',
+        'bundle': PATHS.public + '/main.js',
         'sw': PATHS.public + '/sw.js'
     },
     output: {
