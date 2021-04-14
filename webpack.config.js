@@ -14,11 +14,12 @@ const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.p
 module.exports = {
     entry: {
         'main': PATHS.public + '/main.js',
-        'service-worker': PATHS.public + '/sw.js',
     },
     output: {
-        path:  PATHS.public + '/dist',
-        filename: '[name].[hash:8].js',
+        path: path.resolve(__dirname, './src/dist'),
+        filename: 'bundle.js',
+        sourceMapFilename: '[name].[fullhash:8].map',
+        chunkFilename: '[id].[fullhash:8].js'
     },
 
     devtool: 'source-map',
@@ -71,13 +72,9 @@ module.exports = {
             template: `${PAGES_DIR}/${page}`,
             filename: `./${page.replace(/\.pug/,'.html')}`
         })),
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, './src/index.html'),
-            filename: 'index.html',
-        }),
         new Dotenv(),
         new HtmlWebpackPlugin({
-            template: PATHS.public + '/index.html',
+            template: 'src/index.html',
             filename: 'index.html',
             inject: 'body'
         })
