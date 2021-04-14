@@ -459,7 +459,7 @@ const postRemoveFromFavourites = async (contentId) => {
  * Send async get request using async func.
  * @returns {Promise} - video path.
  */
-const getFilmStream = async (filmID) => {
+const getFilmStream = async () => {
     const params = {
         url: URLS.api.stream,
         method: 'GET',
@@ -476,7 +476,7 @@ const getFilmStream = async (filmID) => {
     } catch (err) {
         return null;
     }
-}
+};
 
 const postLike = async (contentId) => {
     const params = {
@@ -494,13 +494,13 @@ const postLike = async (contentId) => {
 const postDislike = async (contentId) => {
     const params = {
         url: URLS.api.media + contentId + '/dislike',
-            method: 'POST'
+        method: 'POST'
     };
     try {
         const response = await sendRequest(params);
         return response.status === 200;
     } catch (err) {
-    return false;
+        return false;
     }
 };
 

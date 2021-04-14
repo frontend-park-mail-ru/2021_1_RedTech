@@ -3,7 +3,6 @@ import { BaseView } from '../BaseView/BaseView.js';
 import { getPathArgs } from '../../modules/router.js';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer.js';
 import { getFilmStream } from '../../modules/http.js';
-import { currentUrl } from '../../consts/urls.js';
 
 import Loader from '../../components/Loader/Loader.pug';
 import DetailForm from '../../components/DetailForm/DetailForm.pug';
