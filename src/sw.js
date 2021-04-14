@@ -13,6 +13,9 @@ self.addEventListener('install', (event) => {
                     'index.html'
                 ]);
             })
+            .catch(error => {
+                console.log(error);
+            })
     );
 });
 
