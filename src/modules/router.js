@@ -42,6 +42,7 @@ class Router {
             const closestLink = target.closest('a');
             const closestButton = target.closest('button');
             const closestDiv = target.closest('div');
+
             if (closestLink instanceof HTMLAnchorElement) {
                 e.preventDefault();
 
