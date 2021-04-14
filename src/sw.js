@@ -6,11 +6,11 @@ self.addEventListener('install', (event) => {
             .open(CACHE_NAME)
             .then((cache) => {
                 return cache.addAll([
-                    'assets/',
-                    'fonts/',
-                    'index.html',
-                    'main.js',
-                    'index.css'
+                    '../assets/',
+                    '../fonts/',
+                    'bundle.js',
+                    '../index.scss',
+                    '../index.html'
                 ]);
             })
     );

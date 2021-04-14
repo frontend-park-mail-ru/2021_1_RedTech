@@ -13,11 +13,12 @@ const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.p
 
 module.exports = {
     entry: {
-        'main': PATHS.public + '/main.js',
+        'bundle': PATHS.public + '/main.js',
+        'sw': PATHS.public + '/sw.js'
     },
     output: {
         path: path.resolve(__dirname, './src/dist'),
-        filename: 'bundle.js',
+        filename: '[name].js',
         sourceMapFilename: '[name].[fullhash:8].map',
         chunkFilename: '[id].[fullhash:8].js'
     },

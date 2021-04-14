@@ -26,7 +26,7 @@ const genrePageController = new GenrePageController();
 const favouritesPageController = new FavouritesPageController();
 
 if('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js');
+    navigator.serviceWorker.register('sw.js');
 }
 
 const router = new Router(APPLICATION);
