@@ -14,7 +14,7 @@ self.addEventListener('install', (event) => {
                 ]);
             })
             .catch(error => {
-                console.log(error);
+                console.log(__dirname);
             })
     );
 });
