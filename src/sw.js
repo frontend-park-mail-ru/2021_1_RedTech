@@ -8,9 +8,9 @@ self.addEventListener('install', (event) => {
                 return cache.addAll([
                     'assets/',
                     'fonts/',
-                    'index.html',
-                    'main.js',
-                    'index.css'
+                    'dist/bundle.js',
+                    'index.scss',
+                    'index.html'
                 ]);
             })
     );

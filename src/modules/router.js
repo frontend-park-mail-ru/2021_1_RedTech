@@ -40,8 +40,6 @@ class Router {
         this.application.addEventListener('click', (e) => {
             const target = e.target;
             const closestLink = target.closest('a');
-            const closestButton = target.closest('button');
-            const closestDiv = target.closest('div');
 
             if (closestLink instanceof HTMLAnchorElement) {
                 e.preventDefault();
@@ -112,10 +110,6 @@ class Router {
         const parsedURL = new URL(window.location.origin + path);
         let pathParams = null;
         let resultPath = parsedURL.pathname;
-
-        if (path == Routes.MoviePage) {
-            console.log('Перешел по фильму');
-        }
 
         if (path == Routes.MoviesPage) {
             data.isFilm = true;

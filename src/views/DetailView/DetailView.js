@@ -3,7 +3,6 @@ import { BaseView } from '../BaseView/BaseView.js';
 import { getPathArgs } from '../../modules/router.js';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer.js';
 import { getFilmStream } from '../../modules/http.js';
-import { currentUrl } from '../../consts/urls.js';
 
 import Loader from '../../components/Loader/Loader.pug';
 import DetailForm from '../../components/DetailForm/DetailForm.pug';
@@ -31,8 +30,6 @@ export class DetailPageView extends BaseView {
         APPLICATION.innerHTML = template;
 
         let pathArgs = getPathArgs(window.location.pathname, '/movie/:id');
-        console.log(window.location.pathname);
-        console.log(pathArgs);
 
         this.eventBus.emit('detailpage:getInfoAboutFilm', pathArgs.id);
         this.eventBus.emit('homepage:InfoForHeader');
