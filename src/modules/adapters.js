@@ -17,6 +17,7 @@ export const filmJsonToFilm = (jsonFilm) => {
         movieAvatar: `${jsonFilm.movie_avatar}`,
         rating: jsonFilm.rating ? `Рейтинг ${numToFixTruth(jsonFilm.rating)}` : '',
         is_fav: jsonFilm?.is_fav,
+        is_vote: jsonFilm?.is_vote
     };
 
     filmKeys.forEach((value) => {
@@ -66,4 +67,13 @@ export const arrayContentToNewFilmsSeries = (arrayContent) => {
         });
         return newFilmsSeries;
     }, []);
+};
+
+/**
+ * Check is needed to get csrf token
+ * @param {Object} responseBody - Response body.
+ * @return {boolean} - Is needed to get csrf token.
+ */
+export const checkCSRFToken = (responseBody) => {
+    return responseBody.message === 'no csrf-token';
 };

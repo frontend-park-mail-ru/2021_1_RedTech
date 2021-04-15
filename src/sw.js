@@ -13,8 +13,6 @@ self.addEventListener('install', (event) => {
                     '../index.html'
                 ]);
             })
-            .catch(error => {
-            })
     );
 });
 

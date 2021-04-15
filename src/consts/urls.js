@@ -16,6 +16,7 @@ export const URLS = {
     },
     api: {
         me: `${currentUrl}/api/me`,
+        csrf: `${currentUrl}/api/csrf`,
         media: `${currentUrl}/api/media/movie/`,
         genres: `${currentUrl}/api/media/genres`,
         logout: `${currentUrl}/api/users/logout`,
