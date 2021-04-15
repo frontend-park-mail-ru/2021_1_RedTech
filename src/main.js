@@ -42,5 +42,3 @@ router.register(Routes.HomePage, homePageController)
     .register(Routes.SeriesGenrePage, genrePageController)
     .register(Routes.FavouritePage, favouritesPageController)
     .start();
-
-// eventBus.emit('homepage:render');

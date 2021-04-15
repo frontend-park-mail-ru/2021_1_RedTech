@@ -17,6 +17,7 @@ export const filmJsonToFilm = (jsonFilm) => {
         movieAvatar: `${jsonFilm.movie_avatar}`,
         rating: jsonFilm.rating ? `Рейтинг ${numToFixTruth(jsonFilm.rating)}` : '',
         is_fav: jsonFilm?.is_fav,
+        is_vote: jsonFilm?.is_vote
     };
 
     filmKeys.forEach((value) => {
