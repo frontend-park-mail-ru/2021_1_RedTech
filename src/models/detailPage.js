@@ -5,6 +5,7 @@ import {
     postLike,
     postRemoveFromFavourites
 } from '../modules/http.js';
+import {Events} from '../consts/events';
 
 /** Class representing detail page about film model. */
 export class DetailPageModel {
@@ -48,6 +49,8 @@ export class DetailPageModel {
                 postAddToFavourites(filmId).then(() => {
                     this.eventBus.emit('detailpage:changeIconOfFav');
                 });
+            } else {
+                this.eventBus.emit(Events.PathChanged, { path: '/login' });
             }
         });
     }
@@ -62,6 +65,8 @@ export class DetailPageModel {
                 postRemoveFromFavourites(filmId).then(() => {
                     this.eventBus.emit('detailpage:changeIconOfFav');
                 });
+            } else {
+                this.eventBus.emit(Events.PathChanged, { path: '/login' });
             }
         });
     }
@@ -79,6 +84,8 @@ export class DetailPageModel {
                     };
                     this.eventBus.emit('detailpage:changeIconOfLike', data);
                 });
+            } else {
+                this.eventBus.emit(Events.PathChanged, { path: '/login' });
             }
         });
     }
@@ -96,6 +103,8 @@ export class DetailPageModel {
                     };
                     this.eventBus.emit('detailpage:changeIconOfLike', data);
                 });
+            } else {
+                this.eventBus.emit(Events.PathChanged, { path: '/login' });
             }
         });
     }
