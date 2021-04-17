@@ -14,7 +14,6 @@ const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.p
 module.exports = {
     entry: {
         'bundle': PATHS.public + '/main.js',
-        'sw': PATHS.public + '/sw.js'
     },
     output: {
         path: path.resolve(__dirname, './src/dist'),
@@ -33,14 +32,17 @@ module.exports = {
                 exclude: /node_modules/
             },
 
-            { test: /\.(png|jpg|gif|svg)$/, use: [
+            {
+                test: /\.(png|jpg|gif|svg)$/,
+                use: [
                     {
                         loader: 'url-loader',
-                        options: {
+                        options: gi{
                             mimetype: 'image/png',
                         },
                     },
-                ]},
+                ]
+            },
 
             {
                 test: /\.scss$/i,
@@ -88,4 +90,4 @@ module.exports = {
             chunks: 'all'
         }
     }
-}
+};
