@@ -25,10 +25,6 @@ const filmPageController = new MediatekaPageController();
 const genrePageController = new GenrePageController();
 const favouritesPageController = new FavouritesPageController();
 
-if('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-}
-
 const router = new Router(APPLICATION);
 
 router.register(Routes.HomePage, homePageController)

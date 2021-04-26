@@ -2,10 +2,11 @@ import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
 import { getPathArgs } from '../../modules/router.js';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer.js';
-import { getFilmStream } from '../../modules/http.js';
+import { getCurrentUser, getFilmStream } from '../../modules/http.js';
 
 import Loader from '../../components/Loader/Loader.pug';
 import DetailForm from '../../components/DetailForm/DetailForm.pug';
+import { Events } from '../../consts/events';
 
 /** Class representing film detail page view. */
 export class DetailPageView extends BaseView {
@@ -53,19 +54,21 @@ export class DetailPageView extends BaseView {
             const openPlayerHandler = (event) => {
                 event.preventDefault();
 
-                if (!isLoadedVideo) {
-                    getFilmStream('1').then((filmPath) => {
-                        // console.log(`${currentUrl}${filmPath}`);
-                        // console.log(`${currentUrl}${filmPath.video_path}`);
-
-                        // videoPlayer.setSrc(`${currentUrl}${filmPath}`);
-                        videoPlayer.setSrc(`${filmPath}`);
-                        videoPlayer.visibleVideo();
-                        isLoadedVideo = true;
-                    });
-                } else {
-                    videoPlayer.visibleVideo();
-                }
+                getCurrentUser().then((idUser) => {
+                    if (idUser) {
+                        if (!isLoadedVideo) {
+                            getFilmStream(filmData.id).then((filmPath) => {
+                                videoPlayer.setSrc(`${filmPath}`);
+                                videoPlayer.visibleVideo();
+                                isLoadedVideo = true;
+                            });
+                        } else {
+                            videoPlayer.visibleVideo();
+                        }
+                    } else {
+                        this.eventBus.emit(Events.PathChanged, { path: '/login' });
+                    }
+                });
             };
 
             const closeOpenVideo = document.querySelector('.js-play-detail');

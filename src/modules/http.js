@@ -525,9 +525,9 @@ const postRemoveFromFavourites = async (contentId) => {
  * Send async get request using async func.
  * @returns {Promise} - video path.
  */
-const getFilmStream = async () => {
+const getFilmStream = async (contentId) => {
     const params = {
-        url: URLS.api.stream,
+        url: URLS.api.media + contentId + '/stream',
         method: 'GET',
         credentials: 'include',
     };

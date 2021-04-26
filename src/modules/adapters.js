@@ -1,6 +1,6 @@
 import { insertSpaceAfterComa, numToFixTruth } from './utils.js';
 
-const MAX_DESCRIPTION_LENGTH = 240;
+const MAX_DESCRIPTION_LENGTH = 230;
 
 /**
  * Make object for render detail info about film from json.

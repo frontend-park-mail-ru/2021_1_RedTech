@@ -65,11 +65,10 @@ export class ProfileModel {
             const formPut = new FormData();
             formPut.append('avatar', avatar);
 
-            const { avatarSrc } =  postAvatar(idUser, formPut);
-
-            if (avatarSrc) {
+            postAvatar(idUser, formPut).then((avatarSrc) => {
                 this.eventBus.emit('profile:renderNewAvatar', avatarSrc);
-            }
+            });
+
         }
     }
 
