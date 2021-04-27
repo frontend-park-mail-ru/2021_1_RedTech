@@ -1,5 +1,6 @@
 /** Class representing favourites page model. */
 import { getCurrentUser, getFavourites } from '../modules/http.js';
+import Events from '../consts/events';
 
 export class FavouritesPageModel {
     /**
@@ -8,7 +9,7 @@ export class FavouritesPageModel {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on('favouritespage:getPageContent', this.getPageContent);
+        this.eventBus.on(Events.FavouritesPage.GetPageContent, this.getPageContent);
     }
 
     /**
@@ -22,19 +23,19 @@ export class FavouritesPageModel {
                         contentData: contentData ?? [],
                         genreTitle: 'Избранное'
                     };
-                    this.eventBus.emit('favouritespage:renderContent', data);
-                    this.eventBus.emit('genrepage:setEventListeners');
+                    this.eventBus.emit(Events.FavouritesPage.Render.Content, data);
+                    this.eventBus.emit(Events.GenrePage.SetEventListeners);
                 }).catch(() => {
-                    this.eventBus.emit('homepage:renderErrorPage');
+                    this.eventBus.emit(Events.Homepage.Render.ErrorPage);
                 });
             } else {
                 const data = {
                     isAuthorized: false,
                 };
-                this.eventBus.emit('homepage:renderHeader', data);
+                this.eventBus.emit(Events.Homepage.Render.Header, data);
             }
         }).catch(() => {
-            this.eventBus.emit('homepage:renderErrorPage');
+            this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         });
     }
 }

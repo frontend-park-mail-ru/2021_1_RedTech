@@ -10,7 +10,7 @@ export class SignUpModel {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on('signup:signUpUser', this.signUpUser);
+        this.eventBus.on(Events.SignupPage.SignupUser, this.signUpUser);
     }
 
     /**
@@ -34,10 +34,10 @@ export class SignUpModel {
                     this.eventBus.emit('signup:removeEventListeners');
                     this.eventBus.emit(Events.PathChanged, '/');
                 } else {
-                    this.eventBus.emit('signup:render');
+                    this.eventBus.emit(Events.SignupPage.Render);
                 }
             }).catch(() => {
-                this.eventBus.emit('signup:render');
+                this.eventBus.emit(Events.SignupPage.Render);
             });
         }
     }

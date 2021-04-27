@@ -2,6 +2,7 @@ import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
 
 import LogIn from './LogIn.pug';
+import Events from '../../consts/events';
 
 /** Class representing a login page view. */
 export class LogInView extends BaseView {
@@ -12,7 +13,7 @@ export class LogInView extends BaseView {
      */
     constructor(eventBus, { data = {} } = {}) {
         super(eventBus, data);
-        this.eventBus.on('login:render', this.render);
+        this.eventBus.on(Events.LoginPage.Render, this.render);
     }
 
     /**
@@ -34,7 +35,7 @@ export class LogInView extends BaseView {
         const formHandler = (event) => {
             event.preventDefault();
             this.eventBus.emit(
-                'login:loginUser',
+                Events.LoginPage.LoginUser,
                 form,
                 document.getElementById('email').value,
                 document.getElementById('password').value

@@ -9,9 +9,9 @@ export class HomePageModel {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on('homepage:InfoForHeader', this.getInfoForHeader);
-        this.eventBus.on('homepage:logout', this.logout);
-        this.eventBus.on('homepage:getMainPageContent', this.getMainPageContent);
+        this.eventBus.on(Events.Homepage.Get.InfoForHeader, this.getInfoForHeader);
+        this.eventBus.on(Events.Homepage.Logout, this.logout);
+        this.eventBus.on(Events.Homepage.Get.MainPageContent, this.getMainPageContent);
     }
 
     /**
@@ -23,10 +23,10 @@ export class HomePageModel {
         const newSeries = getNewSeries();
         Promise.all([topFilmsAndSeries, newFilms, newSeries]).then((values) => {
             const [topFilmsAndSeriesValue, newFilmsValue, newSeriesValue] = values;
-            this.eventBus.emit('homepage:renderContent', topFilmsAndSeriesValue, newFilmsValue, newSeriesValue);
-            this.eventBus.emit('homepage:setEventListeners');
+            this.eventBus.emit(Events.Homepage.Render.Content, topFilmsAndSeriesValue, newFilmsValue, newSeriesValue);
+            this.eventBus.emit(Events.Homepage.SetEventListeners);
         }).catch(() => {
-            this.eventBus.emit('homepage:renderErrorPage');
+            this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         });
     }
 
@@ -39,17 +39,17 @@ export class HomePageModel {
                 const data = {
                     isAuthorized: true,
                 };
-                this.eventBus.emit('homepage:renderHeader', data);
+                this.eventBus.emit(Events.Homepage.Render.Header, data);
             } else {
                 const data = {
                     isAuthorized: false,
                 };
-                this.eventBus.emit('homepage:renderHeader', data);
+                this.eventBus.emit(Events.Homepage.Render.Header, data);
             }
-            this.eventBus.emit('homepage:setEventListenersForHeader');
+            this.eventBus.emit(Events.Homepage.SetEventListenersForHeader);
 
         }).catch(() => {
-            this.eventBus.emit('homepage:renderErrorPage');
+            this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         });
     }
 
@@ -60,7 +60,7 @@ export class HomePageModel {
         getLogout().then(() => {
             this.eventBus.emit(Events.PathChanged, '/login');
         }).catch(() => {
-            this.eventBus.emit('homepage:renderErrorPage');
+            this.eventBus.emit( Events.Homepage.Render.ErrorPage);
         });
     }
 }

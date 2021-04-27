@@ -17,11 +17,11 @@ export class DetailPageView extends BaseView {
      */
     constructor(eventBus, { data = {} } = {}) {
         super(eventBus, data);
-        this.eventBus.on('detailpage:render', this.render);
-        this.eventBus.on('detailpage:renderDetailsAboutFilm', this.renderDetailsAboutFilm);
-        this.eventBus.on('detailpage:setEventListeners', this.setEventListeners);
-        this.eventBus.on('detailpage:changeIconOfFav', this.changeIconOfFav);
-        this.eventBus.on('detailpage:changeIconOfLike', this.changeIconOfLike);
+        this.eventBus.on(Events.DetailPage.Render.Page, this.render);
+        this.eventBus.on(Events.DetailPage.Render.DetailsAboutFilm, this.renderDetailsAboutFilm);
+        this.eventBus.on(Events.DetailPage.SetEventListeners, this.setEventListeners);
+        this.eventBus.on(Events.DetailPage.Change.IconOfFav, this.changeIconOfFav);
+        this.eventBus.on(Events.DetailPage.Change.IconOfLike, this.changeIconOfLike);
     }
     /**
      * Render html film detail page from pug template.
@@ -32,8 +32,8 @@ export class DetailPageView extends BaseView {
 
         let pathArgs = getPathArgs(window.location.pathname, '/movie/:id');
 
-        this.eventBus.emit('detailpage:getInfoAboutFilm', pathArgs.id);
-        this.eventBus.emit('homepage:InfoForHeader');
+        this.eventBus.emit(Events.DetailPage.GetInfoAboutMovie, pathArgs.id);
+        this.eventBus.emit(Events.Homepage.Get.InfoForHeader);
     }
 
     /**
@@ -74,7 +74,7 @@ export class DetailPageView extends BaseView {
             const closeOpenVideo = document.querySelector('.js-play-detail');
             closeOpenVideo.addEventListener(('click'), openPlayerHandler);
         } else {
-            this.eventBus.emit('homepage:renderErrorPage');
+            this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         }
     }
 
@@ -125,25 +125,25 @@ export class DetailPageView extends BaseView {
         const addToFavourites = (event) => {
             event.preventDefault();
             const contentId = document.querySelector('.detail_preview').id;
-            this.eventBus.emit('detailpage:addToFavourites', contentId);
+            this.eventBus.emit(Events.DetailPage.AddToFavourites, contentId);
         };
 
         const removeFromFavourites = (event) => {
             event.preventDefault();
             const contentId = document.querySelector('.detail_preview').id;
-            this.eventBus.emit('detailpage:removeFromFavourites', contentId);
+            this.eventBus.emit(Events.DetailPage.RemoveFromFavourites, contentId);
         };
 
         const like = (event) => {
             event.preventDefault();
             const contentId = document.querySelector('.detail_preview').id;
-            this.eventBus.emit('detailpage:like', contentId);
+            this.eventBus.emit(Events.DetailPage.Like, contentId);
         };
 
         const dislike = (event) => {
             event.preventDefault();
             const contentId = document.querySelector('.detail_preview').id;
-            this.eventBus.emit('detailpage:dislike', contentId);
+            this.eventBus.emit(Events.DetailPage.Dislike, contentId);
         };
 
         const addToFav = document.getElementById('add_to_fav');

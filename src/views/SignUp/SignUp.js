@@ -2,6 +2,7 @@ import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
 
 import SignUp from './SignUp.pug';
+import Events from '../../consts/events';
 
 /** Class representing a signup page view. */
 export class SignUpView extends BaseView {
@@ -12,7 +13,7 @@ export class SignUpView extends BaseView {
      */
     constructor(eventBus, { data = {} } = {}) {
         super(eventBus, data);
-        this.eventBus.on('signup:render', this.render);
+        this.eventBus.on(Events.SignupPage.Render, this.render);
     }
 
     /**
@@ -35,7 +36,7 @@ export class SignUpView extends BaseView {
             event.preventDefault();
 
             this.eventBus.emit(
-                'signup:signUpUser',
+                Events.SignupPage.SignupUser,
                 form,
                 document.getElementById('login').value,
                 document.getElementById('email').value,
@@ -48,7 +49,7 @@ export class SignUpView extends BaseView {
             event.preventDefault();
 
             this.eventBus.emit('signup:removeEventListeners');
-            this.eventBus.emit('login:render');
+            this.eventBus.emit(Events.LoginPage.Render);
         };
 
         form?.addEventListener(('submit'), formHandler);

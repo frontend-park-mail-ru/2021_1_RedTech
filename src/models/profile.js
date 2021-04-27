@@ -1,5 +1,6 @@
 import { getProfile, getCurrentUser, postAvatar, patchProfile } from '../modules/http.js';
 import { isValidForm } from '../modules/isValidForm.js';
+import Events from '../consts/events';
 
 /** Class representing profile page model. */
 export class ProfileModel {
@@ -9,9 +10,9 @@ export class ProfileModel {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on('profile:getInfoAboutCurrentUser', this.getInfoAboutCurrentUser);
-        this.eventBus.on('profile:getInfoForProfile', this.getInfoForProfile);
-        this.eventBus.on('profile:saveChanges', this.saveChanges);
+        this.eventBus.on(Events.ProfilePage.Get.InfoAboutCurrentUser, this.getInfoAboutCurrentUser);
+        this.eventBus.on(Events.ProfilePage.Get.InfoForProfile, this.getInfoForProfile);
+        this.eventBus.on(Events.ProfilePage.SaveChanges, this.saveChanges);
     }
 
     /**
@@ -21,12 +22,12 @@ export class ProfileModel {
     getInfoAboutCurrentUser = () => {
         getCurrentUser().then((idUser) => {
             if (idUser) {
-                this.eventBus.emit('profile:getInfoForProfile', idUser);
+                this.eventBus.emit(Events.ProfilePage.Get.InfoForProfile, idUser);
             } else {
-                this.eventBus.emit('homepage:render');
+                this.eventBus.emit(Events.Homepage.Render.Page);
             }
         }).catch(() => {
-            this.eventBus.emit('homepage:renderErrorPage');
+            this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         });
     }
 
@@ -37,7 +38,7 @@ export class ProfileModel {
     getInfoForProfile = (idUser) => {
         getProfile(idUser).then((responseBody) => {
             if (!responseBody) {
-                this.eventBus.emit('homepage:renderErrorPage');
+                this.eventBus.emit(Events.Homepage.Render.ErrorPage);
                 return;
             }
 
@@ -47,10 +48,10 @@ export class ProfileModel {
                 user_avatar: responseBody.avatar ?? 'img/user.png',
             };
 
-            this.eventBus.emit('profile:renderProfileInfo', params);
-            this.eventBus.emit('profile:setEventListeners', idUser);
+            this.eventBus.emit(Events.ProfilePage.Render.ProfileInfo, params);
+            this.eventBus.emit(Events.ProfilePage.SetEventListeners, idUser);
         }).catch(() => {
-            this.eventBus.emit('homepage:renderErrorPage');
+            this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         });
     }
 
@@ -66,9 +67,8 @@ export class ProfileModel {
             formPut.append('avatar', avatar);
 
             postAvatar(idUser, formPut).then((avatarSrc) => {
-                this.eventBus.emit('profile:renderNewAvatar', avatarSrc);
+                this.eventBus.emit(Events.ProfilePage.Render.NewAvatar, avatarSrc);
             });
-
         }
     }
 
@@ -86,10 +86,10 @@ export class ProfileModel {
             login
         ).then((responseStatus) => {
             if (responseStatus) {
-                this.eventBus.emit('profile:updateProfile', form);
+                this.eventBus.emit(Events.ProfilePage.Update, form);
             }
         }).catch(() => {
-            this.eventBus.emit('homepage:renderErrorPage');
+            this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         });
     }
 

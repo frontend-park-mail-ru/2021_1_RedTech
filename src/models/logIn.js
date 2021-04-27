@@ -10,7 +10,7 @@ export class LogInModel {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on('login:loginUser', this.loginUser);
+        this.eventBus.on(Events.LoginPage.LoginUser, this.loginUser);
     }
 
     /**

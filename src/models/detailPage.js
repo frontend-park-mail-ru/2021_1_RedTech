@@ -15,11 +15,11 @@ export class DetailPageModel {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on('detailpage:getInfoAboutFilm', this.getInfoAboutFilm);
-        this.eventBus.on('detailpage:addToFavourites', this.addToFavourite);
-        this.eventBus.on('detailpage:removeFromFavourites', this.removeFromFavourite);
-        this.eventBus.on('detailpage:like', this.like);
-        this.eventBus.on('detailpage:dislike', this.dislike);
+        this.eventBus.on(Events.DetailPage.GetInfoAboutMovie, this.getInfoAboutFilm);
+        this.eventBus.on(Events.DetailPage.AddToFavourites, this.addToFavourite);
+        this.eventBus.on(Events.DetailPage.RemoveFromFavourites, this.removeFromFavourite);
+        this.eventBus.on(Events.DetailPage.Like, this.like);
+        this.eventBus.on(Events.DetailPage.Dislike, this.dislike);
     }
 
     /**
@@ -29,13 +29,13 @@ export class DetailPageModel {
     getInfoAboutFilm = (filmId) => {
         getDetailFilm(filmId).then((film) => {
             if (film) {
-                this.eventBus.emit('detailpage:renderDetailsAboutFilm', film);
-                this.eventBus.emit('detailpage:setEventListeners');
+                this.eventBus.emit(Events.DetailPage.Render.DetailsAboutFilm, film);
+                this.eventBus.emit(Events.DetailPage.SetEventListeners);
             } else {
-                this.eventBus.emit('homepage:renderErrorPage');
+                this.eventBus.emit(Events.Homepage.Render.ErrorPage);
             }
         }).catch(() => {
-            this.eventBus.emit('homepage:renderErrorPage');
+            this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         });
     };
 
@@ -47,7 +47,7 @@ export class DetailPageModel {
         getCurrentUser().then((idUser) => {
             if (idUser) {
                 postAddToFavourites(filmId).then(() => {
-                    this.eventBus.emit('detailpage:changeIconOfFav');
+                    this.eventBus.emit(Events.DetailPage.Change.IconOfFav);
                 });
             } else {
                 this.eventBus.emit(Events.PathChanged, { path: '/login' });
@@ -63,7 +63,7 @@ export class DetailPageModel {
         getCurrentUser().then((idUser) => {
             if (idUser) {
                 postRemoveFromFavourites(filmId).then(() => {
-                    this.eventBus.emit('detailpage:changeIconOfFav');
+                    this.eventBus.emit(Events.DetailPage.Change.IconOfFav);
                 });
             } else {
                 this.eventBus.emit(Events.PathChanged, { path: '/login' });
@@ -82,7 +82,7 @@ export class DetailPageModel {
                     const data = {
                         isLike: true,
                     };
-                    this.eventBus.emit('detailpage:changeIconOfLike', data);
+                    this.eventBus.emit(Events.DetailPage.Change.IconOfLike, data);
                 });
             } else {
                 this.eventBus.emit(Events.PathChanged, { path: '/login' });
@@ -101,7 +101,7 @@ export class DetailPageModel {
                     const data = {
                         isLike: false,
                     };
-                    this.eventBus.emit('detailpage:changeIconOfLike', data);
+                    this.eventBus.emit(Events.DetailPage.Change.IconOfLike, data);
                 });
             } else {
                 this.eventBus.emit(Events.PathChanged, { path: '/login' });
