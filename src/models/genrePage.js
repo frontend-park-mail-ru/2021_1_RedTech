@@ -1,7 +1,7 @@
-/** Class representing home page model. */
 import { getGenreFilms, getGenres, getGenreSeries } from '../modules/http.js';
-import Events from '../consts/events';
+import Events from '../consts/events.js';
 
+/** Class representing genre page model. */
 export class GenrePageModel {
     /**
      * Create a genre page model.

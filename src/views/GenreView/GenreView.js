@@ -59,7 +59,6 @@ export class GenrePageView extends BaseView {
     setEventListeners = () => {
         const genresContentHandler = (event) => {
             scrollToTop();
-            removeEventListener();
 
             const target = event.target.closest('.item__internal');
             event.preventDefault();
@@ -83,11 +82,5 @@ export class GenrePageView extends BaseView {
                 img.src = 'img/not-found.jpeg';
             });
         });
-
-        const removeEventListener = () => {
-            genresContent?.removeEventListener(('click'), genresContentHandler);
-        };
-
-        this.eventBus.on('genrepage:removeEventListener', removeEventListener);
     }
 }

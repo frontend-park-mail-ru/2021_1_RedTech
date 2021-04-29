@@ -1,8 +1,8 @@
-import { APPLICATION } from '../../main.js';
-import { BaseView } from '../BaseView/BaseView.js';
+import {APPLICATION} from '../../main.js';
+import {BaseView} from '../BaseView/BaseView.js';
 
 import SignUp from './SignUp.pug';
-import Events from '../../consts/events';
+import Events from '../../consts/events.js';
 
 /** Class representing a signup page view. */
 export class SignUpView extends BaseView {
@@ -20,8 +20,7 @@ export class SignUpView extends BaseView {
      * Render html signup page from pug template.
      */
     render = () => {
-        const template = SignUp();
-        APPLICATION.innerHTML = template;
+        APPLICATION.innerHTML = SignUp();
         this.setEventListeners();
     }
 
@@ -36,7 +35,7 @@ export class SignUpView extends BaseView {
             event.preventDefault();
 
             this.eventBus.emit(
-                Events.SignupPage.SignupUser,
+                Events.User.Signup,
                 form,
                 document.getElementById('login').value,
                 document.getElementById('email').value,
@@ -55,12 +54,5 @@ export class SignUpView extends BaseView {
         form?.addEventListener(('submit'), formHandler);
 
         aTag?.addEventListener(('click'), aTagHandler);
-
-        const removeEventListeners = () => {
-            form?.removeEventListener(('submit'), formHandler);
-            aTag?.removeEventListener(('click'), aTagHandler);
-        };
-
-        this.eventBus.on('signup:removeEventListeners', removeEventListeners);
     }
 }

@@ -52,7 +52,6 @@ export class MediatekaView extends BaseView {
 
         const genresHandler = (event) => {
             scrollToTop();
-            removeEventListener();
 
             const target = event.target.closest('.item__internal');
             event.preventDefault();
@@ -71,12 +70,5 @@ export class MediatekaView extends BaseView {
 
         const genresContainer = document.querySelector('.genres');
         genresContainer?.addEventListener(('click'), genresHandler);
-
-        const removeEventListener = () => {
-            genresContainer?.removeEventListener(('click'), genresHandler);
-        };
-
-        this.eventBus.on('mediateka:removeEventListener', removeEventListener);
-
     }
 }

@@ -1,5 +1,5 @@
 import { eventBus } from '../modules/eventBus.js';
-import { ProfileModel } from '../models/profile.js';
+import { ProfileModel } from '../models/profilePage.js';
 import { ProfileView } from '../views/Profile/Profile.js';
 import Controller from './controller.js';
 

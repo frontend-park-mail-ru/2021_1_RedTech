@@ -1,7 +1,7 @@
-/** Class representing favourites page model. */
 import { getCurrentUser, getFavourites } from '../modules/http.js';
-import Events from '../consts/events';
+import Events from '../consts/events.js';
 
+/** Class representing favourites page model. */
 export class FavouritesPageModel {
     /**
      * Create a favourites page model.

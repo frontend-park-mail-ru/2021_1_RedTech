@@ -2,7 +2,7 @@ import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
 
 import LogIn from './LogIn.pug';
-import Events from '../../consts/events';
+import Events from '../../consts/events.js';
 
 /** Class representing a login page view. */
 export class LogInView extends BaseView {
@@ -35,7 +35,7 @@ export class LogInView extends BaseView {
         const formHandler = (event) => {
             event.preventDefault();
             this.eventBus.emit(
-                Events.LoginPage.LoginUser,
+                Events.User.Login,
                 form,
                 document.getElementById('email').value,
                 document.getElementById('password').value
@@ -45,18 +45,11 @@ export class LogInView extends BaseView {
         const aTagHandler = (event) => {
             event.preventDefault();
             this.eventBus.emit('login:removeEventListeners');
-            this.eventBus.emit('signup:render');
+            this.eventBus.emit(Events.SignupPage.Render);
         };
 
         form?.addEventListener(('submit'), formHandler);
 
         aTag?.addEventListener(('click'), aTagHandler);
-
-        const removeEventListeners = () => {
-            form?.removeEventListener(('submit'), formHandler);
-            aTag?.removeEventListener(('click'), aTagHandler);
-        };
-
-        this.eventBus.on('login:removeEventListeners', removeEventListeners);
     }
 }

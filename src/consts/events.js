@@ -3,6 +3,21 @@ export const Events = {
     RedirectBack: 'redirectBack',
     RedirectForward: 'redirectForward',
 
+    User: {
+        Logout: 'user:logout',
+        Login: 'user:login',
+        Signup: 'user:signup',
+        AddToFavourites: 'user:addToFavourites',
+        RemoveFromFavourites: 'user:removeFromFavourites',
+        Like: 'user:like',
+        Dislike: 'user:dislike',
+        Update: 'user:updateProfile',
+    },
+
+    VideoPlayer: {
+        Init: 'videoplayer:init',
+    },
+
     Homepage: {
         Render: {
             Page: 'homepage:render',
@@ -12,7 +27,6 @@ export const Events = {
         },
         SetEventListeners: 'homepage:setEventListeners',
         SetEventListenersForHeader: 'homepage:setEventListenersForHeader',
-        Logout: 'homepage:logout',
         Get: {
             InfoForHeader: 'homepage:InfoForHeader',
             MainPageContent: 'homepage:getMainPageContent'
@@ -21,12 +35,10 @@ export const Events = {
 
     LoginPage: {
         Render: 'login:render',
-        LoginUser: 'login:loginUser',
     },
 
     SignupPage: {
         Render: 'signup:render',
-        SignupUser: 'signup:signUpUser',
     },
 
     GenrePage: {
@@ -65,7 +77,6 @@ export const Events = {
             InfoAboutCurrentUser: 'profile:getInfoAboutCurrentUser',
             InfoForProfile: 'profile:getInfoForProfile',
         },
-        SaveChanges: 'profile:saveChanges',
         SetEventListeners: 'profile:setEventListeners',
         Update: 'profile:updateProfile',
     },
@@ -74,6 +85,7 @@ export const Events = {
         Render: {
             Page: 'detailpage:render',
             DetailsAboutFilm: 'detailpage:renderDetailsAboutFilm',
+            VideoPlayer: 'detailpage:renderVideoPlayer',
         },
         Change: {
             IconOfFav: 'detailpage:changeIconOfFav',
@@ -81,10 +93,6 @@ export const Events = {
         },
         SetEventListeners: 'detailpage:setEventListeners',
         GetInfoAboutMovie: 'detailpage:getInfoAboutFilm',
-        AddToFavourites: 'detailpage:addToFavourites',
-        RemoveFromFavourites: 'detailpage:removeFromFavourites',
-        Like: 'detailpage:like',
-        Dislike: 'detailpage:dislike',
     },
 
 };

@@ -1,5 +1,5 @@
 import { eventBus } from '../modules/eventBus.js';
-import { SignUpModel } from '../models/signUp.js';
+import { SignUpModel } from '../models/signupPage.js';
 import { SignUpView } from '../views/SignUp/SignUp.js';
 import Controller from './controller.js';
 

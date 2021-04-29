@@ -1,5 +1,5 @@
 import { getGenres, getNewFilms, getNewSeries, getTopFilms, getTopSeries } from '../modules/http.js';
-import Events from '../consts/events';
+import Events from '../consts/events.js';
 
 /** Class representing film/series page model. */
 export class MediatekaPageModel {

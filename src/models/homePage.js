@@ -1,4 +1,4 @@
-import { getCurrentUser, getLogout, getNewFilms, getNewSeries, getTopFilmsAndSeries } from '../modules/http.js';
+import { getCurrentUser, getNewFilms, getNewSeries, getTopFilmsAndSeries } from '../modules/http.js';
 import { Events } from '../consts/events.js';
 
 /** Class representing home page model. */
@@ -10,7 +10,6 @@ export class HomePageModel {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.eventBus.on(Events.Homepage.Get.InfoForHeader, this.getInfoForHeader);
-        this.eventBus.on(Events.Homepage.Logout, this.logout);
         this.eventBus.on(Events.Homepage.Get.MainPageContent, this.getMainPageContent);
     }
 
@@ -50,17 +49,6 @@ export class HomePageModel {
 
         }).catch(() => {
             this.eventBus.emit(Events.Homepage.Render.ErrorPage);
-        });
-    }
-
-    /**
-     * Logout user, and rerender home page.
-     */
-    logout = () => {
-        getLogout().then(() => {
-            this.eventBus.emit(Events.PathChanged, '/login');
-        }).catch(() => {
-            this.eventBus.emit( Events.Homepage.Render.ErrorPage);
         });
     }
 }

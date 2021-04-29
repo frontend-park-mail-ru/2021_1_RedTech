@@ -1,8 +1,8 @@
-import { APPLICATION } from '../../main.js';
-import { BaseView } from '../BaseView/BaseView.js';
+import {APPLICATION} from '../../main.js';
+import {BaseView} from '../BaseView/BaseView.js';
 import Loader from '../../components/Loader/Loader.pug';
 import ProfileContent from '../../components/ProfileContent/ProfileContent.pug';
-import Events from '../../consts/events';
+import Events from '../../consts/events.js';
 
 /** Class representing a profile page view. */
 export class ProfileView extends BaseView {
@@ -24,8 +24,7 @@ export class ProfileView extends BaseView {
 	 * Render html profile page from pug template.
 	 */
     render = () => {
-        const template = Loader();
-        APPLICATION.innerHTML = template;
+        APPLICATION.innerHTML = Loader();
         this.eventBus.emit(Events.ProfilePage.Get.InfoAboutCurrentUser);
         this.eventBus.emit(Events.Homepage.Get.InfoForHeader);
     }
@@ -106,17 +105,10 @@ export class ProfileView extends BaseView {
                 const email = document.getElementById('email').value;
                 const login = document.getElementById('login').value;
 
-                this.eventBus.emit(Events.ProfilePage.SaveChanges, idUser, form, avatarInput, email, login);
+                this.eventBus.emit(Events.User.Update, idUser, form, avatarInput, email, login);
             }
         };
 
         form?.addEventListener(('submit'), formHandler);
-
-        const removeEventListeners = () => {
-            form?.removeEventListener(('submit'), formHandler);
-            imgAvatar.removeEventListener('error', imgHandler);
-        };
-
-        this.eventBus.on('profile:removeEventListeners', removeEventListeners);
     }
 }

@@ -3,7 +3,7 @@ import { BaseView } from '../BaseView/BaseView.js';
 
 import Loader from '../../components/Loader/Loader.pug';
 import GenreContent from '../../components/GenreContent/GenreContent.pug';
-import Events from '../../consts/events';
+import Events from '../../consts/events.js';
 
 /** Class representing favourites page view. */
 export class FavouritesView extends BaseView {

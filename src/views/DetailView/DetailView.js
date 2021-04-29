@@ -2,11 +2,10 @@ import { APPLICATION } from '../../main.js';
 import { BaseView } from '../BaseView/BaseView.js';
 import { getPathArgs } from '../../modules/router.js';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer.js';
-import { getCurrentUser, getFilmStream } from '../../modules/http.js';
 
 import Loader from '../../components/Loader/Loader.pug';
 import DetailForm from '../../components/DetailForm/DetailForm.pug';
-import { Events } from '../../consts/events';
+import { Events } from '../../consts/events.js';
 
 /** Class representing film detail page view. */
 export class DetailPageView extends BaseView {
@@ -18,6 +17,7 @@ export class DetailPageView extends BaseView {
     constructor(eventBus, { data = {} } = {}) {
         super(eventBus, data);
         this.eventBus.on(Events.DetailPage.Render.Page, this.render);
+        this.eventBus.on(Events.DetailPage.Render.VideoPlayer, this.renderVideoPlayer);
         this.eventBus.on(Events.DetailPage.Render.DetailsAboutFilm, this.renderDetailsAboutFilm);
         this.eventBus.on(Events.DetailPage.SetEventListeners, this.setEventListeners);
         this.eventBus.on(Events.DetailPage.Change.IconOfFav, this.changeIconOfFav);
@@ -45,37 +45,32 @@ export class DetailPageView extends BaseView {
         const template = DetailForm(this._data);
         const content = document.querySelector('.content');
         if (content) {
-
             content.innerHTML = template;
-
-            const videoPlayer = new VideoPlayer('.video-player');
-
-            let isLoadedVideo = false;
-            const openPlayerHandler = (event) => {
-                event.preventDefault();
-
-                getCurrentUser().then((idUser) => {
-                    if (idUser) {
-                        if (!isLoadedVideo) {
-                            getFilmStream(filmData.id).then((filmPath) => {
-                                videoPlayer.setSrc(`${filmPath}`);
-                                videoPlayer.visibleVideo();
-                                isLoadedVideo = true;
-                            });
-                        } else {
-                            videoPlayer.visibleVideo();
-                        }
-                    } else {
-                        this.eventBus.emit(Events.PathChanged, { path: '/login' });
-                    }
-                });
-            };
-
-            const closeOpenVideo = document.querySelector('.js-play-detail');
-            closeOpenVideo.addEventListener(('click'), openPlayerHandler);
+            this.eventBus.emit(Events.DetailPage.Render.VideoPlayer, filmData);
         } else {
             this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         }
+    }
+
+    /**
+     * Render video player.
+     * @param {Object} filmData - Detail info about film in object.
+     */
+    renderVideoPlayer = (filmData) => {
+        const videoPlayer = new VideoPlayer('.video-player');
+        let isLoadedVideo = false;
+        const openPlayerHandler = (event) => {
+            event.preventDefault();
+            this._data = {
+                isLoadedVideo,
+                filmData,
+                videoPlayer
+            };
+            this.eventBus.emit(Events.VideoPlayer.Init, this._data);
+        };
+
+        const closeOpenVideo = document.querySelector('.js-play-detail');
+        closeOpenVideo.addEventListener(('click'), openPlayerHandler);
     }
 
     /**
@@ -125,25 +120,25 @@ export class DetailPageView extends BaseView {
         const addToFavourites = (event) => {
             event.preventDefault();
             const contentId = document.querySelector('.detail_preview').id;
-            this.eventBus.emit(Events.DetailPage.AddToFavourites, contentId);
+            this.eventBus.emit(Events.User.AddToFavourites, contentId);
         };
 
         const removeFromFavourites = (event) => {
             event.preventDefault();
             const contentId = document.querySelector('.detail_preview').id;
-            this.eventBus.emit(Events.DetailPage.RemoveFromFavourites, contentId);
+            this.eventBus.emit(Events.User.RemoveFromFavourites, contentId);
         };
 
         const like = (event) => {
             event.preventDefault();
             const contentId = document.querySelector('.detail_preview').id;
-            this.eventBus.emit(Events.DetailPage.Like, contentId);
+            this.eventBus.emit(Events.User.Like, contentId);
         };
 
         const dislike = (event) => {
             event.preventDefault();
             const contentId = document.querySelector('.detail_preview').id;
-            this.eventBus.emit(Events.DetailPage.Dislike, contentId);
+            this.eventBus.emit(Events.User.Dislike, contentId);
         };
 
         const addToFav = document.getElementById('add_to_fav');
@@ -159,15 +154,5 @@ export class DetailPageView extends BaseView {
         dislikeElem.addEventListener('click', dislike);
 
         contentImage.addEventListener('error', imageErrorHandler);
-
-        const removeEventListeners = () => {
-            contentImage.removeEventListener('error', imageErrorHandler);
-            addToFav.removeEventListener('click', addToFavourites);
-            removeFromFav.removeEventListener('click', removeFromFavourites);
-            dislikeElem.removeEventListener('click', dislike);
-            likeElem.removeEventListener('click', like);
-        };
-
-        this.eventBus.on('detailpage:removeEventListeners', removeEventListeners);
     }
 }
