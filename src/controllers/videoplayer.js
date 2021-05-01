@@ -5,7 +5,7 @@ import { VideoPlayerModel } from '../models/videoplayer.js';
 /** Class representing video player controller. */
 export class VideoPlayerController extends Controller {
     constructor() {
-        super(new Controller());
+        super();
         this.eventBus = eventBus;
         this.model = new VideoPlayerModel(this.eventBus);
     }

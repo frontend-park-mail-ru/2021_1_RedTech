@@ -5,7 +5,7 @@ import { UserModel } from '../models/user.js';
 /** Class representing user controller. */
 export class UserController extends Controller {
     constructor() {
-        super(new Controller());
+        super();
         this.eventBus = eventBus;
         this.model = new UserModel(this.eventBus);
     }
