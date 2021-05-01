@@ -1,5 +1,6 @@
 import Events from '../consts/events.js';
 import { getCurrentUser, postAddToFavourites, postDislike, postLike, postRemoveFromFavourites } from '../modules/http.js';
+import Routes from '../consts/routes.js';
 
 export class ContentModel {
     /**
@@ -25,7 +26,7 @@ export class ContentModel {
                     this.eventBus.emit(Events.DetailPage.Change.IconOfFav);
                 });
             } else {
-                this.eventBus.emit(Events.PathChanged, {path: '/login'});
+                this.eventBus.emit(Events.PathChanged, Routes.LoginPage);
             }
         });
     }
@@ -41,7 +42,7 @@ export class ContentModel {
                     this.eventBus.emit(Events.DetailPage.Change.IconOfFav);
                 });
             } else {
-                this.eventBus.emit(Events.PathChanged, {path: '/login'});
+                this.eventBus.emit(Events.PathChanged, Routes.LoginPage);
             }
         });
     }
@@ -60,7 +61,7 @@ export class ContentModel {
                     this.eventBus.emit(Events.DetailPage.Change.IconOfLike, data);
                 });
             } else {
-                this.eventBus.emit(Events.PathChanged, {path: '/login'});
+                this.eventBus.emit(Events.PathChanged, Routes.LoginPage);
             }
         });
     }
@@ -79,7 +80,7 @@ export class ContentModel {
                     this.eventBus.emit(Events.DetailPage.Change.IconOfLike, data);
                 });
             } else {
-                this.eventBus.emit(Events.PathChanged, {path: '/login'});
+                this.eventBus.emit(Events.PathChanged, Routes.LoginPage);
             }
         });
     }

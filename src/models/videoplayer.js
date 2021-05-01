@@ -1,6 +1,6 @@
 import { getCurrentUser, getFilmStream } from '../modules/http.js';
 import Events from '../consts/events.js';
-import Routes from '../consts/routes';
+import Routes from '../consts/routes.js';
 
 /** Class representing video player model. */
 export class VideoPlayerModel {

@@ -1,4 +1,5 @@
 import Events from '../consts/events.js';
+import Routes from '../consts/routes.js';
 import { isValidForm } from '../modules/isValidForm.js';
 import {
     getLogout,
@@ -7,6 +8,7 @@ import {
     postUserForLogin,
     postUserForSignUp
 } from '../modules/http.js';
+
 
 /** Class representing user model. */
 export class UserModel {
@@ -38,12 +40,12 @@ export class UserModel {
             ).then((responseFlag) => {
                 if (responseFlag) {
                     this.eventBus.emit('login:removeEventListeners');
-                    this.eventBus.emit(Events.PathChanged, '/');
+                    this.eventBus.emit(Events.PathChanged, Routes.HomePage);
                 } else {
-                    this.eventBus.emit(Events.PathChanged, '/login');
+                    this.eventBus.emit(Events.PathChanged, Routes.LoginPage);
                 }
             }).catch(() => {
-                this.eventBus.emit(Events.PathChanged, '/login');
+                this.eventBus.emit(Events.PathChanged, Routes.LoginPage);
             });
         }
     }
@@ -68,7 +70,7 @@ export class UserModel {
             ).then((responseFlag) => {
                 if (responseFlag) {
                     this.eventBus.emit('signup:removeEventListeners');
-                    this.eventBus.emit(Events.PathChanged, '/');
+                    this.eventBus.emit(Events.PathChanged, Routes.HomePage);
                 } else {
                     this.eventBus.emit(Events.SignupPage.Render);
                 }
@@ -83,7 +85,7 @@ export class UserModel {
      */
     logout = () => {
         getLogout().then(() => {
-            this.eventBus.emit(Events.PathChanged, '/login');
+            this.eventBus.emit(Events.PathChanged, Routes.LoginPage);
         }).catch(() => {
             this.eventBus.emit( Events.Homepage.Render.ErrorPage);
         });
