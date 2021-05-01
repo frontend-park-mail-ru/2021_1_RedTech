@@ -1,5 +1,6 @@
 import { getCurrentUser, getFilmStream } from '../modules/http.js';
 import Events from '../consts/events.js';
+import Routes from '../consts/routes';
 
 /** Class representing video player model. */
 export class VideoPlayerModel {
@@ -22,12 +23,12 @@ export class VideoPlayerModel {
                         videoPlayer.visibleVideo();
                         isLoadedVideo = true;
                     });
-                } else {
-                    videoPlayer.visibleVideo();
+                    return;
                 }
-            } else {
-                this.eventBus.emit(Events.PathChanged, { path: '/login' });
+                videoPlayer.visibleVideo();
+                return;
             }
+            this.eventBus.emit(Events.PathChanged, Routes.LoginPage);
         });
     }
 }
