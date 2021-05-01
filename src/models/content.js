@@ -26,7 +26,7 @@ export class ContentModel {
                     this.eventBus.emit(Events.DetailPage.Change.IconOfFav);
                 });
             } else {
-                this.eventBus.emit(Events.PathChanged, Routes.LoginPage);
+                this.eventBus.emit(Events.PathChanged, { path: Routes.LoginPage });
             }
         });
     }
@@ -42,7 +42,7 @@ export class ContentModel {
                     this.eventBus.emit(Events.DetailPage.Change.IconOfFav);
                 });
             } else {
-                this.eventBus.emit(Events.PathChanged, Routes.LoginPage);
+                this.eventBus.emit(Events.PathChanged, { path: Routes.LoginPage });
             }
         });
     }
@@ -61,7 +61,7 @@ export class ContentModel {
                     this.eventBus.emit(Events.DetailPage.Change.IconOfLike, data);
                 });
             } else {
-                this.eventBus.emit(Events.PathChanged, Routes.LoginPage);
+                this.eventBus.emit(Events.PathChanged, { path: Routes.LoginPage });
             }
         });
     }
@@ -80,7 +80,7 @@ export class ContentModel {
                     this.eventBus.emit(Events.DetailPage.Change.IconOfLike, data);
                 });
             } else {
-                this.eventBus.emit(Events.PathChanged, Routes.LoginPage);
+                this.eventBus.emit(Events.PathChanged, { path: Routes.LoginPage });
             }
         });
     }

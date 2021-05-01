@@ -28,7 +28,7 @@ export class VideoPlayerModel {
                 videoPlayer.visibleVideo();
                 return;
             }
-            this.eventBus.emit(Events.PathChanged, Routes.LoginPage);
+            this.eventBus.emit(Events.PathChanged, { path: Routes.LoginPage });
         });
     }
 }

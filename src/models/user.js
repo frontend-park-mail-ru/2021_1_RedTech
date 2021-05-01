@@ -40,12 +40,12 @@ export class UserModel {
             ).then((responseFlag) => {
                 if (responseFlag) {
                     this.eventBus.emit('login:removeEventListeners');
-                    this.eventBus.emit(Events.PathChanged, Routes.HomePage);
+                    this.eventBus.emit(Events.PathChanged, { path: Routes.HomePage });
                 } else {
-                    this.eventBus.emit(Events.PathChanged, Routes.LoginPage);
+                    this.eventBus.emit(Events.PathChanged, { path: Routes.LoginPage });
                 }
             }).catch(() => {
-                this.eventBus.emit(Events.PathChanged, Routes.LoginPage);
+                this.eventBus.emit(Events.PathChanged, { path: Routes.LoginPage });
             });
         }
     }
@@ -70,7 +70,7 @@ export class UserModel {
             ).then((responseFlag) => {
                 if (responseFlag) {
                     this.eventBus.emit('signup:removeEventListeners');
-                    this.eventBus.emit(Events.PathChanged, Routes.HomePage);
+                    this.eventBus.emit(Events.PathChanged, { path: Routes.HomePage });
                 } else {
                     this.eventBus.emit(Events.SignupPage.Render);
                 }
@@ -85,7 +85,7 @@ export class UserModel {
      */
     logout = () => {
         getLogout().then(() => {
-            this.eventBus.emit(Events.PathChanged, Routes.LoginPage);
+            this.eventBus.emit(Events.PathChanged, { path: Routes.LoginPage });
         }).catch(() => {
             this.eventBus.emit( Events.Homepage.Render.ErrorPage);
         });
