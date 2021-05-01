@@ -58,7 +58,7 @@ export class DetailPageView extends BaseView {
      */
     renderVideoPlayer = (filmData) => {
         const videoPlayer = new VideoPlayer('.video-player');
-        let isLoadedVideo = false;
+        const isLoadedVideo = false;
         const openPlayerHandler = (event) => {
             event.preventDefault();
             this._data = {
