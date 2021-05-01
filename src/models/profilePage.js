@@ -18,15 +18,16 @@ export class ProfileModel {
      * In other case, rerender home page.
      */
     getInfoAboutCurrentUser = () => {
-        getCurrentUser().then((idUser) => {
-            if (idUser) {
-                this.eventBus.emit(Events.ProfilePage.Get.InfoForProfile, idUser);
-            } else {
-                this.eventBus.emit(Events.Homepage.Render.Page);
-            }
-        }).catch(() => {
-            this.eventBus.emit(Events.Homepage.Render.ErrorPage);
-        });
+        getCurrentUser()
+            .then((idUser) => {
+                if (idUser) {
+                    this.eventBus.emit(Events.ProfilePage.Get.InfoForProfile, idUser);
+                } else {
+                    this.eventBus.emit(Events.Homepage.Render.Page);
+                }
+            }).catch(() => {
+                this.eventBus.emit(Events.Homepage.Render.ErrorPage);
+            });
     }
 
     /**
@@ -34,22 +35,23 @@ export class ProfileModel {
      * @param {string} idUser - Current user id.
      */
     getInfoForProfile = (idUser) => {
-        getProfile(idUser).then((responseBody) => {
-            if (!responseBody) {
+        getProfile(idUser)
+            .then((responseBody) => {
+                if (!responseBody) {
+                    this.eventBus.emit(Events.Homepage.Render.ErrorPage);
+                    return;
+                }
+
+                const params = {
+                    login: responseBody.username,
+                    email: responseBody.email,
+                    user_avatar: responseBody.avatar ?? 'img/user.png',
+                };
+
+                this.eventBus.emit(Events.ProfilePage.Render.ProfileInfo, params);
+                this.eventBus.emit(Events.ProfilePage.SetEventListeners, idUser);
+            }).catch(() => {
                 this.eventBus.emit(Events.Homepage.Render.ErrorPage);
-                return;
-            }
-
-            const params = {
-                login: responseBody.username,
-                email: responseBody.email,
-                user_avatar: responseBody.avatar ?? 'img/user.png',
-            };
-
-            this.eventBus.emit(Events.ProfilePage.Render.ProfileInfo, params);
-            this.eventBus.emit(Events.ProfilePage.SetEventListeners, idUser);
-        }).catch(() => {
-            this.eventBus.emit(Events.Homepage.Render.ErrorPage);
-        });
+            });
     }
 }
