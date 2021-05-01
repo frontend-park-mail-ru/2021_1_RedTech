@@ -120,25 +120,25 @@ export class DetailPageView extends BaseView {
         const addToFavourites = (event) => {
             event.preventDefault();
             const contentId = document.querySelector('.detail_preview').id;
-            this.eventBus.emit(Events.User.AddToFavourites, contentId);
+            this.eventBus.emit(Events.Content.AddToFavourites, contentId);
         };
 
         const removeFromFavourites = (event) => {
             event.preventDefault();
             const contentId = document.querySelector('.detail_preview').id;
-            this.eventBus.emit(Events.User.RemoveFromFavourites, contentId);
+            this.eventBus.emit(Events.Content.RemoveFromFavourites, contentId);
         };
 
         const like = (event) => {
             event.preventDefault();
             const contentId = document.querySelector('.detail_preview').id;
-            this.eventBus.emit(Events.User.Like, contentId);
+            this.eventBus.emit(Events.Content.Like, contentId);
         };
 
         const dislike = (event) => {
             event.preventDefault();
             const contentId = document.querySelector('.detail_preview').id;
-            this.eventBus.emit(Events.User.Dislike, contentId);
+            this.eventBus.emit(Events.Content.Dislike, contentId);
         };
 
         const addToFav = document.getElementById('add_to_fav');

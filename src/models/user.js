@@ -1,10 +1,9 @@
 import Events from '../consts/events.js';
 import { isValidForm } from '../modules/isValidForm.js';
 import {
-    getCurrentUser,
-    getLogout, patchProfile,
-    postAddToFavourites, postAvatar, postDislike, postLike,
-    postRemoveFromFavourites,
+    getLogout,
+    patchProfile,
+    postAvatar,
     postUserForLogin,
     postUserForSignUp
 } from '../modules/http.js';
@@ -20,10 +19,6 @@ export class UserModel {
         this.eventBus.on(Events.User.Login, this.login);
         this.eventBus.on(Events.User.Signup, this.signup);
         this.eventBus.on(Events.User.Logout, this.logout);
-        this.eventBus.on(Events.User.AddToFavourites, this.addToFavourite);
-        this.eventBus.on(Events.User.RemoveFromFavourites, this.removeFromFavourite);
-        this.eventBus.on(Events.User.Like, this.like);
-        this.eventBus.on(Events.User.Dislike, this.dislike);
         this.eventBus.on(Events.User.Update, this.saveChanges);
     }
 
@@ -93,77 +88,6 @@ export class UserModel {
             this.eventBus.emit( Events.Homepage.Render.ErrorPage);
         });
     }
-
-    /**
-     * Add film to favourites.
-     * @param {string} filmId - Film id, needed to add to favourites.
-     */
-    addToFavourite = (filmId) => {
-        getCurrentUser().then((idUser) => {
-            if (idUser) {
-                postAddToFavourites(filmId).then(() => {
-                    this.eventBus.emit(Events.DetailPage.Change.IconOfFav);
-                });
-            } else {
-                this.eventBus.emit(Events.PathChanged, { path: '/login' });
-            }
-        });
-    }
-
-    /**
-     * Remove film film favourites.
-     * @param {string} filmId - Film id, needed to remove from favourites.
-     */
-    removeFromFavourite = (filmId) => {
-        getCurrentUser().then((idUser) => {
-            if (idUser) {
-                postRemoveFromFavourites(filmId).then(() => {
-                    this.eventBus.emit(Events.DetailPage.Change.IconOfFav);
-                });
-            } else {
-                this.eventBus.emit(Events.PathChanged, { path: '/login' });
-            }
-        });
-    }
-
-    /**
-     * Like film.
-     * @param {string} filmId - Film id, needed to like.
-     */
-    like = (filmId) => {
-        getCurrentUser().then((idUser) => {
-            if (idUser) {
-                postLike(filmId).then(() => {
-                    const data = {
-                        isLike: true,
-                    };
-                    this.eventBus.emit(Events.DetailPage.Change.IconOfLike, data);
-                });
-            } else {
-                this.eventBus.emit(Events.PathChanged, { path: '/login' });
-            }
-        });
-    }
-
-    /**
-     * Dislike film.
-     * @param {string} filmId - Film id, needed to dislike.
-     */
-    dislike = (filmId) => {
-        getCurrentUser().then((idUser) => {
-            if (idUser) {
-                postDislike(filmId).then(() => {
-                    const data = {
-                        isLike: false,
-                    };
-                    this.eventBus.emit(Events.DetailPage.Change.IconOfLike, data);
-                });
-            } else {
-                this.eventBus.emit(Events.PathChanged, { path: '/login' });
-            }
-        });
-    }
-
 
     /**
      * Update avatar and emit render new avatar.

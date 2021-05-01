@@ -3,14 +3,17 @@ export const Events = {
     RedirectBack: 'redirectBack',
     RedirectForward: 'redirectForward',
 
+    Content: {
+        AddToFavourites: 'content:addToFavourites',
+        RemoveFromFavourites: 'content:removeFromFavourites',
+        Like: 'content:like',
+        Dislike: 'content:dislike',
+    },
+
     User: {
         Logout: 'user:logout',
         Login: 'user:login',
         Signup: 'user:signup',
-        AddToFavourites: 'user:addToFavourites',
-        RemoveFromFavourites: 'user:removeFromFavourites',
-        Like: 'user:like',
-        Dislike: 'user:dislike',
         Update: 'user:updateProfile',
     },
 

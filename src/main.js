@@ -1,4 +1,5 @@
 import { UserController } from './controllers/user.js';
+import { ContentController } from './controllers/content.js';
 import { LogInController } from './controllers/loginPage.js';
 import { SignUpController } from './controllers/signupPage.js';
 import { ProfileController } from './controllers/profilePage.js';
@@ -18,6 +19,7 @@ export const APPLICATION = document.getElementById('app');
 
 /*eslint no-unused-vars: */
 const userController = new UserController();
+const contentController = new ContentController();
 const videoPlayerController = new VideoPlayerController();
 const signupController = new SignUpController();
 const loginController = new LogInController();
