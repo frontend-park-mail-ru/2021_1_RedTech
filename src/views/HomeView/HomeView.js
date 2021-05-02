@@ -13,16 +13,16 @@ export class HomePageView extends BaseView {
     /**
      * Create a home page view.
      * @param {EventBus} eventBus - Global Event Bus.
-     * @param {Object}- Parameters for home page view.
+     * @param {Object} - Parameters for home page view.
      */
     constructor(eventBus, { data = {} } = {}) {
         super(eventBus, data);
-        this.eventBus.on('homepage:render', this.render);
-        this.eventBus.on('homepage:renderHeader', this.renderHeader);
-        this.eventBus.on('homepage:setEventListeners', this.setEventListeners);
-        this.eventBus.on('homepage:setEventListenersForHeader', this.setEventListenersForHeader);
-        this.eventBus.on('homepage:renderContent', this.renderContent);
-        this.eventBus.on('homepage:renderErrorPage', this.renderErrorPage);
+        this.eventBus.on(Events.Homepage.Render.Page, this.render);
+        this.eventBus.on(Events.Homepage.Render.Header, this.renderHeader);
+        this.eventBus.on(Events.Homepage.SetEventListeners, this.setEventListeners);
+        this.eventBus.on(Events.Homepage.SetEventListenersForHeader, this.setEventListenersForHeader);
+        this.eventBus.on(Events.Homepage.Render.Content, this.renderContent);
+        this.eventBus.on(Events.Homepage.Render.ErrorPage, this.renderErrorPage);
     }
     /**
      * Render html home page from pug template.
@@ -30,8 +30,8 @@ export class HomePageView extends BaseView {
     render = () => {
         const template = Loader();
         APPLICATION.innerHTML = template;
-        this.eventBus.emit('homepage:InfoForHeader');
-        this.eventBus.emit('homepage:getMainPageContent');
+        this.eventBus.emit(Events.Homepage.Get.InfoForHeader);
+        this.eventBus.emit(Events.Homepage.Get.MainPageContent);
     }
 
     /**
@@ -44,7 +44,7 @@ export class HomePageView extends BaseView {
         if (header) {
             header.outerHTML = template;
         } else {
-            this.eventBus.emit('homepage:renderErrorPage');
+            this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         }
     }
     /**
@@ -62,7 +62,7 @@ export class HomePageView extends BaseView {
         if (content) {
             content.innerHTML = template;
         } else {
-            this.eventBus.emit('homepage:renderErrorPage');
+            this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         }
     }
 
@@ -78,38 +78,20 @@ export class HomePageView extends BaseView {
      * Set event listeners for header.
      */
     setEventListenersForHeader = () => {
-        const removeAllListeners = () => {
-            this.eventBus.emit('homepage:removeEventListeners');
-            this.eventBus.emit('profile:removeEventListeners');
-            this.eventBus.emit('mediateka:removeEventListener');
-            this.eventBus.emit('genrepage:removeEventListener');
-            this.eventBus.emit('detailpage:removeEventListeners');
-            profileLink?.removeEventListener(('click'), profileLinkHandler);
-            loginPage?.removeEventListener(('click'), loginPageHandler);
-            logoutPage?.removeEventListener(('click'), logoutPageHandler);
-        };
-
         const profileLinkHandler = (event) => {
-            this.eventBus.emit('homepage:removeEventListeners');
-            this.eventBus.emit('profile:removeEventListeners');
-            this.eventBus.emit('mediateka:removeEventListener');
-            this.eventBus.emit('genrepage:removeEventListener');
-            this.eventBus.emit('detailpage:removeEventListeners');
             event.preventDefault();
 
-            this.eventBus.emit('profile:getInfoAboutCurrentUser');
+            this.eventBus.emit(Events.ProfilePage.Get.InfoAboutCurrentUser);
         };
         const loginPageHandler = (event) => {
-            removeAllListeners();
             event.preventDefault();
 
-            this.eventBus.emit('login:render');
+            this.eventBus.emit(Events.LoginPage.Render);
         };
         const logoutPageHandler = (event) => {
-            // removeAllListeners();
             event.preventDefault();
 
-            this.eventBus.emit('homepage:logout');
+            this.eventBus.emit(Events.User.Logout);
         };
 
         const profileLink = document.querySelector('.js-profile-page');
@@ -143,7 +125,6 @@ export class HomePageView extends BaseView {
 
         const topFilmSeriesHandler = (event) => {
             scrollToTop();
-            removeEventListeners();
 
             const target = event.target.closest('.item__film-card');
             event.preventDefault();
@@ -159,7 +140,6 @@ export class HomePageView extends BaseView {
 
         const newFilmSeriesHandler = (event) => {
             scrollToTop();
-            removeEventListeners();
 
             const target = event.target.closest('.item__internal');
             event.preventDefault();
@@ -181,13 +161,5 @@ export class HomePageView extends BaseView {
 
         const [newSeries] = document.getElementsByClassName('new_series');
         newSeries?.addEventListener(('click'), newFilmSeriesHandler);
-
-        const removeEventListeners = () => {
-            filmContainer?.removeEventListener(('click'), topFilmSeriesHandler);
-            newSeries?.removeEventListener(('click'), newFilmSeriesHandler);
-            newFilms?.removeEventListener(('click'), newFilmSeriesHandler);
-        };
-
-        this.eventBus.on('homepage:removeEventListeners', removeEventListeners);
     }
 }

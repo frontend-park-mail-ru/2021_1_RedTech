@@ -1,6 +1,7 @@
-/** Class representing home page model. */
 import { getGenreFilms, getGenres, getGenreSeries } from '../modules/http.js';
+import Events from '../consts/events.js';
 
+/** Class representing genre page model. */
 export class GenrePageModel {
     /**
      * Create a genre page model.
@@ -8,7 +9,7 @@ export class GenrePageModel {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on('genrepage:getPageContent', this.getPageContent);
+        this.eventBus.on(Events.GenrePage.GetPageContent, this.getPageContent);
     }
 
     /**
@@ -24,10 +25,10 @@ export class GenrePageModel {
                     }
                 });
                 getGenreFilms(data.id).then((content) => {
-                    this.eventBus.emit('genrepage:renderContent', content, data.genre);
-                    this.eventBus.emit('genrepage:setEventListeners');
+                    this.eventBus.emit(Events.GenrePage.Render.Content, content, data.genre);
+                    this.eventBus.emit(Events.GenrePage.SetEventListeners);
                 }).catch(() => {
-                    this.eventBus.emit('homepage:renderErrorPage');
+                    this.eventBus.emit(Events.Homepage.Render.ErrorPage);
                 });
             } else {
                 genres.forEach((genre) => {
@@ -37,10 +38,10 @@ export class GenrePageModel {
                     }
                 });
                 getGenreSeries(data.id).then((content) => {
-                    this.eventBus.emit('genrepage:renderContent', content, data.genre);
-                    this.eventBus.emit('genrepage:setEventListeners');
+                    this.eventBus.emit(Events.GenrePage.Render.Content, content, data.genre);
+                    this.eventBus.emit(Events.GenrePage.SetEventListeners);
                 }).catch(() => {
-                    this.eventBus.emit('homepage:renderErrorPage');
+                    this.eventBus.emit(Events.Homepage.Render.ErrorPage);
                 });
             }
         });

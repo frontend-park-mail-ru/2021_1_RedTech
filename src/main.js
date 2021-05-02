@@ -1,9 +1,11 @@
-import { eventBus } from './modules/eventBus.js';
-import { LogInController } from './controllers/logIn.js';
-import { SignUpController } from './controllers/signUp.js';
-import { ProfileController } from './controllers/profile.js';
+import { UserController } from './controllers/user.js';
+import { ContentController } from './controllers/content.js';
+import { LogInController } from './controllers/loginPage.js';
+import { SignUpController } from './controllers/signupPage.js';
+import { ProfileController } from './controllers/profilePage.js';
 import { HomePageController } from './controllers/homePage.js';
 import { GenrePageController } from './controllers/genrePage.js';
+import { VideoPlayerController } from './controllers/videoplayer.js';
 import { DetailPageController } from './controllers/detailPage.js';
 import { MediatekaPageController } from './controllers/mediatekaPage.js';
 import { FavouritesPageController } from './controllers/favouritesPage.js';
@@ -16,6 +18,9 @@ import './index.scss';
 export const APPLICATION = document.getElementById('app');
 
 /*eslint no-unused-vars: */
+const userController = new UserController();
+const contentController = new ContentController();
+const videoPlayerController = new VideoPlayerController();
 const signupController = new SignUpController();
 const loginController = new LogInController();
 const profileController = new ProfileController();

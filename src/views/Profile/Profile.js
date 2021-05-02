@@ -1,7 +1,8 @@
-import { APPLICATION } from '../../main.js';
-import { BaseView } from '../BaseView/BaseView.js';
+import {APPLICATION} from '../../main.js';
+import {BaseView} from '../BaseView/BaseView.js';
 import Loader from '../../components/Loader/Loader.pug';
 import ProfileContent from '../../components/ProfileContent/ProfileContent.pug';
+import Events from '../../consts/events.js';
 
 /** Class representing a profile page view. */
 export class ProfileView extends BaseView {
@@ -12,21 +13,20 @@ export class ProfileView extends BaseView {
      */
     constructor(eventBus, { data = {} } = {}) {
         super(eventBus, data);
-        this.eventBus.on('profile:render', this.render);
-        this.eventBus.on('profile:renderProfileInfo', this.renderProfileInfo);
-        this.eventBus.on('profile:setEventListeners', this.setEventListeners);
-        this.eventBus.on('profile:renderNewAvatar', this.renderNewAvatar);
-        this.eventBus.on('profile:updateProfile', this.updateProfile);
+        this.eventBus.on(Events.ProfilePage.Render.Page, this.render);
+        this.eventBus.on(Events.ProfilePage.Render.ProfileInfo, this.renderProfileInfo);
+        this.eventBus.on(Events.ProfilePage.SetEventListeners, this.setEventListeners);
+        this.eventBus.on(Events.ProfilePage.Render.NewAvatar, this.renderNewAvatar);
+        this.eventBus.on(Events.ProfilePage.Update, this.updateProfile);
     }
 
     /**
 	 * Render html profile page from pug template.
 	 */
     render = () => {
-        const template = Loader();
-        APPLICATION.innerHTML = template;
-        this.eventBus.emit('profile:getInfoAboutCurrentUser');
-        this.eventBus.emit('homepage:InfoForHeader');
+        APPLICATION.innerHTML = Loader();
+        this.eventBus.emit(Events.ProfilePage.Get.InfoAboutCurrentUser);
+        this.eventBus.emit(Events.Homepage.Get.InfoForHeader);
     }
 
     /**
@@ -42,7 +42,7 @@ export class ProfileView extends BaseView {
         if (content) {
             content.innerHTML = template;
         } else {
-            this.eventBus.emit('homepage:renderErrorPage');
+            this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         }
     }
 
@@ -105,17 +105,10 @@ export class ProfileView extends BaseView {
                 const email = document.getElementById('email').value;
                 const login = document.getElementById('login').value;
 
-                this.eventBus.emit('profile:saveChanges', idUser, form, avatarInput, email, login);
+                this.eventBus.emit(Events.User.Update, idUser, form, avatarInput, email, login);
             }
         };
 
         form?.addEventListener(('submit'), formHandler);
-
-        const removeEventListeners = () => {
-            form?.removeEventListener(('submit'), formHandler);
-            imgAvatar.removeEventListener('error', imgHandler);
-        };
-
-        this.eventBus.on('profile:removeEventListeners', removeEventListeners);
     }
 }

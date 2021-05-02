@@ -15,9 +15,9 @@ export class MediatekaView extends BaseView {
      */
     constructor(eventBus, { data = {} } = {}) {
         super(eventBus, data);
-        this.eventBus.on('mediateka:render', this.render);
-        this.eventBus.on('mediateka:setEventListeners', this.setEventListeners);
-        this.eventBus.on('mediateka:renderContent', this.renderContent);
+        this.eventBus.on(Events.MediatekaPage.Render.Page, this.render);
+        this.eventBus.on(Events.MediatekaPage.SetEventListeners, this.setEventListeners);
+        this.eventBus.on(Events.MediatekaPage.Render.Content, this.renderContent);
     }
     /**
      * Render html film/series page from pug template.
@@ -26,8 +26,8 @@ export class MediatekaView extends BaseView {
         this._data = data.data;
         const template = Loader();
         APPLICATION.innerHTML = template;
-        this.eventBus.emit('homepage:InfoForHeader');
-        this.eventBus.emit('mediateka:getPageContent', this._data);
+        this.eventBus.emit(Events.Homepage.Get.InfoForHeader);
+        this.eventBus.emit(Events.MediatekaPage.GetPageContent, this._data);
     }
 
     /**
@@ -40,7 +40,7 @@ export class MediatekaView extends BaseView {
         if (content) {
             content.innerHTML = template;
         } else {
-            this.eventBus.emit('homepage:renderErrorPage');
+            this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         }
     }
 
@@ -48,11 +48,10 @@ export class MediatekaView extends BaseView {
      * Set event listeners.
      */
     setEventListeners = () => {
-        this.eventBus.emit('homepage:setEventListeners');
+        this.eventBus.emit(Events.Homepage.SetEventListeners);
 
         const genresHandler = (event) => {
             scrollToTop();
-            removeEventListener();
 
             const target = event.target.closest('.item__internal');
             event.preventDefault();
@@ -71,12 +70,5 @@ export class MediatekaView extends BaseView {
 
         const genresContainer = document.querySelector('.genres');
         genresContainer?.addEventListener(('click'), genresHandler);
-
-        const removeEventListener = () => {
-            genresContainer?.removeEventListener(('click'), genresHandler);
-        };
-
-        this.eventBus.on('mediateka:removeEventListener', removeEventListener);
-
     }
 }

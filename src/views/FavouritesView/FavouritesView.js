@@ -3,6 +3,7 @@ import { BaseView } from '../BaseView/BaseView.js';
 
 import Loader from '../../components/Loader/Loader.pug';
 import GenreContent from '../../components/GenreContent/GenreContent.pug';
+import Events from '../../consts/events.js';
 
 /** Class representing favourites page view. */
 export class FavouritesView extends BaseView {
@@ -13,8 +14,8 @@ export class FavouritesView extends BaseView {
      */
     constructor(eventBus, { data = {} } = {}) {
         super(eventBus, data);
-        this.eventBus.on('favouritespage:render', this.render);
-        this.eventBus.on('favouritespage:renderContent', this.renderContent);
+        this.eventBus.on(Events.FavouritesPage.Render.Page, this.render);
+        this.eventBus.on(Events.FavouritesPage.Render.Content, this.renderContent);
     }
     /**
      * Render html favourites page from pug template.
@@ -22,8 +23,8 @@ export class FavouritesView extends BaseView {
     render = () => {
         const template = Loader();
         APPLICATION.innerHTML = template;
-        this.eventBus.emit('homepage:InfoForHeader');
-        this.eventBus.emit('favouritespage:getPageContent');
+        this.eventBus.emit(Events.Homepage.Get.InfoForHeader);
+        this.eventBus.emit(Events.FavouritesPage.GetPageContent);
     }
 
     /**
@@ -36,7 +37,7 @@ export class FavouritesView extends BaseView {
         if (content) {
             content.innerHTML = template;
         } else {
-            this.eventBus.emit('homepage:renderErrorPage');
+            this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         }
     }
 }

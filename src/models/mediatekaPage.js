@@ -1,4 +1,5 @@
 import { getGenres, getNewFilms, getNewSeries, getTopFilms, getTopSeries } from '../modules/http.js';
+import Events from '../consts/events.js';
 
 /** Class representing film/series page model. */
 export class MediatekaPageModel {
@@ -8,7 +9,7 @@ export class MediatekaPageModel {
      */
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.eventBus.on('mediateka:getPageContent', this.getPageContent);
+        this.eventBus.on(Events.MediatekaPage.GetPageContent, this.getPageContent);
     }
 
     /**
@@ -27,10 +28,10 @@ export class MediatekaPageModel {
         }
         Promise.all([topContent, newContent, genres]).then((values) => {
             [data.cardContent, data.newContent, data.genres] = values;
-            this.eventBus.emit('mediateka:renderContent', data);
-            this.eventBus.emit('mediateka:setEventListeners', data);
+            this.eventBus.emit(Events.MediatekaPage.Render.Content, data);
+            this.eventBus.emit(Events.MediatekaPage.SetEventListeners, data);
         }).catch(() => {
-            this.eventBus.emit('homepage:renderErrorPage');
+            this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         });
     }
 }

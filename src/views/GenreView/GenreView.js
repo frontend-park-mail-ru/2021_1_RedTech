@@ -16,9 +16,9 @@ export class GenrePageView extends BaseView {
      */
     constructor(eventBus, { data = {} } = {}) {
         super(eventBus, data);
-        this.eventBus.on('genrepage:render', this.render);
-        this.eventBus.on('genrepage:setEventListeners', this.setEventListeners);
-        this.eventBus.on('genrepage:renderContent', this.renderContent);
+        this.eventBus.on(Events.GenrePage.Render.Page, this.render);
+        this.eventBus.on(Events.GenrePage.SetEventListeners, this.setEventListeners);
+        this.eventBus.on(Events.GenrePage.Render.Content, this.renderContent);
     }
     /**
      * Render html genre page from pug template.
@@ -32,8 +32,8 @@ export class GenrePageView extends BaseView {
 
         const template = Loader();
         APPLICATION.innerHTML = template;
-        this.eventBus.emit('homepage:InfoForHeader');
-        this.eventBus.emit('genrepage:getPageContent', genre);
+        this.eventBus.emit(Events.Homepage.Get.InfoForHeader);
+        this.eventBus.emit(Events.GenrePage.GetPageContent, genre);
     }
 
     /**
@@ -49,7 +49,7 @@ export class GenrePageView extends BaseView {
         if (content) {
             content.innerHTML = template;
         } else {
-            this.eventBus.emit('homepage:renderErrorPage');
+            this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         }
     }
 
@@ -59,7 +59,6 @@ export class GenrePageView extends BaseView {
     setEventListeners = () => {
         const genresContentHandler = (event) => {
             scrollToTop();
-            removeEventListener();
 
             const target = event.target.closest('.item__internal');
             event.preventDefault();
@@ -83,11 +82,5 @@ export class GenrePageView extends BaseView {
                 img.src = 'img/not-found.jpeg';
             });
         });
-
-        const removeEventListener = () => {
-            genresContent?.removeEventListener(('click'), genresContentHandler);
-        };
-
-        this.eventBus.on('genrepage:removeEventListener', removeEventListener);
     }
 }
