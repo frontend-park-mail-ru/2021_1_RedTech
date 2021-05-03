@@ -40,14 +40,25 @@ if isAuthorized
             }
         ]
 
-header
+header.header
     a(class= '' href= "/" ).header-logo
         img(src= "../../assets/RediotekaLogo.png" alt= "")
+
+    input.header__menu-btn(type="checkbox" id="menu-btn")
+    label.header__menu-icon(for="menu-btn")
+        span.header__navicon
 
     ul.header-form
         each i in headerLinks
             li
                 a(class= i.className href=i.href)= i.title
+        if isAuthorized
+            each i in headerIcons
+                li.header__menu-item
+                    a(class= i.className  href=i.href)= i.title
+        else
+            li.header__menu-item
+                a(href='/login')= 'Войти'
 
     if isAuthorized
         div.header-form__profile

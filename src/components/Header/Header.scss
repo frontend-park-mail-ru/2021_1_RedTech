@@ -20,10 +20,93 @@ header {
     max-width: 85%;
   }
 
+  .header__menu-btn {
+    display: none;
+  }
+
+  .header__menu-btn:checked ~ .header-form {
+    max-height: 300px;
+  }
+
+  .header__menu-btn:checked ~ .header__menu-icon .header__navicon {
+    background: transparent;
+  }
+
+  .header__menu-btn:checked ~ .header__menu-icon .header__navicon:before {
+    transform: rotate(-45deg);
+  }
+
+  .header__menu-btn:checked ~ .header__menu-icon .header__navicon:after {
+    transform: rotate(45deg);
+  }
+
+  .header__menu-btn:checked ~ .header__menu-icon:not(.steps) .header__navicon:before,
+  .header__menu-btn:checked ~ .header__menu-icon:not(.steps) .header__navicon:after {
+    top: 0;
+  }
+
+  .header__menu-icon {
+    cursor: pointer;
+    display: none;
+    float: right;
+    padding: 28px 20px;
+    position: relative;
+    user-select: none;
+
+    .header__navicon {
+      background: white;
+      display: block;
+      height: 2px;
+      position: relative;
+      transition: background .2s ease-out;
+      width: 18px;
+    }
+
+    .header__navicon:before, .header__navicon:after {
+      background: white;
+      content: '';
+      display: block;
+      height: 100%;
+      position: absolute;
+      transition: all .2s ease-out;
+      width: 100%;
+    }
+
+    .header__navicon:before {
+      top: 5px;
+    }
+
+    .header__navicon:after {
+      top: -5px;
+    }
+
+  }
+
   .header-form {
     list-style-type: none;
+    overflow: hidden;
+    clear: both;
+    max-height: none;
+    transition: max-height .2s ease-out;
+
+    .header__menu-item {
+      display: none;
+    }
 
     $self: &;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      overflow: hidden;
+    }
+
+    li a {
+      display: block;
+      padding: 20px 20px;
+      text-decoration: none;
+    }
 
     li {
       display: inline-block;
@@ -84,7 +167,7 @@ header {
         right: 0;
         background-color: $dropdown-background;
         min-width: 160px;
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
         z-index: 1;
 
         visibility: hidden;
@@ -111,6 +194,32 @@ header {
           transform: translateY(0);
         }
       }
+    }
+  }
+
+  @media (max-width: 1006px) {
+    flex-wrap: wrap;
+    justify-content: start;
+
+    .header-form {
+      max-height: 0;
+    }
+
+    .header-form{
+      display: flex;
+      flex-direction: column;
+
+      .header__menu-item {
+        display: initial;
+      }
+    }
+
+    .header-form__profile {
+      display: none;
+    }
+
+    .header__menu-icon {
+      display: inline-block;
     }
   }
 }
