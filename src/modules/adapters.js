@@ -1,6 +1,27 @@
 import { insertSpaceAfterComa, numToFixTruth } from './utils.js';
+import { URLS } from '../consts/urls.js';
 
 const MAX_DESCRIPTION_LENGTH = 230;
+
+/**
+ * Union actors and their ids.
+ * @param {Array} actors - Array with actors name.
+ * @param {Array} ids - Array with actors ids.
+ * @return {Array} - Array of object where actor and his id.
+ */
+const unionActorsAndIds = (actors, ids) => {
+    return actors.reduce((actorsWithIds, actor, index) =>{
+        let name = actor;
+        if (index < actors.length - 1) {
+            name += ',';
+        }
+        actorsWithIds.push({
+            name: name,
+            id: ids[index],
+        });
+        return actorsWithIds;
+    }, []);
+};
 
 /**
  * Make object for render detail info about film from json.
@@ -12,12 +33,13 @@ export const filmJsonToFilm = (jsonFilm) => {
     const film = {
         genres: insertSpaceAfterComa(jsonFilm.genres),
         director: insertSpaceAfterComa(jsonFilm.director),
-        actors: insertSpaceAfterComa(jsonFilm.actors),
+        actors: unionActorsAndIds(jsonFilm.actors, jsonFilm.actor_ids),
         countries: insertSpaceAfterComa(jsonFilm.countries),
         movieAvatar: `${jsonFilm.movie_avatar}`,
         rating: jsonFilm.rating ? `Рейтинг ${numToFixTruth(jsonFilm.rating)}` : '',
         is_fav: jsonFilm?.is_fav,
-        is_vote: jsonFilm?.is_vote
+        is_vote: jsonFilm?.is_vote,
+        currentUrl: URLS.api.actors,
     };
 
     filmKeys.forEach((value) => {
@@ -67,6 +89,20 @@ export const arrayContentToNewFilmsSeries = (arrayContent) => {
         });
         return newFilmsSeries;
     }, []);
+};
+
+/**
+ * Make array of object for render actorPage.
+ * @param {Object} actorInfoJson - Info about actor from json.
+ * @return {Object} - InfoAboutActor.
+ */
+export const arrayContentToActorPageContent = (actorInfoJson) => {
+    return {
+        name: actorInfoJson.first_name + ' ' + actorInfoJson.last_name,
+        born: actorInfoJson.born,
+        actor_avatar: actorInfoJson.actor_avatar,
+        movies: arrayContentToNewFilmsSeries(actorInfoJson.movies),
+    };
 };
 
 /**
