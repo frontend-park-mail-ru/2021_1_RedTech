@@ -100,6 +100,16 @@
     .description__items {
       display: flex;
       margin-bottom: 15px;
+
+      .items__actors {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+      }
+    }
+
+    .detail_description__actors {
+      flex-wrap: wrap;
     }
 
     .country__title {

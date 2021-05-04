@@ -43,8 +43,9 @@ div.detail_preview(id= filmData.id)
 
         div(class= 'detail_description__actors description__items')
             span.country__title В главных ролях:
-            each actor in filmData.actors
-                a.country__text.actors__href(href='/actors/'+actor.id)=actor.name
+            div.items__actors
+                each actor in filmData.actors
+                    a.country__text.actors__href(href='/actors/'+actor.id)=actor.name
 
 
 div.detail_description

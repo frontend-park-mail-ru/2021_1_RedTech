@@ -7,6 +7,8 @@ div.content__actor-info
         div.name-born__name= name
         div.name-born__born= born
 
+div.item__page-title= 'Фильмография'
+
 div.suggestion-film__list.genres_content
     each i in movies
         +SuggestionCardCreate (i)
