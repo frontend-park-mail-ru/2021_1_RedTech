@@ -25,7 +25,7 @@ header {
   }
 
   .header__menu-btn:checked ~ .header-form {
-    max-height: 320px;
+    max-height: 360px;
   }
 
   .header__menu-btn:checked ~ .header__menu-icon .header__navicon {
@@ -107,6 +107,13 @@ header {
       display: block;
       padding: 20px 20px;
       text-decoration: none;
+    }
+
+    li div {
+      display: block;
+      padding: 20px 20px;
+      text-decoration: none;
+      font-size: $header-font-size;
     }
 
     li {

@@ -32,11 +32,6 @@ if isAuthorized
                 className: '',
                 href: '/favourite',
                 title: 'Избранное'
-            },
-            {
-                className: 'js-logout-page',
-                href: '',
-                title: 'Выйти',
             }
         ]
 
@@ -56,6 +51,8 @@ header.header
             each i in headerIcons
                 li.header__menu-item
                     a(class= i.className  href=i.href)= i.title
+            li.header__menu-item
+                div.js-logout-page= 'Выйти'
         else
             li.header__menu-item
                 a(href='/login')= 'Войти'
@@ -67,6 +64,7 @@ header.header
                 div(class="dropdown-profile__content")
                     each i in headerIcons
                         a(class='item__dropdown-profile ' + i.className  href=i.href)= i.title
+                    div(class='item__dropdown-profile ' + 'js-logout-page')= 'Выйти'
     else
         div.header-form__profile
             a(class= 'header-form__profile__link' href='/search')
