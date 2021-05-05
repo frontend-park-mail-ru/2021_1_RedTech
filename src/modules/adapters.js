@@ -96,14 +96,14 @@ export const arrayContentToNewFilmsSeries = (arrayContent) => {
  * @param {Object} actorInfoJson - Info about actor from json.
  * @return {Object} - InfoAboutActor.
  */
-export const arrayContentToActorPageContent = (actorInfoJson) => {
-    return {
+export const arrayContentToActorPageContent = (actorInfoJson) => (
+    {
         name: actorInfoJson.first_name + ' ' + actorInfoJson.last_name,
         born: actorInfoJson.born,
         actor_avatar: actorInfoJson.actor_avatar,
         movies: arrayContentToNewFilmsSeries(actorInfoJson.movies),
-    };
-};
+    }
+);
 
 /**
  * Check is needed to get csrf token
