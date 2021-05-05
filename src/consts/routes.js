@@ -9,6 +9,7 @@ export const Routes = {
     SeriesPage: '/series',
     SeriesGenrePage: '\\/series\\/genre\\/\\w+',
     FavouritePage: '/favourite',
+    ActorPage: '\\/actors\\/\\d+',
 };
 
 export default Routes;

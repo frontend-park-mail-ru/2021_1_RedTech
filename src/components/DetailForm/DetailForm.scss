@@ -100,6 +100,16 @@
     .description__items {
       display: flex;
       margin-bottom: 15px;
+
+      .items__actors {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+      }
+    }
+
+    .detail_description__actors {
+      flex-wrap: wrap;
     }
 
     .country__title {
@@ -114,6 +124,18 @@
 
     span {
       display: flex;
+    }
+
+    .actors__href {
+      color: white;
+      padding-left: 5px;
+      transition: 0.35s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .actors__href:hover {
+      color: $text-hover-color;
+      border-color: $text-hover-color;
     }
   }
 }

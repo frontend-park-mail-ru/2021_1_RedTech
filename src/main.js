@@ -5,6 +5,7 @@ import { SignUpController } from './controllers/signupPage.js';
 import { ProfileController } from './controllers/profilePage.js';
 import { HomePageController } from './controllers/homePage.js';
 import { GenrePageController } from './controllers/genrePage.js';
+import { ActorPagePageController } from './controllers/actorPage.js';
 import { VideoPlayerController } from './controllers/videoplayer.js';
 import { DetailPageController } from './controllers/detailPage.js';
 import { MediatekaPageController } from './controllers/mediatekaPage.js';
@@ -24,6 +25,7 @@ const videoPlayerController = new VideoPlayerController();
 const signupController = new SignUpController();
 const loginController = new LogInController();
 const profileController = new ProfileController();
+const actorPageController = new ActorPagePageController();
 const homePageController = new HomePageController();
 const detailPageController = new DetailPageController();
 const filmPageController = new MediatekaPageController();
@@ -42,4 +44,5 @@ router.register(Routes.HomePage, homePageController)
     .register(Routes.SeriesPage, filmPageController)
     .register(Routes.SeriesGenrePage, genrePageController)
     .register(Routes.FavouritePage, favouritesPageController)
+    .register(Routes.ActorPage, actorPageController)
     .start();

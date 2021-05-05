@@ -4,7 +4,8 @@ import {
     arrayFilmsToFilmCards,
     arrayContentToNewFilmsSeries,
     checkCSRFToken,
-    searchJsonToSearchItem
+    searchJsonToSearchItem,
+    arrayContentToActorPageContent
 } from './adapters.js';
 
 /**
@@ -551,6 +552,27 @@ const getFilmStream = async (contentId) => {
 };
 
 /**
+ * Send async get request using async func.
+ * @returns {Array} - Array of objects for render actor page.
+ */
+const getInfoAboutActor = async (actorId) => {
+    const params = {
+        url: URLS.api.actors + actorId,
+        method: 'GET'
+    };
+
+    try {
+        const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return arrayContentToActorPageContent(responseBody);
+        }
+        return null;
+    } catch (err) {
+        return null;
+    }
+};
+
+/**
  * Send async post request using async func.
  * @returns {boolean} - Is status of post request like  equal to 200.
  */
@@ -640,5 +662,6 @@ export {
     getFilmStream,
     postLike,
     postDislike,
-    getSearchResults
+    getSearchResults,
+    getInfoAboutActor,
 };
