@@ -117,6 +117,7 @@
     }
   }
   @media (max-width: 800px) {
+    padding-top: 0;
     flex-direction: column;
     .detail_preview-left {
       width: 100%;
