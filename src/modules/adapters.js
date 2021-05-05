@@ -32,7 +32,7 @@ export const filmJsonToFilm = (jsonFilm) => {
  * @return {Object} - Object for render search body.
  */
 export const searchJsonToSearchItem = (searchJson) => {
-    const actorSearchItems = searchJson.actors.reduce((actorSearchItems, actor) => {
+    const actors = searchJson.actors?.reduce((actorSearchItems, actor) => {
         actorSearchItems.push({
             name: actor.first_name + ' ' + actor.last_name,
             id: actor.id,
@@ -40,17 +40,16 @@ export const searchJsonToSearchItem = (searchJson) => {
         return actorSearchItems;
     }, []);
 
-    const moviesSearchItems = searchJson.movies.reduce((moviesSearchItems, movie) => {
+    const movies = searchJson.movies?.reduce((moviesSearchItems, movie) => {
         moviesSearchItems.push({
             name: movie.title,
             id: movie.id,
         });
         return moviesSearchItems;
     }, []);
-
     return {
-        actors: actorSearchItems,
-        movies: moviesSearchItems,
+        actors: actors,
+        movies: movies,
     };
 };
 

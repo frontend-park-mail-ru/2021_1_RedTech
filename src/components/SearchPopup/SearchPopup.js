@@ -33,11 +33,11 @@ export class SearchPopupComponent {
                 getSearchResults(event.target.value).then((results) => {
                     const searchResultBody = document.querySelector('.search-results__body');
                     searchResultBody.innerHTML = '';
-                    results?.movies.forEach((searchItem) => {
+                    results.movies?.forEach((searchItem) => {
                         searchItem.isMovie = true;
                         searchResultBody.innerHTML += SearchItem(searchItem);
                     });
-                    results?.actors.forEach((searchItem) => {
+                    results.actors?.forEach((searchItem) => {
                         searchItem.isMovie = false;
                         searchResultBody.innerHTML += SearchItem(searchItem);
                     });
