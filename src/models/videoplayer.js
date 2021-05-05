@@ -20,7 +20,11 @@ export class VideoPlayerModel {
                 if (!isLoadedVideo) {
                     getFilmStream(filmData.id).then((filmPath) => {
                         if (data.season >= 1) {
-                            videoPlayer.setSrc(`${filmPath[filmData.seriesList[data.season-1]+data.series].video_path}`);
+                            let seriesOffset = 0;
+                            for (let idx = 0; idx < data.season; idx++) {
+                                seriesOffset += Number(filmData.seriesList[idx]);
+                            }
+                            videoPlayer.setSrc(`${filmPath[Number(seriesOffset) + Number(data.series)].video_path}`);
                         } {
                             videoPlayer.setSrc(`${filmPath[data.series].video_path}`);
                         }
