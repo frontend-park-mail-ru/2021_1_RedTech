@@ -40,6 +40,7 @@ export const filmJsonToFilm = (jsonFilm) => {
         is_fav: jsonFilm?.is_fav,
         is_vote: jsonFilm?.is_vote,
         currentUrl: URLS.api.actors,
+        seriesList: jsonFilm?.series_list,
     };
 
     filmKeys.forEach((value) => {

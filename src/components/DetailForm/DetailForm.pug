@@ -1,6 +1,7 @@
 -
     const isLiked = filmData.is_vote === 1;
     const isDisliked = filmData.is_vote === -1;
+    const isMovie = filmData.type === 'Фильм';
 
 div.detail_preview(id= filmData.id)
     div.detail_preview-left
@@ -46,6 +47,23 @@ div.detail_preview(id= filmData.id)
             div.items__actors
                 each actor in filmData.actors
                     a.country__text.actors__href(href='/actors/'+actor.id)=actor.name
+
+
+if !isMovie
+    - for (let i = 1; i <= filmData.seriesList.length; ++i) {
+        div.detail_description
+            div.detail_description-left
+                div.detail_description__text
+                    div= 'Сезон ' + i
+                    div.detail_description__series
+                        - for (let j = 0; j < filmData.seriesList[i-1]; ++j) {
+                            if j == 0 && i == 1
+                                div.series__info.series__chosen(data-season=i, data-series=j+1)= 'Серия ' + (j+1)
+                            else
+                                div.series__info(data-season=i-1, data-series=j)= 'Серия ' + (j+1)
+                            - }
+            div.detail_description-right
+    - }
 
 
 div.detail_description

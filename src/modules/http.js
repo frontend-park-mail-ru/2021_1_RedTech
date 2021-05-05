@@ -542,7 +542,7 @@ const getFilmStream = async (contentId) => {
     try {
         const {status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
         if (responseStatus === 200) {
-            return responseBody.video_path;
+            return responseBody;
         } else {
             return null;
         }

@@ -46,7 +46,7 @@ export class DetailPageView extends BaseView {
         const content = document.querySelector('.content');
         if (content) {
             content.innerHTML = template;
-            this.eventBus.emit(Events.DetailPage.Render.VideoPlayer, filmData);
+            this.eventBus.emit(Events.DetailPage.Render.VideoPlayer, filmData, 0, 0);
         } else {
             this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         }
@@ -55,17 +55,21 @@ export class DetailPageView extends BaseView {
     /**
      * Render video player.
      * @param {Object} filmData - Detail info about film in object.
+     * @param {Number} season - Number of season, in case of movie will be 0.
+     * @param {Number} series - Number of series, in case of movie will be 0.
      */
-    renderVideoPlayer = (filmData) => {
+    renderVideoPlayer = (filmData, season, series) => {
         const videoPlayer = new VideoPlayer('.video-player');
         const isLoadedVideo = false;
+        this._data = {
+            isLoadedVideo,
+            filmData,
+            videoPlayer,
+            season: season,
+            series: series,
+        };
         const openPlayerHandler = (event) => {
             event.preventDefault();
-            this._data = {
-                isLoadedVideo,
-                filmData,
-                videoPlayer
-            };
             this.eventBus.emit(Events.VideoPlayer.Init, this._data);
         };
 
@@ -140,6 +144,27 @@ export class DetailPageView extends BaseView {
             const contentId = document.querySelector('.detail_preview').id;
             this.eventBus.emit(Events.Content.Dislike, contentId);
         };
+
+        const seriesHandler = (event) => {
+            const target = event.target.closest('.series__info');
+            event.preventDefault();
+
+            if (target) {
+                const series = document.querySelectorAll('.series__info');
+                series.forEach((serie) => {
+                    serie.classList.remove('series__chosen') ;
+                });
+                target.classList.add('series__chosen');
+                this._data.season = target.dataset.season;
+                this._data.series = target.dataset.series;
+                this.eventBus.emit(Events.VideoPlayer.Init, this._data);
+            }
+        };
+
+        const seriesContainer = document.querySelectorAll('.detail_description__series');
+        seriesContainer.forEach((container) => {
+            container.addEventListener(('click'), seriesHandler);
+        });
 
         const addToFav = document.getElementById('add_to_fav');
         addToFav.addEventListener('click', addToFavourites);

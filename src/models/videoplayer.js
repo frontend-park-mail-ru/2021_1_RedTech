@@ -19,7 +19,12 @@ export class VideoPlayerModel {
             if (idUser) {
                 if (!isLoadedVideo) {
                     getFilmStream(filmData.id).then((filmPath) => {
-                        videoPlayer.setSrc(`${filmPath}`);
+                        if (data.season >= 1) {
+                            videoPlayer.setSrc(`${filmPath[filmData.seriesList[data.season-1]+data.series].video_path}`);
+                        } {
+                            videoPlayer.setSrc(`${filmPath[data.series].video_path}`);
+                        }
+
                         videoPlayer.visibleVideo();
                         isLoadedVideo = true;
                     });
