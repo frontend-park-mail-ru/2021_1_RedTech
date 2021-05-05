@@ -27,6 +27,34 @@ export const filmJsonToFilm = (jsonFilm) => {
 };
 
 /**
+ * Make object for render search body.
+ * @param {Object} searchJson - Search info from json.
+ * @return {Object} - Object for render search body.
+ */
+export const searchJsonToSearchItem = (searchJson) => {
+    const actorSearchItems = searchJson.actors.reduce((actorSearchItems, actor) => {
+        actorSearchItems.push({
+            name: actor.first_name + ' ' + actor.last_name,
+            id: actor.id,
+        });
+        return actorSearchItems;
+    }, []);
+
+    const moviesSearchItems = searchJson.movies.reduce((moviesSearchItems, movie) => {
+        moviesSearchItems.push({
+            name: movie.title,
+            id: movie.id,
+        });
+        return moviesSearchItems;
+    }, []);
+
+    return {
+        actors: actorSearchItems,
+        movies: moviesSearchItems,
+    };
+};
+
+/**
  * Make array of object for render top slider from respond json.
  * @param {Array} arrayFilms - Info about film from json.
  * @return {Array} - Array of objects for render top slider.

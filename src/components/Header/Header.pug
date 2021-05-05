@@ -51,6 +51,9 @@ header
 
     if isAuthorized
         div.header-form__profile
+            div.js-search-popup(class= 'header-form__profile__link')
+                img(src= '../../assets/search.png')
+                div.header-form__search-popup
             div.dropdown-profile
                 img(class="dropdown-profile__image" src='../../assets/profileDropdown.png')
                 div(class="dropdown-profile__content")
@@ -58,7 +61,8 @@ header
                         a(class='item__dropdown-profile ' + i.className  href=i.href)= i.title
     else
         div.header-form__profile
-            a(class= 'header-form__profile__link' href='/search')
+            div.js-search-popup(class= 'header-form__profile__link')
                 img(src= '../../assets/search.png')
+                div.header-form__search-popup
             a(class= 'header-form__profile__link' href='/login')
                 img(src= '../../assets/unlogined.png')

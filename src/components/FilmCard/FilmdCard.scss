@@ -45,20 +45,17 @@
         color: white;
       }
 
-      position: relative;
       font-size: $card-title-font-size;
       font-weight: 600;
       padding-bottom: 10px;
     }
 
     .item__film-card__stars {
-      position: relative;
       font-size: $card-stars-font-size;
       font-weight: 900;
     }
 
     .item__film-card__description {
-      position: relative;
       word-spacing: 6px;
       font-weight: 400;
     }

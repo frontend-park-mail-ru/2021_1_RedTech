@@ -1,0 +1,14 @@
+include  ../Input/Input
+
+div.search-popup__popup
+    div.popup__close
+        img(src='../../assets/VideoPlayerAssets/CloseButton.png')
+    div.popup__popup-body
+        div.popup-body__popup-wrapper
+            div.popup-wrapper__title= 'Поиск'
+            div.popup-wrapper__search-wrapper
+                +customInput('text', 'input-wrapper__input search-wrapper__input', 'Актеры, фильмы, сериалы...', 'search')
+            div.popup-wrapper__search-results
+                div.search-results__title= 'Результаты поиска'
+                div.search-results__body
+

@@ -1,5 +1,11 @@
 import { URLS } from '../consts/urls.js';
-import { filmJsonToFilm, arrayFilmsToFilmCards, arrayContentToNewFilmsSeries, checkCSRFToken } from './adapters.js';
+import {
+    filmJsonToFilm,
+    arrayFilmsToFilmCards,
+    arrayContentToNewFilmsSeries,
+    checkCSRFToken,
+    searchJsonToSearchItem
+} from './adapters.js';
 
 /**
  * Send async request to the server.
@@ -592,6 +598,25 @@ const postDislike = async (contentId) => {
     }
 };
 
+const getSearchResults = async (queryParams) => {
+    const params = {
+        url: URLS.api.search + 'query=' + queryParams,
+        method: 'GET',
+        credentials: 'include',
+    };
+
+    try {
+        const {status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return searchJsonToSearchItem(responseBody);
+        } else {
+            return null;
+        }
+    } catch (err) {
+        return null;
+    }
+};
+
 export {
     postUserForLogin,
     postUserForSignUp,
@@ -614,5 +639,6 @@ export {
     getGenres,
     getFilmStream,
     postLike,
-    postDislike
+    postDislike,
+    getSearchResults
 };
