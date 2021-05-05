@@ -161,6 +161,26 @@
       font-weight: 500;
       padding-bottom: 15px;
       word-spacing: 2px;
+
+      .detail_description__series {
+        display: flex;
+        flex-direction: row;
+        overflow-y: auto;
+
+        .series__info {
+          display: flex;
+          flex: none;
+          margin-right: 16px;
+        }
+
+        .series__info:hover {
+          cursor: pointer;
+        }
+
+        .series__chosen {
+          color: $tag-color;
+        }
+      }
     }
   }
 
