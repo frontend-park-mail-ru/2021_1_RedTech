@@ -129,10 +129,13 @@
     .actors__href {
       color: white;
       padding-left: 5px;
+      transition: 0.35s ease;
+      border-bottom: 1px solid transparent;
     }
 
     .actors__href:hover {
-      text-decoration: underline;
+      color: $text-hover-color;
+      border-color: $text-hover-color;
     }
   }
 }

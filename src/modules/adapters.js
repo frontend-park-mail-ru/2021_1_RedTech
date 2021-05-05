@@ -9,8 +9,8 @@ const MAX_DESCRIPTION_LENGTH = 230;
  * @param {Array} ids - Array with actors ids.
  * @return {Array} - Array of object where actor and his id.
  */
-const unionActorsAndIds = (actors, ids) => {
-    return actors.reduce((actorsWithIds, actor, index) =>{
+const unionActorsAndIds = (actors, ids) => (
+    actors.reduce((actorsWithIds, actor, index) =>{
         let name = actor;
         if (index < actors.length - 1) {
             name += ',';
@@ -20,8 +20,8 @@ const unionActorsAndIds = (actors, ids) => {
             id: ids[index],
         });
         return actorsWithIds;
-    }, []);
-};
+    }, [])
+);
 
 /**
  * Make object for render detail info about film from json.

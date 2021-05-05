@@ -8,7 +8,8 @@
     height: 200px;
     display: flex;
     justify-content: center;
-    .actor-info__avatar_src {
+
+    &__avatar_src {
       object-fit: contain;
       max-width: 100%;
       max-height: 100%;
