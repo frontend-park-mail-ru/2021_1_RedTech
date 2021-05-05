@@ -73,10 +73,7 @@ export class VideoPlayer {
 
     initPageListeners() {
         document.addEventListener('keydown', (event) => {
-            if (event.code === 'Space') {
-                event.preventDefault();
-                this.toggleVideo();
-            } else if (event.code === 'ArrowRight') {
+            if (event.code === 'ArrowRight') {
                 this.plusFifteen();
             } else if (event.code === 'ArrowLeft') {
                 this.minusFifteen();
