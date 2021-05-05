@@ -29,8 +29,9 @@ export class SearchPopupComponent {
 
         const searchInput = document.querySelector('.search-wrapper__input');
         searchInput.addEventListener(('input'), (event) => {
-            if (event.target.value.length > 0) {
-                getSearchResults(event.target.value).then((results) => {
+            const searchInputValue = event.target.value.trim();
+            if (searchInputValue.length > 0) {
+                getSearchResults(searchInputValue).then((results) => {
                     const searchResultBody = document.querySelector('.search-results__body');
                     searchResultBody.innerHTML = '';
                     results.movies?.forEach((searchItem) => {
