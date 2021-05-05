@@ -66,6 +66,7 @@ export const searchJsonToSearchItem = (searchJson) => {
         moviesSearchItems.push({
             name: movie.title,
             id: movie.id,
+            type: movie.type,
         });
         return moviesSearchItems;
     }, []);

@@ -1,7 +1,7 @@
 div.search-results__body_item
     if isMovie
         a.body_item__title(href='/movie/' + id)= name
-        span.body_item__category= 'Фильм'
+        span.body_item__category= type
     else
         a.body_item__title(href='/actors/' + id)= name
         span.body_item__category= 'Актер'
