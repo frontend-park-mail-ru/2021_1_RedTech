@@ -53,6 +53,14 @@ export const Events = {
         GetPageContent: 'genrepage:getPageContent',
     },
 
+    ActorPage: {
+        Render: {
+            Page: 'actorpage:render',
+            Content: 'actorpage:renderContent',
+        },
+        GetPageContent: 'actorpage:getPageContent',
+    },
+
     FavouritesPage: {
         Render: {
             Page: 'favouritespage:render',

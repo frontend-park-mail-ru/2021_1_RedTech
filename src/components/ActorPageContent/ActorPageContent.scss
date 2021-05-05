@@ -1,0 +1,29 @@
+.content__actor-info {
+  display: flex;
+  flex-direction: row;
+  margin-left: 30px;
+
+  .actor-info__avatar {
+    width: 180px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+
+    &__avatar_src {
+      object-fit: contain;
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+
+  .actor-info__name-born {
+    margin-left: 30px;
+
+    .name-born__name {
+      font-size: 30px;
+    }
+    .name-born__born {
+      margin-top: 12px;
+    }
+  }
+}
