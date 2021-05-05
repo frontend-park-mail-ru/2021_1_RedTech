@@ -1,0 +1,20 @@
+.search-results__body_item {
+    color: white;
+    margin-top: 8px;
+    margin-right: 16px;
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+
+    .body_item__title {
+        color: white;
+        font-size: 16px;
+    }
+    .body_item__title:hover {
+        text-decoration: underline;
+    }
+    .body_item__category {
+        font-size: 12px;
+        font-style: italic;
+    }
+}

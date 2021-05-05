@@ -7,6 +7,7 @@ import HomeContent from '../../components/HomeContent/HomeContent.pug';
 import ErrorPage from '../../components/ErrorPage/ErrorPage.pug';
 import Loader from '../../components/Loader/Loader.pug';
 import { Events } from '../../consts/events.js';
+import {SearchPopupComponent} from '../../components/SearchPopup/SearchPopup.js';
 
 /** Class representing home page view. */
 export class HomePageView extends BaseView {
@@ -99,6 +100,15 @@ export class HomePageView extends BaseView {
 
         const loginPage = document.querySelector('.js-login-page');
         loginPage?.addEventListener(('click'), loginPageHandler);
+
+        const searchPopup = document.querySelector('.js-search-popup');
+        searchPopup?.addEventListener(('click'),(event) => {
+            event.preventDefault();
+            const popup = document.querySelector('.header-form__search-popup');
+            event.stopPropagation();
+            // eslint-disable-next-line no-unused-vars
+            const searchPopupComponent = new SearchPopupComponent(popup);
+        });
 
         const logoutPage = document.querySelector('.js-logout-page');
         logoutPage?.addEventListener(('click'), logoutPageHandler);

@@ -23,6 +23,7 @@ export const URLS = {
         login: `${currentUrl}/api/users/login`,
         signup: `${currentUrl}/api/users/signup`,
         profile: `${currentUrl}/api/users/`,
+        search: `${currentUrl}/api/search?`,
         actors: `${currentUrl}/api/actors/`,
         topFilms: `${currentUrl}/api/media/category/top?limit=${TOP_SLIDER_MEDIA_COUNT}&type=movie`,
         topSeries: `${currentUrl}/api/media/category/top?limit=${TOP_SLIDER_MEDIA_COUNT}&type=series`,

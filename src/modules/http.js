@@ -4,6 +4,7 @@ import {
     arrayFilmsToFilmCards,
     arrayContentToNewFilmsSeries,
     checkCSRFToken,
+    searchJsonToSearchItem,
     arrayContentToActorPageContent
 } from './adapters.js';
 
@@ -619,6 +620,25 @@ const postDislike = async (contentId) => {
     }
 };
 
+const getSearchResults = async (queryParams) => {
+    const params = {
+        url: URLS.api.search + 'query=' + queryParams,
+        method: 'GET',
+        credentials: 'include',
+    };
+
+    try {
+        const {status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
+        if (responseStatus === 200) {
+            return searchJsonToSearchItem(responseBody);
+        } else {
+            return null;
+        }
+    } catch (err) {
+        return null;
+    }
+};
+
 export {
     postUserForLogin,
     postUserForSignUp,
@@ -642,5 +662,6 @@ export {
     getFilmStream,
     postLike,
     postDislike,
+    getSearchResults,
     getInfoAboutActor,
 };
