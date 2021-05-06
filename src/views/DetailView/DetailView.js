@@ -136,6 +136,9 @@ export class DetailPageView extends BaseView {
         } else {
             this._data.videoPlayer.setSrc(`${this._data.filmPath[this._data.series].video_path}`);
         }
+
+        this._data.videoPlayer.isPlaying = false;
+        this._data.videoPlayer.togglePlayStopButton();
     }
 
     setSeriesCounter = (season, series) => {
