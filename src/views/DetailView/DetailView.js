@@ -22,6 +22,10 @@ export class DetailPageView extends BaseView {
         this.eventBus.on(Events.DetailPage.SetEventListeners, this.setEventListeners);
         this.eventBus.on(Events.DetailPage.Change.IconOfFav, this.changeIconOfFav);
         this.eventBus.on(Events.DetailPage.Change.IconOfLike, this.changeIconOfLike);
+        this.eventBus.on('videoplayer:setSeriesCounter', this.setSeriesCounter);
+        this.eventBus.on('videoplayer:hideNextSeries', this.hideNextSeries);
+        this.eventBus.on('videoplayer:hidePreviousSeries', this.hidePreviousSeries);
+        this.eventBus.on('videoplayer:showSeriesButtons', this.showSeriesButtons);
     }
     /**
      * Render html film detail page from pug template.
@@ -75,8 +79,86 @@ export class DetailPageView extends BaseView {
 
         const closeOpenVideo = document.querySelector('.js-play-detail');
         closeOpenVideo.addEventListener(('click'), openPlayerHandler);
+
+        const nextSeriesHandler = () => {
+            this._data.series++;
+            if (filmData.seriesList[this._data.season] === this._data.series ) {
+                this._data.series = 0;
+                this._data.season++;
+            }
+            this.switchingSeries();
+
+        };
+
+        const previousSeriesHandler = (event) => {
+            this._data.series--;
+            if (this._data.series === -1) {
+                this._data.season--;
+                this._data.series = filmData.seriesList[this._data.season] - 1;
+            }
+            event.preventDefault();
+            this.switchingSeries();
+
+        };
+
+        const nextSeries = document.querySelector('.js-next-series');
+        nextSeries.addEventListener(('click'), nextSeriesHandler);
+
+        const previousSeries = document.querySelector('.js-previous-series');
+        previousSeries.addEventListener(('click'), previousSeriesHandler);
     }
 
+    switchingSeries = () => {
+        const series = document.querySelectorAll('.series__info');
+        series.forEach((serie) => {
+            serie.classList.remove('series__chosen');
+            if (serie.dataset.series == this._data.series && serie.dataset.season == this._data.season) {
+                serie.classList.add('series__chosen');
+            }
+        });
+
+        this.eventBus.emit('videoplayer:showSeriesButtons');
+        this.eventBus.emit('videoplayer:setSeriesCounter', Number(this._data.season), Number(this._data.series));
+
+        let seriesOffset = 0;
+        for (let idx = 0; idx < this._data.season; idx++) {
+            seriesOffset += Number(this._data.filmData.seriesList[idx]);
+        }
+
+        if (Number(seriesOffset) + Number(this._data.series) === this._data.filmPath.length - 1) {
+            this.eventBus.emit('videoplayer:hideNextSeries');
+        } else if (Number(seriesOffset) + Number(this._data.series) === 0) {
+            this.eventBus.emit('videoplayer:hidePreviousSeries');
+        }
+
+        if (this._data.season >= 1) {
+            this._data.videoPlayer.setSrc(`${this._data.filmPath[Number(seriesOffset) + Number(this._data.series)].video_path}`);
+        } else {
+            this._data.videoPlayer.setSrc(`${this._data.filmPath[this._data.series].video_path}`);
+        }
+    }
+
+    setSeriesCounter = (season, series) => {
+        const seriesCounter = document.querySelector('.js-series-number');
+        seriesCounter.textContent = `${season + 1} cезон ${series + 1} серия`;
+    }
+
+    hideNextSeries = () => {
+        const nextSeries = document.querySelector('.js-next-series');
+        nextSeries.style.visibility = 'hidden';
+    }
+
+    showSeriesButtons = () => {
+        const nextSeries = document.querySelector('.js-next-series');
+        nextSeries.style.visibility = 'visible';
+        const previousSeries = document.querySelector('.js-previous-series');
+        previousSeries.style.visibility = 'visible';
+    }
+
+    hidePreviousSeries = () => {
+        const previousSeries = document.querySelector('.js-previous-series');
+        previousSeries.style.visibility = 'hidden';
+    }
     /**
      * Change icon of add/remove to/from favourites.
      */

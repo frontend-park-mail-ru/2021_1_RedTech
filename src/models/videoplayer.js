@@ -19,13 +19,26 @@ export class VideoPlayerModel {
             if (idUser) {
                 if (!isLoadedVideo) {
                     getFilmStream(filmData.id).then((filmPath) => {
+                        data.filmPath = filmPath;
+                        if (filmData.type === 'Сериал') {
+                            this.eventBus.emit('videoplayer:showSeriesButtons');
+                            this.eventBus.emit('videoplayer:setSeriesCounter', Number(data.season), Number(data.series));
+                        }
+
+                        let seriesOffset = 0;
+                        for (let idx = 0; idx < data.season; idx++) {
+                            seriesOffset += Number(filmData.seriesList[idx]);
+                        }
+
+                        if (Number(seriesOffset) + Number(data.series) === filmPath.length - 1 && filmData.type === 'Сериал') {
+                            this.eventBus.emit('videoplayer:hideNextSeries');
+                        } else if (Number(seriesOffset) + Number(data.series) === 0 && filmData.type === 'Сериал') {
+                            this.eventBus.emit('videoplayer:hidePreviousSeries');
+                        }
+
                         if (data.season >= 1) {
-                            let seriesOffset = 0;
-                            for (let idx = 0; idx < data.season; idx++) {
-                                seriesOffset += Number(filmData.seriesList[idx]);
-                            }
                             videoPlayer.setSrc(`${filmPath[Number(seriesOffset) + Number(data.series)].video_path}`);
-                        } {
+                        } else {
                             videoPlayer.setSrc(`${filmPath[data.series].video_path}`);
                         }
 
