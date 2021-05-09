@@ -93,8 +93,6 @@ class Router {
             if (res) {
                 targetController = controller;
             }
-
-            if ()
         });
 
         return {
