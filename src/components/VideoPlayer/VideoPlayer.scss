@@ -77,11 +77,22 @@ $spinner-size: 50px;
     z-index: 10;
   }
 
+  &__black-background-view {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: black;
+  }
+
   &__video {
     width: 100%;
     vertical-align: middle;
     position: relative;
     cursor: pointer;
+    //z-index: 2;
 
     #{$self}__fullscreen & {
       max-width: 100%;
