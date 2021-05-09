@@ -25,10 +25,10 @@ export class GenrePageView extends BaseView {
      */
     render = (genre) => {
 
-        let pathArgs =  genre.isFilm ?
-            getPathArgs(window.location.pathname, '/movies/genre/:id'):
-            getPathArgs(window.location.pathname, '/series/genre/:id');
-        genre.id = pathArgs.id;
+        const pathArgs = getPathArgs(window.location.pathname, '/:contentType//:genreId');
+
+        genre.isFilm = pathArgs.contentType === 'movies';
+        genre.id = pathArgs.genreId;
 
         const template = Loader();
         APPLICATION.innerHTML = template;
