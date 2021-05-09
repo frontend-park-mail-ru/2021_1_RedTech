@@ -43,7 +43,6 @@ $spinner-size: 50px;
 
 .video-player {
   width: 100%;
-  height: 100%;
   top: 0;
   left: 0;
 
@@ -159,6 +158,13 @@ $spinner-size: 50px;
   &__panel-block {
     display: flex;
     align-items: center;
+  }
+
+  &__title-container {
+    display: flex;
+    .title__item:last-child {
+      margin-left: 15px;
+    }
   }
 
   &__panel-button {

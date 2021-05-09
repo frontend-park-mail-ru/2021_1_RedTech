@@ -59,7 +59,7 @@ export class DetailPageView extends BaseView {
      * @param {Number} series - Number of series, in case of movie will be 0.
      */
     renderVideoPlayer = (filmData, season, series) => {
-        const videoPlayer = new VideoPlayer('.video-player');
+        const videoPlayer = new VideoPlayer('.video-player', filmData.title);
         const isLoadedVideo = false;
         this._data = {
             isLoadedVideo,

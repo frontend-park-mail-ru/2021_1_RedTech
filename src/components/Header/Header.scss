@@ -132,7 +132,7 @@ header {
     }
 
     a:hover {
-      color: #b7b7b7;
+      color: #E40B13;
     }
   }
 
@@ -155,7 +155,7 @@ header {
       cursor: pointer;
 
       transition: $transition-time ease;
-      color: #b7b7b7;
+      color: $profile__link-hovered;
     }
 
     .dropdown-profile {
