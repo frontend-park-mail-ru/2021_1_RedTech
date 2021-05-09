@@ -115,12 +115,10 @@ class Router {
 
         if (path == Routes.MoviesPage || path.match(Routes.MoviesGenrePage)) {
             data.isFilm = true;
-            console.log('Routes.MoviesPage');
         }
 
         if (path == Routes.SeriesPage || path.match(Routes.SeriesGenrePage)) {
             data.isFilm = false;
-            console.log('Routes.SeriesPage');
         }
 
         return {
@@ -145,7 +143,6 @@ class Router {
             window.history.pushState(null, null, path);
         }
 
-        console.log(data);
         this.currentController.view.render(data);
     }
 
