@@ -92,7 +92,7 @@ $spinner-size: 50px;
     vertical-align: middle;
     position: relative;
     cursor: pointer;
-    //z-index: 2;
+    z-index: 2;
 
     #{$self}__fullscreen & {
       max-width: 100%;
@@ -163,6 +163,7 @@ $spinner-size: 50px;
     background: rgba(0, 0, 0, 0.4);
     display: flex;
     flex-wrap: wrap;
+    z-index: 2;
     justify-content: space-between;
   }
 
