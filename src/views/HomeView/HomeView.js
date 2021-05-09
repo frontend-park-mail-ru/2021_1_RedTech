@@ -121,6 +121,28 @@ export class HomePageView extends BaseView {
         const topMediaImgs = document.querySelectorAll('.item__card-image');
         const newMediaImgs = document.querySelectorAll('.item__suggestion__image');
 
+        const mainSlider = document.querySelector('.container');
+        const slideRight = document.querySelector('.js-slider-right');
+
+        const scrollDistantion = 500;
+
+        slideRight.addEventListener('click', () => {
+            mainSlider.scrollBy({
+                top: 0,
+                left: mainSlider.scrollLeft + scrollDistantion,
+                behavior: 'smooth',
+            });
+        });
+
+        const slideLeft = document.querySelector('.js-slider-left');
+        slideLeft.addEventListener('click', () => {
+            mainSlider.scrollBy({
+                top: 0,
+                left: -scrollDistantion,
+                behavior: 'smooth',
+            });
+        });
+
         topMediaImgs.forEach((img) => {
             img.addEventListener('error', () => {
                 img.src = 'img/not-found.jpeg';
