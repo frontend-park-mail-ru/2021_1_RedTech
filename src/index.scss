@@ -1,11 +1,12 @@
 @import 'components/ActorPageContent/ActorPageContent';
 @import 'components/SuggestionCard/SuggestionCard';
-@import 'components/SearchPopup/SearchPopup';
-@import 'components/SearchItem/SearchItem';
 @import 'components/SuggestionBar/SuggestionBar';
 @import 'components/GenreContent/GenreContent';
+@import 'components/SearchPopup/SearchPopup';
 @import 'components/VideoPlayer/VideoPlayer';
+@import 'components/SearchItem/SearchItem';
 @import 'components/DetailForm/DetailForm';
+@import 'components/TopSlider/TopSlider';
 @import 'components/Underline/Underline';
 @import 'components/ErrorPage/ErrorPage';
 @import 'components/FilmCard/FilmdCard';
@@ -89,32 +90,4 @@ a.main-page__href {
   font-weight: 600;
   font-size: $page-title;
   margin: 15px 35px 15px 35px;
-}
-
-.slider__actions {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.slider__item {
-  width: 56px;
-  height: 56px;
-  cursor: pointer;
-  transition: 0.24s ease-in-out;
-}
-
-.slider__item-left {
-  margin-left: 20px;
-}
-
-.slider__item-right {
-   margin-right: 20px;
-}
-
-.slider__item:hover {
-  transform: scale(1.2);
 }
