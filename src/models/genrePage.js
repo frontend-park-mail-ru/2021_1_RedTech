@@ -16,7 +16,6 @@ export class GenrePageModel {
      * Get info for genre page about films/series and emit render content.
      */
     getPageContent = (data) => {
-        console.log('getPageContent', data);
         getGenres().then((genres) => {
             if (data.isFilm) {
                 genres.forEach((genre) => {
@@ -26,7 +25,6 @@ export class GenrePageModel {
                     }
                 });
                 getGenreFilms(data.id).then((content) => {
-                    console.log('Film', content);
                     this.eventBus.emit(Events.GenrePage.Render.Content, content, data.genre);
                     this.eventBus.emit(Events.GenrePage.SetEventListeners);
                 }).catch(() => {
@@ -41,7 +39,6 @@ export class GenrePageModel {
                     }
                 });
                 getGenreSeries(data.id).then((content) => {
-                    console.log('Series', content);
                     this.eventBus.emit(Events.GenrePage.Render.Content, content, data.genre);
                     this.eventBus.emit(Events.GenrePage.SetEventListeners);
                 }).catch(() => {

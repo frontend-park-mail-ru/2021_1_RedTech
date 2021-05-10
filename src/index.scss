@@ -39,7 +39,7 @@ html, body {
 
 .container {
   display: flex;
-  overflow-x: hidden;
+  overflow: hidden;
   height: auto;
 }
 
@@ -91,6 +91,15 @@ a.main-page__href {
   margin: 15px 35px 15px 35px;
 }
 
+.slider__actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .slider__item {
   width: 56px;
   height: 56px;
@@ -99,15 +108,11 @@ a.main-page__href {
 }
 
 .slider__item-left {
-  top: calc(44% - 25px);
-  left: calc(20px);
-  position: absolute;
+  margin-left: 20px;
 }
 
 .slider__item-right {
-  top: calc(44% - 25px);
-  right: calc(20px);
-  position: absolute;
+   margin-right: 20px;
 }
 
 .slider__item:hover {
