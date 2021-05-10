@@ -91,3 +91,8 @@ a.main-page__href {
   font-size: $page-title;
   margin: 15px 35px 15px 35px;
 }
+
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
+}

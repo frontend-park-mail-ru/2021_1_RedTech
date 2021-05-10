@@ -189,6 +189,7 @@ export class VideoPlayer {
     }
 
     hideVideo() {
+        document.body.className = document.body.className.replace('stop-scrolling','');
         const fullscreenImg = this.videoPlayer.querySelector('.js-fullscreen-img');
         if (document.fullscreenElement) {
             fullscreenImg.src = FULLSCREEN_ICONS.fullscreen;
@@ -207,6 +208,7 @@ export class VideoPlayer {
     }
 
     visibleVideo() {
+        document.body.classList.add('stop-scrolling');
         // this.videoPlayer.style.visibility = 'visible';
         this.videoPlayer.classList.remove('video-player__hide-animation');
         this.videoPlayer.classList.add('video-player__show-animation');
