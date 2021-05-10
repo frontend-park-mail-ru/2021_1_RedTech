@@ -92,7 +92,7 @@ $spinner-size: 50px;
     vertical-align: middle;
     position: relative;
     cursor: pointer;
-    z-index: 2;
+    z-index: 1;
 
     #{$self}__fullscreen & {
       max-width: 100%;
