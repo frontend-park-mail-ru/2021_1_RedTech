@@ -88,7 +88,8 @@ $spinner-size: 50px;
   }
 
   &__video {
-    width: 100%;
+    max-width: 100%;
+    height: 100%;
     vertical-align: middle;
     position: relative;
     cursor: pointer;
