@@ -6,6 +6,7 @@ import { getPathArgs } from '../../modules/router.js';
 import Loader from '../../components/Loader/Loader.pug';
 import GenreContent from '../../components/GenreContent/GenreContent.pug';
 import { Events } from '../../consts/events.js';
+import { Routes } from '../../consts/routes.js';
 
 /** Class representing genre page view. */
 export class GenrePageView extends BaseView {
@@ -24,10 +25,19 @@ export class GenrePageView extends BaseView {
      * Render html genre page from pug template.
      */
     render = (genre) => {
-        console.log('genre', genre);
+        const path = window.location.pathname;
+
+        if (path.match(Routes.MoviesGenrePage) !== null) {
+            console.log('genre.isFilm = true;');
+            genre.isFilm = true;
+            // eslint-disable-next-line no-dupe-else-if
+        } else if (path.match(Routes.MoviesGenrePage) !== null) {
+            console.log('genre.isFilm = false;');
+            genre.isFilm = false;
+        }
         let pathArgs =  genre.isFilm ?
-            getPathArgs(window.location.pathname, '/movies/genre/:id'):
-            getPathArgs(window.location.pathname, '/series/genre/:id');
+            getPathArgs(path, '/movies/genre/:id'):
+            getPathArgs(path, '/series/genre/:id');
         genre.id = pathArgs.id;
 
         const template = Loader();
