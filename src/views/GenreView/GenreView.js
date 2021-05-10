@@ -24,7 +24,7 @@ export class GenrePageView extends BaseView {
      * Render html genre page from pug template.
      */
     render = (genre) => {
-
+        console.log('genre', genre);
         let pathArgs =  genre.isFilm ?
             getPathArgs(window.location.pathname, '/movies/genre/:id'):
             getPathArgs(window.location.pathname, '/series/genre/:id');
