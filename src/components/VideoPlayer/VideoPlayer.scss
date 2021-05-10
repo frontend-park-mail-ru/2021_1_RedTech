@@ -2,9 +2,9 @@ $spinner-size: 50px;
 
 .video-player__container {
   visibility: hidden;
-  position: fixed;
+  position: absolute;
   top: 0;
-  height: 100%;
+  bottom: 0;
   left: 0;
   right: 0;
 }
