@@ -189,6 +189,7 @@ export class VideoPlayer {
     }
 
     hideVideo() {
+        window.scrollTo(0, 0);
         document.body.className = document.body.className.replace('stop-scrolling','');
         const fullscreenImg = this.videoPlayer.querySelector('.js-fullscreen-img');
         if (document.fullscreenElement) {
@@ -208,19 +209,11 @@ export class VideoPlayer {
     }
 
     visibleVideo() {
+        window.scrollTo(0, 0);
         document.body.classList.add('stop-scrolling');
-        // this.videoPlayer.style.visibility = 'visible';
         this.videoPlayer.classList.remove('video-player__hide-animation');
         this.videoPlayer.classList.add('video-player__show-animation');
         this.resetPlaying(true);
-
-        // const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        //
-        // const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-        // window.onscroll = function() {
-        //
-        //     window.scrollTo(scrollLeft, scrollTop);
-        // };
     }
 
     minusFifteen() {
