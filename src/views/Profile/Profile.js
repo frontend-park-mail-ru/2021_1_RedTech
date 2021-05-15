@@ -1,5 +1,5 @@
-import {APPLICATION} from '../../main.js';
-import {BaseView} from '../BaseView/BaseView.js';
+import { APPLICATION } from '../../main.js';
+import { BaseView } from '../BaseView/BaseView.js';
 import Loader from '../../components/Loader/Loader.pug';
 import ProfileContent from '../../components/ProfileContent/ProfileContent.pug';
 import Events from '../../consts/events.js';
@@ -57,20 +57,10 @@ export class ProfileView extends BaseView {
 
     /**
      * Setting for input form and button.
-     * @param {HTMLFormElement} form - Form element that will be updated.
      */
-    updateProfile = (form) => {
-        const [nick] = document.getElementsByClassName('title-wrapper__nickname');
-        const [button] = document.getElementsByClassName('input-wrapper__button');
-        const inputs = form.querySelectorAll('.input-wrapper__input');
-
+    updateProfile = () => {
+        const nick = document.querySelector('.title-wrapper__nickname');
         nick.textContent = document.getElementById('login').value;
-        button.textContent = 'Редактировать';
-
-        inputs.forEach((input) => {
-            input.classList.add('input-wrapper__input_disabled');
-            input.disabled = true;
-        });
     }
 
     /**
@@ -92,15 +82,7 @@ export class ProfileView extends BaseView {
         const formHandler = (event) => {
             event.preventDefault();
 
-            const inputs = form.querySelectorAll('.input-wrapper__input');
-
-            if (button.textContent === 'Редактировать') {
-                button.textContent = 'Сохранить';
-                inputs.forEach((input) => {
-                    input.classList.remove('input-wrapper__input_disabled');
-                    input.disabled = false;
-                });
-            } else if (button.textContent === 'Сохранить') {
+            if (button.textContent === 'Сохранить') {
                 const avatarInput = document.getElementById('file');
                 const email = document.getElementById('email').value;
                 const login = document.getElementById('login').value;

@@ -113,16 +113,15 @@ export class UserModel {
      * @param {string} idUser - Current user id.
      * @param {string} email - New user email.
      * @param {string} login - New user login.
-     * @param {HTMLFormElement} form - Profile page form.
      */
-    updateProfileInfo = (idUser, email, login, form) => {
+    updateProfileInfo = (idUser, email, login) => {
         patchProfile(
             idUser,
             email,
             login
         ).then((responseStatus) => {
             if (responseStatus) {
-                this.eventBus.emit(Events.ProfilePage.Update, form);
+                this.eventBus.emit(Events.ProfilePage.Update);
             }
         }).catch(() => {
             this.eventBus.emit(Events.Homepage.Render.ErrorPage);
@@ -143,7 +142,7 @@ export class UserModel {
             if (avatarInput.value) {
                 this.updateAvatar(idUser, avatarInput);
             }
-            this.updateProfileInfo(idUser, email, login, form);
+            this.updateProfileInfo(idUser, email, login);
         }
     }
 }
