@@ -2,6 +2,7 @@
 @import 'components/SuggestionCard/SuggestionCard';
 @import 'components/SuggestionBar/SuggestionBar';
 @import 'components/GenreContent/GenreContent';
+@import 'components/BottomSlider/BottomSlider';
 @import 'components/SearchPopup/SearchPopup';
 @import 'components/VideoPlayer/VideoPlayer';
 @import 'components/SearchItem/SearchItem';
@@ -10,6 +11,7 @@
 @import 'components/Underline/Underline';
 @import 'components/ErrorPage/ErrorPage';
 @import 'components/FilmCard/FilmdCard';
+@import 'components/Slider/Slider';
 @import 'components/Header/Header';
 @import 'components/Loader/Loader';
 
@@ -39,9 +41,13 @@ html, body {
 }
 
 .container {
+  position: relative;
   display: flex;
-  overflow: hidden;
   height: auto;
+}
+
+.non-scrollable {
+  overflow: hidden;
 }
 
 .item__button {

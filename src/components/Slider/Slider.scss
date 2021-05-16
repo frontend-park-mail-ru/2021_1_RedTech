@@ -1,0 +1,84 @@
+.slider-film-card__container {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  height: auto;
+}
+
+.slider-film-card__actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.slider-film-card__item {
+  position: absolute;
+  top: 40%;
+  color: white;
+  width: 56px;
+  height: 56px;
+  cursor: pointer;
+  transition: 0.24s ease-in-out;
+
+  &-left {
+    margin-left: 8px;
+  }
+
+  &-right {
+    right: 0;
+    margin-right: 8px;
+  }
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.slider-suggestion-card__item {
+  position: absolute;
+  top: 32%;
+  color: white;
+  width: 56px;
+  height: 56px;
+  cursor: pointer;
+  transition: 0.24s ease-in-out;
+
+  &-left {
+    margin-left: 8px;
+  }
+
+  &-right {
+    right: 0;
+    margin-right: 8px;
+  }
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.slider-button__item {
+  position: absolute;
+  top: 40%;
+  opacity: 50%;
+  width: 56px;
+  height: 56px;
+  cursor: pointer;
+  transition: 0.24s ease-in-out;
+  &-left {
+    margin-left: 8px;
+  }
+
+  &-right {
+    right: 0;
+    margin-right: 8px;
+  }
+
+  &:hover {
+    opacity: 100%;
+  }
+}
+

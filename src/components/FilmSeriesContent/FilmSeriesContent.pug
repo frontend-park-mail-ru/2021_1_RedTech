@@ -6,19 +6,30 @@ if isFilm
 else
     div.item__page-title Сериалы с наивысшим рейтингом
 
-div.container
-    +TopSlider(cardContent)
+div.slider__container
+    div(class="container non-scrollable")
+        +TopSlider(cardContent)
+    img(class="slider-film-card__item slider-film-card__item-left js-slider-left-FilmCard" src= "../../assets/SliderLeftButton.png" alt= "")
+    img(class="slider-film-card__item slider-film-card__item-right js-slider-right-FilmCard" src= "../../assets/SliderRightButton.png" alt= "")
+
 
 div.item__page-title Жанры
 
-div.suggestion-film__list.genres
-    each i in genres
-        div.item__internal(id= i.name.toLowerCase() data-genre= i.label_rus)
-            img.item__suggestion__image(src= i.image)
+div.slider__container
+    div(class="suggestion-film__list genres non-scrollable")
+        each i in genres
+            div.item__internal(id= i.name.toLowerCase() data-genre= i.label_rus)
+                img.item__suggestion__image(src= i.image)
+    img(class="slider-button__item slider-button__item-left js-slider-left-Genres" src= "../../assets/LeftButton.png" alt= "")
+    img(class="slider-button__item slider-button__item-right js-slider-right-Genres" src= "../../assets/RightButton.png" alt= "")
+
 if isFilm
     div.item__page-title Новые фильмы
 else
     div.item__page-title Новые сериалы
 
-div.suggestion-film__list.new_films
-    +BottomSlider(newContent)
+div.slider__container
+    div(class="suggestion-film__list new_films non-scrollable")
+        +BottomSlider(newContent)
+    img(class="slider-suggestion-card__item slider-suggestion-card__item-left js-slider-left-NewFilms" src= "../../assets/PartSliderLeftButton.png" alt= "")
+    img(class="slider-suggestion-card__item slider-suggestion-card__item-right js-slider-right-NewFilms" src= "../../assets/PartSliderRightButton.png" alt= "")

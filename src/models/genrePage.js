@@ -45,6 +45,9 @@ export class GenrePageModel {
                     this.eventBus.emit(Events.Homepage.Render.ErrorPage);
                 });
             }
+        }).catch((e) => {
+            console.log(e);
+            this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         });
     }
 }

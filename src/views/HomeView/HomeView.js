@@ -122,26 +122,136 @@ export class HomePageView extends BaseView {
         const newMediaImgs = document.querySelectorAll('.item__suggestion__image');
 
         const mainSlider = document.querySelector('.container');
-        const slideRight = document.querySelector('.js-slider-right');
+        const slideRight = document.querySelector('.js-slider-right-FilmCard');
 
         const scrollDistantion = 500;
 
-        slideRight.addEventListener('click', () => {
-            mainSlider.scrollBy({
-                top: 0,
-                left: mainSlider.scrollLeft + scrollDistantion,
-                behavior: 'smooth',
+        if (slideRight) {
+            slideRight.addEventListener('click', () => {
+                const offset = window.pageYOffset;
+                mainSlider.scrollBy({
+                    top: 0,
+                    left: mainSlider.scrollLeft + scrollDistantion,
+                    behavior: 'smooth',
+                });
+                window.scrollTo({
+                    top: offset,
+                });
             });
-        });
+        }
 
-        const slideLeft = document.querySelector('.js-slider-left');
-        slideLeft.addEventListener('click', () => {
-            mainSlider.scrollBy({
-                top: 0,
-                left: -scrollDistantion,
-                behavior: 'smooth',
+        const slideLeft = document.querySelector('.js-slider-left-FilmCard');
+        if (slideLeft) {
+            slideLeft.addEventListener('click', () => {
+                const offset = window.pageYOffset;
+                mainSlider.scrollBy({
+                    top: 0,
+                    left: -scrollDistantion,
+                    behavior: 'smooth',
+                });
+                window.scrollTo({
+                    top: offset,
+                });
             });
-        });
+        }
+
+        const sliderSuggestion = document.querySelector('.suggestion-film__list.new_films');
+        const slideRightSuggestionFilms = document.querySelector('.js-slider-right-NewFilms');
+
+        if (slideRightSuggestionFilms) {
+            slideRightSuggestionFilms.addEventListener('click', () => {
+                const offset = window.pageYOffset;
+                sliderSuggestion.scrollBy({
+                    top: 0,
+                    left: sliderSuggestion.scrollLeft + scrollDistantion,
+                    behavior: 'smooth',
+                });
+                window.scrollTo({
+                    top: offset,
+                });
+            });
+        }
+
+        const slideLeftSuggestionFilms = document.querySelector('.js-slider-left-NewFilms');
+        if (slideLeftSuggestionFilms) {
+            slideLeftSuggestionFilms.addEventListener('click', () => {
+                const offset = window.pageYOffset;
+                sliderSuggestion.scrollBy({
+                    top: 100,
+                    left: -scrollDistantion,
+                    behavior: 'smooth',
+                });
+                window.scrollTo({
+                    top: offset,
+                });
+            });
+        }
+
+        // keke
+        const sliderSuggestionSeries = document.querySelector('.suggestion-film__list.new_series');
+        const slideRightSuggestionSeries = document.querySelector('.js-slider-right-NewSeries');
+
+        if (slideRightSuggestionSeries) {
+            slideRightSuggestionSeries.addEventListener('click', () => {
+                const offset = window.pageYOffset;
+                sliderSuggestionSeries.scrollBy({
+                    top: 0,
+                    left: slideRightSuggestionSeries.scrollLeft + scrollDistantion,
+                    behavior: 'smooth',
+                });
+                window.scrollTo({
+                    top: offset,
+                });
+            });
+        }
+
+        const slideLeftSuggestionSeries = document.querySelector('.js-slider-left-NewSeries');
+        if (slideLeftSuggestionSeries) {
+            slideLeftSuggestionSeries.addEventListener('click', () => {
+                const offset = window.pageYOffset;
+                sliderSuggestionSeries.scrollBy({
+                    top: 100,
+                    left: -scrollDistantion,
+                    behavior: 'smooth',
+                });
+                window.scrollTo({
+                    top: offset,
+                });
+            });
+        }
+
+        // fefe
+        const sliderSuggestionGenres = document.querySelector('.suggestion-film__list.genres');
+        const slideRightGenresSeries = document.querySelector('.js-slider-right-Genres');
+
+        if (slideRightGenresSeries) {
+            slideRightGenresSeries.addEventListener('click', () => {
+                const offset = window.pageYOffset;
+                sliderSuggestionGenres.scrollBy({
+                    top: 0,
+                    left: sliderSuggestionGenres.scrollLeft + scrollDistantion,
+                    behavior: 'smooth',
+                });
+                window.scrollTo({
+                    top: offset,
+                });
+            });
+        }
+
+        const slideLeftGenresSeries = document.querySelector('.js-slider-left-Genres');
+        if (slideLeftGenresSeries) {
+            slideLeftGenresSeries.addEventListener('click', () => {
+                const offset = window.pageYOffset;
+                sliderSuggestionGenres.scrollBy({
+                    top: 100,
+                    left: -scrollDistantion,
+                    behavior: 'smooth',
+                });
+                window.scrollTo({
+                    top: offset,
+                });
+            });
+        }
 
         topMediaImgs.forEach((img) => {
             img.addEventListener('error', () => {
