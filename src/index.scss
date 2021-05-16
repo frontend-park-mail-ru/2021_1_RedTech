@@ -46,7 +46,14 @@ html, body {
   height: auto;
 }
 
-.non-scrollable::-webkit-scrollbar {
+.slider__container {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  height: auto;
+}
+
+.non-scrollable::-webkit-sslider__containercrollbar {
   display: none;
 }
 
