@@ -18,6 +18,7 @@ export class ProfileView extends BaseView {
         this.eventBus.on(Events.ProfilePage.SetEventListeners, this.setEventListeners);
         this.eventBus.on(Events.ProfilePage.Render.NewAvatar, this.renderNewAvatar);
         this.eventBus.on(Events.ProfilePage.Update, this.updateProfile);
+        this.eventBus.on(Events.ProfilePage.Render.ValidationFromServer, this.renderValidationFromServer);
     }
 
     /**
@@ -56,6 +57,18 @@ export class ProfileView extends BaseView {
     }
 
     /**
+     * Render message about errors from server.
+     */
+    renderValidationFromServer = (error) => {
+        const errorDiv = document.getElementById('serverError');
+        if (error) {
+            errorDiv.textContent = 'Не удалось обновить данные';
+            return;
+        }
+        errorDiv.textContent = '';
+    }
+
+    /**
      * Setting for input form and button.
      */
     updateProfile = () => {
@@ -69,6 +82,7 @@ export class ProfileView extends BaseView {
      */
     setEventListeners = (idUser) => {
         const imgAvatar = document.getElementById('avatar');
+        const avatarInput = document.getElementById('file');
 
         const [form] = document.getElementsByTagName('form');
         const [button] = document.getElementsByClassName('input-wrapper__button');
@@ -77,7 +91,15 @@ export class ProfileView extends BaseView {
             imgAvatar.src='img/user.png';
         };
 
+        const previewHandler = (event) => {
+            imgAvatar.src = URL.createObjectURL(event.target.files[0]);
+            imgAvatar.onload = () => {
+                URL.revokeObjectURL(imgAvatar.src);
+            };
+        };
+
         imgAvatar.addEventListener('error', imgHandler);
+        avatarInput.addEventListener('change', previewHandler);
 
         const formHandler = (event) => {
             event.preventDefault();

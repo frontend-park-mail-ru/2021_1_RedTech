@@ -103,7 +103,14 @@ export class UserModel {
             formPut.append('avatar', avatar);
 
             postAvatar(idUser, formPut).then((avatarSrc) => {
-                this.eventBus.emit(Events.ProfilePage.Render.NewAvatar, avatarSrc);
+                if (avatarSrc) {
+                    this.eventBus.emit(Events.ProfilePage.Render.NewAvatar, avatarSrc);
+                    this.eventBus.emit(Events.ProfilePage.Render.ValidationFromServer, false);
+                } else {
+                    this.eventBus.emit(Events.ProfilePage.Render.ValidationFromServer, true);
+                }
+            }).catch(() => {
+                this.eventBus.emit(Events.Homepage.Render.ErrorPage);
             });
         }
     }
@@ -122,6 +129,9 @@ export class UserModel {
         ).then((responseStatus) => {
             if (responseStatus) {
                 this.eventBus.emit(Events.ProfilePage.Update);
+                this.eventBus.emit(Events.ProfilePage.Render.ValidationFromServer, false);
+            } else {
+                this.eventBus.emit(Events.ProfilePage.Render.ValidationFromServer);
             }
         }).catch(() => {
             this.eventBus.emit(Events.Homepage.Render.ErrorPage);

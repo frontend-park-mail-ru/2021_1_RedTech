@@ -63,7 +63,7 @@
   border: 1px solid $border-color;
   border-radius: 4px;
   cursor: pointer;
-  width: auto;
+  width: fit-content;
   margin-left: 0;
 }
 
@@ -74,7 +74,6 @@
 }
 
 .input-wrapper__img {
-  align-self: center;
   margin-bottom: 12px;
   object-fit: contain;
 }
