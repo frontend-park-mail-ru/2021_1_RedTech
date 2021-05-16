@@ -53,6 +53,10 @@ html, body {
   height: auto;
 }
 
+.container::-webkit-scrollbar {
+  display: none;
+}
+
 .non-scrollable::-webkit-scrollbar {
   display: none;
 }
