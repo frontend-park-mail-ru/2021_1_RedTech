@@ -42,12 +42,13 @@ html, body {
 
 .container {
   position: relative;
+  overflow-x: auto;
   display: flex;
   height: auto;
 }
 
-.non-scrollable {
-  overflow: hidden;
+.non-scrollable::-webkit-scrollbar {
+  display: none;
 }
 
 .item__button {
