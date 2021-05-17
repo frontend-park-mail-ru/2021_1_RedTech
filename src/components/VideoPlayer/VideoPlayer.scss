@@ -72,11 +72,16 @@ $spinner-size: 50px;
     outline: none;
     background: none;
     border: 0;
+    opacity: 25%;
     img {
       width: 32px;
       height: 32px;
     }
     z-index: 10;
+  }
+
+  .video-player__close-button:hover {
+    opacity: 100%;
   }
 
   &__black-background-view {
