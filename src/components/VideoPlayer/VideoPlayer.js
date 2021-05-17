@@ -301,7 +301,6 @@ export class VideoPlayer {
         const current =  Number(this.video.currentTime.toFixed());
         let formattedDuration ;
         if (isNaN(duration) || isNaN(current)) {
-            console.log('kek');
             formattedDuration = '0:00 / 0:00';
         } else {
             formattedDuration = `${this.formatTime(current)} / ${this.formatTime(duration)}`;
