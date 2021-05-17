@@ -77,7 +77,7 @@ export class VideoPlayer {
     nextSeries() {
         if (typeof this.nextSeries !== 'undefined') {
             this.updateCurrentEpisode(this.nextSeries);
-            this.resetPlaying(false);
+            this.resetPlaying(true);
         }
     }
 
@@ -143,7 +143,7 @@ export class VideoPlayer {
             this.setEpisodes();
         } else {
             serialControls.style.visibility = 'visible';
-            filmControls.style.display = 'none';
+            filmControls.style.display = 'visible';
 
             const episode = {
                 season,
@@ -299,7 +299,13 @@ export class VideoPlayer {
     setVideoDuration() {
         const duration = Number(this.video.duration.toFixed());
         const current =  Number(this.video.currentTime.toFixed());
-        const formattedDuration = `${this.formatTime(current)} / ${this.formatTime(duration)}`;
+        let formattedDuration ;
+        if (isNaN(duration) || isNaN(current)) {
+            console.log('kek');
+            formattedDuration = '0:00 / 0:00';
+        } else {
+            formattedDuration = `${this.formatTime(current)} / ${this.formatTime(duration)}`;
+        }
         const htmlDuration = this.videoPlayer.querySelector('.js-duration');
         const spinner = this.videoPlayer.querySelector('.spinner');
         spinner.style.visibility = 'hidden';
@@ -307,7 +313,7 @@ export class VideoPlayer {
         this.videoPlayer.querySelector('.video-player__line-current').style.width = `${(current / duration) * 100}%`;
 
         if (htmlDuration.innerHTML !== formattedDuration) {
-            this.videoPlayer.querySelector('.js-duration').innerHTML = `${this.formatTime(current)} / ${this.formatTime(duration)}`;
+            this.videoPlayer.querySelector('.js-duration').innerHTML = formattedDuration;
         }
 
         if (current === duration) {
