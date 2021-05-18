@@ -21,7 +21,7 @@
   font-size: 36px;
   display: flex;
   flex-direction: row;
-  margin-bottom: 40px;
+  margin-bottom: 12px;
 }
 
 .title-wrapper__nickname {
@@ -31,6 +31,10 @@
 .profile-content__inputs {
   font-size: 24px;
   width: 100%;
+}
+
+.profile-content__form {
+   margin-top: 8px;
 }
 
 .form__input-wrapper {

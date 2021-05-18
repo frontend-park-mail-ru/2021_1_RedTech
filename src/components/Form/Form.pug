@@ -1,7 +1,8 @@
 include ../Input/Input.pug
 
 mixin form(inputs, buttonName, inputWrapper, img)
-    form(novalidate)
+    div.error(id = 'serverError')
+    form.profile-content__form(novalidate)
         if !inputWrapper
             div.form_content__inputs
                 div.inputs__input-wrapper
@@ -24,7 +25,6 @@ mixin form(inputs, buttonName, inputWrapper, img)
                         img(src=img.path class="input-wrapper__img" id="avatar" width="120px" height="120px")
                         input(type="file" id="file" class="input-wrapper__input" accept="image/*")
                         label(for="file" class="input-wrapper__input") Выбрать...
-                        div.error(id = 'serverError')
             div.form__input-wrapper
                 div.input-wrapper__label
                 button.input-wrapper__button Сохранить

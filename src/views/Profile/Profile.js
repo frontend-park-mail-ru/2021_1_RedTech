@@ -63,7 +63,7 @@ export class ProfileView extends BaseView {
     renderValidationFromServer = (error) => {
         const errorDiv = document.getElementById('serverError');
         if (error) {
-            errorDiv.textContent = 'Не удалось обновить данные';
+            errorDiv.textContent = 'Не удалось обновить данные. Проверьте соединение и повторите попытку позже';
             return;
         }
         errorDiv.textContent = '';
