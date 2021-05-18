@@ -45,7 +45,7 @@
     flex-direction: column;
     width: 220px;
 
-    #{$self}__title & {
+    .item__film-card__title {
 
       > a {
         text-decoration: none;
@@ -57,17 +57,17 @@
       padding-bottom: 10px;
     }
 
-    #{$self}__stars & {
+    .item__film-card__stars {
       font-size: $card-stars-font-size;
       font-weight: 900;
     }
 
-    #{$self}__description & {
+    .item__film-card__description {
       word-spacing: 6px;
       font-weight: 400;
     }
 
-    #{$self}__buttons & {
+    .item__film-card__buttons {
       margin-block-start: auto;
       display: flex;
       justify-content: start;
