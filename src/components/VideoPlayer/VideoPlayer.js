@@ -132,12 +132,12 @@ export class VideoPlayer {
         this.video.src = `${newSrc}`;
     }
 
-    setFilmDataTransition(season, series, filmPath) {
-        this.filmPath = filmPath;
+    setFilmDataTransition(season, series, filmPathArray) {
+        this.filmPathArray = filmPathArray;
         const serialControls = this.videoPlayer.querySelector('.serial-switcher-js');
         const filmControls = this.videoPlayer.querySelector('.film-switcher-js');
 
-        if (filmPath.length == 1) {
+        if (filmPathArray.length == 1) {
             serialControls.style.display = 'none';
             filmControls.style.visibility = 'visible';
             this.setEpisodes();
@@ -155,7 +155,7 @@ export class VideoPlayer {
     }
 
     updateCurrentEpisode(episode) {
-        this.filmPath.forEach((item, index, array) => {
+        this.filmPathArray.forEach((item, index, array) => {
             if (item.season == episode.season && item.series == episode.series) {
                 this.setSrc(item.video_path);
 
