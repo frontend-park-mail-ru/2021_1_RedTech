@@ -6,7 +6,8 @@ mixin FilmCardCreate (i)
             div.item__film-card__title= i.title
             div.item__film-card__stars= i.stars
 
-            div.item__film-card__description= i.description
+            div.item__film-card__description
+                p.film-card__description_text=i.description
 
             div.item__film-card__buttons
                 div.item__button-title Смотреть
