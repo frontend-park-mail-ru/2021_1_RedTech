@@ -3,8 +3,8 @@
     const isDisliked = filmData.is_vote === -1;
     const isMovie = filmData.type === 'Фильм';
 
-div.detail_preview(id= filmData.id)
-    div.detail_preview-left
+div.detail-preview(id= filmData.id)
+    div.detail-preview-left
         div.detail-preview__image
             img(class="js-preview-image" src= filmData.movieAvatar alt= '')
         div.detail_description__buttons
@@ -22,9 +22,9 @@ div.detail_preview(id= filmData.id)
                 img(src= '../../assets/dislike.webp' alt= '' id= 'dislike')
             div(class='button__item js-pressed-dislike-detail' hidden=!isDisliked)
                 img(src= '../../assets/pressed_dislike.webp' alt= '')
-    div.detail_preview-right
-        div.detail_preview__title=filmData.title
-        div.detail_preview__tags
+    div.detail-preview-right
+        div.detail-preview__title=filmData.title
+        div.detail-preview__tags
             span.item__type=filmData.type
             span.item__marks=filmData.rating
 
