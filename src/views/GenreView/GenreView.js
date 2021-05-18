@@ -29,10 +29,12 @@ export class GenrePageView extends BaseView {
 
         if (path.match(Routes.MoviesGenrePage) !== null) {
             genre.isFilm = true;
-            // eslint-disable-next-line no-dupe-else-if
-        } else if (path.match(Routes.MoviesGenrePage) !== null) {
+        }
+
+        if (path.match(Routes.MoviesGenrePage) !== null) {
             genre.isFilm = false;
         }
+
         let pathArgs =  genre.isFilm ?
             getPathArgs(path, '/movies/genre/:id'):
             getPathArgs(path, '/series/genre/:id');
