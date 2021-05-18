@@ -68,8 +68,8 @@ export class VideoPlayer {
     }
 
     previousSeries() {
-        if (this.preaviousSeries) {
-            this.updateCurrentEpisode(this.preaviousSeries);
+        if (this.previousSeries) {
+            this.updateCurrentEpisode(this.previousSeries);
             this.resetPlaying(false);
         }
     }
@@ -90,7 +90,7 @@ export class VideoPlayer {
         }
 
         const prevSeriesButton = this.videoPlayer.querySelector('.js-prev-series');
-        if (!this.preaviousSeries) {
+        if (!this.previousSeries) {
             prevSeriesButton.style.display = 'none';
         } else {
             prevSeriesButton.style.display = '';
@@ -160,9 +160,9 @@ export class VideoPlayer {
                 this.setSrc(item.video_path);
 
                 if (index - 1 < 0) {
-                    this.preaviousSeries = undefined;
+                    this.previousSeries = undefined;
                 } else {
-                    this.preaviousSeries = array[index - 1];
+                    this.previousSeries = array[index - 1];
                 }
 
                 if (index + 1 >= array.length) {
