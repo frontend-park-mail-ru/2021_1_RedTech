@@ -68,14 +68,14 @@ export class VideoPlayer {
     }
 
     previousSeries() {
-        if (typeof this.preaviousSeries !== 'undefined') {
+        if (this.preaviousSeries) {
             this.updateCurrentEpisode(this.preaviousSeries);
             this.resetPlaying(false);
         }
     }
 
     nextSeries() {
-        if (typeof this.nextSeries !== 'undefined') {
+        if (this.nextSeries) {
             this.updateCurrentEpisode(this.nextSeries);
             this.resetPlaying(true);
         }
@@ -83,14 +83,14 @@ export class VideoPlayer {
 
     updateSwitchSeriesController() {
         const nextSeriesButton = this.videoPlayer.querySelector('.js-next-series');
-        if (typeof this.nextSeries === 'undefined') {
+        if (!this.nextSeries) {
             nextSeriesButton.style.display = 'none';
         } else {
             nextSeriesButton.style.display = '';
         }
 
         const prevSeriesButton = this.videoPlayer.querySelector('.js-prev-series');
-        if (typeof this.preaviousSeries === 'undefined') {
+        if (!this.preaviousSeries) {
             prevSeriesButton.style.display = 'none';
         } else {
             prevSeriesButton.style.display = '';
@@ -178,7 +178,7 @@ export class VideoPlayer {
     }
 
     setEpisodes(episode) {
-        if (typeof episode === 'undefined') {
+        if (!episode) {
             this.videoPlayer.querySelector('.js-series-info').innerHTML = '';
             return;
         }
