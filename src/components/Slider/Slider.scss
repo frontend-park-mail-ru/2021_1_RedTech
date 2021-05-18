@@ -21,6 +21,7 @@
   height: 56px;
   cursor: pointer;
   transition: 0.24s ease-in-out;
+  visibility: hidden;
 
   &-left {
     margin-left: 8px;
@@ -68,6 +69,8 @@
   height: 56px;
   cursor: pointer;
   transition: 0.24s ease-in-out;
+  visibility: hidden;
+
   &-left {
     margin-left: 8px;
   }
