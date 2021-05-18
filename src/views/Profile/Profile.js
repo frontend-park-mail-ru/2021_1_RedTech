@@ -19,6 +19,7 @@ export class ProfileView extends BaseView {
         this.eventBus.on(Events.ProfilePage.Render.NewAvatar, this.renderNewAvatar);
         this.eventBus.on(Events.ProfilePage.Update, this.updateProfile);
         this.eventBus.on(Events.ProfilePage.Render.ValidationFromServer, this.renderValidationFromServer);
+        this.eventBus.on(Events.ProfilePage.Render.Loader, this.renderLoader);
     }
 
     /**
@@ -74,6 +75,25 @@ export class ProfileView extends BaseView {
     updateProfile = () => {
         const nick = document.querySelector('.title-wrapper__nickname');
         nick.textContent = document.getElementById('login').value;
+    }
+
+    /**
+     * Render loader instead of save button.
+     * @param {Boolean} isLoading - flag to render button or loader.
+     */
+    renderLoader = (isLoading) => {
+        const img = document.querySelector('.input-wrapper__loader');
+        const button = document.querySelector('.input-wrapper__button');
+
+        if (isLoading) {
+            img.classList.remove('hidden');
+            button.classList.add('hidden');
+            return;
+        }
+
+        img.classList.add('hidden');
+        button.classList.remove('hidden');
+
     }
 
     /**

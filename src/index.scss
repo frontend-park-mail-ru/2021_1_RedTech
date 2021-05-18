@@ -90,3 +90,10 @@ a.main-page__href {
   font-size: $page-title;
   margin: 15px 35px 15px 35px;
 }
+
+.hidden {
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  padding: 0;
+}
