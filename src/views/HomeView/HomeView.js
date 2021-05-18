@@ -241,7 +241,6 @@ export class HomePageView extends BaseView {
             });
         }
 
-        // keke
         const sliderSuggestionSeries = document.querySelector('.suggestion-film__list.new_series');
         const slideRightSuggestionSeries = document.querySelector('.js-slider-right-NewSeries');
 
@@ -274,7 +273,6 @@ export class HomePageView extends BaseView {
             });
         }
 
-        // fefe
         const sliderSuggestionGenres = document.querySelector('.suggestion-film__list.genres');
         const slideRightGenresSeries = document.querySelector('.js-slider-right-Genres');
 
