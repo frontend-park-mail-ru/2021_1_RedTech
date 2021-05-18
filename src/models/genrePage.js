@@ -27,6 +27,7 @@ export class GenrePageModel {
                 getGenreFilms(data.id).then((content) => {
                     this.eventBus.emit(Events.GenrePage.Render.Content, content, data.genre);
                     this.eventBus.emit(Events.GenrePage.SetEventListeners);
+                    this.eventBus.emit(Events.SliderActions);
                 }).catch(() => {
                     this.eventBus.emit(Events.Homepage.Render.ErrorPage);
                 });
@@ -41,6 +42,7 @@ export class GenrePageModel {
                 getGenreSeries(data.id).then((content) => {
                     this.eventBus.emit(Events.GenrePage.Render.Content, content, data.genre);
                     this.eventBus.emit(Events.GenrePage.SetEventListeners);
+                    this.eventBus.emit(Events.SliderActions);
                 }).catch(() => {
                     this.eventBus.emit(Events.Homepage.Render.ErrorPage);
                 });

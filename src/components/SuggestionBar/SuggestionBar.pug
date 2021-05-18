@@ -1,10 +1,11 @@
-div.item__suggestion-bar
-    div.item__suggestion-button
-        div.items__container
-            img.item__image(src= '../../assets/subscription.webp' alt= '')
-            div.item__title Оформить подписку
+mixin SuggestionBar ()
+    div.item__suggestion-bar
+        div(class="item__suggestion-bar-button" href="/favourite")
+            div.items__container
+                img.item__image(src= '../../assets/subscription.webp' alt= '')
+                div.item__title Оформить подписку
 
-    div.item__suggestion-button
-        div.items__container
-            img.item__image(src= '../../assets/findmedia.webp' alt= '')
-            div.item__title Подборка медиа
+        div(class="item__suggestion-bar-button" href="/favourite")
+            div.items__container
+                img.item__image(src= '../../assets/findmedia.webp' alt= '')
+                div.item__title Избранное

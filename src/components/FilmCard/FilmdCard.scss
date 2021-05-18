@@ -1,10 +1,8 @@
 @import '../../css/Consts';
 
-.item__film-card:first-child {
-  margin-left: 30px;
-}
-
 .item__film-card {
+  $self: &;
+
   margin: 15px;
   background-color: $card-form-background-color;
   padding: 30px;
@@ -18,6 +16,15 @@
   gap: 10px;
 
   transition: 0.25s ease-in;
+
+  &:first-child {
+    margin-left: 30px;
+  }
+
+  #{$self}:hover {
+    background-color: $card-form-background-color-hovered;
+    transform: scale($card-scale);
+  }
 
   .item__image {
     width: 220px;
@@ -38,7 +45,7 @@
     flex-direction: column;
     width: 220px;
 
-    .item__film-card__title {
+    #{$self}__title {
 
       > a {
         text-decoration: none;
@@ -50,17 +57,17 @@
       padding-bottom: 10px;
     }
 
-    .item__film-card__stars {
+    #{$self}__stars {
       font-size: $card-stars-font-size;
       font-weight: 900;
     }
 
-    .item__film-card__description {
+    #{$self}__description {
       word-spacing: 6px;
       font-weight: 400;
     }
 
-    .item__film-card__buttons {
+    #{$self}__buttons {
       margin-block-start: auto;
       display: flex;
       justify-content: start;
@@ -96,9 +103,4 @@
       }
     }
   }
-}
-
-.item__film-card:hover {
-  background-color: $card-form-background-color-hovered;
-  transform: scale($card-scale);
 }

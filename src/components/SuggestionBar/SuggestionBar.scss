@@ -9,7 +9,7 @@
 
   height: 112px;
 
-  .item__suggestion-button {
+  &-button {
     width: 50%;
     margin: 0 25px;
     background-color: $suggestion-button-color;
@@ -43,7 +43,7 @@
     }
   }
 
-  .item__suggestion-button:hover {
+  &-button:hover {
     background-color: $suggestion-button-color-hovered;
     transform: scale($suggestion-bar-scale);
   }

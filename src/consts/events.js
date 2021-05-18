@@ -2,6 +2,7 @@ export const Events = {
     PathChanged: 'pathChanged',
     RedirectBack: 'redirectBack',
     RedirectForward: 'redirectForward',
+    SliderActions: 'sliderActions',
 
     Content: {
         AddToFavourites: 'content:addToFavourites',

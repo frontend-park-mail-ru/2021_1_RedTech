@@ -1,4 +1,6 @@
 $spinner-size: 50px;
+$opacity-button-hovered: 100%;
+$opacity-button-unhovered: 50%;
 
 .video-player__container {
   visibility: hidden;
@@ -64,7 +66,7 @@ $spinner-size: 50px;
     animation: spinnerElement 1.2s linear infinite;
   }
 
-  .video-player__close-button {
+  &__close-button {
     position: fixed;
     top: 15px;
     left: 15px;
@@ -72,7 +74,7 @@ $spinner-size: 50px;
     outline: none;
     background: none;
     border: 0;
-    opacity: 25%;
+    opacity: $opacity-button-unhovered;
     img {
       width: 32px;
       height: 32px;
@@ -80,8 +82,8 @@ $spinner-size: 50px;
     z-index: 10;
   }
 
-  .video-player__close-button:hover {
-    opacity: 100%;
+  &__close-button:hover {
+    opacity: $opacity-button-hovered;
   }
 
   &__black-background-view {
@@ -208,33 +210,6 @@ $spinner-size: 50px;
     }
   }
 
-  .switch_series {
-    z-index: 2;
-    cursor: pointer;
-    outline: none;
-    opacity: 25%;
-    margin: 10px 15px;
-    top: 44%;
-    border-radius: 12px;
-    img {
-      width: 56px;
-    }
-  }
-
-  .switch_series:hover {
-    opacity: 100%;
-    background: #7a7a7a;
-  }
-
-  .switch_series-left {
-    position: absolute;
-  }
-
-  .switch_series-right {
-    position: absolute;
-    right: 0;
-  }
-
   &__panel-button:first-child {
     margin-left: 8px;
   }
@@ -289,4 +264,33 @@ $spinner-size: 50px;
   0% { transform: rotate(0deg); border-width: 12px }
   50% { transform: rotate(180deg); border-width: 12px }
   100% { transform: rotate(360deg); border-width: 12px }
+}
+
+.switch_series {
+  $self: &;
+
+  z-index: 2;
+  cursor: pointer;
+  outline: none;
+  opacity:$opacity-button-unhovered;
+  margin: 10px 15px;
+  top: 44%;
+  border-radius: 12px;
+  img {
+    width: 56px;
+  }
+
+  &:hover {
+    opacity: $opacity-button-hovered;
+    background: #7a7a7a;
+  }
+
+  &-left {
+    position: absolute;
+  }
+
+  &-right {
+    position: absolute;
+    right: 0;
+  }
 }

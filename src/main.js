@@ -1,15 +1,15 @@
-import { UserController } from './controllers/user.js';
-import { ContentController } from './controllers/content.js';
-import { LogInController } from './controllers/loginPage.js';
-import { SignUpController } from './controllers/signupPage.js';
-import { ProfileController } from './controllers/profilePage.js';
-import { HomePageController } from './controllers/homePage.js';
-import { GenrePageController } from './controllers/genrePage.js';
+import { FavouritesPageController } from './controllers/favouritesPage.js';
+import { MediatekaPageController } from './controllers/mediatekaPage.js';
 import { ActorPagePageController } from './controllers/actorPage.js';
 import { VideoPlayerController } from './controllers/videoplayer.js';
 import { DetailPageController } from './controllers/detailPage.js';
-import { MediatekaPageController } from './controllers/mediatekaPage.js';
-import { FavouritesPageController } from './controllers/favouritesPage.js';
+import { GenrePageController } from './controllers/genrePage.js';
+import { ProfileController } from './controllers/profilePage.js';
+import { SignUpController } from './controllers/signupPage.js';
+import { HomePageController } from './controllers/homePage.js';
+import { ContentController } from './controllers/content.js';
+import { LogInController } from './controllers/loginPage.js';
+import { UserController } from './controllers/user.js';
 
 import Router from './modules/router.js';
 import Routes from './consts/routes.js';

@@ -24,6 +24,7 @@ export class HomePageView extends BaseView {
         this.eventBus.on(Events.Homepage.SetEventListenersForHeader, this.setEventListenersForHeader);
         this.eventBus.on(Events.Homepage.Render.Content, this.renderContent);
         this.eventBus.on(Events.Homepage.Render.ErrorPage, this.renderErrorPage);
+        this.eventBus.on(Events.SliderActions, this.setSliderActions);
     }
     /**
      * Render html home page from pug template.
@@ -121,6 +122,59 @@ export class HomePageView extends BaseView {
         const topMediaImgs = document.querySelectorAll('.item__card-image');
         const newMediaImgs = document.querySelectorAll('.item__suggestion__image');
 
+        topMediaImgs.forEach((img) => {
+            img.addEventListener('error', () => {
+                img.src = 'img/not-found.jpeg';
+            });
+        });
+
+        newMediaImgs.forEach((img) => {
+            img.addEventListener('error', () => {
+                img.src = 'img/not-found.jpeg';
+            });
+        });
+
+        const topFilmSeriesHandler = (event) => {
+            scrollToTop();
+
+            const target = event.target.closest('.item__film-card');
+            event.preventDefault();
+
+            if (target) {
+                const transmitData = {
+                    path: target.getAttribute('href'),
+                };
+
+                this.eventBus.emit(Events.PathChanged, transmitData);
+            }
+        };
+
+        const newFilmSeriesHandler = (event) => {
+            scrollToTop();
+
+            const target = event.target.closest('.item__internal');
+            event.preventDefault();
+
+            if (target) {
+                const transmitData = {
+                    path: target.getAttribute('href'),
+                };
+
+                this.eventBus.emit(Events.PathChanged, transmitData);
+            }
+        };
+
+        const [filmContainer] = document.getElementsByClassName('container');
+        filmContainer?.addEventListener(('click'), topFilmSeriesHandler);
+
+        const [newFilms] = document.getElementsByClassName('new_films');
+        newFilms?.addEventListener(('click'), newFilmSeriesHandler);
+
+        const [newSeries] = document.getElementsByClassName('new_series');
+        newSeries?.addEventListener(('click'), newFilmSeriesHandler);
+    }
+
+    setSliderActions = () => {
         const mainSlider = document.querySelector('.container');
         const slideRight = document.querySelector('.js-slider-right-FilmCard');
 
@@ -252,56 +306,5 @@ export class HomePageView extends BaseView {
                 });
             });
         }
-
-        topMediaImgs.forEach((img) => {
-            img.addEventListener('error', () => {
-                img.src = 'img/not-found.jpeg';
-            });
-        });
-
-        newMediaImgs.forEach((img) => {
-            img.addEventListener('error', () => {
-                img.src = 'img/not-found.jpeg';
-            });
-        });
-
-        const topFilmSeriesHandler = (event) => {
-            scrollToTop();
-
-            const target = event.target.closest('.item__film-card');
-            event.preventDefault();
-
-            if (target) {
-                const transmitData = {
-                    path: target.getAttribute('href'),
-                };
-
-                this.eventBus.emit(Events.PathChanged, transmitData);
-            }
-        };
-
-        const newFilmSeriesHandler = (event) => {
-            scrollToTop();
-
-            const target = event.target.closest('.item__internal');
-            event.preventDefault();
-
-            if (target) {
-                const transmitData = {
-                    path: target.getAttribute('href'),
-                };
-
-                this.eventBus.emit(Events.PathChanged, transmitData);
-            }
-        };
-
-        const [filmContainer] = document.getElementsByClassName('container');
-        filmContainer?.addEventListener(('click'), topFilmSeriesHandler);
-
-        const [newFilms] = document.getElementsByClassName('new_films');
-        newFilms?.addEventListener(('click'), newFilmSeriesHandler);
-
-        const [newSeries] = document.getElementsByClassName('new_series');
-        newSeries?.addEventListener(('click'), newFilmSeriesHandler);
     }
 }

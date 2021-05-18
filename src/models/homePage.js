@@ -24,6 +24,7 @@ export class HomePageModel {
             const [topFilmsAndSeriesValue, newFilmsValue, newSeriesValue] = values;
             this.eventBus.emit(Events.Homepage.Render.Content, topFilmsAndSeriesValue, newFilmsValue, newSeriesValue);
             this.eventBus.emit(Events.Homepage.SetEventListeners);
+            this.eventBus.emit(Events.SliderActions);
         }).catch(() => {
             this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         });
