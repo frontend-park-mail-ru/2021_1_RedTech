@@ -1,18 +1,18 @@
 const VOLUME_ICONS = {
-    full: '../../assets/VideoPlayerAssets/VolumeFull.png',
-    half: '../../assets/VideoPlayerAssets/VolumeHalf.png',
-    zero: '../../assets/VideoPlayerAssets/VolumeZero.png',
-    none: '../../assets/VideoPlayerAssets/VolumeNot.png',
+    full: '../../assets/VideoPlayerAssets/VolumeFull.webp',
+    half: '../../assets/VideoPlayerAssets/VolumeHalf.webp',
+    zero: '../../assets/VideoPlayerAssets/VolumeZero.webp',
+    none: '../../assets/VideoPlayerAssets/VolumeNot.webp',
 };
 
 const PLAYSTOP_ICONS = {
-    play: '../../assets/VideoPlayerAssets/ButtonPlay.png',
-    stop: '../../assets/VideoPlayerAssets/ButtonStop.png',
+    play: '../../assets/VideoPlayerAssets/ButtonPlay.webp',
+    stop: '../../assets/VideoPlayerAssets/ButtonStop.webp',
 };
 
 const FULLSCREEN_ICONS = {
-    fullscreen: '../../assets/VideoPlayerAssets/MakeFullScreen.png',
-    partscreen: '.../../assets/VideoPlayerAssets/MakePartScreen.png',
+    fullscreen: '../../assets/VideoPlayerAssets/MakeFullScreen.webp',
+    partscreen: '.../../assets/VideoPlayerAssets/MakePartScreen.webp',
 };
 
 export class VideoPlayer {
