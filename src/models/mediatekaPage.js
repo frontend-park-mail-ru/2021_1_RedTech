@@ -30,6 +30,7 @@ export class MediatekaPageModel {
             [data.cardContent, data.newContent, data.genres] = values;
             this.eventBus.emit(Events.MediatekaPage.Render.Content, data);
             this.eventBus.emit(Events.MediatekaPage.SetEventListeners, data);
+            this.eventBus.emit(Events.SliderActions);
         }).catch(() => {
             this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         });

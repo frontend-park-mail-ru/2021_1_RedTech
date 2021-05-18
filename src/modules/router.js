@@ -107,22 +107,26 @@ class Router {
 
     getParam(path = '/') {
         let data = {};
+        let isFilm = true;
         const parsedURL = new URL(window.location.origin + path);
         let pathParams = null;
         let resultPath = parsedURL.pathname;
 
-        if (path == Routes.MoviesPage) {
+        if (path == Routes.MoviesPage || path.match(Routes.MoviesGenrePage)) {
             data.isFilm = true;
+            isFilm = true;
         }
 
-        if (path == Routes.SeriesPage) {
+        if (path == Routes.SeriesPage || path.match(Routes.SeriesGenrePage)) {
             data.isFilm = false;
+            isFilm = false;
         }
 
         return {
             path: resultPath,
             pathParams: pathParams,
             data,
+            isFilm,
         };
     }
 

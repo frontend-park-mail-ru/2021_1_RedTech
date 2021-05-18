@@ -37,7 +37,7 @@ if isAuthorized
 
 header.header
     a(class= '' href= "/" ).header-logo
-        img(src= "../../assets/RediotekaLogo.png" alt= "")
+        img(src= "../../assets/RediotekaLogo.webp" alt= "")
 
     input.header__menu-btn(type="checkbox" id="menu-btn")
     label.header__menu-icon(for="menu-btn")
@@ -60,10 +60,10 @@ header.header
     if isAuthorized
         div.header-form__profile
             div.js-search-popup(class= 'header-form__profile__link')
-                img(src= '../../assets/search.png')
+                img(src= '../../assets/search.webp')
                 div.header-form__search-popup
             div.dropdown-profile
-                img(class="dropdown-profile__image" src='../../assets/profileDropdown.png')
+                img(class="dropdown-profile__image" src='../../assets/profileDropdown.webp')
                 div(class="dropdown-profile__content")
                     each i in headerIcons
                         a(class='item__dropdown-profile ' + i.className  href=i.href)= i.title
@@ -71,7 +71,7 @@ header.header
     else
         div.header-form__profile
             div.js-search-popup(class= 'header-form__profile__link')
-                img(src= '../../assets/search.png')
+                img(src= '../../assets/search.webp')
                 div.header-form__search-popup
             a(class= 'header-form__profile__link' href='/login')
-                img(src= '../../assets/unlogined.png')
+                img(src= '../../assets/unlogined.webp')

@@ -1,14 +1,16 @@
 @import 'components/ActorPageContent/ActorPageContent';
 @import 'components/SuggestionCard/SuggestionCard';
-@import 'components/SearchPopup/SearchPopup';
-@import 'components/SearchItem/SearchItem';
 @import 'components/SuggestionBar/SuggestionBar';
 @import 'components/GenreContent/GenreContent';
+@import 'components/BottomSlider/BottomSlider';
+@import 'components/SearchPopup/SearchPopup';
 @import 'components/VideoPlayer/VideoPlayer';
+@import 'components/SearchItem/SearchItem';
 @import 'components/DetailForm/DetailForm';
 @import 'components/Underline/Underline';
 @import 'components/ErrorPage/ErrorPage';
 @import 'components/FilmCard/FilmdCard';
+@import 'components/Slider/Slider';
 @import 'components/Header/Header';
 @import 'components/Loader/Loader';
 
@@ -38,9 +40,25 @@ html, body {
 }
 
 .container {
+  position: relative;
+  overflow-x: auto;
   display: flex;
-  overflow-x: scroll;
   height: auto;
+}
+
+.slider__container {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  height: auto;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.non-scrollable::-webkit-scrollbar {
+  display: none;
 }
 
 .item__button {
@@ -89,4 +107,9 @@ a.main-page__href {
   font-weight: 600;
   font-size: $page-title;
   margin: 15px 35px 15px 35px;
+}
+
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
 }

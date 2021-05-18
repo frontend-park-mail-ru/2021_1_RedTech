@@ -59,7 +59,7 @@ export class DetailPageView extends BaseView {
      * @param {Number} series - Number of series, in case of movie will be 0.
      */
     renderVideoPlayer = (filmData, season, series) => {
-        const videoPlayer = new VideoPlayer('.video-player');
+        const videoPlayer = new VideoPlayer('.video-player', filmData.title);
         const isLoadedVideo = false;
         this._data = {
             isLoadedVideo,
@@ -123,25 +123,25 @@ export class DetailPageView extends BaseView {
 
         const addToFavourites = (event) => {
             event.preventDefault();
-            const contentId = document.querySelector('.detail_preview').id;
+            const contentId = document.querySelector('.detail-preview').id;
             this.eventBus.emit(Events.Content.AddToFavourites, contentId);
         };
 
         const removeFromFavourites = (event) => {
             event.preventDefault();
-            const contentId = document.querySelector('.detail_preview').id;
+            const contentId = document.querySelector('.detail-preview').id;
             this.eventBus.emit(Events.Content.RemoveFromFavourites, contentId);
         };
 
         const like = (event) => {
             event.preventDefault();
-            const contentId = document.querySelector('.detail_preview').id;
+            const contentId = document.querySelector('.detail-preview').id;
             this.eventBus.emit(Events.Content.Like, contentId);
         };
 
         const dislike = (event) => {
             event.preventDefault();
-            const contentId = document.querySelector('.detail_preview').id;
+            const contentId = document.querySelector('.detail-preview').id;
             this.eventBus.emit(Events.Content.Dislike, contentId);
         };
 

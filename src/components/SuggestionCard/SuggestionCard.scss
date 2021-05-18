@@ -6,6 +6,34 @@
   gap: 1em;
 
   padding: 20px 30px 20px 30px;
+
+  &__image {
+    object-fit: contain;
+    border-radius: 12px;
+    width: 180px;
+    height: 252px;
+  }
+
+  &__title {
+    padding-top: 5px;
+    padding-left: 10px;
+    font-weight: 500;
+    font-size: $suggestion-card-title;
+    justify-items: left;
+
+    > a {
+      text-decoration: none;
+      color: $title-color;
+    }
+  }
+
+  &__status {
+    padding: 5px 0 15px 10px;
+    font-size: $suggestion-card-status;
+    font-weight: 300;
+    justify-items: left;
+    color: $status-color;
+  }
 }
 
 .suggestion-film__list {
@@ -23,36 +51,8 @@
     display: grid;
     transition: all 0.15s ease-in-out;
 
-    .item__suggestion__image {
-      object-fit: contain;
-      border-radius: 12px;
-      width: 180px;
-      height: 252px;
+    &:hover {
+      transform: translateY(-5px) scale($suggestion-card-scale);
     }
-  }
-
-  .item__internal:hover {
-    transform: translateY(-5px) scale($suggestion-card-scale);
-  }
-
-  .item__suggestion__title {
-    padding-top: 5px;
-    padding-left: 10px;
-    font-weight: 500;
-    font-size: $suggestion-card-title;
-    justify-items: left;
-
-    > a {
-      text-decoration: none;
-      color: $title-color;
-    }
-  }
-
-  .item__suggestion__status {
-    padding: 5px 0 15px 10px;
-    font-size: $suggestion-card-status;
-    font-weight: 300;
-    justify-items: left;
-    color: $status-color;
   }
 }

@@ -27,10 +27,12 @@ export class GenrePageModel {
                 getGenreFilms(data.id).then((content) => {
                     this.eventBus.emit(Events.GenrePage.Render.Content, content, data.genre);
                     this.eventBus.emit(Events.GenrePage.SetEventListeners);
+                    this.eventBus.emit(Events.SliderActions);
                 }).catch(() => {
                     this.eventBus.emit(Events.Homepage.Render.ErrorPage);
                 });
             } else {
+
                 genres.forEach((genre) => {
                     if (genre.name.toLowerCase() === data.id) {
                         data.genre = genre.label_rus;
@@ -40,10 +42,13 @@ export class GenrePageModel {
                 getGenreSeries(data.id).then((content) => {
                     this.eventBus.emit(Events.GenrePage.Render.Content, content, data.genre);
                     this.eventBus.emit(Events.GenrePage.SetEventListeners);
+                    this.eventBus.emit(Events.SliderActions);
                 }).catch(() => {
                     this.eventBus.emit(Events.Homepage.Render.ErrorPage);
                 });
             }
+        }).catch(() => {
+            this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         });
     }
 }

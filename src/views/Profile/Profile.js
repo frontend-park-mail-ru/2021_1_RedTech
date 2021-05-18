@@ -84,7 +84,7 @@ export class ProfileView extends BaseView {
         const [button] = document.getElementsByClassName('input-wrapper__button');
 
         const imgHandler = () => {
-            imgAvatar.src='img/user.png';
+            imgAvatar.src='../../assets/profile.webp';
         };
 
         imgAvatar.addEventListener('error', imgHandler);
