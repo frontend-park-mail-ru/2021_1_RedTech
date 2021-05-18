@@ -27,9 +27,9 @@ export class GenrePageView extends BaseView {
     render = (genre) => {
         const path = window.location.pathname;
 
-        if (path.match(Routes.MoviesGenrePage) !== null) {
+        if (!path.match(Routes.MoviesGenrePage)) {
             genre.isFilm = true;
-        } else if (path.match(Routes.SeriesGenrePage) !== null) {
+        } else if (!path.match(Routes.SeriesGenrePage)) {
             genre.isFilm = false;
         }
 
