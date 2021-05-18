@@ -29,9 +29,7 @@ export class GenrePageView extends BaseView {
 
         if (path.match(Routes.MoviesGenrePage) !== null) {
             genre.isFilm = true;
-        }
-
-        if (path.match(Routes.MoviesGenrePage) !== null) {
+        } else if (path.match(Routes.SeriesGenrePage) !== null) {
             genre.isFilm = false;
         }
 
