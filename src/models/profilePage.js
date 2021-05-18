@@ -45,7 +45,7 @@ export class ProfileModel {
                 const params = {
                     login: responseBody.username,
                     email: responseBody.email,
-                    user_avatar: responseBody.avatar ?? 'img/user.png',
+                    user_avatar: responseBody.avatar ?? '../assets/profile.webp',
                 };
 
                 this.eventBus.emit(Events.ProfilePage.Render.ProfileInfo, params);
