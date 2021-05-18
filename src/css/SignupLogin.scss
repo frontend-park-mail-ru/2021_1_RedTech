@@ -72,7 +72,7 @@
     box-shadow: 0 0 12px $input-shadow;
   }
 
-  .&_error {
+  &_error {
     border: 1px solid $alert-color;
   }
 
