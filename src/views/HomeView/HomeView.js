@@ -178,21 +178,18 @@ export class HomePageView extends BaseView {
      * Set slider actions.
      */
     setSliderActions = () => {
-        const setupSlider = (sliderContainerName, sliderControllerName, isRightDirections) => {
+        const SCROLL_LEFT_LIMIT = 50;
+        const SCROLL_RIGHT_LIMIT = 150;
+
+        const setupSlider = (sliderContainerName, sliderLeftControllerName, sliderRightControllerName, isRightDirections) => {
             const sliderContainer = document.querySelector(sliderContainerName);
-            const sliderController = document.querySelector(sliderControllerName);
+            const sliderLeftController = document.querySelector(sliderLeftControllerName);
+            const sliderRightController = document.querySelector(sliderRightControllerName);
 
-            const scrollDistantion = window.innerWidth;
-
-            if (sliderContainer && sliderController) {
-
-                let offset = -scrollDistantion;
-
-                if (isRightDirections) {
-                    offset = sliderContainer.scrollLeft + scrollDistantion;
-                }
-
-                sliderController.addEventListener('click', () => {
+            if (sliderContainer && sliderLeftController && sliderRightController) {
+                sliderRightController.addEventListener('click', () => {
+                    const scrollDistantion = window.innerWidth;
+                    const offset = sliderContainer.scrollLeft + scrollDistantion;
                     const initialYDist = window.pageYOffset;
                     sliderContainer.scrollBy({
                         top: 0,
@@ -203,16 +200,43 @@ export class HomePageView extends BaseView {
                         top: initialYDist,
                     });
                 });
+
+                sliderLeftController.addEventListener('click', () => {
+                    const scrollDistantion = window.innerWidth;
+                    const offset = -scrollDistantion;
+                    const initialYDist = window.pageYOffset;
+                    sliderContainer.scrollBy({
+                        top: 0,
+                        left: offset,
+                        behavior: 'smooth',
+                    });
+                    window.scrollTo({
+                        top: initialYDist,
+                    });
+                });
+
+                const hideShowSliders = () => {
+                    if (sliderContainer.scrollLeft <= SCROLL_LEFT_LIMIT) {
+                        sliderLeftController.style.visibility = 'hidden';
+                        sliderRightController.style.visibility = 'visible';
+                    } else if (sliderContainer.scrollLeft >= sliderContainer.scrollWidth - sliderContainer.offsetWidth - SCROLL_RIGHT_LIMIT) {
+                        sliderLeftController.style.visibility = 'visible';
+                        sliderRightController.style.visibility = 'hidden';
+                    } else {
+                        sliderLeftController.style.visibility = 'visible';
+                        sliderRightController.style.visibility = 'visible';
+                    }
+                };
+
+                sliderContainer.addEventListener('scroll', hideShowSliders);
+
+                hideShowSliders();
             }
         };
 
-        setupSlider('.container', '.js-slider-right-FilmCard', true);
-        setupSlider('.container', '.js-slider-left-FilmCard', false);
-        setupSlider('.suggestion-film__list.new_films', '.js-slider-right-NewFilms', true);
-        setupSlider('.suggestion-film__list.new_films', '.js-slider-left-NewFilms', false);
-        setupSlider('.suggestion-film__list.new_series', '.js-slider-right-NewSeries', true);
-        setupSlider('.suggestion-film__list.new_series', '.js-slider-left-NewSeries', false);
-        setupSlider('.suggestion-film__list.genres', '.js-slider-right-Genres', true);
-        setupSlider('.suggestion-film__list.genres', '.js-slider-left-Genres', false);
+        setupSlider('.container', '.js-slider-left-FilmCard', '.js-slider-right-FilmCard', true);
+        setupSlider('.suggestion-film__list.new_films', '.js-slider-left-NewFilms', '.js-slider-right-NewFilms', true);
+        setupSlider('.suggestion-film__list.new_series', '.js-slider-left-NewSeries', '.js-slider-right-NewSeries', true);
+        setupSlider('.suggestion-film__list.genres', '.js-slider-left-Genres', '.js-slider-right-Genres', true);
     }
 }
