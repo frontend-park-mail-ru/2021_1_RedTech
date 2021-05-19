@@ -1,7 +1,7 @@
 import { insertSpaceAfterComa, numToFixTruth } from './utils.js';
 import { URLS } from '../consts/urls.js';
 
-const MAX_DESCRIPTION_LENGTH = 230;
+const MAX_DESCRIPTION_LENGTH = 200;
 
 /**
  * Union actors and their ids.

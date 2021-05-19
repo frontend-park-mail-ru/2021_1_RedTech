@@ -1,8 +1,10 @@
 $spinner-size: 50px;
+$opacity-button-hovered: 100%;
+$opacity-button-unhovered: 50%;
 
 .video-player__container {
   visibility: hidden;
-  position: fixed;
+  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
@@ -42,13 +44,13 @@ $spinner-size: 50px;
 }
 
 .video-player {
-  width: 100%;
-  height: 100%;
+  position: absolute;
   top: 0;
+  bottom: 0;
   left: 0;
+  right: 0;
 
   $self: &;
-  position: relative;
 
   .spinner {
     top: calc(50% - 25px);
@@ -63,7 +65,7 @@ $spinner-size: 50px;
     animation: spinnerElement 1.2s linear infinite;
   }
 
-  .video-player__close-button {
+  &__close-button {
     position: fixed;
     top: 15px;
     left: 15px;
@@ -71,6 +73,7 @@ $spinner-size: 50px;
     outline: none;
     background: none;
     border: 0;
+    opacity: $opacity-button-unhovered;
     img {
       width: 32px;
       height: 32px;
@@ -78,11 +81,32 @@ $spinner-size: 50px;
     z-index: 10;
   }
 
-  &__video {
+  &__close-button:hover {
+    opacity: $opacity-button-hovered;
+  }
+
+  &__black-background-view {
     width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: black;
+  }
+
+  &__video {
+    max-width: 100%;
+    height: 100%;
     vertical-align: middle;
-    position: relative;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translateX(calc((100% - 100vw) / 2));
     cursor: pointer;
+    z-index: 1;
 
     #{$self}__fullscreen & {
       max-width: 100%;
@@ -153,12 +177,20 @@ $spinner-size: 50px;
     background: rgba(0, 0, 0, 0.4);
     display: flex;
     flex-wrap: wrap;
+    z-index: 2;
     justify-content: space-between;
   }
 
   &__panel-block {
     display: flex;
     align-items: center;
+  }
+
+  &__title-container {
+    display: flex;
+    .title__item:last-child {
+      margin-left: 15px;
+    }
   }
 
   &__panel-button {
@@ -231,4 +263,33 @@ $spinner-size: 50px;
   0% { transform: rotate(0deg); border-width: 12px }
   50% { transform: rotate(180deg); border-width: 12px }
   100% { transform: rotate(360deg); border-width: 12px }
+}
+
+.switch_series {
+  $self: &;
+
+  z-index: 2;
+  cursor: pointer;
+  outline: none;
+  opacity:$opacity-button-unhovered;
+  margin: 10px 15px;
+  top: 44%;
+  border-radius: 12px;
+  img {
+    width: 56px;
+  }
+
+  &:hover {
+    opacity: $opacity-button-hovered;
+    background: #7a7a7a;
+  }
+
+  &-left {
+    position: absolute;
+  }
+
+  &-right {
+    position: absolute;
+    right: 0;
+  }
 }

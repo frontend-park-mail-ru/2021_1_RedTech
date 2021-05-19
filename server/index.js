@@ -24,7 +24,6 @@ app.get('/video.mp4', (req, res) => {
 });
 
 app.get('/*', (req, res) => {
-    console.log(req.ip, 'page request', req.url);
     res.sendFile(path.resolve(`${__dirname}/../src/index.html`));
 });
 

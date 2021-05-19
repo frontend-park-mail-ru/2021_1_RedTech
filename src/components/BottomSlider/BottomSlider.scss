@@ -1,0 +1,30 @@
+.suggestion-slider {
+  &__actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-10%);
+  }
+
+  &__item {
+    width: 56px;
+    height: 56px;
+    cursor: pointer;
+    transition: 0.24s ease-in-out;
+    visibility: hidden;
+
+    &-left {
+      margin-left: 20px;
+    }
+
+    &-right {
+      margin-right: 20px;
+    }
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}

@@ -1,24 +1,27 @@
 const VOLUME_ICONS = {
-    full: '../../assets/VideoPlayerAssets/VolumeFull.png',
-    half: '../../assets/VideoPlayerAssets/VolumeHalf.png',
-    zero: '../../assets/VideoPlayerAssets/VolumeZero.png',
-    none: '../../assets/VideoPlayerAssets/VolumeNot.png',
+    full: '../../assets/VideoPlayerAssets/VolumeFull.webp',
+    half: '../../assets/VideoPlayerAssets/VolumeHalf.webp',
+    zero: '../../assets/VideoPlayerAssets/VolumeZero.webp',
+    none: '../../assets/VideoPlayerAssets/VolumeNot.webp',
 };
 
 const PLAYSTOP_ICONS = {
-    play: '../../assets/VideoPlayerAssets/ButtonPlay.png',
-    stop: '../../assets/VideoPlayerAssets/ButtonStop.png',
+    play: '../../assets/VideoPlayerAssets/ButtonPlay.webp',
+    stop: '../../assets/VideoPlayerAssets/ButtonStop.webp',
 };
 
 const FULLSCREEN_ICONS = {
-    fullscreen: '../../assets/VideoPlayerAssets/MakeFullScreen.png',
-    partscreen: '.../../assets/VideoPlayerAssets/MakePartScreen.png',
+    fullscreen: '../../assets/VideoPlayerAssets/MakeFullScreen.webp',
+    partscreen: '.../../assets/VideoPlayerAssets/MakePartScreen.webp',
 };
 
 export class VideoPlayer {
-    constructor(selector) {
+    constructor(selector, title) {
         this.videoPlayer = document.querySelector(selector);
         this.video = this.videoPlayer.querySelector('video');
+        this.series = 0;
+        this.season = 0;
+        this.videoPlayer.querySelector('.js-title').innerHTML = title;
         this.previousVolume = 100;
         this.isVisible = false;
         this.isMoreThanOneHour =  this.video.duration > 600;
@@ -60,6 +63,38 @@ export class VideoPlayer {
         this.videoPlayer.querySelector('.js-move-left').addEventListener('click', this.minusFifteen.bind(this));
         this.videoPlayer.querySelector('.js-move-right').addEventListener('click', this.plusFifteen.bind(this));
         this.videoPlayer.querySelector('.js-fullscreen').addEventListener('click', this.toggleFullScreen.bind(this));
+        this.videoPlayer.querySelector('.js-prev-series').addEventListener('click', this.previousSeries.bind(this));
+        this.videoPlayer.querySelector('.js-next-series').addEventListener('click', this.nextSeries.bind(this));
+    }
+
+    previousSeries() {
+        if (this.previousSeries) {
+            this.updateCurrentEpisode(this.previousSeries);
+            this.resetPlaying(false);
+        }
+    }
+
+    nextSeries() {
+        if (this.nextSeries) {
+            this.updateCurrentEpisode(this.nextSeries);
+            this.resetPlaying(true);
+        }
+    }
+
+    updateSwitchSeriesController() {
+        const nextSeriesButton = this.videoPlayer.querySelector('.js-next-series');
+        if (!this.nextSeries) {
+            nextSeriesButton.style.display = 'none';
+        } else {
+            nextSeriesButton.style.display = '';
+        }
+
+        const prevSeriesButton = this.videoPlayer.querySelector('.js-prev-series');
+        if (!this.previousSeries) {
+            prevSeriesButton.style.display = 'none';
+        } else {
+            prevSeriesButton.style.display = '';
+        }
     }
 
     initTimeLineListeners() {
@@ -97,7 +132,65 @@ export class VideoPlayer {
         this.video.src = `${newSrc}`;
     }
 
+    setFilmDataTransition(season, series, filmPathArray) {
+        this.filmPathArray = filmPathArray;
+        const serialControls = this.videoPlayer.querySelector('.serial-switcher-js');
+        const filmControls = this.videoPlayer.querySelector('.film-switcher-js');
+
+        if (filmPathArray.length == 1) {
+            serialControls.style.display = 'none';
+            filmControls.style.visibility = 'visible';
+            this.setEpisodes();
+        } else {
+            serialControls.style.visibility = 'visible';
+            filmControls.style.display = 'visible';
+
+            const episode = {
+                season,
+                series,
+            };
+
+            this.updateCurrentEpisode(episode);
+        }
+    }
+
+    updateCurrentEpisode(episode) {
+        this.filmPathArray.forEach((item, index, array) => {
+            if (item.season == episode.season && item.series == episode.series) {
+                this.setSrc(item.video_path);
+
+                if (index - 1 < 0) {
+                    this.previousSeries = undefined;
+                } else {
+                    this.previousSeries = array[index - 1];
+                }
+
+                if (index + 1 >= array.length) {
+                    this.nextSeries = undefined;
+                } else {
+                    this.nextSeries = array[index + 1];
+                }
+
+                this.setEpisodes(episode);
+                this.updateSwitchSeriesController();
+            }
+        });
+    }
+
+    setEpisodes(episode) {
+        if (!episode) {
+            this.videoPlayer.querySelector('.js-series-info').innerHTML = '';
+            return;
+        }
+
+        this.season = episode.season;
+        this.series = episode.series;
+        this.videoPlayer.querySelector('.js-series-info').innerHTML = `сезон: ${episode.season}, серия: ${episode.series}`;
+    }
+
     hideVideo() {
+        window.scrollTo(0, 0);
+        document.body.className = document.body.className.replace('stop-scrolling','');
         const fullscreenImg = this.videoPlayer.querySelector('.js-fullscreen-img');
         if (document.fullscreenElement) {
             fullscreenImg.src = FULLSCREEN_ICONS.fullscreen;
@@ -109,10 +202,18 @@ export class VideoPlayer {
         this.toggleVideo();
     }
 
+    resetPlaying(isPlaying = false) {
+        this.isPlaying = isPlaying;
+        this.togglePlayStopButton();
+        this.video[this.isPlaying ? 'play': 'pause']();
+    }
+
     visibleVideo() {
-        // this.videoPlayer.style.visibility = 'visible';
+        window.scrollTo(0, 0);
+        document.body.classList.add('stop-scrolling');
         this.videoPlayer.classList.remove('video-player__hide-animation');
         this.videoPlayer.classList.add('video-player__show-animation');
+        this.resetPlaying(true);
     }
 
     minusFifteen() {
@@ -198,7 +299,12 @@ export class VideoPlayer {
     setVideoDuration() {
         const duration = Number(this.video.duration.toFixed());
         const current =  Number(this.video.currentTime.toFixed());
-        const formattedDuration = `${this.formatTime(current)} / ${this.formatTime(duration)}`;
+        let formattedDuration ;
+        if (isNaN(duration) || isNaN(current)) {
+            formattedDuration = '0:00 / 0:00';
+        } else {
+            formattedDuration = `${this.formatTime(current)} / ${this.formatTime(duration)}`;
+        }
         const htmlDuration = this.videoPlayer.querySelector('.js-duration');
         const spinner = this.videoPlayer.querySelector('.spinner');
         spinner.style.visibility = 'hidden';
@@ -206,7 +312,7 @@ export class VideoPlayer {
         this.videoPlayer.querySelector('.video-player__line-current').style.width = `${(current / duration) * 100}%`;
 
         if (htmlDuration.innerHTML !== formattedDuration) {
-            this.videoPlayer.querySelector('.js-duration').innerHTML = `${this.formatTime(current)} / ${this.formatTime(duration)}`;
+            this.videoPlayer.querySelector('.js-duration').innerHTML = formattedDuration;
         }
 
         if (current === duration) {

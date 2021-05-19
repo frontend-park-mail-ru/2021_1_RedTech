@@ -24,6 +24,7 @@ export class HomePageView extends BaseView {
         this.eventBus.on(Events.Homepage.SetEventListenersForHeader, this.setEventListenersForHeader);
         this.eventBus.on(Events.Homepage.Render.Content, this.renderContent);
         this.eventBus.on(Events.Homepage.Render.ErrorPage, this.renderErrorPage);
+        this.eventBus.on(Events.SliderActions, this.setSliderActions);
     }
     /**
      * Render html home page from pug template.
@@ -171,5 +172,71 @@ export class HomePageView extends BaseView {
 
         const [newSeries] = document.getElementsByClassName('new_series');
         newSeries?.addEventListener(('click'), newFilmSeriesHandler);
+    }
+
+    /**
+     * Set slider actions.
+     */
+    setSliderActions = () => {
+        const SCROLL_LEFT_LIMIT = 50;
+        const SCROLL_RIGHT_LIMIT = 150;
+
+        const setupSlider = (sliderContainerName, sliderLeftControllerName, sliderRightControllerName, isRightDirections) => {
+            const sliderContainer = document.querySelector(sliderContainerName);
+            const sliderLeftController = document.querySelector(sliderLeftControllerName);
+            const sliderRightController = document.querySelector(sliderRightControllerName);
+
+            if (sliderContainer && sliderLeftController && sliderRightController) {
+                sliderRightController.addEventListener('click', () => {
+                    const scrollDistantion = window.innerWidth;
+                    const offset = sliderContainer.scrollLeft + scrollDistantion;
+                    const initialYDist = window.pageYOffset;
+                    sliderContainer.scrollBy({
+                        top: 0,
+                        left: offset,
+                        behavior: 'smooth',
+                    });
+                    window.scrollTo({
+                        top: initialYDist,
+                    });
+                });
+
+                sliderLeftController.addEventListener('click', () => {
+                    const scrollDistantion = window.innerWidth;
+                    const offset = -scrollDistantion;
+                    const initialYDist = window.pageYOffset;
+                    sliderContainer.scrollBy({
+                        top: 0,
+                        left: offset,
+                        behavior: 'smooth',
+                    });
+                    window.scrollTo({
+                        top: initialYDist,
+                    });
+                });
+
+                const hideShowSliders = () => {
+                    if (sliderContainer.scrollLeft <= SCROLL_LEFT_LIMIT) {
+                        sliderLeftController.style.visibility = 'hidden';
+                        sliderRightController.style.visibility = 'visible';
+                    } else if (sliderContainer.scrollLeft >= sliderContainer.scrollWidth - sliderContainer.offsetWidth - SCROLL_RIGHT_LIMIT) {
+                        sliderLeftController.style.visibility = 'visible';
+                        sliderRightController.style.visibility = 'hidden';
+                    } else {
+                        sliderLeftController.style.visibility = 'visible';
+                        sliderRightController.style.visibility = 'visible';
+                    }
+                };
+
+                sliderContainer.addEventListener('scroll', hideShowSliders);
+
+                hideShowSliders();
+            }
+        };
+
+        setupSlider('.container', '.js-slider-left-FilmCard', '.js-slider-right-FilmCard', true);
+        setupSlider('.suggestion-film__list.new_films', '.js-slider-left-NewFilms', '.js-slider-right-NewFilms', true);
+        setupSlider('.suggestion-film__list.new_series', '.js-slider-left-NewSeries', '.js-slider-right-NewSeries', true);
+        setupSlider('.suggestion-film__list.genres', '.js-slider-left-Genres', '.js-slider-right-Genres', true);
     }
 }
