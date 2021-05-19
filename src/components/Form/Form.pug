@@ -22,7 +22,7 @@ mixin form(inputs, buttonName, inputWrapper, img)
                 div.input-wrapper__input-avatar
                     div.input-wrapper__label Аватар
                     div.input-avatar__input-wrapper
-                        img(src=img.path class="input-wrapper__img" id="avatar" width="120px" height="120px")
+                        img(src=img.path class="input-wrapper__img" id="avatar" width="120px" height="120px" alt="Аватар")
                         input(type="file" id="file" class="input-wrapper__input" accept="image/*")
                         label(for="file" class="input-wrapper__input") Выбрать...
             div.form__input-wrapper
