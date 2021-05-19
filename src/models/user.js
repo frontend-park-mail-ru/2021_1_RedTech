@@ -133,7 +133,7 @@ export class UserModel {
                 this.eventBus.emit(Events.ProfilePage.Update);
                 this.eventBus.emit(Events.ProfilePage.Render.ValidationFromServer, false);
             } else {
-                this.eventBus.emit(Events.ProfilePage.Render.ValidationFromServer);
+                this.eventBus.emit(Events.ProfilePage.Render.ValidationFromServer, true);
             }
         }).catch(() => {
             this.eventBus.emit(Events.Homepage.Render.ErrorPage);
@@ -151,6 +151,7 @@ export class UserModel {
     saveChanges = (idUser, form, avatarInput, email, login) => {
         const isValid = isValidForm(form);
         let promiseUpdateProfileInfo, promiseUpdateAvatar;
+        this.eventBus.emit(Events.ProfilePage.Render.ValidationFromServer, false);
         if (isValid) {
             this.eventBus.emit(Events.ProfilePage.Render.Loader, true);
             if (avatarInput.value) {
