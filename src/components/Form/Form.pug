@@ -1,7 +1,8 @@
 include ../Input/Input.pug
 
 mixin form(inputs, buttonName, inputWrapper, img)
-    form(novalidate)
+    div.error(id = 'serverError')
+    form.profile-content__form(novalidate)
         if !inputWrapper
             div.form_content__inputs
                 div.inputs__input-wrapper
@@ -15,15 +16,16 @@ mixin form(inputs, buttonName, inputWrapper, img)
                 div.form__input-wrapper
                     label(for=wrapper.for class="input-wrapper__label") #{wrapper.text}
                     div.input-wrapper__input-with-error
-                        +customInput(wrapper.type, "input-wrapper__input input-wrapper__input_disabled", wrapper.placeholder, wrapper.id, wrapper.value, true)
+                        +customInput(wrapper.type, "input-wrapper__input", wrapper.placeholder, wrapper.id, wrapper.value, false)
                         div.error(id = wrapper.id+'Error')
             div.form__input-wrapper
                 div.input-wrapper__input-avatar
                     div.input-wrapper__label Аватар
                     div.input-avatar__input-wrapper
-                        img(src=img.path class="input-wrapper__img" id="avatar" width="120px" height="120px")
-                        input(type="file" id="file" class="input-wrapper__input" accept="image/*" disabled)
-                        label(for="file" class="input-wrapper__input input-wrapper__input_disabled") Выбрать...
+                        img(src=img.path class="input-wrapper__img" id="avatar" width="120px" height="120px" alt="Аватар")
+                        input(type="file" id="file" class="input-wrapper__input" accept="image/*")
+                        label(for="file" class="input-wrapper__input") Выбрать...
             div.form__input-wrapper
                 div.input-wrapper__label
-                button.input-wrapper__button Редактировать
+                button.input-wrapper__button Сохранить
+                img(src="../../assets/loading_spinner.gif" class="input-wrapper__loader hidden" width="120px" height="120px" alt="Загрузка")

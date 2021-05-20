@@ -181,7 +181,7 @@ export class HomePageView extends BaseView {
         const SCROLL_LEFT_LIMIT = 50;
         const SCROLL_RIGHT_LIMIT = 150;
 
-        const setupSlider = (sliderContainerName, sliderLeftControllerName, sliderRightControllerName, isRightDirections) => {
+        const setupSlider = (sliderContainerName, sliderLeftControllerName, sliderRightControllerName) => {
             const sliderContainer = document.querySelector(sliderContainerName);
             const sliderLeftController = document.querySelector(sliderLeftControllerName);
             const sliderRightController = document.querySelector(sliderRightControllerName);

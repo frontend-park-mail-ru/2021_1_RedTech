@@ -95,6 +95,7 @@ export class UserModel {
      * Update avatar and emit render new avatar.
      * @param {string} idUser - Current user id.
      * @param {HTMLElement} avatarInput - Avatar input field.
+     * @return {Promise} - promise of request.
      */
     updateAvatar = (idUser, avatarInput) => {
         const [avatar] = avatarInput.files;
@@ -102,8 +103,15 @@ export class UserModel {
             const formPut = new FormData();
             formPut.append('avatar', avatar);
 
-            postAvatar(idUser, formPut).then((avatarSrc) => {
-                this.eventBus.emit(Events.ProfilePage.Render.NewAvatar, avatarSrc);
+            return postAvatar(idUser, formPut).then((avatarSrc) => {
+                if (avatarSrc) {
+                    this.eventBus.emit(Events.ProfilePage.Render.NewAvatar, avatarSrc);
+                    this.eventBus.emit(Events.ProfilePage.Render.ValidationFromServer, false);
+                } else {
+                    this.eventBus.emit(Events.ProfilePage.Render.ValidationFromServer, true);
+                }
+            }).catch(() => {
+                this.eventBus.emit(Events.Homepage.Render.ErrorPage);
             });
         }
     }
@@ -113,16 +121,19 @@ export class UserModel {
      * @param {string} idUser - Current user id.
      * @param {string} email - New user email.
      * @param {string} login - New user login.
-     * @param {HTMLFormElement} form - Profile page form.
+     * @return {Promise} - promise of request.
      */
-    updateProfileInfo = (idUser, email, login, form) => {
-        patchProfile(
+    updateProfileInfo = (idUser, email, login) => {
+        return patchProfile(
             idUser,
             email,
             login
         ).then((responseStatus) => {
             if (responseStatus) {
-                this.eventBus.emit(Events.ProfilePage.Update, form);
+                this.eventBus.emit(Events.ProfilePage.Update);
+                this.eventBus.emit(Events.ProfilePage.Render.ValidationFromServer, false);
+            } else {
+                this.eventBus.emit(Events.ProfilePage.Render.ValidationFromServer, true);
             }
         }).catch(() => {
             this.eventBus.emit(Events.Homepage.Render.ErrorPage);
@@ -139,11 +150,17 @@ export class UserModel {
      */
     saveChanges = (idUser, form, avatarInput, email, login) => {
         const isValid = isValidForm(form);
+        let promiseUpdateProfileInfo, promiseUpdateAvatar;
+        this.eventBus.emit(Events.ProfilePage.Render.ValidationFromServer, false);
         if (isValid) {
+            this.eventBus.emit(Events.ProfilePage.Render.Loader, true);
             if (avatarInput.value) {
-                this.updateAvatar(idUser, avatarInput);
+                promiseUpdateAvatar = this.updateAvatar(idUser, avatarInput);
             }
-            this.updateProfileInfo(idUser, email, login, form);
+            promiseUpdateProfileInfo = this.updateProfileInfo(idUser, email, login);
+            Promise.all([promiseUpdateProfileInfo, promiseUpdateAvatar]).then(() => {
+                this.eventBus.emit(Events.ProfilePage.Render.Loader, false);
+            });
         }
     }
 }

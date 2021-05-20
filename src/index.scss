@@ -109,6 +109,13 @@ a.main-page__href {
   margin: 15px 35px 15px 35px;
 }
 
+.hidden {
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  padding: 0;
+}
+
 .stop-scrolling {
   height: 100%;
   overflow: hidden;

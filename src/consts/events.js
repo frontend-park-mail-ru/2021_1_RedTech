@@ -84,6 +84,8 @@ export const Events = {
             Page: 'profile:render',
             ProfileInfo: 'profile:renderProfileInfo',
             NewAvatar: 'profile:renderNewAvatar',
+            ValidationFromServer: 'profile:renderValidationFromServer',
+            Loader: 'profile:renderLoader',
         },
         Get: {
             InfoAboutCurrentUser: 'profile:getInfoAboutCurrentUser',
