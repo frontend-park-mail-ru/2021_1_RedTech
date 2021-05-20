@@ -111,8 +111,8 @@ export class HomePageView extends BaseView {
             const searchPopupComponent = new SearchPopupComponent(popup);
         });
 
-        const logoutPage = document.querySelector('.js-logout-page');
-        logoutPage?.addEventListener(('click'), logoutPageHandler);
+        const logoutPage = document.querySelectorAll('.js-logout-page');
+        logoutPage.forEach(element => element.addEventListener(('click'), logoutPageHandler));
     }
 
     /**
