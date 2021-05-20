@@ -1,5 +1,5 @@
-import {APPLICATION} from '../../main.js';
-import {BaseView} from '../BaseView/BaseView.js';
+import { APPLICATION } from '../../main.js';
+import { BaseView } from '../BaseView/BaseView.js';
 import Loader from '../../components/Loader/Loader.pug';
 import ProfileContent from '../../components/ProfileContent/ProfileContent.pug';
 import Events from '../../consts/events.js';
@@ -18,6 +18,8 @@ export class ProfileView extends BaseView {
         this.eventBus.on(Events.ProfilePage.SetEventListeners, this.setEventListeners);
         this.eventBus.on(Events.ProfilePage.Render.NewAvatar, this.renderNewAvatar);
         this.eventBus.on(Events.ProfilePage.Update, this.updateProfile);
+        this.eventBus.on(Events.ProfilePage.Render.ValidationFromServer, this.renderValidationFromServer);
+        this.eventBus.on(Events.ProfilePage.Render.Loader, this.renderLoader);
     }
 
     /**
@@ -56,21 +58,42 @@ export class ProfileView extends BaseView {
     }
 
     /**
-     * Setting for input form and button.
-     * @param {HTMLFormElement} form - Form element that will be updated.
+     * Render message about errors from server.
      */
-    updateProfile = (form) => {
-        const [nick] = document.getElementsByClassName('title-wrapper__nickname');
-        const [button] = document.getElementsByClassName('input-wrapper__button');
-        const inputs = form.querySelectorAll('.input-wrapper__input');
+    renderValidationFromServer = (error) => {
+        const errorDiv = document.getElementById('serverError');
+        if (error) {
+            errorDiv.textContent = 'Не удалось обновить данные. Проверьте соединение и повторите попытку позже';
+            return;
+        }
+        errorDiv.textContent = '';
+    }
 
+    /**
+     * Setting for input form and button.
+     */
+    updateProfile = () => {
+        const nick = document.querySelector('.title-wrapper__nickname');
         nick.textContent = document.getElementById('login').value;
-        button.textContent = 'Редактировать';
+    }
 
-        inputs.forEach((input) => {
-            input.classList.add('input-wrapper__input_disabled');
-            input.disabled = true;
-        });
+    /**
+     * Render loader instead of save button.
+     * @param {Boolean} isLoading - flag to render button or loader.
+     */
+    renderLoader = (isLoading) => {
+        const img = document.querySelector('.input-wrapper__loader');
+        const button = document.querySelector('.input-wrapper__button');
+
+        if (isLoading) {
+            img.classList.remove('hidden');
+            button.classList.add('hidden');
+            return;
+        }
+
+        img.classList.add('hidden');
+        button.classList.remove('hidden');
+
     }
 
     /**
@@ -79,6 +102,7 @@ export class ProfileView extends BaseView {
      */
     setEventListeners = (idUser) => {
         const imgAvatar = document.getElementById('avatar');
+        const avatarInput = document.getElementById('file');
 
         const [form] = document.getElementsByTagName('form');
         const [button] = document.getElementsByClassName('input-wrapper__button');
@@ -87,20 +111,20 @@ export class ProfileView extends BaseView {
             imgAvatar.src='../../assets/profile.webp';
         };
 
+        const previewHandler = (event) => {
+            imgAvatar.src = URL.createObjectURL(event.target.files[0]);
+            imgAvatar.onload = () => {
+                URL.revokeObjectURL(imgAvatar.src);
+            };
+        };
+
         imgAvatar.addEventListener('error', imgHandler);
+        avatarInput.addEventListener('change', previewHandler);
 
         const formHandler = (event) => {
             event.preventDefault();
 
-            const inputs = form.querySelectorAll('.input-wrapper__input');
-
-            if (button.textContent === 'Редактировать') {
-                button.textContent = 'Сохранить';
-                inputs.forEach((input) => {
-                    input.classList.remove('input-wrapper__input_disabled');
-                    input.disabled = false;
-                });
-            } else if (button.textContent === 'Сохранить') {
+            if (button.textContent === 'Сохранить') {
                 const avatarInput = document.getElementById('file');
                 const email = document.getElementById('email').value;
                 const login = document.getElementById('login').value;

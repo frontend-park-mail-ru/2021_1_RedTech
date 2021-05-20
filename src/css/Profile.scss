@@ -13,7 +13,6 @@
   flex-direction: column;
   align-items: center;
   height: auto;
-  position: relative;
   margin: 20px auto auto;
   width: auto;
 }
@@ -22,7 +21,7 @@
   font-size: 36px;
   display: flex;
   flex-direction: row;
-  margin-bottom: 40px;
+  margin-bottom: 12px;
 }
 
 .title-wrapper__nickname {
@@ -32,6 +31,10 @@
 .profile-content__inputs {
   font-size: 24px;
   width: 100%;
+}
+
+.profile-content__form {
+   margin-top: 8px;
 }
 
 .form__input-wrapper {
@@ -64,7 +67,7 @@
   border: 1px solid $border-color;
   border-radius: 4px;
   cursor: pointer;
-  width: auto;
+  width: fit-content;
   margin-left: 0;
 }
 
@@ -75,7 +78,6 @@
 }
 
 .input-wrapper__img {
-  align-self: center;
   margin-bottom: 12px;
   object-fit: contain;
 }
