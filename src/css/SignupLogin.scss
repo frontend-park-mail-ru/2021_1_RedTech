@@ -1,7 +1,8 @@
 @import 'Consts';
 
 .login-signup {
-  width: 540px;
+  max-width: 540px;
+  width: 80%;
   height: 100vh;
   margin: 0 auto;
   display: flex;
@@ -24,6 +25,7 @@
 }
 
 .content__title-hint {
+  text-align: center;
   font-size: $second-title-loginout;
   margin-bottom: 20px;
 }
