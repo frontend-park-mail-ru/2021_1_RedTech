@@ -1,7 +1,6 @@
 @import 'Consts';
 
 .login-signup {
-  max-width: 540px;
   width: 80%;
   height: 100vh;
   margin: 0 auto;
@@ -150,4 +149,10 @@
 .have-acc__href {
   padding-left: 2px;
   color: red;
+}
+
+@media (max-width: 1006px) {
+  .input-wrapper__input {
+    font-size: 12px;
+  }
 }
