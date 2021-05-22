@@ -137,7 +137,8 @@
 
     .actors__href:hover {
       color: $text-hover-color;
-      border-color: $text-hover-color;
+      text-decoration: underline;
+      text-decoration-color: $text-hover-color;
     }
   }
 
