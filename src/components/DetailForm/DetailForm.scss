@@ -27,12 +27,34 @@
       max-height: 412px;
       min-width: 263px;
       min-height: 370px;
+      position: relative;
+
+      .detail-preview__image_sub {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        background: rgba(0, 0, 0, 0.8);;
+        align-items: center;
+        justify-content: center;
+        border-radius: 24px;
+
+        .sub__href {
+          color: $alert-color;
+          margin-left: 4px;
+        }
+      }
 
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         border-radius: 24px;
+        position: absolute;
       }
     }
 

@@ -7,6 +7,10 @@ div.detail-preview(id= filmData.id)
     div.detail-preview-left
         div.detail-preview__image
             img(class="js-preview-image" src= filmData.movieAvatar alt= '')
+            if !filmData.is_free
+                div.detail-preview__image_sub
+                    span='Чтобы посмотреть, оформите '
+                    a.sub__href(href='/profile') подписку
         div.detail_description__buttons
             div(class='button__item js-play-detail')
                 img(src= '../../assets/playDetail.webp' alt= '')
@@ -26,8 +30,11 @@ div.detail-preview(id= filmData.id)
         div.detail-preview__title=filmData.title
         div.detail-preview__tags
             span.item__type=filmData.type
+            if filmData.is_free
+                span.item__marks Бесплатно
+            else
+                span.item__marks Подписка
             span.item__marks=filmData.rating
-
 
         div(class= 'detail_description__year description__items')
             span.country__title Год:
@@ -64,7 +71,6 @@ if !isMovie
                             - }
             div.detail_description-right
     - }
-
 
 div.detail_description
     div.detail_description-left

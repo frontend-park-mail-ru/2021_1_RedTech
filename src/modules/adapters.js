@@ -29,14 +29,14 @@ const unionActorsAndIds = (actors, ids) => (
  * @return {Object} - Object for render detail info about film.
  */
 export const filmJsonToFilm = (jsonFilm) => {
-    const filmKeys = ['id', 'title', 'type', 'year', 'description'];
+    const filmKeys = ['id', 'title', 'type', 'year', 'description', 'is_free'];
     const film = {
         genres: insertSpaceAfterComa(jsonFilm.genres),
         director: insertSpaceAfterComa(jsonFilm.director),
         actors: unionActorsAndIds(jsonFilm.actors, jsonFilm.actor_ids),
         countries: insertSpaceAfterComa(jsonFilm.countries),
         movieAvatar: `${jsonFilm.movie_avatar}`,
-        rating: jsonFilm.rating ? `Рейтинг ${numToFixTruth(jsonFilm.rating)}` : '',
+        rating: jsonFilm.rating ? `Рейтинг ${numToFixTruth(jsonFilm.rating)} / 10.0` : '',
         is_fav: jsonFilm?.is_fav,
         is_vote: jsonFilm?.is_vote,
         currentUrl: URLS.api.actors,
