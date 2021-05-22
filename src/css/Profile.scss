@@ -76,7 +76,7 @@
             border-radius: 4px;
             padding: 12px 16px;
             color: $font-color;
-            font-size: 20px;
+            font-size: $header-font-size;
             font-family: 'MontserratMedium', sans-serif;
           }
 
@@ -96,7 +96,7 @@
 
       .profile-content__title-wrapper {
         flex-direction: column;
-        font-size: 20px;
+        font-size: $header-font-size;
 
         .title-wrapper__nickname {
           margin-left: 0;
