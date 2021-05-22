@@ -97,6 +97,7 @@ export const arrayFilmsToFilmCards = (arrayFilms) => {
             description: description,
             movieAvatar: `${jsonFilm?.movie_avatar}`,
             href: `/movie/${jsonFilm.id}`,
+            isFree: jsonFilm.is_free,
         });
         return filmCards;
     }, []);

@@ -2,12 +2,14 @@ mixin FilmCardCreate (i)
     div(class="item__film-card" href= i.href)
         div.item__image
             img(src= i.movieAvatar alt= i.alt)
+            if !i.isFree
+                div.item__film-card__subscription
+                    div.item__film-card__subscription_text Подписка
         div.item__details
             div.item__film-card__title= i.title
             div.item__film-card__stars= i.stars
 
             div.item__film-card__description
                 p.film-card__description_text=i.description
-
             div.item__film-card__buttons
                 div.item__button-title Смотреть
