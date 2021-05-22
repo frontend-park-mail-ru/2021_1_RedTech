@@ -104,7 +104,7 @@
     }
   }
 
-  @media (max-width: 1006px) {
+  @media (max-width: $mobile-max-width) {
     margin: 15px;
     padding: 12px;
     align-items: center;

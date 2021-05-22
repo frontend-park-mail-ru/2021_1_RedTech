@@ -142,7 +142,7 @@
     }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: $mobile-max-width) {
     padding-top: 0;
     flex-direction: column;
     #{$self}-left {
@@ -228,7 +228,7 @@
     justify-content: space-between;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: $mobile-max-width) {
     .detail_description-left {
       width: 100%;
       display: flex;

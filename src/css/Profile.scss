@@ -91,7 +91,7 @@
       }
     }
 
-    @media (max-width: 1006px) {
+    @media (max-width: $mobile-max-width) {
       width: 100%;
 
       .profile-content__title-wrapper {
