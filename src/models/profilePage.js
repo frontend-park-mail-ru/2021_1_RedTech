@@ -43,6 +43,7 @@ export class ProfileModel {
                 }
 
                 const params = {
+                    id: responseBody.id,
                     login: responseBody.username,
                     email: responseBody.email,
                     user_avatar: responseBody.avatar ?? '../assets/profile.webp',
