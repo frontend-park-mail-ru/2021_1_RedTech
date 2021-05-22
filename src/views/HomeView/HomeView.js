@@ -112,7 +112,7 @@ export class HomePageView extends BaseView {
         });
 
         const logoutPage = document.querySelectorAll('.js-logout-page');
-        logoutPage.forEach(element => element.addEventListener(('click'), logoutPageHandler));
+        logoutPage?.forEach(element => element.addEventListener(('click'), logoutPageHandler));
     }
 
     /**
