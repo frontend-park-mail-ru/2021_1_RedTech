@@ -24,7 +24,6 @@
       .title-wrapper__nickname {
         margin-left: 20px;
       }
-
     }
 
     .profile-content__inputs {
@@ -49,7 +48,6 @@
             display: flex;
             flex-direction: column;
             margin-left: 32px;
-
           }
 
           .input-wrapper__input-avatar {
@@ -65,9 +63,7 @@
                 margin-bottom: 12px;
                 object-fit: contain;
               }
-
             }
-
           }
 
           .input-wrapper__button {
@@ -92,9 +88,7 @@
             outline: none;
           }
         }
-
       }
-
     }
 
     @media (max-width: 1006px) {
@@ -136,7 +130,6 @@
         }
       }
     }
-
   }
 }
 
