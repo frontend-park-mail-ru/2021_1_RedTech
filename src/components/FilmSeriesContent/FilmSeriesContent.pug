@@ -18,8 +18,8 @@ div.item__page-title Жанры
 div.slider__container
     div(class="suggestion-film__list genres non-scrollable")
         each i in genres
-            div.item__internal(id= i.name.toLowerCase() data-genre= i.label_rus)
-                img.item__suggestion__image(src= i.image)
+            div.item__internal.genre-item(id= i.name.toLowerCase() data-genre= i.label_rus)
+                img.item__suggestion__image.genre-item__img(src= i.image)
     img(class="slider-button__item slider-button__item-left js-slider-left-Genres" src= "../../assets/LeftButton.webp" alt= "")
     img(class="slider-button__item slider-button__item-right js-slider-right-Genres" src= "../../assets/RightButton.webp" alt= "")
 
