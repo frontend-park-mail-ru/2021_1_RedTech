@@ -54,5 +54,23 @@
     &:hover {
       transform: translateY(-5px) scale($suggestion-card-scale);
     }
+
+    @media (max-width: $mobile-max-width) {
+      width: 22%;
+
+      .item__suggestion__image {
+        width: 110px;
+        height: 180px;
+        object-fit: cover;
+      }
+
+      .item__suggestion__title {
+        font-size: 14px;
+      }
+
+      .item__suggestion__status {
+        font-size: 12px;
+      }
+    }
   }
 }
