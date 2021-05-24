@@ -44,5 +44,6 @@ jobs:
           host: 89.208.198.192
           username: ubuntu
           key: ${{ secrets.PRIVATE_KEY }}
-          source: "build"
+          source: "build/*"
           target: "/home/ubuntu/frontend/2021_1_RedTech/src/dist"
+          strip_components: 1
