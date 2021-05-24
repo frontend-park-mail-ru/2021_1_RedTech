@@ -137,11 +137,12 @@
 
     .actors__href:hover {
       color: $text-hover-color;
-      border-color: $text-hover-color;
+      text-decoration: underline;
+      text-decoration-color: $text-hover-color;
     }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: $mobile-max-width) {
     padding-top: 0;
     flex-direction: column;
     #{$self}-left {
@@ -227,7 +228,7 @@
     justify-content: space-between;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: $mobile-max-width) {
     .detail_description-left {
       width: 100%;
       display: flex;

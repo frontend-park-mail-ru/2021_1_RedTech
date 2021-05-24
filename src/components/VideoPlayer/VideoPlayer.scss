@@ -206,7 +206,12 @@ $opacity-button-unhovered: 50%;
     font-size: 18px;
     img {
       width: 24px;
+      cursor: pointer;
     }
+  }
+
+  &__panel-button:last-child {
+    cursor: default;
   }
 
   &__panel-button:first-child {

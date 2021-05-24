@@ -27,6 +27,7 @@
 
 html, body {
   font-family: 'MontserratMedium', sans-serif;
+  width: 100vw;
   height: 100%;
   color: $text-color;
   background-color: $background-color;
@@ -107,6 +108,10 @@ a.main-page__href {
   font-weight: 600;
   font-size: $page-title;
   margin: 15px 35px 15px 35px;
+
+  @media (max-width: $mobile-max-width) {
+    font-size: 22px;
+  }
 }
 
 .hidden {
