@@ -34,6 +34,8 @@ const favouritesPageController = new FavouritesPageController();
 
 const router = new Router(APPLICATION);
 
+console.log("HELLO FROM CI/CD")
+
 router.register(Routes.HomePage, homePageController)
     .register(Routes.SignUpPage, signupController)
     .register(Routes.LoginPage, loginController)
