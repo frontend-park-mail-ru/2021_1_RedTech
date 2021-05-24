@@ -13,6 +13,8 @@ div.profile
         div.profile-content__title-wrapper
             div.title-wrapper__title Настройки профиля:
             div.title-wrapper__nickname #{profileData.login}
+            if profileData.is_sub
+                div.title-wrapper__substatus 👑
         div.profile-content__inputs
             +form(inputs, buttonName, inputWrapper, img)
 
