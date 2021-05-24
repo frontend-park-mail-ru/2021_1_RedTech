@@ -7,7 +7,7 @@ const deployUrl = 'https://redioteka.com';
 const TOP_SLIDER_MEDIA_COUNT = 5;
 const BOTTOM_SLIDER_MEDIA_COUNT = 10;
 
-export const currentUrl = deployUrl;
+export const currentUrl = localUrl;
 
 export const URLS = {
     pages: {

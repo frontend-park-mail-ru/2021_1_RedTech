@@ -39,6 +39,9 @@ export class ProfileView extends BaseView {
         this._data = {
             profileData: params
         };
+
+        console.log(this._data);
+
         const template = ProfileContent(this._data);
         const content = document.querySelector('.content');
         if (content) {

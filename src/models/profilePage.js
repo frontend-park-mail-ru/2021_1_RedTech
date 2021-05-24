@@ -20,8 +20,12 @@ export class ProfileModel {
     getInfoAboutCurrentUser = () => {
         getCurrentUser()
             .then((idUser) => {
+
                 if (idUser) {
-                    this.eventBus.emit(Events.ProfilePage.Get.InfoForProfile, idUser);
+                    getProfile(idUser).then((body) => {
+                        this.eventBus.emit(Events.ProfilePage.Get.InfoForProfile, idUser, body.is_sub);
+                    });
+
                 } else {
                     this.eventBus.emit(Events.Homepage.Render.Page);
                 }
@@ -34,7 +38,7 @@ export class ProfileModel {
      * Get full info about user and emit render profile page.
      * @param {string} idUser - Current user id.
      */
-    getInfoForProfile = (idUser) => {
+    getInfoForProfile = (idUser, isSub) => {
         getProfile(idUser)
             .then((responseBody) => {
                 if (!responseBody) {
@@ -47,6 +51,7 @@ export class ProfileModel {
                     login: responseBody.username,
                     email: responseBody.email,
                     user_avatar: responseBody.avatar ?? '../assets/profile.webp',
+                    is_sub: isSub,
                 };
 
                 this.eventBus.emit(Events.ProfilePage.Render.ProfileInfo, params);

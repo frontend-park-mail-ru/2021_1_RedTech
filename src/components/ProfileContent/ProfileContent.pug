@@ -16,30 +16,30 @@ div.profile
         div.profile-content__inputs
             +form(inputs, buttonName, inputWrapper, img)
 
-    div(class="subscription")
-        div(class="subscription__main-title") Оформите подписку
-        div(class="subscription__labels")
-            div(class="subscription__price-label") за 1 ₽ в месяц
-            div(class="subscription__description") Наличие подписки открывает вам доступ ко всем фильмам и сериалам
+    if !profileData.is_sub
+        div(class="subscription")
+            div(class="subscription__main-title") Оформите подписку
+            div(class="subscription__labels")
+                div(class="subscription__price-label") за 1 ₽ в месяц
+                div(class="subscription__description") Наличие подписки открывает вам доступ ко всем фильмам и сериалам
 
-        form(class="payment-form" method="POST" action="https://yoomoney.ru/quickpay/confirm.xml")
-            input(type="hidden" name="receiver" value="4100116797042674")
-            input(type="hidden" name="label" value=profileData.id)
-            input(type="hidden" name="quickpay-form" value="donate")
-            input(type="hidden" name="targets" value="Подписка Redioteka")
-            input(type="hidden" name="sum" value="1" data-type="number")
-            input(type="hidden" name="need-fio" value="false")
-            input(type="hidden" name="need-email" value="true")
-            input(type="hidden" name="need-phone" value="true")
-            input(type="hidden" name="need-address" value="false")
-            input(type="hidden" name="successURL" value="https://www.redioteka.com/profile")
-            label(class="subscription__radio-title radio-color-PC")
-                input(id="radio-1" type="radio" name="paymentType" value="PC" checked)
-                label(for="radio-1") Через Юmoney
+            form(class="payment-form" method="POST" action="https://yoomoney.ru/quickpay/confirm.xml")
+                input(type="hidden" name="receiver" value="4100116797042674")
+                input(type="hidden" name="label" value=profileData.id)
+                input(type="hidden" name="quickpay-form" value="donate")
+                input(type="hidden" name="targets" value="Подписка Redioteka")
+                input(type="hidden" name="sum" value="5" data-type="number")
+                input(type="hidden" name="need-fio" value="false")
+                input(type="hidden" name="need-email" value="true")
+                input(type="hidden" name="need-phone" value="true")
+                input(type="hidden" name="need-address" value="false")
+                input(type="hidden" name="successURL" value="https://www.redioteka.com/profile")
+                label(class="subscription__radio-title radio-color-PC")
+                    input(id="radio-1" type="radio" name="paymentType" value="PC" checked)
+                    label(for="radio-1") Через Юmoney
 
-            label(class="subscription__radio-title radio-color-AC")
-                input(id="radio-2" type="radio" name="paymentType" value="AC")
-                label(for="radio-2") Через карту
+                label(class="subscription__radio-title radio-color-AC")
+                    input(id="radio-2" type="radio" name="paymentType" value="AC")
+                    label(for="radio-2") Через карту
 
-            input(class="subscription__button" type="submit" value="Перейти к оплате")
-
+                input(class="subscription__button" type="submit" value="Перейти к оплате")
