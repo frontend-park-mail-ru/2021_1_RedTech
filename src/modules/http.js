@@ -286,7 +286,6 @@ const getDetailFilm = async (filmId) => {
 
     try {
         const { status: responseStatus, parsedJson: responseBody} = await sendRequest(params);
-        console.log("HELLO FROM CI/CD");
         if (responseStatus === 200) {
             return filmJsonToFilm(responseBody);
         }
