@@ -4,5 +4,4 @@ src/dist
 index.css
 node_modules
 prepros.config
-package-lock.json
 templates.js
