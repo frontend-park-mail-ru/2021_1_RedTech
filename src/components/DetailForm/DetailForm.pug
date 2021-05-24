@@ -52,8 +52,13 @@ div.detail-preview(id= filmData.id)
         div(class= 'detail_description__actors description__items')
             span.country__title В главных ролях:
             div.items__actors
-                each actor in filmData.actors
-                    a.country__text.actors__href(href='/actors/'+actor.id)=actor.name
+                - for (let i = 0; i < filmData.actors.length; ++i) {
+                    - const actor = filmData.actors[i];
+                    if i === filmData.actors.length - 1
+                        a.country__text.actors__href(href='/actors/'+actor.id)=actor.first_name + ' ' + actor.last_name
+                    else
+                        a.country__text.actors__href(href='/actors/'+actor.id)=actor.first_name + ' ' + actor.last_name + ', '
+                - }
 
 
 if !isMovie

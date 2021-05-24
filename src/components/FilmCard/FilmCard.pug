@@ -1,7 +1,7 @@
 mixin FilmCardCreate (i)
     div(class="item__film-card" href= i.href)
         div.item__image
-            img(src= i.movieAvatar alt= i.alt)
+            img.item__image_img(src= i.movieAvatar alt= i.alt)
             if !i.isFree
                 div.item__film-card__subscription
                     div.item__film-card__subscription_text Подписка

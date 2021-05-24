@@ -4,26 +4,6 @@ import { URLS } from '../consts/urls.js';
 const MAX_DESCRIPTION_LENGTH = 200;
 
 /**
- * Union actors and their ids.
- * @param {Array} actors - Array with actors name.
- * @param {Array} ids - Array with actors ids.
- * @return {Array} - Array of object where actor and his id.
- */
-const unionActorsAndIds = (actors, ids) => (
-    actors.reduce((actorsWithIds, actor, index) =>{
-        let name = actor;
-        if (index < actors.length - 1) {
-            name += ',';
-        }
-        actorsWithIds.push({
-            name: name,
-            id: ids[index],
-        });
-        return actorsWithIds;
-    }, [])
-);
-
-/**
  * Make object for render detail info about film from json.
  * @param {Object} jsonFilm - Info about film from json.
  * @return {Object} - Object for render detail info about film.
@@ -33,7 +13,7 @@ export const filmJsonToFilm = (jsonFilm) => {
     const film = {
         genres: insertSpaceAfterComa(jsonFilm.genres),
         director: insertSpaceAfterComa(jsonFilm.director),
-        actors: unionActorsAndIds(jsonFilm.actors, jsonFilm.actor_ids),
+        actors: jsonFilm?.actors,
         countries: insertSpaceAfterComa(jsonFilm.countries),
         movieAvatar: `${jsonFilm.movie_avatar}`,
         rating: jsonFilm.rating ? `Рейтинг ${numToFixTruth(jsonFilm.rating)} / 10.0` : '',
