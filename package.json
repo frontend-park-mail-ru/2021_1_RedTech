@@ -10,7 +10,6 @@
     "prestart": "npm run scss && npm run tmpl",
     "lint": "eslint src/",
     "lint-fix": "eslint --fix src/",
-    "prepare": "husky install",
     "build": "webpack --mode=production --config ./webpack.config.js",
     "dev": "webpack serve --mode=development --open --config ./webpack.config.js"
   },
