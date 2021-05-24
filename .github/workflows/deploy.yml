@@ -27,7 +27,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: build
-          path: ./src/dist
+          path: ./build
 
   deploy:
     runs-on: ubuntu-latest
@@ -44,6 +44,6 @@ jobs:
           host: 89.208.198.192
           username: ubuntu
           key: ${{ secrets.PRIVATE_KEY }}
-          source: "src/dist/*"
+          source: "build/*"
           target: "/home/ubuntu/frontend/2021_1_RedTech/src/dist"
           strip_components: 1
