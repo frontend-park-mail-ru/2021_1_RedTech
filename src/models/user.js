@@ -29,10 +29,10 @@ export class UserModel {
      * @param {HTMLFontElement} form - Form for login, need to validation
      * @param {string} email - User email, need to post request.
      * @param {string} password - User password, need to post request.
+     * @param {String} returnpath - path of returning for router.
      */
-    login = (form, email, password) => {
+    login = (form, email, password, returnpath) => {
         const isValid = isValidForm(form);
-
         if (isValid) {
             postUserForLogin(
                 email,
@@ -40,6 +40,10 @@ export class UserModel {
             ).then((responseFlag) => {
                 if (responseFlag) {
                     this.eventBus.emit('login:removeEventListeners');
+                    if (returnpath) {
+                        this.eventBus.emit(Events.PathChanged, { path: returnpath });
+                        return;
+                    }
                     this.eventBus.emit(Events.PathChanged, { path: Routes.HomePage });
                 } else {
                     this.eventBus.emit(Events.PathChanged, { path: Routes.LoginPage });
@@ -57,8 +61,9 @@ export class UserModel {
      * @param {string} email - User email, need to post request.
      * @param {string} password - User password, need to post request.
      * @param {string} confirmPassword - User confirm password, need to post request.
+     * @param {String} returnpath - path of returning for router.
      */
-    signup = (form, login, email, password, confirmPassword) => {
+    signup = (form, login, email, password, confirmPassword, returnpath) => {
         const isValid = isValidForm(form);
 
         if (isValid) {
@@ -70,6 +75,10 @@ export class UserModel {
             ).then((responseFlag) => {
                 if (responseFlag) {
                     this.eventBus.emit('signup:removeEventListeners');
+                    if (returnpath) {
+                        this.eventBus.emit(Events.PathChanged, { path: returnpath });
+                        return;
+                    }
                     this.eventBus.emit(Events.PathChanged, { path: Routes.HomePage });
                 } else {
                     this.eventBus.emit(Events.SignupPage.Render);

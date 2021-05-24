@@ -18,17 +18,19 @@ export class LogInView extends BaseView {
 
     /**
      * Render html login page from pug template.
+     * @param {Object} data - data from router.
      */
-    render = () => {
-        const template = LogIn();
+    render = (data) => {
+        const template = LogIn(data);
         APPLICATION.innerHTML = template;
-        this.setEventListeners();
+        this.setEventListeners(data?.returnpath);
     }
 
     /**
      * Set event listeners.
+     * @param {String} returnpath - path of returning for router.
      */
-    setEventListeners = () => {
+    setEventListeners = (returnpath) => {
         const [form] = document.getElementsByTagName('form');
         const [aTag] = document.getElementsByClassName('have-acc__link');
 
@@ -38,14 +40,15 @@ export class LogInView extends BaseView {
                 Events.User.Login,
                 form,
                 document.getElementById('email').value,
-                document.getElementById('password').value
+                document.getElementById('password').value,
+                returnpath
             );
         };
 
         const aTagHandler = (event) => {
             event.preventDefault();
             this.eventBus.emit('login:removeEventListeners');
-            this.eventBus.emit(Events.SignupPage.Render);
+            this.eventBus.emit(Events.SignupPage.Render, { returnpath });
         };
 
         form?.addEventListener(('submit'), formHandler);

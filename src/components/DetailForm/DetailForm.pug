@@ -2,30 +2,60 @@
     const isLiked = filmData.is_vote === 1;
     const isDisliked = filmData.is_vote === -1;
     const isMovie = filmData.type === 'Фильм';
+    const isSubscribed = filmData.availability === 1;
+    const isNotAuthorized = filmData.availability === -1;
 
 div.detail-preview(id= filmData.id)
     div.detail-preview-left
         div.detail-preview__image
             img(class="js-preview-image" src= filmData.movieAvatar alt= '')
-            if !filmData.is_free
+            if isNotAuthorized
                 div.detail-preview__image_sub
-                    span='Чтобы посмотреть, оформите '
-                    a.sub__href(href='/profile') подписку
-        div.detail_description__buttons
-            div(class='button__item js-play-detail')
-                img(src= '../../assets/playDetail.webp' alt= '')
-            div(class='button__item js-add-favourite-detail' hidden=filmData.is_fav)
-                img(class='item__favourite-icon' src= '../../assets/star.webp' alt= '' id='add_to_fav')
-            div(class='button__item js-remove-favourite-detail' hidden=!filmData.is_fav)
-                img(class='item__favourite-icon' src= '../../assets/favourite.webp' alt= '' id='remove_from_fav')
-            div(class='button__item js-like-detail' hidden=isLiked)
-                img(src= '../../assets/like.webp' alt= '' id= 'like')
-            div(class='button__item js-pressed-like-detail' hidden=!isLiked)
-                img(src= '../../assets/pressed_like.webp' alt= '')
-            div(class='button__item js-dislike-detail' hidden=isDisliked)
-                img(src= '../../assets/dislike.webp' alt= '' id= 'dislike')
-            div(class='button__item js-pressed-dislike-detail' hidden=!isDisliked)
-                img(src= '../../assets/pressed_dislike.webp' alt= '')
+                    span.image_sub__text= `Чтобы посмотреть этот ${filmData.type.toLowerCase()} `
+                        |
+                        a.sub__href(href='/login' data-returnpath=`/movie/${filmData.id}`) зарегистрируйтесь/авторизируйтесь
+                        |
+                        | на нашем сервисе
+            else if !filmData.is_free && !isSubscribed
+                div.detail-preview__image_sub
+                    span.image_sub__text= `Данный ${filmData.type.toLowerCase()} доступен только по `
+                        |
+                        a.sub__href(href='/profile') подписке
+                        |. Оформить ее вы можете на странице
+                        |
+                        a.sub__href(href='/profile') профиля
+        if isNotAuthorized || (!filmData.is_free && !isSubscribed)
+            div.detail_description__buttons.hidden
+                div(class='button__item js-play-detail')
+                    img(src= '../../assets/playDetail.webp' alt= '')
+                div(class='button__item js-add-favourite-detail' hidden=filmData.is_fav)
+                    img(class='item__favourite-icon' src= '../../assets/star.webp' alt= '' id='add_to_fav')
+                div(class='button__item js-remove-favourite-detail' hidden=!filmData.is_fav)
+                    img(class='item__favourite-icon' src= '../../assets/favourite.webp' alt= '' id='remove_from_fav')
+                div(class='button__item js-like-detail' hidden=isLiked)
+                    img(src= '../../assets/like.webp' alt= '' id= 'like')
+                div(class='button__item js-pressed-like-detail' hidden=!isLiked)
+                    img(src= '../../assets/pressed_like.webp' alt= '')
+                div(class='button__item js-dislike-detail' hidden=isDisliked)
+                    img(src= '../../assets/dislike.webp' alt= '' id= 'dislike')
+                div(class='button__item js-pressed-dislike-detail' hidden=!isDisliked)
+                    img(src= '../../assets/pressed_dislike.webp' alt= '')
+        else
+            div.detail_description__buttons
+                div(class='button__item js-play-detail')
+                    img(src= '../../assets/playDetail.webp' alt= '')
+                div(class='button__item js-add-favourite-detail' hidden=filmData.is_fav)
+                    img(class='item__favourite-icon' src= '../../assets/star.webp' alt= '' id='add_to_fav')
+                div(class='button__item js-remove-favourite-detail' hidden=!filmData.is_fav)
+                    img(class='item__favourite-icon' src= '../../assets/favourite.webp' alt= '' id='remove_from_fav')
+                div(class='button__item js-like-detail' hidden=isLiked)
+                    img(src= '../../assets/like.webp' alt= '' id= 'like')
+                div(class='button__item js-pressed-like-detail' hidden=!isLiked)
+                    img(src= '../../assets/pressed_like.webp' alt= '')
+                div(class='button__item js-dislike-detail' hidden=isDisliked)
+                    img(src= '../../assets/dislike.webp' alt= '' id= 'dislike')
+                div(class='button__item js-pressed-dislike-detail' hidden=!isDisliked)
+                    img(src= '../../assets/pressed_dislike.webp' alt= '')
     div.detail-preview-right
         div.detail-preview__title=filmData.title
         div.detail-preview__tags
@@ -69,7 +99,7 @@ if !isMovie
                     div= 'Сезон ' + i
                     div.detail_description__series
                         - for (let j = 0; j < filmData.seriesList[i-1]; ++j) {
-                            if j == 0 && i == 1
+                            if j === 0 && i === 1
                                 div.series__info.series__chosen(data-season=i-1, data-series=j)= 'Серия ' + (j+1)
                             else
                                 div.series__info(data-season=i-1, data-series=j)= 'Серия ' + (j+1)
