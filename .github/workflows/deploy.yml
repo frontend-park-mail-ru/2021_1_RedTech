@@ -3,8 +3,6 @@ name: Build and deploy redioteka frontend
 on:
   push:
     branches: [main, configure_CI/CD_RT-169]
-  pull_request:
-    branches: [main, configure_CI/CD_RT-169]
 
 jobs:
 
