@@ -8,8 +8,8 @@
     "tmpl": "puglatizer -d src/ -o src/templates.js",
     "scss": "node-sass src/index.scss -o src/",
     "prestart": "npm run scss && npm run tmpl",
-    "lint": "eslint src/",
-    "lint-fix": "eslint --fix src/",
+    "lint": "eslint ./",
+    "lint-fix": "eslint --fix ./",
     "build": "webpack --mode=production --config ./webpack.config.js",
     "dev": "webpack serve --mode=development --open --config ./webpack.config.js"
   },
