@@ -1,5 +1,6 @@
-import { getProfile, getCurrentUser } from '../modules/http.js';
+import { getProfile, getCurrentUser, cancelSubscription } from '../modules/http.js';
 import Events from '../consts/events.js';
+import Routes from '../consts/routes';
 
 /** Class representing profile page model. */
 export class ProfileModel {
@@ -11,6 +12,12 @@ export class ProfileModel {
         this.eventBus = eventBus;
         this.eventBus.on(Events.ProfilePage.Get.InfoAboutCurrentUser, this.getInfoAboutCurrentUser);
         this.eventBus.on(Events.ProfilePage.Get.InfoForProfile, this.getInfoForProfile);
+        this.eventBus.on(Events.User.CancelSubscription, this.goCancelSubscription);
+    }
+
+    goCancelSubscription = () => {
+        cancelSubscription();
+        this.eventBus.emit(Events.PathChanged, { path: Routes.ProfilePage });
     }
 
     /**
@@ -20,8 +27,12 @@ export class ProfileModel {
     getInfoAboutCurrentUser = () => {
         getCurrentUser()
             .then((idUser) => {
+
                 if (idUser) {
-                    this.eventBus.emit(Events.ProfilePage.Get.InfoForProfile, idUser);
+                    getProfile(idUser).then((body) => {
+                        this.eventBus.emit(Events.ProfilePage.Get.InfoForProfile, idUser, body.is_sub);
+                    });
+
                 } else {
                     this.eventBus.emit(Events.Homepage.Render.Page);
                 }
@@ -34,7 +45,7 @@ export class ProfileModel {
      * Get full info about user and emit render profile page.
      * @param {string} idUser - Current user id.
      */
-    getInfoForProfile = (idUser) => {
+    getInfoForProfile = (idUser, isSub) => {
         getProfile(idUser)
             .then((responseBody) => {
                 if (!responseBody) {
@@ -43,9 +54,11 @@ export class ProfileModel {
                 }
 
                 const params = {
+                    id: responseBody.id,
                     login: responseBody.username,
                     email: responseBody.email,
                     user_avatar: responseBody.avatar ?? '../assets/profile.webp',
+                    is_sub: isSub,
                 };
 
                 this.eventBus.emit(Events.ProfilePage.Render.ProfileInfo, params);

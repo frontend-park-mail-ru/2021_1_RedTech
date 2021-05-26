@@ -1,21 +1,23 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
-const webpack = require('webpack');
 const path = require('path');
 const fs = require('fs');
 
 const  PATHS  =  {
+    // eslint-disable-next-line no-undef
     public:  path.resolve(__dirname,  'src'),
 };
 
 const PAGES_DIR = `${PATHS.public}/views/`;
 const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.pug'));
 
+// eslint-disable-next-line no-undef
 module.exports = {
     entry: {
         'bundle': PATHS.public + '/main.js',
     },
     output: {
+        // eslint-disable-next-line no-undef
         path: path.resolve(__dirname, './src/dist'),
         filename: '[name].js',
         sourceMapFilename: '[name].[fullhash:8].map',
@@ -57,7 +59,7 @@ module.exports = {
 
             {
                 test: /\.pug$/,
-                use: ['pug-loader'],
+                use: ['pug3-loader'],
             },
         ]
     },

@@ -24,6 +24,16 @@
       .title-wrapper__nickname {
         margin-left: 20px;
       }
+
+      .title-wrapper__substatus {
+        margin-left: 10px;
+        transition: all 0.15s ease-in-out;
+        cursor: pointer;
+      }
+
+      .title-wrapper__substatus:hover {
+        transform: scale($interactive-items-scale);
+      }
     }
 
     .profile-content__inputs {
