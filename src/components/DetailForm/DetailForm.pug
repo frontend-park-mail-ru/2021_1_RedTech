@@ -91,7 +91,7 @@ div.detail-preview(id= filmData.id)
                 - }
 
 
-if !isMovie
+if !isMovie && !(isNotAuthorized || (!filmData.is_free && !isSubscribed))
     - for (let i = 1; i <= filmData.seriesList.length; ++i) {
         div.detail_description
             div.detail_description-left
