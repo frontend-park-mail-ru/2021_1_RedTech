@@ -1,4 +1,4 @@
-import { getProfile, getCurrentUser } from '../modules/http.js';
+import { getProfile, getCurrentUser, cancelSubscription } from '../modules/http.js';
 import Events from '../consts/events.js';
 
 /** Class representing profile page model. */
@@ -11,6 +11,12 @@ export class ProfileModel {
         this.eventBus = eventBus;
         this.eventBus.on(Events.ProfilePage.Get.InfoAboutCurrentUser, this.getInfoAboutCurrentUser);
         this.eventBus.on(Events.ProfilePage.Get.InfoForProfile, this.getInfoForProfile);
+        this.eventBus.on(Events.User.CancelSubscription, this.cancelSubscription);
+    }
+
+    cancelSubscription = () => {
+        cancelSubscription();
+
     }
 
     /**

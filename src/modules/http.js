@@ -163,6 +163,28 @@ const getCurrentUser = async () => {
     }
 };
 
+const cancelSubscription = async () => {
+    const params = {
+        url: URLS.api.cancelSubcription,
+        method: 'DELETE',
+        credentials: 'include',
+    };
+
+    try {
+        const response = await sendRequest(params);
+        if (checkCSRFToken(response.parsedJson)) {
+            const successGetCSRF = await getCSRF();
+            if (successGetCSRF) {
+                return cancelSubscription();
+            }
+            return false;
+        }
+        return response.status === 200;
+    } catch (err) {
+        return false;
+    }
+};
+
 /**
  * Send async get request using async func.
  * @returns {boolean} - flag success of request.
@@ -647,6 +669,7 @@ const getSearchResults = async (queryParams) => {
 };
 
 export {
+    cancelSubscription,
     postUserForLogin,
     postUserForSignUp,
     getCurrentUser,

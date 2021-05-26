@@ -15,6 +15,7 @@ export const URLS = {
         profile: '/profile',
     },
     api: {
+        cancelSubcription: `${currentUrl}/api/subscriptions`,
         me: `${currentUrl}/api/me`,
         csrf: `${currentUrl}/api/csrf`,
         media: `${currentUrl}/api/media/movie/`,

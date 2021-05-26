@@ -16,6 +16,7 @@ export const Events = {
         Login: 'user:login',
         Signup: 'user:signup',
         Update: 'user:updateProfile',
+        CancelSubscription: 'user:cancel',
     },
 
     VideoPlayer: {

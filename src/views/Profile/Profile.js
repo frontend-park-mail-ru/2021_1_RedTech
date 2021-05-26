@@ -44,6 +44,12 @@ export class ProfileView extends BaseView {
         const content = document.querySelector('.content');
         if (content) {
             content.innerHTML = template;
+            const cancelButton = content.querySelector('.cancel-subscription-js');
+            if (params.is_sub && cancelButton) {
+                cancelButton.addEventListener('click', () => {
+                    this.eventBus.emit(Events.User.CancelSubscription);
+                });
+            }
         } else {
             this.eventBus.emit(Events.Homepage.Render.ErrorPage);
         }
