@@ -32,6 +32,19 @@
     justify-content: center;
     display: flex;
 
+    .item__film-card__subscription {
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      background-color: $header__link-hovered;
+      box-shadow: 0 4px 15px 6px $card-form-background-color-hovered;
+      border-radius: 12px;
+
+      &_text {
+        padding: 2px 8px;
+      }
+    }
+
     &_img {
       object-fit: contain;
       border-radius: 20px;
@@ -103,7 +116,6 @@
       }
     }
   }
-
   @media (max-width: $mobile-max-width) {
     margin: 4px;
     padding: 12px;

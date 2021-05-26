@@ -18,16 +18,18 @@ export class SignUpView extends BaseView {
 
     /**
      * Render html signup page from pug template.
+     * @param {Object} data - data from router.
      */
-    render = () => {
-        APPLICATION.innerHTML = SignUp();
-        this.setEventListeners();
+    render = (data) => {
+        APPLICATION.innerHTML = SignUp(data);
+        this.setEventListeners(data?.returnpath);
     }
 
     /**
      * Setting event listeners.
+     * @param {String} returnpath - path of returning for router.
      */
-    setEventListeners = () => {
+    setEventListeners = (returnpath) => {
         const [form] = document.getElementsByTagName('form');
         const [aTag] = document.getElementsByClassName('have-acc__link');
 
@@ -40,7 +42,8 @@ export class SignUpView extends BaseView {
                 document.getElementById('login').value,
                 document.getElementById('email').value,
                 document.getElementById('password').value,
-                document.getElementById('confirmPassword').value
+                document.getElementById('confirmPassword').value,
+                returnpath
             );
         };
 
@@ -48,7 +51,7 @@ export class SignUpView extends BaseView {
             event.preventDefault();
 
             this.eventBus.emit('signup:removeEventListeners');
-            this.eventBus.emit(Events.LoginPage.Render);
+            this.eventBus.emit(Events.LoginPage.Render, { returnpath });
         };
 
         form?.addEventListener(('submit'), formHandler);

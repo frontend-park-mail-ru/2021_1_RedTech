@@ -1,4 +1,5 @@
 import { URLS } from '../consts/urls.js';
+import { getCSRFToken } from './utils.js';
 import {
     filmJsonToFilm,
     arrayFilmsToFilmCards,
@@ -8,14 +9,20 @@ import {
     arrayContentToActorPageContent
 } from './adapters.js';
 
+
 /**
  * Send async request to the server.
  * @param {Object} params - parameters for request.
  * @returns {Object} - returns status and parsed response.
  */
 const sendRequest = async ({ url, method, body } = {}) => {
+    const headers = new Headers({
+        'X-CSRF-TOKEN': getCSRFToken(),
+    });
+
     const response = await fetch(url, {
         method: method,
+        headers,
         body: body,
         mode: 'cors',
         credentials: 'include',
@@ -153,6 +160,28 @@ const getCurrentUser = async () => {
     } catch (err) {
 
         return null;
+    }
+};
+
+const cancelSubscription = async () => {
+    const params = {
+        url: URLS.api.cancelSubcription,
+        method: 'DELETE',
+        credentials: 'include',
+    };
+
+    try {
+        const response = await sendRequest(params);
+        if (checkCSRFToken(response.parsedJson)) {
+            const successGetCSRF = await getCSRF();
+            if (successGetCSRF) {
+                return cancelSubscription();
+            }
+            return false;
+        }
+        return response.status === 200;
+    } catch (err) {
+        return false;
     }
 };
 
@@ -640,6 +669,7 @@ const getSearchResults = async (queryParams) => {
 };
 
 export {
+    cancelSubscription,
     postUserForLogin,
     postUserForSignUp,
     getCurrentUser,
